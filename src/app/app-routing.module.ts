@@ -6,7 +6,7 @@ import { StatisticPageComponent } from './pages/statistic-page/statistic-page.co
 
 
 const routes: Routes = [
-  { path: 'farm', component: FarmPageComponent },
+  { path: '', component: FarmPageComponent },
   { path: 'statistics', component: StatisticPageComponent },
   { path: 'settings', component: SettingPageComponent }
 ];

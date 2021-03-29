@@ -8,6 +8,7 @@ import { SettingPageComponent } from './setting-page.component';
   declarations: [SettingPageComponent],
   imports: [
     CommonModule
-  ]
+  ],
+  exports: [SettingPageComponent]
 })
 export class SettingPageModule { }

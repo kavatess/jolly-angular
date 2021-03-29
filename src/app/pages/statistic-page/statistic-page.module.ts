@@ -8,6 +8,7 @@ import { StatisticPageComponent } from './statistic-page.component';
   declarations: [StatisticPageComponent],
   imports: [
     CommonModule
-  ]
+  ],
+  exports: [StatisticPageComponent]
 })
 export class StatisticPageModule { }

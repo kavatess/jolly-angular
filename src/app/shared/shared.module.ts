@@ -7,7 +7,8 @@ import { PageLayoutModule } from './modules/page-layout/page-layout.module';
 
 @NgModule({
   declarations: [],
-  imports: [
+  imports: [CommonModule],
+  exports: [
     CommonModule,
     HeaderModule,
     PageLayoutModule,

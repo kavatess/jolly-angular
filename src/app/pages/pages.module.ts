@@ -7,7 +7,9 @@ import { StatisticPageModule } from './statistic-page/statistic-page.module';
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule,
+    CommonModule
+  ],
+  exports: [
     FarmPageModule,
     SettingPageModule,
     StatisticPageModule

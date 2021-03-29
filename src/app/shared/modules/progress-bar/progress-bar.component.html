@@ -2,11 +2,11 @@
     <div [class]="striped ? 'progress-bar progress-bar-striped' : 'progress-bar'" role="progressbar"
         [style.width]="percentage + '%'" [style.background-color]="color"
         aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-        <div *ngIf="percentage>33" [class]="smallContent?'':'text'">
+        <div *ngIf=" percentage > 33 " [class]="smallContent?'':'text'">
             {{content}}
         </div>
     </div>
-    <div *ngIf="percentage<=33" class="text-container">
+    <div *ngIf=" percentage <= 33 " class="text-container">
         <div [class]="smallContent?'':'text'">
             {{content}}
         </div>

@@ -1,0 +1,77 @@
+<div class="farm-content">
+    <!-- farm in block A -->
+    <div *ngIf=" block == 'A' " class="component">
+        <div class="middle-component">
+            <div class="main-component">
+                <!-- truss array A -->
+                <app-farm-block [block]="'A'"></app-farm-block>
+            </div>
+            <div class="right-component">
+                <div class="component">
+                    <!-- seed nursery table -->
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom-component">
+            <div class="component">
+                <!-- seed nursery table -->
+
+            </div>
+        </div>
+    </div>
+
+    <!-- farm in block A -->
+    <div *ngIf=" block == 'B' " class="component">
+        <div class="middle-component">
+            <div class="left-component">
+                <!-- truss array BN -->
+                <app-farm-block [block]="'BN'"></app-farm-block>
+            </div>
+            <div class="main-component">
+                <!-- truss array B -->
+                <app-farm-block [block]="'B'"></app-farm-block>
+            </div>
+            <div class="right-component">
+                <!-- truss array BS -->
+                <app-farm-block [block]="'BS'"></app-farm-block>
+            </div>
+        </div>
+    </div>
+
+    <!-- farm in block C & D -->
+    <div *ngIf=" block == 'C' " class="component">
+        <div class="middle-component">
+            <div class="main-component">
+                <div class="card text-center">
+                    <div class="card-header">
+                        Tầng 1 vườn C
+                    </div>
+                    <div class="card-body">
+                        <!-- truss array C -->
+                        <app-farm-block [block]="'C'"></app-farm-block>
+                    </div>
+                </div>
+                <div class="card text-center">
+                    <div class="card-header">
+                        Tầng 2 vườn C
+                    </div>
+                    <div class="card-body">
+                        <!-- truss array CT -->
+                        <app-farm-block [block]="'CT'"></app-farm-block>
+                    </div>
+                </div>
+                <div class="card text-center">
+                    <div class="card-header">
+                        Vườn D
+                    </div>
+                    <div class="card-body">
+                        <!-- truss array D -->
+                        <app-farm-block [block]="'D'"></app-farm-block>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-farm-modal></app-farm-modal>

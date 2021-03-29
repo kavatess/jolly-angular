@@ -1,0 +1,54 @@
+.farm-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    overflow: scroll;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .top-component {
+        width: 100%;
+        height: 10%;
+    }
+    .middle-component {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        .left-component,
+        .right-component {
+            width: 10%;
+            height: 100%;
+        }
+        .main-component {
+            width: 100%;
+            height: 100%;
+        }
+    }
+    .bottom-component {
+        width: 100%;
+        height: 10%;
+        max-height: 36px;
+    }
+}
+
+.card {
+    margin-bottom: 8px !important;
+}
+
+.component {
+    width: 100%;
+    height: 100%;
+}
+
+.left-component {
+    padding-right: 7px;
+    min-width: 40px;
+}
+
+.right-component {
+    padding-left: 10px;
+    min-width: 40px;
+}

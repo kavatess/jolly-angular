@@ -1,1 +1,9 @@
-<p>farm-page works!</p>
+<app-page-layout [hasFooter]="true" [hasHeader]="true">
+    <div class="page-content">
+        <app-farm></app-farm>
+    </div>
+    <div class="footer">
+        <app-select [isStatisticsPage]="false" (selectedBlock)=" block = $event"
+            (selectedGrowth)=" plantGrowth = $event " (selectedPlant)=" plantId = $event "></app-select>
+    </div>
+</app-page-layout>
