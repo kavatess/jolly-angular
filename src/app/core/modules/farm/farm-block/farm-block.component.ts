@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { Truss } from 'src/app/core/models/truss.model';
+import { FarmPageComponent } from 'src/app/pages/farm-page/farm-page.component';
 import { SessionStorageService } from 'src/app/shared/services/session-storage.service';
 
 @Component({
@@ -7,20 +8,19 @@ import { SessionStorageService } from 'src/app/shared/services/session-storage.s
   templateUrl: './farm-block.component.html',
   styleUrls: ['./farm-block.component.scss']
 })
-export class FarmBlockComponent implements OnChanges {
+export class FarmBlockComponent extends FarmPageComponent implements OnChanges {
   @Input() block = '';
-  @Input() plantId = '';
-  @Input() plantGrowth = 0;
-  @Output() clickTruss = new EventEmitter<Truss>();
   trussDataArr: Truss[] = [];
 
-  constructor(private sessionStorage: SessionStorageService) { }
+  constructor(private sessionStorage: SessionStorageService) {
+    super();
+  }
 
   async ngOnChanges() {
     this.trussDataArr = await this.sessionStorage.getTrussArrInBlock(this.block);
   }
 
-  emitClickedTrussEvent(clickedTruss: Truss): void {
-    this.clickTruss.emit(clickedTruss);
+  emitClickedTrussEvent(truss: Truss): void {
+    this.newClickedTruss = truss;
   }
 }

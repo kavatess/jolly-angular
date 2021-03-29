@@ -15,9 +15,7 @@ export class SelectComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    const selectOfFarm = window.sessionStorage.getItem('last-block-farm');
-    const selectOfStat = window.sessionStorage.getItem('last-block-stat');
-    this.lastSelectedBlock = this.isStatisticsPage ? selectOfStat : selectOfFarm;
+    this.lastSelectedBlock = this.isStatisticsPage ? window.sessionStorage.getItem('last-block-stat') : window.sessionStorage.getItem('last-block-farm');
   }
 
   selectBlock(event: any): void {

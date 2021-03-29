@@ -7,32 +7,32 @@ import { Truss } from 'src/app/core/models/truss.model';
   styleUrls: ['./farm-page.component.scss']
 })
 export class FarmPageComponent implements OnInit {
-  public static block = '';
-  public static plantId = '';
-  public static plantGrowth = 0;
-  public static clickedTruss: Truss;
-  set clickedTruss(clickedTruss: Truss) {
+  private static block = '';
+  private static plantId = '';
+  private static plantGrowth = 0;
+  private static clickedTruss: Truss;
+  set newClickedTruss(clickedTruss: Truss) {
     FarmPageComponent.clickedTruss = clickedTruss;
   }
   get clickedTruss(): Truss {
     return FarmPageComponent.clickedTruss;
   }
-  set block(block: string) {
+  set newBlock(block: string) {
     FarmPageComponent.block = block;
   }
-  get block(): string {
+  get selectedBlock(): string {
     return FarmPageComponent.block;
   }
-  set plantId(plantId: string) {
+  set newPlantId(plantId: string) {
     FarmPageComponent.plantId = plantId;
   }
-  get plantId(): string {
+  get selectedPlantId(): string {
     return FarmPageComponent.plantId;
   }
-  set plantGrowth(plantGrowth: number) {
+  set newPlantGrowth(plantGrowth: number) {
     FarmPageComponent.plantGrowth = plantGrowth;
   }
-  get plantGrowth(): number {
+  get selectedPlantGrowth(): number {
     return FarmPageComponent.plantGrowth;
   }
 

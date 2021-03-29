@@ -1,6 +1,6 @@
 <div class="farm-content">
     <!-- farm in block A -->
-    <div *ngIf=" block == 'A' " class="component">
+    <div *ngIf=" selectedBlock == 'A' " class="component">
         <div class="middle-component">
             <div class="main-component">
                 <!-- truss array A -->
@@ -22,7 +22,7 @@
     </div>
 
     <!-- farm in block A -->
-    <div *ngIf=" block == 'B' " class="component">
+    <div *ngIf=" selectedBlock == 'B' " class="component">
         <div class="middle-component">
             <div class="left-component">
                 <!-- truss array BN -->
@@ -40,7 +40,7 @@
     </div>
 
     <!-- farm in block C & D -->
-    <div *ngIf=" block == 'C' " class="component">
+    <div *ngIf=" selectedBlock == 'C' " class="component" style="overflow: scroll;">
         <div class="middle-component">
             <div class="main-component">
                 <div class="card text-center">

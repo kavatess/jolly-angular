@@ -1,0 +1,23 @@
+<div *ngIf="isModifyMode">
+    <div class="modal-body">
+
+    </div>
+    
+    <div class="modal-footer">
+        <button class="btn btn-outline-primary">Thay đổi</button>
+        <button type="button" class="btn btn-outline-danger">Xoá giàn</button>
+    </div>
+</div>
+
+
+<div *ngIf="!isModifyMode">
+    <div class="modal-body">
+
+    </div>
+
+    <div class="modal-footer">
+        <button class="btn btn-success">Lưu</button>
+        <button type="button" class="btn btn-primary">Phục hồi</button>
+        <button class="btn btn-secondary">Quay về</button>
+    </div>
+</div>

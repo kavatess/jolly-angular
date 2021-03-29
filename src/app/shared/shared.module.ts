@@ -6,7 +6,6 @@ import { ProgressBarModule } from './modules/progress-bar/progress-bar.module';
 import { PageLayoutModule } from './modules/page-layout/page-layout.module';
 
 @NgModule({
-  declarations: [],
   imports: [CommonModule],
   exports: [
     CommonModule,

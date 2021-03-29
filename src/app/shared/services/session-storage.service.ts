@@ -64,7 +64,8 @@ export class SessionStorageService {
 
   private sortDataInBlockBS(trussArr: Truss[]): Truss[] {
     trussArr.sort((a, b) => b.index - a.index);
-    return trussArr.splice(1, 0, null, null);
+    trussArr.splice(1, 0, null, null);
+    return trussArr;
   }
 
   private sortDataInBlockC(trussArr: Truss[]): Truss[] {
@@ -98,6 +99,7 @@ export class SessionStorageService {
 
   private sortDataInBlockD(trussArr: Truss[]): Truss[] {
     trussArr.sort((a, b) => a.index - b.index);
-    return trussArr.splice(1, 0, null, null);
+    trussArr.splice(1, 0, null, null);
+    return trussArr;
   }
 }

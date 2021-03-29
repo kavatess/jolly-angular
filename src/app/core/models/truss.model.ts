@@ -22,7 +22,7 @@ export interface TrussTimeline {
     timeline: MileStone[];
 }
 
-export interface Truss {
+export class Truss {
     _id: string;
     block: string;
     index: number;

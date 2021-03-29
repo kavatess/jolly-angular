@@ -2,9 +2,9 @@
     <span class="select-block">
         <select class="form-select form-select-sm" name="select-block" (change)="selectBlock($event)">
             <option *ngIf="isStatisticsPage" value="" selected>--Tất cả rau--</option>
-            <option value="A" [selected]="lastSelectedBlock=='A'">Vườn A</option>
-            <option value="B" [selected]="lastSelectedBlock=='B'">Vườn B</option>
-            <option value="C" [selected]="lastSelectedBlock=='C'">Vườn C và D</option>
+            <option value="A" [selected]=" lastSelectedBlock == 'A' ">Vườn A</option>
+            <option value="B" [selected]=" lastSelectedBlock == 'B' ">Vườn B</option>
+            <option value="C" [selected]=" lastSelectedBlock == 'C' ">Vườn C và D</option>
         </select>
     </span>
 
