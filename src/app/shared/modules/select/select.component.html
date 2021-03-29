@@ -1,0 +1,26 @@
+<div class="select-group">
+    <span class="select-block">
+        <select class="form-select form-select-sm" name="select-block" (change)="selectBlock($event)">
+            <option *ngIf="isStatisticsPage" value="" selected>--Tất cả rau--</option>
+            <option value="A" [selected]="lastSelectedBlock=='A'">Vườn A</option>
+            <option value="B" [selected]="lastSelectedBlock=='B'">Vườn B</option>
+            <option value="C" [selected]="lastSelectedBlock=='C'">Vườn C và D</option>
+        </select>
+    </span>
+
+    <span class="select-growth">
+        <select class="form-select form-select-sm" name="select-block" (change)="selectGrowth($event)">
+            <option value="0">--Tình trạng--</option>
+            <option value="1">Cây con</option>
+            <option value="2">Cây trung</option>
+            <option value="3">Đang thu hoạch</option>
+        </select>
+    </span>
+
+    <span class="select-plant">
+        <select class="form-select form-select-sm" name="select-block" (change)="selectPlant($event)">
+            <option value="0">--Tất cả rau--</option>
+            <option></option>
+        </select>
+    </span>
+</div>
