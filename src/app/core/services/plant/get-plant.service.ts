@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Plant } from '../../models/plant.model';
 import { HttpRequestService } from '../http-request.service';
 import { PLANT_REQUEST } from '../request-url-constants';
 
@@ -7,7 +9,7 @@ import { PLANT_REQUEST } from '../request-url-constants';
 })
 export class GetPlantService {
   constructor(private httpReq: HttpRequestService) { }
-  getPlantDataService() {
+  getPlantDataService(): Observable<Plant[]> {
     return this.httpReq.getDataRequest(PLANT_REQUEST.getPlantData);
   }
 }

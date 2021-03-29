@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { SettingPageComponent } from './setting-page.component';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [SettingPageComponent],
   imports: [
     CommonModule
   ]
 })
-export class ServicesModule { }
+export class SettingPageModule { }
