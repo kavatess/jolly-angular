@@ -1,0 +1,13 @@
+<header class="header">
+    <app-header *ngIf="hasHeader"></app-header>
+</header>
+<article class="content-container">
+    <div class="content-box">
+        <div class="content">
+            <ng-content select=".page-content"></ng-content>
+        </div>
+        <div *ngIf="hasFooter" class="footer">
+            <ng-content select=".footer"></ng-content>
+        </div>
+    </div>
+</article>
