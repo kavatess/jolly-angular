@@ -1,0 +1,68 @@
+.plant-info-container {
+    width: 100%;
+    height: 120px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    .plant-img {
+        width: 40%;
+        height: 100%;
+    }
+    .plant-info {
+        width: 60%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        .info-element {
+            width: 100%;
+            height: 100%;
+            display: inline-flex;
+            .info-icon {
+                flex: 2;
+            }
+            .info-title {
+                flex: 5;
+                height: 100%;
+            }
+            .info-body {
+                flex: 5;
+                height: 100%;
+            }
+            .info-title,
+            .info-body,
+            .info-icon {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: flex-start;
+            }
+        }
+    }
+}
+
+.modify-mode-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    .select-container {
+        margin-bottom: 10px;
+    }
+}
+
+.status-info {
+    width: 120px !important;
+}
+
+.plant-status,
+.plant-img,
+.plant-number {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}

@@ -169,9 +169,13 @@ body {
     }
 }
 .modal-body {
-    padding: 10px !important;
     max-height: 400px;
     overflow: scroll;
+}
+
+.modal-body,
+.modal-footer {
+    padding: 12px !important;
 }
 
 @media only screen and (min-height: 600px) {
@@ -192,7 +196,7 @@ body {
 
 @media only screen and (max-width: 325px) {
     .modal-body {
-        padding: 5px;
+        padding: 7px !important;
     }
 }
 /* Importing Bootstrap SCSS file. */

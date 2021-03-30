@@ -1,14 +1,14 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { Truss } from 'src/app/core/models/truss.model';
-import { FarmPageComponent } from 'src/app/pages/farm-page/farm-page.component';
 import { SessionStorageService } from 'src/app/shared/services/session-storage.service';
+import { FarmComponent } from '../farm.component';
 
 @Component({
   selector: 'app-farm-block',
   templateUrl: './farm-block.component.html',
   styleUrls: ['./farm-block.component.scss']
 })
-export class FarmBlockComponent extends FarmPageComponent implements OnChanges {
+export class FarmBlockComponent extends FarmComponent implements OnChanges {
   @Input() block = '';
   trussDataArr: Truss[] = [];
 

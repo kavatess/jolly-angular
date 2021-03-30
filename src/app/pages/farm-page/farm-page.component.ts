@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Truss } from 'src/app/core/models/truss.model';
 
 @Component({
   selector: 'app-farm-page',
@@ -10,13 +9,9 @@ export class FarmPageComponent implements OnInit {
   private static block = 'A';
   private static plantId = '';
   private static plantGrowth = 0;
-  private static clickedTruss: Truss;
-  set newClickedTruss(clickedTruss: Truss) {
-    FarmPageComponent.clickedTruss = clickedTruss;
-  }
-  get clickedTruss(): Truss {
-    return FarmPageComponent.clickedTruss;
-  }
+
+  constructor() { }
+
   set newBlock(block: string) {
     FarmPageComponent.block = block;
   }
@@ -35,8 +30,6 @@ export class FarmPageComponent implements OnInit {
   get selectedPlantGrowth(): number {
     return FarmPageComponent.plantGrowth;
   }
-
-  constructor() { }
 
   ngOnInit(): void {
     this.getLastBlock();
