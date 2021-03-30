@@ -3,7 +3,7 @@
         <div *ngFor="let truss of trussDataArr">
             <app-progress-bar *ngIf="truss" [verticalBar]=" truss.block=='BN' || truss.block == 'BS' "
                 [percentage]=" truss.percentage ? truss.percentage : 0 " (click)="emitClickedTrussEvent(truss) "
-                [color]=" (truss.plantId == selectedPlantId && truss.plantGrowth == selectedPlantGrowth) || (!selectedPlantId && !selectedPlantGrowth)  ? truss.plantColor : 'lightgray' "
+                [color]=" (!selectedPlantId && !selectedPlantGrowth) || (truss.plantId == selectedPlantId && truss.plantGrowth == selectedPlantGrowth) ? truss.plantColor : 'lightgray' "
                 data-toggle="modal" data-target="#exampleModal">
             </app-progress-bar>
 

@@ -7,7 +7,7 @@ import { Truss } from 'src/app/core/models/truss.model';
   styleUrls: ['./farm-page.component.scss']
 })
 export class FarmPageComponent implements OnInit {
-  private static block = '';
+  private static block = 'A';
   private static plantId = '';
   private static plantGrowth = 0;
   private static clickedTruss: Truss;
