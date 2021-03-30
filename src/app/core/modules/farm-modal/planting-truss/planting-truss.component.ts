@@ -1,0 +1,52 @@
+import { Component, Input, OnChanges } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { Truss } from 'src/app/core/models/truss.model';
+import { updateStatusBody } from 'src/app/core/models/truss.request.model';
+import { UpdateStatusService } from 'src/app/core/services/truss/update-status.service';
+
+@Component({
+  selector: 'app-planting-truss',
+  templateUrl: './planting-truss.component.html',
+  styleUrls: ['./planting-truss.component.scss']
+})
+export class PlantingTrussComponent implements OnChanges {
+  @Input() clickedTruss: Truss = new Truss();
+  updateStatusForm: FormGroup = new FormGroup({
+    newPlantGrowth: new FormControl(),
+    newPlantNumber: new FormControl()
+  });
+  isModifyMode = false;
+
+  constructor(private updateStatusService: UpdateStatusService) {
+  }
+
+  get saveBtnDisabled(): boolean {
+    return !(this.newPlantGrowth > this.clickedTruss.plantGrowth || this.newPlantNumber < this.clickedTruss.plantNumber);
+  }
+  private get newPlantNumber(): number {
+    return Number(this.updateStatusForm.value.newPlantNumber);
+  }
+  private get newPlantGrowth(): number {
+    return Number(this.updateStatusForm.value.newPlantGrowth);
+  }
+
+  ngOnChanges(): void {
+    this.revertStatus();
+    this.isModifyMode = false;
+  }
+
+  modifyBtnOnClick(): void {
+    this.isModifyMode = !this.isModifyMode;
+  }
+
+  revertStatus(): void {
+    this.updateStatusForm.setControl('newPlantGrowth', new FormControl(this.clickedTruss.plantGrowth));
+    this.updateStatusForm.setControl('newPlantNumber', new FormControl(this.clickedTruss.plantNumber));
+  }
+
+  saveStatus(): void {
+    const requestBody = new updateStatusBody(this.clickedTruss._id, this.newPlantNumber, this.newPlantGrowth);
+    this.updateStatusService.updateStatusService(requestBody);
+  }
+
+}

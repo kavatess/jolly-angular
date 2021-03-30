@@ -10,7 +10,7 @@
                 </button>
             </div>
             <!--modal-body for non-empty-truss-->
-            <app-planting-truss *ngIf="clickedTruss.plantId"></app-planting-truss>
+            <app-planting-truss *ngIf="clickedTruss.plantId" [clickedTruss]="clickedTruss"></app-planting-truss>
             <app-empty-truss *ngIf="!clickedTruss.plantId"></app-empty-truss>
         </div>
     </div>

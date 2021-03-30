@@ -1,4 +1,5 @@
 <div *ngIf="!isModifyMode">
+    <!-- Thân modal hiển thị thông tin giàn -->
     <div class="modal-body">
         <div class="plant-info-container">
             <span class="plant-img">
@@ -67,20 +68,37 @@
     </div>
 
     <div class="modal-footer">
-        <button class="btn btn-outline-primary">Thay đổi</button>
+        <button class="btn btn-outline-primary" (click)="modifyBtnOnClick()">Thay đổi</button>
         <button type="button" class="btn btn-outline-danger">Xoá giàn</button>
     </div>
 </div>
 
-
+<!-- Khi bấm vào nút thay đổi thân modal sẽ là một form để nhận input từ user -->
 <div *ngIf="isModifyMode">
     <div class="modal-body">
+        <form class="form-update-status" [formGroup]="updateStatusForm">
+            <div class="select-container">
+                <label for="plant-growth-select" class="text">Tình trạng:</label>
+                <select name="plant-growth-select" class="form-select form-select-sm"
+                    [formControlName]="'newPlantGrowth'">
+                    <option [value]="1">Cây con</option>
+                    <option [value]="2">Cây trung</option>
+                    <option [value]="3">Cây đã có thể thu hoạch
+                    </option>
+                </select>
+            </div>
 
+            <div class="input-container">
+                <label for="plant-number-input" class="text">Số lượng:</label>
+                <input name="plant-number-input" class="form-control form-control-sm" type="number" [formControlName]="'newPlantNumber'"
+                    [defaultValue]="clickedTruss.plantNumber" [max]="clickedTruss.maxHole">
+            </div>
+        </form>
     </div>
 
     <div class="modal-footer">
-        <button class="btn btn-success">Lưu</button>
-        <button type="button" class="btn btn-primary">Phục hồi</button>
-        <button class="btn btn-secondary">Quay về</button>
+        <button class="btn btn-success" (click)="saveStatus()" [disabled]="saveBtnDisabled">Lưu</button>
+        <button type="button" class="btn btn-primary" (click)="revertStatus()">Phục hồi</button>
+        <button class="btn btn-secondary" (click)="modifyBtnOnClick()">Quay về</button>
     </div>
 </div>

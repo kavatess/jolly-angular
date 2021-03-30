@@ -23,4 +23,5 @@ export class FarmBlockComponent extends FarmComponent implements OnChanges {
   emitClickedTrussEvent(truss: Truss): void {
     this.newClickedTruss = truss;
   }
+
 }

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { PlantingTrussComponent } from './planting-truss.component';
 import { PipesModule } from 'src/app/shared/pipes/pipes.module';
 import { ProgressBarModule } from 'src/app/shared/modules/progress-bar/progress-bar.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [PlantingTrussComponent],
@@ -10,6 +11,7 @@ import { ProgressBarModule } from 'src/app/shared/modules/progress-bar/progress-
     CommonModule,
     ProgressBarModule,
     PipesModule,
+    ReactiveFormsModule
   ],
   exports: [PlantingTrussComponent]
 })
