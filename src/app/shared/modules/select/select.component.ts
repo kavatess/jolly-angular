@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Plant } from 'src/app/core/models/plant.model';
+import { SessionStorageService } from '../../services/session-storage.service';
 
 @Component({
   selector: 'app-select',
@@ -11,10 +13,12 @@ export class SelectComponent implements OnInit {
   @Output() selectedGrowth = new EventEmitter<number>();
   @Output() selectedPlant = new EventEmitter<number>();
 
+  plantDataArr: Plant[] = [];
   lastSelectedBlock: string = "A";
-  constructor() { }
+  constructor(private sessionStorageService: SessionStorageService) { }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    this.plantDataArr = await this.sessionStorageService.getPlantArr();
     this.lastSelectedBlock = this.isStatisticsPage ? window.sessionStorage.getItem('last-block-stat') : window.sessionStorage.getItem('last-block-farm');
   }
 
@@ -33,7 +37,7 @@ export class SelectComponent implements OnInit {
   }
 
   selectPlant(event: any): void {
-    this.selectedPlant.emit(Number(event.target.value));
+    this.selectedPlant.emit(event.target.value);
   }
 
 }

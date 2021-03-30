@@ -21,7 +21,10 @@ export class PlantingTrussComponent implements OnChanges {
   }
 
   get saveBtnDisabled(): boolean {
-    return !(this.newPlantGrowth > this.clickedTruss.plantGrowth || this.newPlantNumber < this.clickedTruss.plantNumber);
+    const validNewPlantGrowth = this.newPlantGrowth >= this.clickedTruss.plantGrowth;
+    const validNewPlantNumber = this.newPlantNumber <= this.clickedTruss.plantNumber;
+    const exceptCond = this.newPlantGrowth == this.clickedTruss.plantGrowth && this.newPlantNumber == this.clickedTruss.plantNumber;
+    return !(validNewPlantGrowth && validNewPlantNumber && !exceptCond);
   }
   private get newPlantNumber(): number {
     return Number(this.updateStatusForm.value.newPlantNumber);

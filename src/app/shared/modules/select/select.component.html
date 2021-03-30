@@ -19,8 +19,10 @@
 
     <span class="select-plant">
         <select class="form-select form-select-sm" name="select-block" (change)="selectPlant($event)">
-            <option value="0">--Tất cả rau--</option>
-            <option></option>
+            <option [value]="''">--Tất cả rau--</option>
+            <option *ngFor="let plant of plantDataArr" [value]="plant._id">
+                {{ plant.plantName }}
+            </option>
         </select>
     </span>
 </div>
