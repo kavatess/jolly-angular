@@ -1,4 +1,4 @@
-export interface Seed {
+export class Seed {
     _id: string;
     plantId: string;
     startDate: string;

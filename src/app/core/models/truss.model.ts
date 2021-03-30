@@ -14,15 +14,22 @@ export interface MileStone extends PlantModel {
     statusPredict: Status[];
 }
 
-export interface TrussTimeline {
+export class TrussTimeline {
     _id: string;
     block: string;
     index: number;
     maxHole: number;
     timeline: MileStone[];
+    constructor(_id: string = "", block: string = "", index: number = 0, maxHole: number = 0, timeline: MileStone[] = []) {
+        this._id = _id;
+        this.block = block;
+        this.index = index;
+        this.maxHole = maxHole;
+        this.timeline = timeline;
+    }
 }
 
-export interface Truss {
+export class Truss {
     _id: string;
     block: string;
     index: number;
