@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpRequestService } from '../http-request.service';
 import { DeleteOneSeedService } from '../seed/delete-one-seed.service';
-import { createTrussRequest } from '../../models/truss.request.model';
+import { createTrussBody } from '../../models/truss.request.model';
 import { TRUSS_REQUEST } from '../request-url-constants';
 
 @Injectable({
@@ -9,7 +9,7 @@ import { TRUSS_REQUEST } from '../request-url-constants';
 })
 export class CreateTrussService {
   constructor(private httpReq: HttpRequestService, private deleteSeedService: DeleteOneSeedService) { }
-  createTrussService(sentJSON: createTrussRequest) {
+  createTrussService(sentJSON: createTrussBody) {
     this.deleteSeedService.deleteOneSeedService(sentJSON).subscribe(_response => {
       this.httpReq.accessDataRequest(TRUSS_REQUEST.createTruss, sentJSON);
     });
