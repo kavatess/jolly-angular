@@ -7,14 +7,14 @@ const UPDATE_REQUEST = '/update';
 const INSERT_REQUEST = '/insert';
 const DELETE_REQUEST = '/delete';
 export const TRUSS_REQUEST = {
-    getTrussData: TRUSS_REQUEST_HEAD + '/block/:block',
+    getTrussData: TRUSS_REQUEST_HEAD + '/block',
     getStatistics: TRUSS_REQUEST_HEAD + '/statistics',
     updateStatus: TRUSS_REQUEST_HEAD + '/update/status',
     createTruss: TRUSS_REQUEST_HEAD + '/create',
     clearTruss: TRUSS_REQUEST_HEAD + '/clear',
     updateMaxHole: TRUSS_REQUEST_HEAD + '/update/maxhole',
     revertStatus: TRUSS_REQUEST_HEAD + '/revert/status',
-    getTimelineById: TRUSS_REQUEST_HEAD + '/timeline/:id'
+    getTimelineById: TRUSS_REQUEST_HEAD + '/timeline'
 }
 export const PLANT_REQUEST = {
     getPlantData: PLANT_REQUEST_HEAD,
