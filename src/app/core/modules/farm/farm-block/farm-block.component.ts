@@ -17,7 +17,7 @@ export class FarmBlockComponent extends FarmComponent implements OnChanges {
   }
 
   async ngOnChanges() {
-    this.trussDataArr = await this.sessionStorage.getTrussArrInBlock(this.block);
+    this.trussDataArr = await this.sessionStorage.getTrussDataByBlock(this.block);
   }
 
   emitClickedTrussEvent(truss: Truss): void {

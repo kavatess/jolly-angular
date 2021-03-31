@@ -28,7 +28,7 @@ export class updateStatusBody {
     constructor(_id: string, plantNumber: number, plantGrowth: number) {
         this._id = _id;
         this.date = new Date().toString();
-        this.plantNumber = Number(plantNumber);
+        this.plantNumber = plantNumber ? Number(plantNumber) : 0;
         this.plantGrowth = Number(plantGrowth);
     }
 }

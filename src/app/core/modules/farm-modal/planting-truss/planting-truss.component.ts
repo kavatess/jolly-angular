@@ -20,19 +20,6 @@ export class PlantingTrussComponent implements OnChanges {
   constructor(private updateStatusService: UpdateStatusService) {
   }
 
-  get saveBtnDisabled(): boolean {
-    const validNewPlantGrowth = this.newPlantGrowth >= this.clickedTruss.plantGrowth;
-    const validNewPlantNumber = this.newPlantNumber <= this.clickedTruss.plantNumber;
-    const exceptCond = this.newPlantGrowth == this.clickedTruss.plantGrowth && this.newPlantNumber == this.clickedTruss.plantNumber;
-    return !(validNewPlantGrowth && validNewPlantNumber && !exceptCond);
-  }
-  private get newPlantNumber(): number {
-    return Number(this.updateStatusForm.value.newPlantNumber);
-  }
-  private get newPlantGrowth(): number {
-    return Number(this.updateStatusForm.value.newPlantGrowth);
-  }
-
   ngOnChanges(): void {
     this.revertStatus();
     this.isModifyMode = false;
@@ -50,6 +37,19 @@ export class PlantingTrussComponent implements OnChanges {
   saveStatus(): void {
     const requestBody = new updateStatusBody(this.clickedTruss._id, this.newPlantNumber, this.newPlantGrowth);
     this.updateStatusService.updateStatusService(requestBody);
+  }
+
+  get saveBtnDisabled(): boolean {
+    const validNewPlantGrowth = this.newPlantGrowth >= this.clickedTruss.plantGrowth;
+    const validNewPlantNumber = this.newPlantNumber <= this.clickedTruss.plantNumber;
+    const exceptCond = this.newPlantGrowth == this.clickedTruss.plantGrowth && this.newPlantNumber == this.clickedTruss.plantNumber;
+    return !(validNewPlantGrowth && validNewPlantNumber && !exceptCond);
+  }
+  private get newPlantNumber(): number {
+    return Number(this.updateStatusForm.value.newPlantNumber);
+  }
+  private get newPlantGrowth(): number {
+    return Number(this.updateStatusForm.value.newPlantGrowth);
   }
 
 }
