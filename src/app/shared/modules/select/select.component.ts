@@ -7,7 +7,7 @@ import { SessionStorageService } from '../../services/session-storage.service';
   styleUrls: ['./select.component.scss']
 })
 export class SelectComponent implements OnInit {
-  @Input() isStatisticsPage: boolean = false;
+  @Input() isStatisticsPage = false;
   @Output() selectedBlock = new EventEmitter<string>();
   @Output() selectedGrowth = new EventEmitter<number>();
   @Output() selectedPlant = new EventEmitter<number>();

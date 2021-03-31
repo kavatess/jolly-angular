@@ -1,4 +1,4 @@
-<div *ngIf="!isModifyMode">
+<ng-template [ngIf]="!isModifyMode">
     <!-- Thân modal hiển thị thông tin giàn -->
     <div class="modal-body">
         <div class="plant-info-container">
@@ -71,10 +71,10 @@
         <button class="btn btn-outline-primary" (click)="modifyBtnOnClick()">Thay đổi</button>
         <button type="button" class="btn btn-outline-danger">Xoá giàn</button>
     </div>
-</div>
+</ng-template>
 
 <!-- Khi bấm vào nút thay đổi thân modal sẽ là một form để nhận input từ user -->
-<div *ngIf="isModifyMode">
+<ng-template [ngIf]="isModifyMode">
     <div class="modal-body">
         <form class="form-update-status" [formGroup]="updateStatusForm">
             <div class="select-container">
@@ -101,4 +101,4 @@
         <button type="button" class="btn btn-primary" (click)="revertStatus()">Phục hồi</button>
         <button class="btn btn-secondary" (click)="modifyBtnOnClick()">Quay về</button>
     </div>
-</div>
+</ng-template>

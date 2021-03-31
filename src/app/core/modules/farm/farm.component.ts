@@ -9,19 +9,32 @@ import { Truss } from '../../models/truss.model';
 })
 export class FarmComponent extends FarmPageComponent implements OnInit {
   private static clickedTruss: Truss = new Truss();
+  private static modalTitle = '';
+  // test = 0;
 
   constructor() {
     super();
   }
 
   set newClickedTruss(clickedTruss: Truss) {
+    // this.test += 1;
     FarmComponent.clickedTruss = clickedTruss;
   }
   get clickedTruss(): Truss {
     return FarmComponent.clickedTruss;
   }
+  set newTitle(title: string) {
+    FarmComponent.modalTitle = title;
+  }
+  get modalTitle(): string {
+    return FarmComponent.modalTitle;
+  }
 
   ngOnInit(): void {
   }
+
+  // ngDoCheck(): void {
+  //   console.log(this.test, 'farm')
+  // }
 
 }

@@ -1,15 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'app-modal',
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.scss']
 })
-export class ModalComponent implements OnInit {
-
+export class ModalComponent implements OnChanges {
+  @Input() Id = '';
+  @Input() title = '';
+  // @Input() test = 0;
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnChanges(): void {
+    // console.log(this.test, "test");
   }
 
 }

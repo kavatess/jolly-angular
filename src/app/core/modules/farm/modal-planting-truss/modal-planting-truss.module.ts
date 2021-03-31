@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PlantingTrussComponent } from './planting-truss.component';
+import { ModalPlantingTrussComponent } from './modal-planting-truss.component';
 import { PipesModule } from 'src/app/shared/pipes/pipes.module';
 import { ProgressBarModule } from 'src/app/shared/modules/progress-bar/progress-bar.module';
 import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [PlantingTrussComponent],
+  declarations: [ModalPlantingTrussComponent],
   imports: [
     CommonModule,
-    ProgressBarModule,
+    ReactiveFormsModule,
     PipesModule,
-    ReactiveFormsModule
+    ProgressBarModule
   ],
-  exports: [PlantingTrussComponent]
+  exports: [ModalPlantingTrussComponent]
 })
-export class PlantingTrussModule { }
+export class ModalPlantingTrussModule { }

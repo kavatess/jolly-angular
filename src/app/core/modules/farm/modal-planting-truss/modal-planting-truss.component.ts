@@ -5,11 +5,11 @@ import { updateStatusBody } from 'src/app/core/models/truss.request.model';
 import { UpdateStatusService } from 'src/app/core/services/truss/update-status.service';
 
 @Component({
-  selector: 'app-planting-truss',
-  templateUrl: './planting-truss.component.html',
-  styleUrls: ['./planting-truss.component.scss']
+  selector: 'app-modal-planting-truss',
+  templateUrl: './modal-planting-truss.component.html',
+  styleUrls: ['./modal-planting-truss.component.scss']
 })
-export class PlantingTrussComponent implements OnChanges {
+export class ModalPlantingTrussComponent implements OnChanges {
   @Input() clickedTruss: Truss = new Truss();
   updateStatusForm: FormGroup = new FormGroup({
     newPlantGrowth: new FormControl(),

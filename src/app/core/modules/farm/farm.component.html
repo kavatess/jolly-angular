@@ -74,4 +74,12 @@
         </div>
     </div>
 </div>
-<app-farm-modal [clickedTruss]="clickedTruss"></app-farm-modal>
+<app-modal [Id]="'farm-modal'" [title]="modalTitle">
+    <div *ngIf="clickedTruss.plantId" modal-content>
+        <app-modal-planting-truss [clickedTruss]="clickedTruss">
+        </app-modal-planting-truss>
+    </div>
+    <div *ngIf="!clickedTruss.plantId" modal-content>
+        <app-modal-empty-truss></app-modal-empty-truss>
+    </div>
+</app-modal>
