@@ -1,13 +1,11 @@
-<div class="farm">
-    <div [class]="'farm-block-'+ block">
-        <div *ngFor="let truss of trussDataArr">
-            <app-progress-bar *ngIf="truss" [verticalBar]=" truss.block=='BN' || truss.block == 'BS' "
-                [percentage]=" truss.percentage ? truss.percentage : 0 " (click)="emitClickedTrussEvent(truss) "
-                [color]=" (!selectedPlantId || truss.plantId == selectedPlantId) && (!selectedPlantGrowth || truss.plantGrowth == selectedPlantGrowth) ? truss.plantColor : 'lightgray' "
-                data-toggle="modal" data-target="#farm-modal">
-            </app-progress-bar>
+<div [class]="'farm-block-'+ block">
+    <div *ngFor="let truss of trussDataArr">
+        <app-progress-bar *ngIf="truss" [verticalBar]=" truss.block=='BN' || truss.block == 'BS' "
+            [percentage]=" truss.percentage ? truss.percentage : 0 " (click)="emitClickedTrussEvent(truss) "
+            [color]=" (!selectedPlantId || truss.plantId == selectedPlantId) && (!selectedPlantGrowth || truss.plantGrowth == selectedPlantGrowth) ? truss.plantColor : 'lightgray' "
+            data-toggle="modal" data-target="#farm_modal">
+        </app-progress-bar>
 
-            <div *ngIf="!truss"></div>
-        </div>
+        <div *ngIf="!truss"></div>
     </div>
 </div>

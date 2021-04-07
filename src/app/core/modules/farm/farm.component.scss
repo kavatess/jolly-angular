@@ -1,19 +1,24 @@
-.farm-content {
-    width: 100%;
-    height: 100%;
+.farm-card-group {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    overflow: scroll;
+}
+
+.farm-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
     .top-component {
         width: 100%;
-        height: 10%;
+        flex: 1;
     }
     .middle-component {
         width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: row;
+        flex: 10;
+        display: inline-flex;
         align-items: center;
         justify-content: center;
         .left-component,
@@ -21,33 +26,64 @@
             width: 10%;
             height: 100%;
         }
+        .left-component {
+            padding-right: 7px;
+            min-width: 40px;
+        }
         .main-component {
             width: 100%;
             height: 100%;
+            .card {
+                margin-bottom: 8px !important;
+            }
+        }
+        .right-component {
+            padding-left: 10px;
+            min-width: 40px;
         }
     }
     .bottom-component {
         width: 100%;
-        height: 10%;
+        flex: 1;
         max-height: 36px;
     }
 }
 
-.card {
-    margin-bottom: 8px !important;
-}
-
-.component {
+.seed-table {
     width: 100%;
     height: 100%;
+    display: flex;
+    flex-direction: column-reverse;
 }
 
-.left-component {
-    padding-right: 7px;
-    min-width: 40px;
+.seed-table-horizontal {
+    width: 88%;
+    height: 100%;
+    margin-top: 8px;
 }
 
-.right-component {
-    padding-left: 10px;
-    min-width: 40px;
+.seed-table-vertical {
+    width: 100%;
+    height: 90%;
+}
+
+@media screen and (min-height: 700px) {
+    .right-component {
+        min-width: 45px !important;
+    }
+    .bottom-component {
+        max-height: 48px !important;
+    }
+    .seed-table-horizontal {
+        margin-top: 15px;
+    }
+}
+
+@media screen and (max-height: 600px) {
+    .right-component {
+        min-width: 36px !important;
+    }
+    .bottom-component {
+        max-height: 33px !important;
+    }
 }
