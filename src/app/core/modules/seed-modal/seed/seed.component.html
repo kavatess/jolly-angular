@@ -1,1 +1,53 @@
-<p>seed works!</p>
+<div *ngIf=" seedIndex == 0 " class="seed-list-header">
+    <span class="seed-status-header">TT</span>
+    <span class="seed-img-header">Hình</span>
+    <span class="seed-info-header">Thông tin</span>
+    <span class="seed-number-header">SL</span>
+    <span class="seed-tool-header"></span>
+</div>
+
+<hr>
+
+<div class="seed-element-container">
+    <span class="seed-status-container">
+        <i [class]=" seedEl.isReadySeed | plantStatusIcon "></i>
+    </span>
+
+    <span class="seed-img-container">
+        <img style="height: 60px;border-radius: 50%;" [src]=" seedEl.imgSrc " alt="">
+    </span>
+
+    <span class="seed-info-container">
+        <div class="seed-info-content">
+            <span class="text seed-info-title">Tên rau:</span>
+            <span class="text seed-info-body" [style.color]=" seedEl.plantColor ">
+                {{ seedEl.plantName }}
+            </span>
+        </div>
+
+        <div class="seed-info-content">
+            <span class="text seed-info-title">NT:</span>
+            <span class="text seed-info-body" [style.color]=" seedEl.plantColor ">
+                {{ seedEl.startDate | date: 'dd/MM/yyyy' }}
+            </span>
+        </div>
+
+        <div *ngIf=" seedEl.age > 0 " class="seed-info-content">
+            <span class="text seed-info-title">Tuổi:</span>
+            <span class="text seed-info-body" [style.color]=" seedEl.plantColor ">
+                <span *ngIf=" seedEl.age > 0 ">{{ seedEl.age }} tuần</span>
+                <span *ngIf=" seedEl.age == 0 ">Mới trồng</span>
+            </span>
+        </div>
+    </span>
+
+    <span class="seed-number-container">
+        <div *ngIf=" seedNumberVisible " class="seed-number-content" [style.color]="seedEl.plantColor">{{
+            seedEl.plantNumber }}</div>
+        <ng-content *ngIf=" !seedNumberVisible " select=".seed-number-content"></ng-content>
+    </span>
+
+    <span class="seed-tool-container">
+        <ng-content select=".seed-tool-content"></ng-content>
+    </span>
+</div>

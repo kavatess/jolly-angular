@@ -11,38 +11,38 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    .top-component {
+    .farm-top-container {
         width: 100%;
         flex: 1;
     }
-    .middle-component {
+    .farm-main-container {
         width: 100%;
         flex: 10;
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        .left-component,
-        .right-component {
+        .farm-left-container,
+        .farm-right-container {
             width: 10%;
             height: 100%;
         }
-        .left-component {
+        .farm-left-container {
             padding-right: 7px;
             min-width: 40px;
         }
-        .main-component {
+        .farm-middle-container {
             width: 100%;
             height: 100%;
             .card {
                 margin-bottom: 8px !important;
             }
         }
-        .right-component {
+        .farm-right-container {
             padding-left: 10px;
             min-width: 40px;
         }
     }
-    .bottom-component {
+    .farm-bottom-container {
         width: 100%;
         flex: 1;
         max-height: 36px;
@@ -68,10 +68,10 @@
 }
 
 @media screen and (min-height: 700px) {
-    .right-component {
+    .farm-right-container {
         min-width: 45px !important;
     }
-    .bottom-component {
+    .farm-bottom-container {
         max-height: 48px !important;
     }
     .seed-table-horizontal {
@@ -80,10 +80,10 @@
 }
 
 @media screen and (max-height: 600px) {
-    .right-component {
+    .farm-right-container {
         min-width: 36px !important;
     }
-    .bottom-component {
+    .farm-bottom-container {
         max-height: 33px !important;
     }
 }

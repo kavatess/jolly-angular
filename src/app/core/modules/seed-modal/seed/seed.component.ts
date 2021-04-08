@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Seed } from 'src/app/core/models/seed.model';
 
 @Component({
   selector: 'app-seed',
@@ -6,7 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./seed.component.scss']
 })
 export class SeedComponent implements OnInit {
-
+  @Input() seedIndex = -1;
+  @Input() seedEl: Seed = new Seed();
+  @Input() seedNumberVisible = true;
   constructor() { }
 
   ngOnInit(): void {

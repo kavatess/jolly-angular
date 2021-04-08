@@ -5,6 +5,7 @@ import { FarmBlockModule } from './farm-block/farm-block.module';
 import { ModalPlantingTrussModule } from './modal-planting-truss/modal-planting-truss.module';
 import { ModalEmptyTrussModule } from './modal-empty-truss/modal-empty-truss.module';
 import { ModalModule } from 'src/app/shared/modules/modal/modal.module';
+import { SeedModalModule } from '../seed-modal/seed-modal.module';
 
 @NgModule({
   declarations: [FarmComponent],
@@ -13,7 +14,8 @@ import { ModalModule } from 'src/app/shared/modules/modal/modal.module';
     FarmBlockModule,
     ModalModule,
     ModalPlantingTrussModule,
-    ModalEmptyTrussModule
+    ModalEmptyTrussModule,
+    SeedModalModule
   ],
   exports: [FarmComponent]
 })

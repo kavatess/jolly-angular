@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SessionStorageService } from 'src/app/shared/services/session-storage.service';
 
 @Component({
   selector: 'app-seed-modal',
@@ -6,10 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./seed-modal.component.scss']
 })
 export class SeedModalComponent implements OnInit {
+  constructor(public sessionStorageService: SessionStorageService) { }
 
-  constructor() { }
-
-  ngOnInit(): void {
+  async ngOnInit() {
   }
 
 }

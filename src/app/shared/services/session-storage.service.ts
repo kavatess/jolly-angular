@@ -13,11 +13,11 @@ export class SessionStorageService {
   constructor(
     private getDataService: HttpRequestService
   ) {
-    this.getSessionData('plant-arr', PLANT_REQUEST.getPlantData);
-    this.getSessionData('seed-arr', SEED_REQUEST.getSeedData);
+    this.getSeedArr();
+    this.getPlantArr();
   }
 
-  async getSessionData(collectionName: string, reqURL: string): Promise<any[]> {
+  private async getSessionData(collectionName: string, reqURL: string): Promise<any[]> {
     if (!this.sessionData[collectionName]) {
       this.sessionData[collectionName] = await this.getDataService.getDataRequest(reqURL).toPromise();
     }
@@ -37,4 +37,11 @@ export class SessionStorageService {
     return this.sessionData['seed-arr'];
   }
 
+  async getSeedArr(): Promise<Seed[]> {
+    return this.getSessionData('seed-arr', SEED_REQUEST.getSeedData);
+  }
+
+  async getPlantArr(): Promise<Plant[]> {
+    return this.getSessionData('plant-arr', PLANT_REQUEST.getPlantData);
+  }
 }
