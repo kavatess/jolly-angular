@@ -1,0 +1,62 @@
+<div class="modal-body">
+    <div class="created-seed-table">
+        <app-seed *ngFor="let seed of seedCreatedArr; let i = index" [seedEl]="seed" [seedIndex]="i">
+            <span class="seed-tool-content">
+                <i class="fas fas-16 fa-minus-square" (click)="removePlantIconClick(i)"></i>
+            </span>
+        </app-seed>
+    </div>
+
+    <div class="form-create-seed-container">
+        <form class="form-create-seed" [formGroup]="createSeedForm">
+            <div class="form-item-container">
+                <div class="form-title">
+                    <div class="text">Cây trồng:</div>
+                </div>
+
+                <div class="form-input-container">
+                    <select class="form-select form-select-sm" formControlName="plantId">
+                        <option *ngFor="let plant of sessionStorageService.plantArr" [value]="plant._id">
+                            {{ plant.plantName }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-item-container">
+                <div class="form-title">
+                    <div class="text">Ngày trồng:</div>
+                </div>
+
+                <div class="form-input-container">
+                    <input class="form-control form-control-sm" type="date" formControlName="startDate">
+                </div>
+            </div>
+
+            <div class="form-item-container">
+                <div class="form-title">
+                    <div class="text">Số lượng:</div>
+                </div>
+
+                <div class="form-input-container">
+                    <input class="form-control form-control-sm" formControlName="plantNumber" [type]="'number'">
+                </div>
+            </div>
+        </form>
+
+        <span class="form-btn-icon-group">
+            <button class="btn btn-outline-success" [disabled]="createSeedForm.invalid" (click)="addPlantIconClick()">
+                <i class="fas fas-25 fa-plus-square"></i>
+            </button>
+
+            <button class="btn btn-outline-secondary" (click)="initializeForm()">
+                <i class="fas fas-25 fa-history"></i>
+            </button>
+        </span>
+    </div>
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-success" [disabled]=" seedCreatedArr.length == 0 " (click)="saveBtnOnClick()">Lưu</button>
+    <button class="btn btn-secondary" (click)=" newModeValue = false ">Quay về</button>
+</div>

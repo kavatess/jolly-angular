@@ -1,8 +1,9 @@
 <app-modal [Id]="'seed_modal'" [title]="'Danh sách hạt đang ươm'">
-    <div modal-content>
-        <div class="modal-body">
-            <app-seed *ngFor="let seed of sessionStorageService.seedArr; let i = index" [seedIndex]="i" [seedEl]="seed">
-            </app-seed>
-        </div>
+    <div *ngIf="creationMode" modal-content>
+        <app-modal-create-seed></app-modal-create-seed>
+    </div>
+
+    <div *ngIf="!creationMode" modal-content>
+        <app-modal-seed-management></app-modal-seed-management>
     </div>
 </app-modal>

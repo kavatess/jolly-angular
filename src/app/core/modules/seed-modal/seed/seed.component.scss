@@ -1,4 +1,3 @@
-.seed-list-header,
 .seed-element-container,
 .seed-status-container,
 .seed-img-container,
@@ -12,21 +11,22 @@
 .seed-list-header {
     width: 100%;
     height: auto;
+    display: inline-flex;
     text-align: center;
     .seed-status-header {
-        flex: 5;
+        flex: 7;
     }
     .seed-img-header {
-        flex: 24;
+        flex: 22;
     }
     .seed-info-header {
-        flex: 44;
+        flex: 50;
     }
     .seed-number-header {
-        flex: 18;
+        flex: 10;
     }
     .seed-tool-header {
-        flex: 9;
+        flex: 11;
     }
 }
 
@@ -36,7 +36,7 @@
     border-radius: 5px;
     align-items: flex-start !important;
     .seed-status-container {
-        flex: 5;
+        flex: 7;
     }
 
     .seed-img-container {
@@ -44,8 +44,7 @@
     }
 
     .seed-info-container {
-        flex: 49;
-        width: 100%;
+        flex: 50;
         height: 100%;
         display: flex;
         flex-direction: column;
@@ -62,7 +61,7 @@
     }
 
     .seed-number-container {
-        flex: 12;
+        flex: 13;
         height: 100%;
         .seed-number-content {
             font-size: 18px;
@@ -71,9 +70,8 @@
     }
 
     .seed-tool-container {
-        flex: 7;
+        flex: 8;
         height: 100%;
-        padding-left: 10px;
     }
 }
 

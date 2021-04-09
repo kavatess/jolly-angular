@@ -1,4 +1,4 @@
-import { PlantModel } from "./plant.model";
+import { BasicPlant } from "./plant.model";
 
 export class Status {
     date: string;
@@ -6,7 +6,7 @@ export class Status {
     plantGrowth: number;
 }
 
-export interface MileStone extends PlantModel {
+export interface MileStone extends BasicPlant {
     _index: number;
     plantId: string;
     startDate: string;

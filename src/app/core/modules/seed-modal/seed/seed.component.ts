@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Seed } from 'src/app/core/models/seed.model';
+import { Seed, BasicSeedInfo } from 'src/app/core/models/seed.model';
 
 @Component({
   selector: 'app-seed',
@@ -8,11 +8,23 @@ import { Seed } from 'src/app/core/models/seed.model';
 })
 export class SeedComponent implements OnInit {
   @Input() seedIndex = -1;
-  @Input() seedEl: Seed = new Seed();
+  @Input() seedEl: BasicSeedInfo = new Seed();
   @Input() seedNumberVisible = true;
+
   constructor() { }
 
   ngOnInit(): void {
+    console.log(this.seedEl);
+    // if (!this.seedEl._id) {
+    //   this.createSeedForm = new FormGroup({
+    //     plantId: new FormControl(''),
+    //     startDate: new FormControl(new Date().toString()),
+    //     plantNumber: new FormControl(300, [
+    //       Validators.required,
+    //       Validators.maxLength(4)
+    //     ])
+    //   })
+    // }
   }
 
 }
