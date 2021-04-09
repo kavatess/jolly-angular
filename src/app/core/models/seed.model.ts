@@ -31,13 +31,12 @@ export class BasicSeedInfo implements SimpleSeed {
         this.plantColor = plantType.plantColor;
         this.seedUpTime = plantType.seedUpTime;
     }
-
     get age(): number {
         const ageMiliSec = new Date().getTime() - new Date(this.startDate).getTime();
-        return floor(ageMiliSec / (7 * 24 * 3600 * 1000));
+        return floor(ageMiliSec / (7 * 86400000));
     }
     get isReadySeed(): boolean {
-        return this.age >= floor(this.seedUpTime / 7);
+        return new Date().getTime() - new Date(this.startDate).getTime() >= this.seedUpTime * 86400000;
     }
 }
 

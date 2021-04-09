@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./seed-modal.component.scss']
 })
 export class SeedModalComponent implements OnInit {
-  private static creationMode = true;
+  private static creationMode = false;
 
   constructor() { }
 

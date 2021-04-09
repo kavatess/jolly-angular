@@ -1,7 +1,9 @@
 <div class="modal-body">
-
+    <app-seed *ngFor="let seed of sessionStorageService.seedArr; let i = index" [seedEl]="seed" [seedIndex]="i">
+    </app-seed>
 </div>
 
 <div class="modal-footer">
-    
+    <button class="btn btn-info" (click)=" newModeValue = true ">Ươm hạt mới</button>
+    <button class="btn btn-secondary" data-dismiss="modal">Đóng</button>
 </div>
