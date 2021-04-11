@@ -1,5 +1,34 @@
 <div class="modal-body">
-    <app-seed *ngFor="let seed of sessionStorageService.seedArr; let i = index" [seedEl]="seed" [seedIndex]="i">
+    <app-seed *ngFor="let seed of sessionStorageService.seedData; let i = index" [seedEl]="seed" [seedIndex]="i"
+        [seedNumberVisible]="false">
+        <span class="seed-number-content">
+            <span #seed_number_div [style.color]="seed.plantColor">{{ seed.plantNumber }}</span>
+            <input #seed_number_input type="number" class="form-control form-control-sm d-none"
+                [defaultValue]="seed.plantNumber">
+        </span>
+
+        <span #setting_icon_div class="seed-tool-content">
+            <i class="fas fa-gray fas-16 fa-cog"
+                (click)="settingIconOnClick(setting_icon_div, setting_btn_group_span)"></i>
+        </span>
+
+        <span #setting_btn_group_span class="seed-tool-content d-none">
+            <button class="btn btn-fa-container btn-danger">
+                <i class="fas fas-12 fa-times"></i>
+            </button>
+
+            <button class="btn btn-fa-container btn-outline-secondary"
+                (click)="modifyIconOnClick(seed_number_div, seed_number_input, setting_btn_group_span , modify_btn_group_span)">
+                <i class="fas fas-12 fa-pencil-alt"></i>
+            </button>
+        </span>
+
+        <span #modify_btn_group_span class="seed-tool-content d-none">
+            <i class="fas fa-success fa-check-circle"></i>
+
+            <i class="fas fa-danger fa-times-circle"
+                (click)="cancelIconOnClick(seed_number_div, seed_number_input, setting_icon_div, setting_btn_group_span , modify_btn_group_span)"></i>
+        </span>
     </app-seed>
 </div>
 

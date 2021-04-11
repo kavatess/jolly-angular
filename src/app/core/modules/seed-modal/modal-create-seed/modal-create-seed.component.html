@@ -16,7 +16,7 @@
 
                 <div class="form-input-container">
                     <select class="form-select form-select-sm" formControlName="plantId">
-                        <option *ngFor="let plant of sessionStorageService.plantArr" [value]="plant._id">
+                        <option *ngFor="let plant of sessionStorageService.plantData" [value]="plant._id">
                             {{ plant.plantName }}
                         </option>
                     </select>
@@ -45,11 +45,11 @@
         </form>
 
         <span class="form-btn-icon-group">
-            <button class="btn btn-outline-success" [disabled]="createSeedForm.invalid" (click)="addPlantIconClick()">
+            <button class="btn btn-fa-container btn-outline-success" [disabled]="createSeedForm.invalid" (click)="addPlantIconClick()">
                 <i class="fas fas-25 fa-plus-square"></i>
             </button>
 
-            <button class="btn btn-outline-secondary" (click)="initializeForm()">
+            <button class="btn btn-fa-container btn-outline-secondary" (click)="initializeForm()">
                 <i class="fas fas-25 fa-history"></i>
             </button>
         </span>

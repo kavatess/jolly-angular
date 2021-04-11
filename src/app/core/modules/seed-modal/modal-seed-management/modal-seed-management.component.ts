@@ -9,11 +9,26 @@ import { SeedModalComponent } from '../seed-modal.component';
 })
 export class ModalSeedManagementComponent extends SeedModalComponent implements OnInit {
 
-  constructor(public sessionStorageService:SessionStorageService) {
+  constructor(public sessionStorageService: SessionStorageService) {
     super();
   }
 
   ngOnInit(): void {
   }
 
+  settingIconOnClick(settingIconEl: any, settingBtnGroupEl: any): void {
+    settingIconEl.classList.add('d-none');
+    settingBtnGroupEl.classList.remove('d-none')
+  }
+
+  modifyIconOnClick(seedNumberEl: any, seedNumberInputEl: any, settingBtnGroupEl: any, modifyBtnGroupEl: any): void {
+    this.settingIconOnClick(seedNumberEl, seedNumberInputEl);
+    this.settingIconOnClick(settingBtnGroupEl, modifyBtnGroupEl);
+  }
+
+  cancelIconOnClick(seedNumberEl: any, seedNumberInputEl: any, settingIconEl: any, settingBtnGroupEl: any, modifyBtnGroupEl: any): void {
+    this.settingIconOnClick(seedNumberInputEl, seedNumberEl);
+    this.settingIconOnClick(settingBtnGroupEl, settingIconEl);
+    modifyBtnGroupEl.classList.add('d-none');
+  }
 }

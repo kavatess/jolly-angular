@@ -32,13 +32,13 @@ export class ModalCreateSeedComponent extends SeedModalComponent implements OnIn
         Validators.maxLength(4)
       ])
     });
-    const plantArr = await this.sessionStorageService.getPlantArr();
+    const plantArr = await this.sessionStorageService.getPlantData();
     this.createSeedForm.setControl('plantId', new FormControl(plantArr[0]._id));
   }
 
   addPlantIconClick(): void {
     if (this.createSeedForm.valid) {
-      const plantType = this.sessionStorageService.plantArr.find(plant => plant._id === this.createSeedForm.value.plantId);
+      const plantType = this.sessionStorageService.plantData.find(plant => plant._id == this.createSeedForm.value.plantId);
       const newSeed = new BasicSeedInfo(this.createSeedForm.value, plantType);
       this.seedCreatedArr.push(newSeed);
     }

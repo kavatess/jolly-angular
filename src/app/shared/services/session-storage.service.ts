@@ -1,47 +1,47 @@
 import { Injectable } from '@angular/core';
-import { HttpRequestService } from 'src/app/core/services/http-request.service';
-import { PLANT_REQUEST, SEED_REQUEST, TRUSS_REQUEST } from 'src/app/core/services/request-url-constants';
+import { Truss } from 'src/app/core/models/truss.model';
+import { GetPlantDataService } from 'src/app/core/services/plant/get-plant-data.service';
+import { GetSeedDataService } from 'src/app/core/services/seed/get-seed-data.service';
+import { GetTrussByBlockService } from 'src/app/core/services/truss/get-truss-by-block.service';
 import { Plant } from '../../core/models/plant.model';
 import { Seed } from '../../core/models/seed.model';
-import { Truss } from '../../core/models/truss.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SessionStorageService {
-  sessionData: any[] = [];
+  trussCollection: any[] = [];
+  plantData: Plant[] = [];
+  seedData: Seed[] = [];
   constructor(
-    private getDataService: HttpRequestService
+    private getTrussDataService: GetTrussByBlockService,
+    private getPlantDataService: GetPlantDataService,
+    private getSeedDataService: GetSeedDataService
   ) {
-    this.getSeedArr();
-    this.getPlantArr();
-  }
-
-  private async getSessionData(collectionName: string, reqURL: string): Promise<any[]> {
-    if (!this.sessionData[collectionName]) {
-      this.sessionData[collectionName] = await this.getDataService.getDataRequest(reqURL).toPromise();
-    }
-    return this.sessionData[collectionName];
+    this.getPlantData();
+    this.getSeedData();
   }
 
   async getTrussDataByBlock(block: string): Promise<Truss[]> {
-    const collectionName = `truss-arr-block-${block}`;
-    return await this.getSessionData(collectionName, TRUSS_REQUEST.getTrussData + `/${block}`);
+    if (!this.trussCollection[`block-${block}`]) {
+      this.trussCollection[`block-${block}`] = await this.getTrussDataService.getTrussDataByBlock(block).toPromise();
+    }
+    return this.trussCollection[`block-${block}`];
   }
 
-  get plantArr(): Plant[] {
-    return this.sessionData['plant-arr'];
+  async getPlantData(): Promise<Plant[]> {
+    if (!this.plantData.length) {
+      this.plantData = await this.getPlantDataService.getPlantData().toPromise();
+    }
+    return this.plantData;
   }
 
-  get seedArr(): Seed[] {
-    return this.sessionData['seed-arr'];
+  async getSeedData(): Promise<Seed[]> {
+    if (!this.seedData.length) {
+      this.seedData = await this.getSeedDataService.getSeedData().toPromise();
+      this.seedData.sort((a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime());
+    }
+    return this.seedData;
   }
 
-  async getSeedArr(): Promise<Seed[]> {
-    return this.getSessionData('seed-arr', SEED_REQUEST.getSeedData);
-  }
-
-  async getPlantArr(): Promise<Plant[]> {
-    return this.getSessionData('plant-arr', PLANT_REQUEST.getPlantData);
-  }
 }

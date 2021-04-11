@@ -42,8 +42,7 @@
     </span>
 
     <span class="seed-number-container">
-        <div *ngIf=" seedNumberVisible " class="seed-number-content" [style.color]="seedEl.plantColor">{{
-            seedEl.plantNumber }}</div>
+        <span *ngIf=" seedNumberVisible " [style.color]="seedEl.plantColor">{{seedEl.plantNumber }}</span>
         <ng-content *ngIf=" !seedNumberVisible " select=".seed-number-content"></ng-content>
     </span>
 

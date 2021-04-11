@@ -80,7 +80,7 @@
     </ng-template>
 
     <!-- Modal for truss -->
-    <app-modal [Id]="'farm_modal'" [title]="modalTitle">
+    <app-modal [Id]="'farm_modal'" [title]=" 'Thông tin giàn rau ' + clickedTruss.block + clickedTruss.index ">
         <div *ngIf="clickedTruss.plantId" modal-content>
             <app-modal-planting-truss [clickedTruss]="clickedTruss">
             </app-modal-planting-truss>
