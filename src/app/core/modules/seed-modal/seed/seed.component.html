@@ -8,7 +8,7 @@
 
 <hr>
 
-<div class="seed-element-container">
+<div #seed_element class="seed-element-container" (click)="seedElOnClick(seed_element)">
     <span class="seed-status-container">
         <i [class]=" seedEl.isReadySeed | plantStatusIcon "></i>
     </span>
@@ -19,22 +19,22 @@
 
     <span class="seed-info-container">
         <div class="seed-info-content">
-            <span class="text seed-info-title">Tên rau:</span>
-            <span class="text seed-info-body" [style.color]=" seedEl.plantColor ">
+            <span class="seed-info-title">Tên rau:</span>
+            <span class="seed-info-body" [style.color]=" seedEl.plantColor ">
                 {{ seedEl.plantName }}
             </span>
         </div>
 
         <div class="seed-info-content">
-            <span class="text seed-info-title">NT:</span>
-            <span class="text seed-info-body" [style.color]=" seedEl.plantColor ">
+            <span class="seed-info-title">NT:</span>
+            <span class="seed-info-body" [style.color]=" seedEl.plantColor ">
                 {{ seedEl.startDate | date: 'dd/MM/yyyy' }}
             </span>
         </div>
 
         <div class="seed-info-content">
-            <span class="text seed-info-title">Tuổi:</span>
-            <span class="text seed-info-body" [style.color]=" seedEl.plantColor ">
+            <span class="seed-info-title">Tuổi:</span>
+            <span class="seed-info-body" [style.color]=" seedEl.plantColor ">
                 <span *ngIf=" seedEl.age > 0 ">{{ seedEl.age }} tuần</span>
                 <span *ngIf=" seedEl.age == 0 ">Mới trồng</span>
             </span>
@@ -42,52 +42,10 @@
     </span>
 
     <span class="seed-number-container">
-        <span *ngIf=" seedNumberVisible " [style.color]="seedEl.plantColor">{{seedEl.plantNumber }}</span>
-        <ng-content *ngIf=" !seedNumberVisible " select=".seed-number-content"></ng-content>
+        <ng-content select=".seed-number-content"></ng-content>
     </span>
 
     <span class="seed-tool-container">
         <ng-content select=".seed-tool-content"></ng-content>
     </span>
 </div>
-
-<!-- <form *ngIf="!seedEl._id" class="seed-element-container" [formGroup]="createSeedForm">
-    <span class="seed-status-container">?</span>
-
-    <span class="seed-img-container">?</span>
-
-    <span class="seed-info-container">
-        <div class="seed-info-content">
-            <span class="text seed-info-title">Tên rau:</span>
-            <span class="text seed-info-body">
-                <select class="form-select form-select-sm" formControlName="plantId">
-                    <option *ngFor="let plant of sessionStorageService.plantArr" [value]="plant._id">
-                        {{ plant.plantName }}
-                    </option>
-                </select>
-            </span>
-        </div>
-
-        <div class="seed-info-content">
-            <span class="text seed-info-title">NT:</span>
-            <span class="text seed-info-body">
-                <input class="form-control form-control-sm" type="date" formControlName="startDate">
-            </span>
-        </div>
-
-        <div class="seed-info-content">
-            <span class="text seed-info-title">Tuổi:</span>
-            <span class="text seed-info-body">?</span>
-        </div>
-    </span>
-
-    <span class="seed-number-container">
-        <input class="form-control form-control-sm" formControlName="plantNumber" [type]="'number'">
-    </span>
-
-    <span class="seed-tool-container">
-        <button class="btn btn-outline-success">
-            <i class="fas fas-25 fa-check"></i>
-        </button>
-    </span>
-</form> -->

@@ -17,8 +17,7 @@ export class ModalPlantingTrussComponent implements OnChanges {
   });
   isModifyMode = false;
 
-  constructor(private updateStatusService: UpdateStatusService) {
-  }
+  constructor(private updateStatusService: UpdateStatusService) { }
 
   ngOnChanges(): void {
     this.revertStatus();
@@ -35,15 +34,17 @@ export class ModalPlantingTrussComponent implements OnChanges {
   }
 
   saveStatus(): void {
-    const requestBody = new updateStatusBody(this.clickedTruss._id, this.newPlantNumber, this.newPlantGrowth);
-    this.updateStatusService.updateStatusService(requestBody);
+    if (this.isValidNewStatus) {
+      const requestBody = new updateStatusBody(this.clickedTruss._id, this.newPlantNumber, this.newPlantGrowth);
+      this.updateStatusService.updateStatusService(requestBody);
+    }
   }
 
-  get saveBtnDisabled(): boolean {
+  get isValidNewStatus(): boolean {
     const validNewPlantGrowth = this.newPlantGrowth >= this.clickedTruss.plantGrowth;
     const validNewPlantNumber = this.newPlantNumber <= this.clickedTruss.plantNumber;
     const exceptCond = this.newPlantGrowth == this.clickedTruss.plantGrowth && this.newPlantNumber == this.clickedTruss.plantNumber;
-    return !(validNewPlantGrowth && validNewPlantNumber && !exceptCond);
+    return validNewPlantGrowth && validNewPlantNumber && !exceptCond;
   }
   private get newPlantNumber(): number {
     return Number(this.updateStatusForm.value.newPlantNumber);

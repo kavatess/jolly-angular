@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Seed, BasicSeedInfo } from 'src/app/core/models/seed.model';
 
 @Component({
@@ -9,22 +9,22 @@ import { Seed, BasicSeedInfo } from 'src/app/core/models/seed.model';
 export class SeedComponent implements OnInit {
   @Input() seedIndex = -1;
   @Input() seedEl: BasicSeedInfo = new Seed();
-  @Input() seedNumberVisible = true;
+  @Input() hasClickEvent = false;
+  @Output() seedElClick = new EventEmitter<BasicSeedInfo>();
 
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.seedEl);
-    // if (!this.seedEl._id) {
-    //   this.createSeedForm = new FormGroup({
-    //     plantId: new FormControl(''),
-    //     startDate: new FormControl(new Date().toString()),
-    //     plantNumber: new FormControl(300, [
-    //       Validators.required,
-    //       Validators.maxLength(4)
-    //     ])
-    //   })
-    // }
+  }
+
+  seedElOnClick(seedContainerEl: any): void {
+    if (this.hasClickEvent) {
+      document.querySelectorAll('.seed-element-container').forEach(seedEl => {
+        seedEl.classList.remove('seed-element-on-focus');
+      })
+      seedContainerEl.classList.add('seed-element-on-focus');
+      this.seedElClick.emit(this.seedEl);
+    }
   }
 
 }

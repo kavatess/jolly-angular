@@ -7,7 +7,7 @@ import { SEED_REQUEST } from '../request-url-constants';
 })
 export class DeleteOneSeedService {
   constructor(private httpReq: HttpRequestService) { }
-  deleteOneSeedService(sentJSON: any) {
-    return this.httpReq.getDataRequest(SEED_REQUEST.deleteOneSeed, sentJSON);
+  deleteOneSeed(deletedSeedId: string) {
+    return this.httpReq.getDataRequest(SEED_REQUEST.deleteOneSeed + `/${deletedSeedId}`);
   }
 }

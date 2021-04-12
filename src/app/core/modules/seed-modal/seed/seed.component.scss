@@ -26,14 +26,14 @@
         flex: 11;
     }
     .seed-tool-header {
-        flex: 12;
+        flex: 10;
     }
 }
 
 .seed-element-container {
     width: 100%;
-    height: 110px;
-    border-radius: 5px;
+    height: 106px;
+    border-radius: 8px;
     align-items: flex-start !important;
     .seed-status-container {
         flex: 7;
@@ -52,16 +52,16 @@
         .seed-info-content {
             display: inline-flex;
             .seed-info-title {
-                flex: 4;
+                width: 45%;
             }
             .seed-info-body {
-                flex: 6;
+                width: 55%;
             }
         }
     }
 
     .seed-number-container {
-        flex: 13;
+        flex: 11;
         min-width: 41px;
         height: 100%;
         font-size: 18px;
@@ -75,8 +75,8 @@
     }
 }
 
-.on-focus {
-    background-color: #ffe77b !important;
+.seed-element-on-focus {
+    border: 3px solid lightslategray;
 }
 
 @media only screen and (max-width: 325px) {

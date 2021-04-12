@@ -1,22 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { BasicSeedInfo, SimpleSeed } from 'src/app/core/models/seed.model';
 import { InsertSeedService } from 'src/app/core/services/seed/insert-seed.service';
 import { SessionStorageService } from 'src/app/shared/services/session-storage.service';
-import { SeedModalComponent } from '../seed-modal.component';
 
 @Component({
   selector: 'app-modal-create-seed',
   templateUrl: './modal-create-seed.component.html',
   styleUrls: ['./modal-create-seed.component.scss']
 })
-export class ModalCreateSeedComponent extends SeedModalComponent implements OnInit {
-  createSeedForm: FormGroup = new FormGroup({
-  });
+export class ModalCreateSeedComponent implements OnInit {
+  createSeedForm: FormGroup = new FormGroup({});
   seedCreatedArr: BasicSeedInfo[] = [];
+  @Output() return = new EventEmitter();
 
-  constructor(public sessionStorageService: SessionStorageService, private addSeedService: InsertSeedService) {
-    super();
+  constructor(public sessionStorage: SessionStorageService, private addSeedService: InsertSeedService) {
   }
 
   ngOnInit(): void {
@@ -32,16 +30,14 @@ export class ModalCreateSeedComponent extends SeedModalComponent implements OnIn
         Validators.maxLength(4)
       ])
     });
-    const plantArr = await this.sessionStorageService.getPlantData();
+    const plantArr = await this.sessionStorage.getPlantData();
     this.createSeedForm.setControl('plantId', new FormControl(plantArr[0]._id));
   }
 
-  addPlantIconClick(): void {
-    if (this.createSeedForm.valid) {
-      const plantType = this.sessionStorageService.plantData.find(plant => plant._id == this.createSeedForm.value.plantId);
-      const newSeed = new BasicSeedInfo(this.createSeedForm.value, plantType);
-      this.seedCreatedArr.push(newSeed);
-    }
+  addIconClick(): void {
+    const plantType = this.sessionStorage.plantData.find(plant => plant._id == this.createSeedForm.value.plantId);
+    const newSeed = new BasicSeedInfo(this.createSeedForm.value, plantType);
+    this.seedCreatedArr.push(newSeed);
   }
 
   removePlantIconClick(seedIndex: number): void {
@@ -59,6 +55,10 @@ export class ModalCreateSeedComponent extends SeedModalComponent implements OnIn
       })
       this.addSeedService.insertManySeedService(newSeedArr);
     }
+  }
+
+  returnBtnOnClick(): void {
+    this.return.emit();
   }
 
 }

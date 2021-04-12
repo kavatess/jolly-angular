@@ -44,4 +44,12 @@ export class SessionStorageService {
     return this.seedData;
   }
 
+  async resetSeedData() {
+    this.seedData = [];
+    return await this.getSeedData();
+  }
+
+  get readySeedData(): Seed[] {
+    return this.seedData.filter(seed => seed.isReadySeed);
+  }
 }

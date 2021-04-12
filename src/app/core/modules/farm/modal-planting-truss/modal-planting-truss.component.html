@@ -11,53 +11,35 @@
                         <i [class]=" clickedTruss.plantGrowth | plantStatusIcon "></i>
                     </span>
                     <span class="info-body status-info">
-                        <div class="text">
-                            {{ clickedTruss.plantGrowth | plantGrowthStr }}
-                        </div>
+                        {{ clickedTruss.plantGrowth | plantGrowthStr }}
                     </span>
                 </div>
 
                 <div class="info-element">
-                    <span class="info-title">
-                        <div class="text">Tên rau:</div>
-                    </span>
-                    <span class="info-body">
-                        <div class="text" [style.color]=" clickedTruss.plantColor ">
-                            {{ clickedTruss.plantName }}
-                        </div>
+                    <span class="info-title">Tên rau:</span>
+                    <span class="info-body" [style.color]=" clickedTruss.plantColor ">
+                        {{ clickedTruss.plantName }}
                     </span>
                 </div>
 
                 <div class="info-element">
-                    <span class="info-title">
-                        <div class="text">Ngày trồng:</div>
-                    </span>
-                    <span class="info-body">
-                        <div class="text" [style.color]=" clickedTruss.plantColor ">
-                            {{ clickedTruss.startDate | date: 'dd/MM/yyyy' }}
-                        </div>
+                    <span class="info-title">Ngày trồng:</span>
+                    <span class="info-body" [style.color]=" clickedTruss.plantColor ">
+                        {{ clickedTruss.startDate | date: 'dd/MM/yyyy' }}
                     </span>
                 </div>
 
                 <div class="info-element" *ngIf=" clickedTruss.plantGrowth < 3 ">
-                    <span class="info-title">
-                        <div class="text">Dự kiến TH:</div>
-                    </span>
-                    <span class="info-body">
-                        <div class="text" [style.color]=" clickedTruss.plantColor ">
-                            {{ clickedTruss.predictHarvestDate }} ngày nữa
-                        </div>
+                    <span class="info-title">Dự kiến TH:</span>
+                    <span class="info-body" [style.color]=" clickedTruss.plantColor ">
+                        {{ clickedTruss.predictHarvestDate }} ngày nữa
                     </span>
                 </div>
 
                 <div class="info-element" *ngIf=" clickedTruss.plantGrowth == 3 ">
-                    <span class="info-title">
-                        <div class="text">Đã TH được:</div>
-                    </span>
-                    <span class="info-body">
-                        <div class="text" [style.color]=" clickedTruss.plantColor ">
-                            {{ clickedTruss.predictHarvestDate }} ngày
-                        </div>
+                    <span class="info-title">Đã TH được:</span>
+                    <span class="info-body" [style.color]=" clickedTruss.plantColor ">
+                        {{ clickedTruss.predictHarvestDate }} ngày
                     </span>
                 </div>
             </span>
@@ -79,8 +61,7 @@
         <form class="form-update-status" [formGroup]="updateStatusForm">
             <div class="select-container">
                 <label for="plant-growth-select" class="text">Tình trạng:</label>
-                <select name="plant-growth-select" class="form-select form-select-sm"
-                    [formControlName]="'newPlantGrowth'">
+                <select name="plant-growth-select" class="form-select form-select-sm" formControlName="newPlantGrowth">
                     <option [value]="1">Cây con</option>
                     <option [value]="2">Cây trung</option>
                     <option [value]="3">Cây đã có thể thu hoạch
@@ -90,14 +71,14 @@
 
             <div class="input-container">
                 <label for="plant-number-input" class="text">Số lượng:</label>
-                <input name="plant-number-input" class="form-control form-control-sm" type="number" [formControlName]="'newPlantNumber'"
-                    [defaultValue]="clickedTruss.plantNumber">
+                <input name="plant-number-input" class="form-control form-control-sm" type="number"
+                    formControlName="newPlantNumber">
             </div>
         </form>
     </div>
 
     <div class="modal-footer">
-        <button class="btn btn-success" (click)="saveStatus()" [disabled]="saveBtnDisabled">Lưu</button>
+        <button class="btn btn-success" (click)="saveStatus()" [disabled]="!isValidNewStatus">Lưu</button>
         <button type="button" class="btn btn-primary" (click)="revertStatus()">Phục hồi</button>
         <button class="btn btn-secondary" (click)="modifyBtnOnClick()">Quay về</button>
     </div>

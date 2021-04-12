@@ -1,17 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { BasicSeedInfo, Seed } from 'src/app/core/models/seed.model';
+import { DeleteOneSeedService } from 'src/app/core/services/seed/delete-one-seed.service';
+import { UpdateSeedNumberService } from 'src/app/core/services/seed/update-seed-number.service';
 import { SessionStorageService } from 'src/app/shared/services/session-storage.service';
-import { SeedModalComponent } from '../seed-modal.component';
 
 @Component({
   selector: 'app-modal-seed-management',
   templateUrl: './modal-seed-management.component.html',
   styleUrls: ['./modal-seed-management.component.scss']
 })
-export class ModalSeedManagementComponent extends SeedModalComponent implements OnInit {
+export class ModalSeedManagementComponent implements OnInit {
+  @Input() seedArr: Seed[] = [];
+  @Input() clickEventActivated = false;
+  @Output() seedElClick = new EventEmitter<BasicSeedInfo>();
 
-  constructor(public sessionStorageService: SessionStorageService) {
-    super();
-  }
+  constructor(
+    private sessionStorage: SessionStorageService,
+    private deleteSeedService: DeleteOneSeedService,
+    private updateSeedService: UpdateSeedNumberService
+  ) { }
 
   ngOnInit(): void {
   }
@@ -27,8 +34,28 @@ export class ModalSeedManagementComponent extends SeedModalComponent implements 
   }
 
   cancelIconOnClick(seedNumberEl: any, seedNumberInputEl: any, settingIconEl: any, settingBtnGroupEl: any, modifyBtnGroupEl: any): void {
+    seedNumberInputEl.value = seedNumberInputEl.defaultValue;
     this.settingIconOnClick(seedNumberInputEl, seedNumberEl);
     this.settingIconOnClick(settingBtnGroupEl, settingIconEl);
     modifyBtnGroupEl.classList.add('d-none');
   }
+
+  deleteIconOnClick(deletedSeed: Seed): void {
+    let confirm = window.confirm(`Bạn chắc chắn muốn loại bỏ hạt ${deletedSeed.plantName} này!`)
+    if (confirm) {
+      this.deleteSeedService.deleteOneSeed(deletedSeed._id).subscribe(_response => {
+        this.sessionStorage.resetSeedData();
+      });
+    }
+  }
+
+  updateIconOnClick(seedId: string, newPlantNumber: string): void {
+    const plantNumber = Number(newPlantNumber);
+    if (!isNaN(plantNumber)) {
+      this.updateSeedService.updateSeedNumber(seedId, plantNumber).subscribe(_response => {
+        this.sessionStorage.resetSeedData();
+      });
+    }
+  }
+
 }

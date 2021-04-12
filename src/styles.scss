@@ -8,6 +8,17 @@ body {
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+$success-color: rgb(56, 176, 0);
+$danger-color: #e30000;
+
+.cl-success {
+    color: $success-color;
+}
+
+.cl-danger {
+    color: $danger-color;
+}
+
 .form-select {
     display: block;
     width: 100%;
@@ -71,16 +82,8 @@ body {
     justify-content: center;
 }
 
-.fa-seedling {
-    color: rgb(56, 176, 0);
-}
-
 .fa-success {
-    color: rgb(56, 176, 0);
-}
-
-.fa-tractor {
-    color: #e30000;
+    color: $success-color;
 }
 
 .fa-seedling,
@@ -89,7 +92,7 @@ body {
 }
 
 .fa-danger {
-    color: #e30000;
+    color: $danger-color;
 }
 
 .fa-gray {

@@ -1,6 +1,7 @@
 <div class="modal-body">
     <div class="created-seed-table">
         <app-seed *ngFor="let seed of seedCreatedArr; let i = index" [seedEl]="seed" [seedIndex]="i">
+            <span class="seed-number-content" [style.color]="seed.plantColor">{{ seed.plantNumber }}</span>
             <span class="seed-tool-content">
                 <i class="fas fas-16 fa-minus-square" (click)="removePlantIconClick(i)"></i>
             </span>
@@ -16,7 +17,7 @@
 
                 <div class="form-input-container">
                     <select class="form-select form-select-sm" formControlName="plantId">
-                        <option *ngFor="let plant of sessionStorageService.plantData" [value]="plant._id">
+                        <option *ngFor="let plant of sessionStorage.plantData" [value]="plant._id">
                             {{ plant.plantName }}
                         </option>
                     </select>
@@ -45,7 +46,7 @@
         </form>
 
         <span class="form-btn-icon-group">
-            <button class="btn btn-fa-container btn-outline-success" [disabled]="createSeedForm.invalid" (click)="addPlantIconClick()">
+            <button class="btn btn-fa-container btn-outline-success" [disabled]="createSeedForm.invalid" (click)="addIconClick()">
                 <i class="fas fas-25 fa-plus-square"></i>
             </button>
 
@@ -57,6 +58,6 @@
 </div>
 
 <div class="modal-footer">
-    <button class="btn btn-success" [disabled]=" seedCreatedArr.length == 0 " (click)="saveBtnOnClick()">Lưu</button>
-    <button class="btn btn-secondary" (click)=" newModeValue = false ">Quay về</button>
+    <button class="btn btn-success" [disabled]="seedCreatedArr.length == 0" (click)="saveBtnOnClick()">Lưu</button>
+    <button class="btn btn-secondary" (click)="returnBtnOnClick()">Quay về</button>
 </div>
