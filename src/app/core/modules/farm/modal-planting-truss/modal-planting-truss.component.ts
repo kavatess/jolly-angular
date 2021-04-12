@@ -2,6 +2,7 @@ import { Component, Input, OnChanges } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Truss } from 'src/app/core/models/truss.model';
 import { updateStatusBody } from 'src/app/core/models/truss.request.model';
+import { ClearTrussService } from 'src/app/core/services/truss/clear-truss.service';
 import { UpdateStatusService } from 'src/app/core/services/truss/update-status.service';
 
 @Component({
@@ -17,20 +18,29 @@ export class ModalPlantingTrussComponent implements OnChanges {
   });
   isModifyMode = false;
 
-  constructor(private updateStatusService: UpdateStatusService) { }
+  constructor(
+    private updateStatusService: UpdateStatusService,
+    private clearTrussService: ClearTrussService
+  ) { }
 
   ngOnChanges(): void {
     this.revertStatus();
     this.isModifyMode = false;
   }
 
-  modifyBtnOnClick(): void {
+  changeMode(): void {
     this.isModifyMode = !this.isModifyMode;
   }
 
   revertStatus(): void {
     this.updateStatusForm.setControl('newPlantGrowth', new FormControl(this.clickedTruss.plantGrowth));
     this.updateStatusForm.setControl('newPlantNumber', new FormControl(this.clickedTruss.plantNumber));
+  }
+
+  clearTruss(): void {
+    this.clearTrussService.clearTruss(this.clickedTruss._id).subscribe(_response => {
+      location.reload();
+    });
   }
 
   saveStatus(): void {

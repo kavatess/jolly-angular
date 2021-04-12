@@ -34,17 +34,17 @@ export class ModalCreateSeedComponent implements OnInit {
     this.createSeedForm.setControl('plantId', new FormControl(plantArr[0]._id));
   }
 
-  addIconClick(): void {
+  addNewSeed(): void {
     const plantType = this.sessionStorage.plantData.find(plant => plant._id == this.createSeedForm.value.plantId);
     const newSeed = new BasicSeedInfo(this.createSeedForm.value, plantType);
     this.seedCreatedArr.push(newSeed);
   }
 
-  removePlantIconClick(seedIndex: number): void {
+  removeSeed(seedIndex: number): void {
     this.seedCreatedArr.splice(seedIndex, 1);
   }
 
-  saveBtnOnClick(): void {
+  insertToDB(): void {
     if (this.seedCreatedArr.length) {
       const newSeedArr: SimpleSeed[] = this.seedCreatedArr.map(seed => {
         return {
@@ -57,7 +57,7 @@ export class ModalCreateSeedComponent implements OnInit {
     }
   }
 
-  returnBtnOnClick(): void {
+  changeMode(): void {
     this.return.emit();
   }
 

@@ -10,7 +10,7 @@ import { TRUSS_REQUEST } from '../request-url-constants';
 export class CreateTrussService {
   constructor(private httpReq: HttpRequestService, private deleteSeedService: DeleteOneSeedService) { }
   createTrussService(sentJSON: createTrussBody) {
-    this.deleteSeedService.deleteOneSeedService(sentJSON).subscribe(_response => {
+    this.deleteSeedService.deleteOneSeed(sentJSON._id).subscribe(_response => {
       this.httpReq.accessDataRequest(TRUSS_REQUEST.createTruss, sentJSON);
     });
   }

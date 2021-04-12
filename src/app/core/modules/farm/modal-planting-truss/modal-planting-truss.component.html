@@ -50,8 +50,8 @@
     </div>
 
     <div class="modal-footer">
-        <button class="btn btn-outline-primary" (click)="modifyBtnOnClick()">Thay đổi</button>
-        <button type="button" class="btn btn-outline-danger">Xoá giàn</button>
+        <button class="btn btn-outline-primary" (click)="changeMode()">Thay đổi</button>
+        <button class="btn btn-outline-danger" (click)="clearTruss()">Xoá giàn</button>
     </div>
 </ng-template>
 
@@ -80,6 +80,6 @@
     <div class="modal-footer">
         <button class="btn btn-success" (click)="saveStatus()" [disabled]="!isValidNewStatus">Lưu</button>
         <button type="button" class="btn btn-primary" (click)="revertStatus()">Phục hồi</button>
-        <button class="btn btn-secondary" (click)="modifyBtnOnClick()">Quay về</button>
+        <button class="btn btn-secondary" (click)="changeMode()">Quay về</button>
     </div>
 </ng-template>
