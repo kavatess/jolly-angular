@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpRequestService } from '../http-request.service';
-import { updateMaxHoleBody } from '../../models/truss.request.model';
+import { UpdateMaxHoleBody } from '../../models/truss.request.model';
 import { TRUSS_REQUEST } from '../request-url-constants';
 
 @Injectable({
@@ -8,7 +8,7 @@ import { TRUSS_REQUEST } from '../request-url-constants';
 })
 export class UpdateMaxholeService {
   constructor(private httpReq: HttpRequestService) { }
-  updateMaxHoleService(sentJSON: updateMaxHoleBody) {
+  updateMaxHoleService(sentJSON: UpdateMaxHoleBody) {
     return this.httpReq.accessDataRequest(TRUSS_REQUEST.updateMaxHole, sentJSON);
   }
 }

@@ -10,15 +10,12 @@ import { FarmComponent } from '../farm.component';
 })
 export class FarmBlockComponent extends FarmComponent implements OnChanges {
   @Input() block = '';
-  trussDataArr: Truss[] = [];
 
-  constructor(private sessionStorage: SessionStorageService) {
+  constructor(public sessionStorage: SessionStorageService) {
     super();
   }
 
-  async ngOnChanges() {
-    this.trussDataArr = await this.sessionStorage.getTrussDataByBlock(this.block);
-  }
+  ngOnChanges(): void { }
 
   emitClickedTrussEvent(truss: Truss): void {
     this.newClickedTruss = truss;

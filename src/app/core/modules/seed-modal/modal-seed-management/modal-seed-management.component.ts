@@ -44,7 +44,7 @@ export class ModalSeedManagementComponent implements OnInit {
     let confirm = window.confirm(`Bạn chắc chắn muốn loại bỏ hạt ${deletedSeed.plantName} này!`)
     if (confirm) {
       this.deleteSeedService.deleteOneSeed(deletedSeed._id).subscribe(_response => {
-        this.sessionStorage.resetSeedData();
+        this.sessionStorage.resetCollection('plant-data');
       });
     }
   }
@@ -53,7 +53,7 @@ export class ModalSeedManagementComponent implements OnInit {
     const plantNumber = Number(newPlantNumber);
     if (!isNaN(plantNumber)) {
       this.updateSeedService.updateSeedNumber(seedId, plantNumber).subscribe(_response => {
-        this.sessionStorage.resetSeedData();
+        this.sessionStorage.resetCollection('plant-data');
       });
     }
   }

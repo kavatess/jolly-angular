@@ -5,7 +5,8 @@
 
     <div *ngIf="!creationMode" modal-content>
         <div class="modal-body">
-            <app-modal-seed-management [seedArr]="sessionStorage.seedData"></app-modal-seed-management>
+            <app-modal-seed-management [seedArr]="sessionStorage.getCollection('seed-data') | async">
+            </app-modal-seed-management>
         </div>
 
         <div class="modal-footer">

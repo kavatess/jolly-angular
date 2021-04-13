@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'plantGrowthStr'
+  name: 'plant_growth_str'
 })
 export class PlantGrowthStrPipe implements PipeTransform {
 

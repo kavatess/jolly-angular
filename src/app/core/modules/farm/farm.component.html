@@ -86,7 +86,7 @@
             </app-modal-planting-truss>
         </div>
         <div *ngIf="!clickedTruss.plantId" modal-content>
-            <app-modal-empty-truss></app-modal-empty-truss>
+            <app-modal-empty-truss [trussId]="clickedTruss._id"></app-modal-empty-truss>
         </div>
     </app-modal>
 

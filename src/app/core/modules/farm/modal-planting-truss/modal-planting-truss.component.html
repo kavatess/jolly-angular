@@ -8,10 +8,10 @@
             <span class="plant-info">
                 <div class="info-element">
                     <span class="info-icon">
-                        <i [class]=" clickedTruss.plantGrowth | plantStatusIcon "></i>
+                        <i [class]=" clickedTruss.plantGrowth | plant_status_icon "></i>
                     </span>
                     <span class="info-body status-info">
-                        {{ clickedTruss.plantGrowth | plantGrowthStr }}
+                        {{ clickedTruss.plantGrowth | plant_growth_str }}
                     </span>
                 </div>
 
@@ -32,14 +32,14 @@
                 <div class="info-element" *ngIf=" clickedTruss.plantGrowth < 3 ">
                     <span class="info-title">Dự kiến TH:</span>
                     <span class="info-body" [style.color]=" clickedTruss.plantColor ">
-                        {{ clickedTruss.predictHarvestDate }} ngày nữa
+                        {{ clickedTruss.harvestDate | harvest_days }} ngày nữa
                     </span>
                 </div>
 
                 <div class="info-element" *ngIf=" clickedTruss.plantGrowth == 3 ">
                     <span class="info-title">Đã TH được:</span>
                     <span class="info-body" [style.color]=" clickedTruss.plantColor ">
-                        {{ clickedTruss.predictHarvestDate }} ngày
+                        {{ clickedTruss.harvestDate | harvest_days }} ngày
                     </span>
                 </div>
             </span>

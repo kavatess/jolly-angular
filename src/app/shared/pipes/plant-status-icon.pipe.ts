@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'plantStatusIcon'
+  name: 'plant_status_icon'
 })
 export class PlantStatusIconPipe implements PipeTransform {
 

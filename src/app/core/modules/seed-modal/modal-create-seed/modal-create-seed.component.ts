@@ -30,12 +30,13 @@ export class ModalCreateSeedComponent implements OnInit {
         Validators.maxLength(4)
       ])
     });
-    const plantArr = await this.sessionStorage.getPlantData();
+    const plantArr = await this.sessionStorage.getPlantArrAsync();
     this.createSeedForm.setControl('plantId', new FormControl(plantArr[0]._id));
   }
 
-  addNewSeed(): void {
-    const plantType = this.sessionStorage.plantData.find(plant => plant._id == this.createSeedForm.value.plantId);
+  async addNewSeed() {
+    const plantArr = await this.sessionStorage.getPlantArrAsync();
+    const plantType = plantArr.find(plant => plant._id == this.createSeedForm.value.plantId);
     const newSeed = new BasicSeedInfo(this.createSeedForm.value, plantType);
     this.seedCreatedArr.push(newSeed);
   }
