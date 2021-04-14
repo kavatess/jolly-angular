@@ -54,7 +54,9 @@ export class ModalCreateSeedComponent implements OnInit {
           plantNumber: seed.plantNumber
         }
       })
-      this.addSeedService.insertManySeedService(newSeedArr);
+      this.addSeedService.insertManySeed(newSeedArr).subscribe(_response => {
+        location.reload();
+      });
     }
   }
 

@@ -1,4 +1,3 @@
-import { floor } from "mathjs";
 import { Plant } from "./plant.model";
 
 export class Seed implements BasicSeedInfo {
@@ -33,7 +32,7 @@ export class BasicSeedInfo implements SimpleSeed {
     }
     get age(): number {
         const ageMiliSec = new Date().getTime() - new Date(this.startDate).getTime();
-        return floor(ageMiliSec / (7 * 86400000));
+        return Number(Number(ageMiliSec / (7 * 86400000)).toFixed(0));
     }
     get isReadySeed(): boolean {
         return new Date().getTime() - new Date(this.startDate).getTime() >= this.seedUpTime * 86400000;

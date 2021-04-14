@@ -3,7 +3,6 @@ const REQUEST_URL_HEAD = SERVER_URL + '/api/v1';
 const TRUSS_REQUEST_HEAD = REQUEST_URL_HEAD + '/truss';
 const PLANT_REQUEST_HEAD = REQUEST_URL_HEAD + '/plant';
 const SEED_REQUEST_HEAD = REQUEST_URL_HEAD + '/seed';
-const STORAGE_REQUEST = '/storage';
 const UPDATE_REQUEST = '/update';
 const INSERT_REQUEST = '/insert';
 const DELETE_REQUEST = '/delete';
@@ -21,15 +20,12 @@ export const PLANT_REQUEST = {
     getPlantData: PLANT_REQUEST_HEAD,
     updateOnePlant: PLANT_REQUEST_HEAD + UPDATE_REQUEST,
     insertOnePlant: PLANT_REQUEST_HEAD + INSERT_REQUEST,
-    deleteOnePlant: PLANT_REQUEST_HEAD + DELETE_REQUEST,
+    deleteOnePlant: PLANT_REQUEST_HEAD + DELETE_REQUEST
 }
 export const SEED_REQUEST = {
     getSeedData: SEED_REQUEST_HEAD,
     updateOneSeed: SEED_REQUEST_HEAD + UPDATE_REQUEST,
     insertManySeed: SEED_REQUEST_HEAD + INSERT_REQUEST,
     deleteManySeed: SEED_REQUEST_HEAD + DELETE_REQUEST,
-    deleteOneSeed: SEED_REQUEST_HEAD + '/remove',
-}
-export const SEED_STORAGE_REQUEST = {
-    storeManySeed: SEED_REQUEST_HEAD + STORAGE_REQUEST + INSERT_REQUEST
+    deleteOneSeed: SEED_REQUEST_HEAD + '/remove'
 }

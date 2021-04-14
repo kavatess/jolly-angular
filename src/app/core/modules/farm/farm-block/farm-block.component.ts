@@ -11,7 +11,7 @@ import { FarmComponent } from '../farm.component';
 export class FarmBlockComponent extends FarmComponent implements OnChanges {
   @Input() block = '';
 
-  constructor(public sessionService: SessionStorageService) {
+  constructor(public sessionStorage: SessionStorageService) {
     super();
   }
 

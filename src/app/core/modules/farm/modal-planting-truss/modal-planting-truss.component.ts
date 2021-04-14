@@ -38,9 +38,12 @@ export class ModalPlantingTrussComponent implements OnChanges {
   }
 
   clearTruss(): void {
-    this.clearTrussService.clearTruss(this.clickedTruss._id).subscribe(_response => {
-      location.reload();
-    });
+    let confirm = window.confirm(`Bạn chắc chắn muốn xóa giàn ${this.clickedTruss.block + this.clickedTruss.index} này chứ!`);
+    if (confirm) {
+      this.clearTrussService.clearTruss(this.clickedTruss._id).subscribe(_response => {
+        location.reload();
+      });
+    }
   }
 
   saveStatus(): void {
