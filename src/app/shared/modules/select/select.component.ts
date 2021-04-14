@@ -13,7 +13,7 @@ export class SelectComponent implements OnInit {
   @Output() selectedPlant = new EventEmitter<number>();
 
   lastSelectedBlock: string = "A";
-  constructor(public sessionStorageService: SessionStorageService) { }
+  constructor(public sessionService: SessionStorageService) { }
 
   ngOnInit(): void {
     this.lastSelectedBlock = this.isStatisticsPage ? window.sessionStorage.getItem('last-block-stat') : window.sessionStorage.getItem('last-block-farm');

@@ -46,7 +46,9 @@ export class ModalPlantingTrussComponent implements OnChanges {
   saveStatus(): void {
     if (this.isValidNewStatus) {
       const requestBody = new UpdateStatusBody(this.clickedTruss._id, this.newPlantNumber, this.newPlantGrowth);
-      this.updateStatusService.updateStatusService(requestBody);
+      this.updateStatusService.updateStatusService(requestBody).subscribe(_response => {
+        location.reload();
+      });
     }
   }
 

@@ -11,11 +11,12 @@ import { FarmComponent } from '../farm.component';
 export class FarmBlockComponent extends FarmComponent implements OnChanges {
   @Input() block = '';
 
-  constructor(public sessionStorage: SessionStorageService) {
+  constructor(public sessionService: SessionStorageService) {
     super();
   }
 
-  ngOnChanges(): void { }
+  ngOnChanges(): void {
+  }
 
   emitClickedTrussEvent(truss: Truss): void {
     this.newClickedTruss = truss;

@@ -1,5 +1,6 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { Seed } from 'src/app/core/models/seed.model';
+import { CreateTrussService } from 'src/app/core/services/truss/create-truss.service';
 import { SessionStorageService } from 'src/app/shared/services/session-storage.service';
 
 @Component({
@@ -9,13 +10,22 @@ import { SessionStorageService } from 'src/app/shared/services/session-storage.s
 })
 export class ModalEmptyTrussComponent implements OnChanges {
   @Input() trussId = '';
-  readySeedArr: Seed[] = [];
   selectedSeed: Seed = new Seed();
 
-  constructor(public sessionStorage: SessionStorageService) { }
+  constructor(
+    public sessionStorage: SessionStorageService,
+    private createTrussService: CreateTrussService
+  ) { }
 
-  async ngOnChanges() {
-    this.readySeedArr = await this.sessionStorage.getReadySeedAsync();
+  ngOnChanges(): void {
+  }
+
+  createTruss(): void {
+    if (this.trussId && this.selectedSeed._id) {
+      this.createTrussService.createTruss(this.trussId, this.selectedSeed._id).subscribe(_response => {
+        location.reload();
+      });
+    }
   }
 
 }

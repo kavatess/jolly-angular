@@ -11,6 +11,7 @@ import { SessionStorageService } from 'src/app/shared/services/session-storage.s
 })
 export class ModalSeedManagementComponent implements OnInit {
   @Input() seedArr: Seed[] = [];
+  @Input() readySeedFiltered = false
   @Input() clickEventActivated = false;
   @Output() seedElClick = new EventEmitter<BasicSeedInfo>();
 
@@ -44,7 +45,7 @@ export class ModalSeedManagementComponent implements OnInit {
     let confirm = window.confirm(`Bạn chắc chắn muốn loại bỏ hạt ${deletedSeed.plantName} này!`)
     if (confirm) {
       this.deleteSeedService.deleteOneSeed(deletedSeed._id).subscribe(_response => {
-        this.sessionStorage.resetCollection('plant-data');
+        this.sessionStorage.reset('seed-arr');
       });
     }
   }
@@ -53,7 +54,7 @@ export class ModalSeedManagementComponent implements OnInit {
     const plantNumber = Number(newPlantNumber);
     if (!isNaN(plantNumber)) {
       this.updateSeedService.updateSeedNumber(seedId, plantNumber).subscribe(_response => {
-        this.sessionStorage.resetCollection('plant-data');
+        this.sessionStorage.reset('seed-arr');
       });
     }
   }

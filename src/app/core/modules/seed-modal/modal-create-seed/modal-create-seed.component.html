@@ -17,7 +17,7 @@
 
                 <div class="form-input-container">
                     <select class="form-select form-select-sm" formControlName="plantId">
-                        <option *ngFor="let plant of sessionStorage.getCollection('plant-data') | async" [value]="plant._id">
+                        <option *ngFor="let plant of sessionStorage.plantArr" [value]="plant._id">
                             {{ plant.plantName }}
                         </option>
                     </select>
