@@ -11,7 +11,6 @@ import { SessionStorageService } from 'src/app/shared/services/session-storage.s
 })
 export class ModalSeedManagementComponent implements OnInit {
   @Input() seedArr: Seed[] = [];
-  @Input() readySeedFiltered = false
   @Input() clickEventActivated = false;
   @Output() seedElClick = new EventEmitter<BasicSeedInfo>();
 

@@ -141,33 +141,33 @@ $danger-color: #e30000;
     }
 }
 .modal-body {
-    max-height: 400px;
+    max-height: 450px;
     overflow: scroll;
+}
+
+.modal-body-no-scroll {
+    overflow: unset;
 }
 
 .modal-body,
 .modal-footer {
-    padding: 14px !important;
+    padding: 14px;
 }
 
-@media only screen and (min-height: 600px) {
+@media screen and (min-height: 700px) {
     .modal-body {
-        max-height: 450px;
+        max-height: 525px;
     }
-    @media screen and (min-height: 700px) {
+    @media screen and (min-height: 800px) {
         .modal-body {
-            max-height: 525px;
-        }
-        @media screen and (min-height: 800px) {
-            .modal-body {
-                max-height: 600px;
-            }
+            max-height: 600px;
         }
     }
 }
 
 @media only screen and (max-width: 325px) {
     .modal-body {
-        padding: 7px !important;
+        max-height: 400px;
+        padding: 7px;
     }
 }

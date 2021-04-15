@@ -1,17 +1,17 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, OnChanges } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Truss } from 'src/app/core/models/truss.model';
 import { UpdateStatusBody } from 'src/app/core/models/truss.request.model';
 import { ClearTrussService } from 'src/app/core/services/truss/clear-truss.service';
 import { UpdateStatusService } from 'src/app/core/services/truss/update-status.service';
+import { ReloadClickedTrussComponent } from 'src/app/shared/components/reload-clicked-truss.component';
+import { SessionStorageService } from 'src/app/shared/services/session-storage.service';
 
 @Component({
   selector: 'app-modal-planting-truss',
   templateUrl: './modal-planting-truss.component.html',
   styleUrls: ['./modal-planting-truss.component.scss']
 })
-export class ModalPlantingTrussComponent implements OnChanges {
-  @Input() clickedTruss: Truss = new Truss();
+export class ModalPlantingTrussComponent extends ReloadClickedTrussComponent implements OnChanges {
   updateStatusForm: FormGroup = new FormGroup({
     newPlantGrowth: new FormControl(),
     newPlantNumber: new FormControl()
@@ -19,9 +19,12 @@ export class ModalPlantingTrussComponent implements OnChanges {
   isModifyMode = false;
 
   constructor(
+    protected sessionStorage: SessionStorageService,
     private updateStatusService: UpdateStatusService,
     private clearTrussService: ClearTrussService
-  ) { }
+  ) { 
+    super(sessionStorage);
+  }
 
   ngOnChanges(): void {
     this.revertStatus();
@@ -40,8 +43,8 @@ export class ModalPlantingTrussComponent implements OnChanges {
   clearTruss(): void {
     let confirm = window.confirm(`Bạn chắc chắn muốn xóa giàn ${this.clickedTruss.block + this.clickedTruss.index} này chứ!`);
     if (confirm) {
-      this.clearTrussService.clearTruss(this.clickedTruss._id).subscribe(_response => {
-        location.reload();
+      this.clearTrussService.clearTruss(this.clickedTruss._id).subscribe(async _response => {
+        await this.reloadClickedTruss();
       });
     }
   }
@@ -49,8 +52,8 @@ export class ModalPlantingTrussComponent implements OnChanges {
   saveStatus(): void {
     if (this.isValidNewStatus) {
       const requestBody = new UpdateStatusBody(this.clickedTruss._id, this.newPlantNumber, this.newPlantGrowth);
-      this.updateStatusService.updateStatusService(requestBody).subscribe(_response => {
-        location.reload();
+      this.updateStatusService.updateStatusService(requestBody).subscribe(async _response => {
+        await this.reloadClickedTruss();
       });
     }
   }
@@ -67,5 +70,5 @@ export class ModalPlantingTrussComponent implements OnChanges {
   private get newPlantGrowth(): number {
     return Number(this.updateStatusForm.value.newPlantGrowth);
   }
-
+  
 }

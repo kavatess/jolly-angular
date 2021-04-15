@@ -55,13 +55,10 @@ export class ModalCreateSeedComponent implements OnInit {
         }
       })
       this.addSeedService.insertManySeed(newSeedArr).subscribe(_response => {
-        location.reload();
+        this.sessionStorage.reset('seed-arr');
+        this.return.emit();
       });
     }
-  }
-
-  changeMode(): void {
-    this.return.emit();
   }
 
 }

@@ -1,6 +1,6 @@
 <ng-template [ngIf]="!isModifyMode">
     <!-- Thân modal hiển thị thông tin giàn -->
-    <div class="modal-body">
+    <div class="modal-body modal-body-no-scroll">
 
         <div class="plant-info-container">
             
@@ -62,7 +62,7 @@
 <!-- Khi bấm vào nút thay đổi thân modal sẽ là một form để nhận input từ user -->
 <ng-template [ngIf]="isModifyMode">
 
-    <div class="modal-body">
+    <div class="modal-body modal-body-no-scroll">
         <form class="form-update-status" [formGroup]="updateStatusForm">
 
             <div class="select-container">
