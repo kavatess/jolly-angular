@@ -1,27 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { FarmPageComponent } from 'src/app/pages/farm-page/farm-page.component';
-import { Truss } from '../../models/truss.model';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-farm',
   templateUrl: './farm.component.html',
   styleUrls: ['./farm.component.scss']
 })
-export class FarmComponent extends FarmPageComponent implements OnInit {
-  private static clickedTruss: Truss = new Truss();
+export class FarmComponent implements OnInit {
+  @Input() block = '';
 
-  constructor() {
-    super();
-  }
+  constructor() { }
 
-  set newClickedTruss(clickedTruss: Truss) {
-    FarmComponent.clickedTruss = clickedTruss;
-  }
-  get clickedTruss(): Truss {
-    return FarmComponent.clickedTruss;
-  }
-
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
 }

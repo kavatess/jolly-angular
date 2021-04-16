@@ -3,15 +3,15 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { UpdateStatusBody } from 'src/app/core/models/truss.request.model';
 import { ClearTrussService } from 'src/app/core/services/truss/clear-truss.service';
 import { UpdateStatusService } from 'src/app/core/services/truss/update-status.service';
-import { ReloadClickedTrussComponent } from 'src/app/shared/components/reload-clicked-truss.component';
 import { SessionStorageService } from 'src/app/shared/services/session-storage.service';
+import { FarmModalComponent } from '../farm-modal.component';
 
 @Component({
   selector: 'app-modal-planting-truss',
   templateUrl: './modal-planting-truss.component.html',
   styleUrls: ['./modal-planting-truss.component.scss']
 })
-export class ModalPlantingTrussComponent extends ReloadClickedTrussComponent implements OnChanges {
+export class ModalPlantingTrussComponent extends FarmModalComponent implements OnChanges {
   updateStatusForm: FormGroup = new FormGroup({
     newPlantGrowth: new FormControl(),
     newPlantNumber: new FormControl()
@@ -36,14 +36,14 @@ export class ModalPlantingTrussComponent extends ReloadClickedTrussComponent imp
   }
 
   revertStatus(): void {
-    this.updateStatusForm.setControl('newPlantGrowth', new FormControl(this.clickedTruss.plantGrowth));
-    this.updateStatusForm.setControl('newPlantNumber', new FormControl(this.clickedTruss.plantNumber));
+    this.updateStatusForm.setControl('newPlantGrowth', new FormControl(this.modalTruss.plantGrowth));
+    this.updateStatusForm.setControl('newPlantNumber', new FormControl(this.modalTruss.plantNumber));
   }
 
   clearTruss(): void {
-    let confirm = window.confirm(`Bạn chắc chắn muốn xóa giàn ${this.clickedTruss.block + this.clickedTruss.index} này chứ!`);
+    let confirm = window.confirm(`Bạn chắc chắn muốn xóa giàn ${this.modalTruss.block + this.modalTruss.index} này chứ!`);
     if (confirm) {
-      this.clearTrussService.clearTruss(this.clickedTruss._id).subscribe(async _response => {
+      this.clearTrussService.clearTruss(this.modalTruss._id).subscribe(async _response => {
         await this.reloadClickedTruss();
       });
     }
@@ -51,7 +51,7 @@ export class ModalPlantingTrussComponent extends ReloadClickedTrussComponent imp
 
   saveStatus(): void {
     if (this.isValidNewStatus) {
-      const requestBody = new UpdateStatusBody(this.clickedTruss._id, this.newPlantNumber, this.newPlantGrowth);
+      const requestBody = new UpdateStatusBody(this.modalTruss._id, this.newPlantNumber, this.newPlantGrowth);
       this.updateStatusService.updateStatusService(requestBody).subscribe(async _response => {
         await this.reloadClickedTruss();
       });
@@ -59,9 +59,9 @@ export class ModalPlantingTrussComponent extends ReloadClickedTrussComponent imp
   }
 
   get isValidNewStatus(): boolean {
-    const validNewPlantGrowth = this.newPlantGrowth >= this.clickedTruss.plantGrowth;
-    const validNewPlantNumber = this.newPlantNumber <= this.clickedTruss.plantNumber;
-    const exceptCond = this.newPlantGrowth == this.clickedTruss.plantGrowth && this.newPlantNumber == this.clickedTruss.plantNumber;
+    const validNewPlantGrowth = this.newPlantGrowth >= this.modalTruss.plantGrowth;
+    const validNewPlantNumber = this.newPlantNumber <= this.modalTruss.plantNumber;
+    const exceptCond = this.newPlantGrowth == this.modalTruss.plantGrowth && this.newPlantNumber == this.modalTruss.plantNumber;
     return validNewPlantGrowth && validNewPlantNumber && !exceptCond;
   }
   private get newPlantNumber(): number {

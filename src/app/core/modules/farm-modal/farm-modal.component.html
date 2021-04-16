@@ -1,0 +1,9 @@
+<!-- Modal for truss -->
+<app-modal [Id]="'farm_modal'" [title]=" 'Thông tin giàn rau ' + modalTruss.block + modalTruss.index ">
+    <div *ngIf="modalTruss.plantId" modal-content>
+        <app-modal-planting-truss></app-modal-planting-truss>
+    </div>
+    <div *ngIf="!modalTruss.plantId" modal-content>
+        <app-modal-empty-truss></app-modal-empty-truss>
+    </div>
+</app-modal>

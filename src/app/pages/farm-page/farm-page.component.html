@@ -1,9 +1,18 @@
-<app-page-layout [hasFooter]="true" [hasHeader]="true">
+<app-page-layout [hasFooter]="true" [hasHeader]="true" [onLoad]="!dataReady">
     <div class="page-content">
-        <app-farm></app-farm>
+        <!-- Map of farm -->
+        <app-farm [block]="selectedBlock"></app-farm>
+
+        <!-- Modal truss information -->
+        <app-farm-modal [clickedTruss]="clickedTruss"></app-farm-modal>
+
+        <!-- Modal for seed table -->
+        <app-seed-modal></app-seed-modal>
     </div>
+
+    <!-- select group -->
     <div class="footer">
-        <app-select [isStatisticsPage]="false" (selectedBlock)=" newBlock = $event"
-            (selectedGrowth)=" newPlantGrowth = $event " (selectedPlant)=" newPlantId = $event "></app-select>
+        <app-select [isStatisticsPage]="false" (selectedBlock)="changeBlock($event)"
+            (selectedGrowth)="changePlantGrowth($event)" (selectedPlant)="changePlantId($event)"></app-select>
     </div>
 </app-page-layout>

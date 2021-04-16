@@ -1,6 +1,5 @@
 <div class="farm-container">
-    <!-- farm in block A -->
-    <ng-template [ngIf]=" selectedBlock == 'A' ">
+    <ng-template [ngIf]=" block == 'A' ">
         <div class="farm-main-container">
             <div class="farm-middle-container">
                 <!-- truss array A -->
@@ -25,7 +24,7 @@
     </ng-template>
 
     <!-- farm in block B -->
-    <ng-template [ngIf]=" selectedBlock == 'B' ">
+    <ng-template [ngIf]=" block == 'B' ">
         <div class="farm-main-container">
             <div class="farm-left-container">
                 <!-- truss array BN -->
@@ -43,7 +42,7 @@
     </ng-template>
 
     <!-- farm in block C & D -->
-    <ng-template [ngIf]=" selectedBlock == 'C' ">
+    <ng-template [ngIf]=" block == 'C' ">
         <div class="farm-main-container farm-card-group">
             <div class="farm-middle-container">
                 <div class="card text-center">
@@ -78,17 +77,4 @@
             </div>
         </div>
     </ng-template>
-
-    <!-- Modal for truss -->
-    <app-modal [Id]="'farm_modal'" [title]=" 'Thông tin giàn rau ' + clickedTruss.block + clickedTruss.index ">
-        <div *ngIf="clickedTruss.plantId" modal-content>
-            <app-modal-planting-truss [clickedTruss]="clickedTruss" (newClickedTruss)="newClickedTruss = $event"></app-modal-planting-truss>
-        </div>
-        <div *ngIf="!clickedTruss.plantId" modal-content>
-            <app-modal-empty-truss [clickedTruss]="clickedTruss" (newClickedTruss)="newClickedTruss = $event"></app-modal-empty-truss>
-        </div>
-    </app-modal>
-
-    <!-- Modal for seed table -->
-    <app-seed-modal></app-seed-modal>
 </div>

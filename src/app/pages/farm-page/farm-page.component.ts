@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Truss } from 'src/app/core/models/truss.model';
 
 @Component({
   selector: 'app-farm-page',
@@ -9,26 +10,40 @@ export class FarmPageComponent implements OnInit {
   private static block = 'A';
   private static plantId = '';
   private static plantGrowth = 0;
+  private static clickedTruss: Truss = new Truss();
+  private static dataReady = false;
 
   constructor() { }
 
-  set newBlock(block: string) {
-    FarmPageComponent.block = block;
-  }
   get selectedBlock(): string {
     return FarmPageComponent.block;
-  }
-  set newPlantId(plantId: string) {
-    FarmPageComponent.plantId = plantId;
   }
   get selectedPlantId(): string {
     return FarmPageComponent.plantId;
   }
-  set newPlantGrowth(plantGrowth: number) {
-    FarmPageComponent.plantGrowth = plantGrowth;
-  }
   get selectedPlantGrowth(): number {
     return FarmPageComponent.plantGrowth;
+  }
+  get clickedTruss(): Truss {
+    return FarmPageComponent.clickedTruss;
+  }
+  get dataReady(): boolean {
+    return FarmPageComponent.dataReady;
+  }
+  changeBlock(block: string): void {
+    FarmPageComponent.block = block;
+  }
+  changePlantId(plantId: string): void {
+    FarmPageComponent.plantId = plantId;
+  }
+  changePlantGrowth(plantGrowth: number) {
+    FarmPageComponent.plantGrowth = plantGrowth;
+  }
+  changeClickedTruss(truss: Truss) {
+    FarmPageComponent.clickedTruss = truss;
+  }
+  changeDataStatus(status: boolean): void {
+    FarmPageComponent.dataReady = status;
   }
 
   ngOnInit(): void {

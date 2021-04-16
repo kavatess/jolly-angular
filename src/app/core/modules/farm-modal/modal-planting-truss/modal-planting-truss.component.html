@@ -5,51 +5,51 @@
         <div class="plant-info-container">
             
             <span class="plant-img">
-                <img [src]="clickedTruss.imgSrc" style="height: 120px;" alt="">
+                <img [src]="modalTruss.imgSrc" style="height: 120px;" alt="">
             </span>
 
             <span class="plant-info">
                 <div class="info-element">
                     <span class="info-icon">
-                        <i [class]=" clickedTruss.plantGrowth | plant_status_icon "></i>
+                        <i [class]=" modalTruss.plantGrowth | plant_status_icon "></i>
                     </span>
                     <span class="info-body status-info">
-                        {{ clickedTruss.plantGrowth | plant_growth_str }}
+                        {{ modalTruss.plantGrowth | plant_growth_str }}
                     </span>
                 </div>
 
                 <div class="info-element">
                     <span class="info-title">Tên rau:</span>
-                    <span class="info-body" [style.color]=" clickedTruss.plantColor ">
-                        {{ clickedTruss.plantName }}
+                    <span class="info-body" [style.color]=" modalTruss.plantColor ">
+                        {{ modalTruss.plantName }}
                     </span>
                 </div>
 
                 <div class="info-element">
                     <span class="info-title">Ngày trồng:</span>
-                    <span class="info-body" [style.color]=" clickedTruss.plantColor ">
-                        {{ clickedTruss.startDate | date: 'dd/MM/yyyy' }}
+                    <span class="info-body" [style.color]=" modalTruss.plantColor ">
+                        {{ modalTruss.startDate | date: 'dd/MM/yyyy' }}
                     </span>
                 </div>
 
-                <div class="info-element" *ngIf=" clickedTruss.plantGrowth < 3 ">
+                <div class="info-element" *ngIf=" modalTruss.plantGrowth < 3 ">
                     <span class="info-title">Dự kiến TH:</span>
-                    <span class="info-body" [style.color]=" clickedTruss.plantColor ">
-                        {{ clickedTruss.harvestDate | harvest_days }} ngày nữa
+                    <span class="info-body" [style.color]=" modalTruss.plantColor ">
+                        {{ modalTruss.harvestDate | harvest_days }} ngày nữa
                     </span>
                 </div>
 
-                <div class="info-element" *ngIf=" clickedTruss.plantGrowth == 3 ">
+                <div class="info-element" *ngIf=" modalTruss.plantGrowth == 3 ">
                     <span class="info-title">Đã TH được:</span>
-                    <span class="info-body" [style.color]=" clickedTruss.plantColor ">
-                        {{ clickedTruss.harvestDate | harvest_days }} ngày
+                    <span class="info-body" [style.color]=" modalTruss.plantColor ">
+                        {{ modalTruss.harvestDate | harvest_days }} ngày
                     </span>
                 </div>
             </span>
             
         </div>
-        <app-progress-bar [striped]="true" [height]="'28px'" [color]="clickedTruss.plantColor"
-            [percentage]="clickedTruss.percentage" [content]="clickedTruss.plantNumber + '/ ' + clickedTruss.maxHole">
+        <app-progress-bar [striped]="true" [height]="'28px'" [color]="modalTruss.plantColor"
+            [percentage]="modalTruss.percentage" [content]="modalTruss.plantNumber + '/ ' + modalTruss.maxHole">
         </app-progress-bar>
     </div>
 
