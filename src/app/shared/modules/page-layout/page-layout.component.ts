@@ -8,7 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class PageLayoutComponent implements OnInit {
   @Input() hasHeader = true;
   @Input() hasFooter = true;
-  @Input() scroll = true;
+  @Input() scroll = false;
   @Input() onLoad = true;
   constructor() { }
 

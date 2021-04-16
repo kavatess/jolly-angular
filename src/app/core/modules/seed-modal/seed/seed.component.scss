@@ -1,56 +1,43 @@
-.seed-element-container,
-.seed-status-container,
-.seed-img-container,
-.seed-number-container {
-    height: 100%;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-}
-
 .seed-list-header {
-    width: 100%;
-    height: auto;
-    display: inline-flex;
-    text-align: center;
-    .seed-status-header {
-        flex: 7;
-    }
-    .seed-img-header {
-        flex: 22;
-    }
-    .seed-info-header {
-        flex: 50;
-    }
-    .seed-number-header {
-        flex: 11;
-    }
-    .seed-tool-header {
-        flex: 10;
+    grid-template-rows: 24px !important;
+    .seed-number-container {
+        font-size: unset !important;
+        font-weight: unset !important;
     }
 }
 
 .seed-element-container {
     width: 100%;
-    height: 106px;
     border-radius: 8px;
-    align-items: flex-start !important;
+    display: grid;
+    grid-template-columns: 20px 60px auto 41px 20px;
+    grid-template-rows: 100px;
+    .seed-status-container,
+    .seed-img-container,
+    .seed-info-container,
+    .seed-number-container {
+        place-self: center;
+    }
+
     .seed-status-container {
-        flex: 7;
+        grid-column-start: 1;
+        grid-column-end: 2;
     }
 
     .seed-img-container {
-        flex: 22;
+        grid-column-start: 2;
+        grid-column-end: 3;
     }
 
     .seed-info-container {
-        flex: 50;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
+        grid-column-start: 3;
+        grid-column-end: 4;
         .seed-info-content {
+            width: 100%;
+            min-height: 33px;
             display: inline-flex;
+            align-items: center;
+            justify-content: center;
             .seed-info-title {
                 width: 45%;
             }
@@ -61,17 +48,15 @@
     }
 
     .seed-number-container {
-        flex: 11;
-        min-width: 41px;
-        height: 100%;
+        grid-column-start: 4;
+        grid-column-end: 5;
         font-size: 18px;
         font-weight: 900;
     }
 
     .seed-tool-container {
-        flex: 8;
-        height: 100%;
-        margin-left: 5px;
+        grid-column-start: 5;
+        grid-column-end: 6;
     }
 }
 

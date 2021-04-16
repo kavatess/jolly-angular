@@ -1,7 +1,7 @@
 <div class="modal-body">
     <h6 class="text-center">Danh sách hạt đã sẵn sàng</h6>
     <app-modal-seed-management [seedArr]="sessionStorage.readySeedArr" [clickEventActivated]="true"
-        (seedElClick)="selectedSeed = $event">
+        (seedElClick)="changeSelectedSeed($event)">
     </app-modal-seed-management>
 </div>
 

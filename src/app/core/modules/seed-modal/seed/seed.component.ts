@@ -20,9 +20,11 @@ export class SeedComponent implements OnInit {
   seedElOnClick(seedContainerEl: any): void {
     if (this.hasClickEvent) {
       document.querySelectorAll('.seed-element-container').forEach(seedEl => {
-        seedEl.classList.remove('seed-element-on-focus');
+        if (seedEl != seedContainerEl) {
+          seedEl.classList.remove('seed-element-on-focus');
+        }
       })
-      seedContainerEl.classList.add('seed-element-on-focus');
+      seedContainerEl.classList.toggle('seed-element-on-focus');
       this.seedElClick.emit(this.seedEl);
     }
   }
