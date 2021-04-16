@@ -20,5 +20,4 @@ export class FarmBlockComponent extends FarmPageComponent implements OnChanges {
     this.trussArr = await this.sessionStorage.getAsync(this.block);
     this.changeDataStatus(true);
   }
-
 }

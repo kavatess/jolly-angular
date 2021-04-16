@@ -8,6 +8,18 @@ body {
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+.img-120 {
+    height: 120px;
+}
+
+.img-60 {
+    height: 60px;
+}
+
+.img-circle-border {
+    border-radius: 50%;
+}
+
 $success-color: rgb(56, 176, 0);
 $danger-color: #e30000;
 
@@ -166,6 +178,9 @@ $danger-color: #e30000;
 }
 
 @media only screen and (max-width: 325px) {
+    img {
+        max-height: 100px;
+    }
     .modal-body {
         max-height: 400px;
         padding: 7px;

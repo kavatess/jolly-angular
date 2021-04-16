@@ -30,8 +30,4 @@ export class ModalEmptyTrussComponent extends FarmModalComponent implements OnCh
     }
   }
 
-  changeSelectedSeed(newSeed: Seed): void {
-    this.selectedSeed = (this.selectedSeed._id == newSeed._id) ? new Seed() : newSeed;
-  }
-
 }
