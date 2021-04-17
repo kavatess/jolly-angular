@@ -8,27 +8,15 @@ import { Truss } from '../../models/truss.model';
   styleUrls: ['./farm-modal.component.scss']
 })
 export class FarmModalComponent implements OnChanges {
-  private static modalTruss: Truss = new Truss();
-  @Input() private clickedTruss: Truss = new Truss();
+  @Input() clickedTruss: Truss = new Truss();
   @Output() reload = new EventEmitter<Truss>();
 
   constructor(protected sessionStorage: SessionStorageService) { }
 
-  set setModalTruss(newTruss: Truss) {
-    FarmModalComponent.modalTruss = newTruss;
-  }
-  get modalTruss(): Truss {
-    return FarmModalComponent.modalTruss;
-  }
-
-  ngOnChanges(): void {
-    this.setModalTruss = this.clickedTruss;
-  }
+  ngOnChanges(): void { }
 
   protected async reloadClickedTruss(): Promise<void> {
-    await this.sessionStorage.reset(this.clickedTruss.block);
-    const newClickedTruss = this.sessionStorage.trussData[this.clickedTruss.block].find(truss => truss._id == this.clickedTruss._id);
-    this.setModalTruss = newClickedTruss;
-    this.reload.emit(this.sessionStorage.trussData[this.clickedTruss.block]);
+    const newClickedTruss = (await this.sessionStorage.reset(this.clickedTruss.block)).find(truss => truss._id == this.clickedTruss._id);
+    this.reload.emit(newClickedTruss);
   }
 }

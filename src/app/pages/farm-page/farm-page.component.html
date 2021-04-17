@@ -4,7 +4,7 @@
         <app-farm [block]="selectedBlock"></app-farm>
 
         <!-- Modal truss information -->
-        <app-farm-modal [clickedTruss]="clickedTruss"></app-farm-modal>
+        <app-farm-modal [clickedTruss]="clickedTruss" (reload)="changeClickedTruss($event)"></app-farm-modal>
 
         <!-- Modal for seed table -->
         <app-seed-modal></app-seed-modal>

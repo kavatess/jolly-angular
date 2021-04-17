@@ -41,6 +41,7 @@ export class FarmPageComponent implements OnInit {
   }
   changeClickedTruss(truss: Truss) {
     FarmPageComponent.clickedTruss = truss;
+    console.log(FarmPageComponent.clickedTruss);
   }
   changeDataStatus(status: boolean): void {
     FarmPageComponent.dataReady = status;

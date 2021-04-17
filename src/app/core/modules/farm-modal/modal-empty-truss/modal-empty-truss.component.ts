@@ -23,8 +23,8 @@ export class ModalEmptyTrussComponent extends FarmModalComponent implements OnCh
   }
 
   createTruss(): void {
-    if (this.modalTruss._id && this.selectedSeed._id) {
-      this.createTrussService.createTruss(this.modalTruss._id, this.selectedSeed._id).subscribe(async _response => {
+    if (this.clickedTruss._id && this.selectedSeed._id) {
+      this.createTrussService.createTruss(this.clickedTruss._id, this.selectedSeed._id).subscribe(async (_response) => {
         await this.reloadClickedTruss();
       });
     }
