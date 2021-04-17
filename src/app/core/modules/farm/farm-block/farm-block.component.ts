@@ -1,14 +1,15 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, DoCheck, Input, OnInit } from '@angular/core';
+import { TRUSS_SESSION_COLLECTION } from 'src/app/app-constants';
 import { Truss } from 'src/app/core/models/truss.model';
-import { FarmPageComponent } from 'src/app/pages/farm-page/farm-page.component';
 import { SessionStorageService } from 'src/app/shared/services/session-storage.service';
+import { FarmComponent } from '../farm.component';
 
 @Component({
   selector: 'app-farm-block',
   templateUrl: './farm-block.component.html',
   styleUrls: ['./farm-block.component.scss']
 })
-export class FarmBlockComponent extends FarmPageComponent implements OnChanges {
+export class FarmBlockComponent extends FarmComponent implements OnInit, DoCheck {
   @Input() block = '';
   trussArr: Truss[] = [];
 
@@ -16,8 +17,14 @@ export class FarmBlockComponent extends FarmPageComponent implements OnChanges {
     super();
   }
 
-  async ngOnChanges() {
-    this.trussArr = await this.sessionStorage.getAsync(this.block);
+  async ngOnInit() {
+    this.trussArr = await this.sessionStorage.getAsync(TRUSS_SESSION_COLLECTION + this.block);
     this.changeDataStatus(true);
+  }
+
+  async ngDoCheck() {
+    if (!this.dataReady) {
+      await this.ngOnInit();
+    }
   }
 }

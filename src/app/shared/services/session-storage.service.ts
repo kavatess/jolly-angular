@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BLOCK_ARR, PLANT_SESSION_COLLECTION, SEED_SESSION_COLLECTION } from 'src/app/app-constants';
+import { PLANT_SESSION_COLLECTION, SEED_SESSION_COLLECTION, TRUSS_SESSION_COLLECTION } from 'src/app/app-constants';
 import { Plant } from 'src/app/core/models/plant.model';
 import { Seed } from 'src/app/core/models/seed.model';
 import { HttpRequestService } from 'src/app/core/services/http-request.service';
@@ -11,9 +11,6 @@ import { PLANT_REQUEST, SEED_REQUEST, TRUSS_REQUEST } from 'src/app/core/service
 export class SessionStorageService {
   private sessionStorage = {};
   constructor(private requestService: HttpRequestService) {
-    BLOCK_ARR.forEach(async (block) => {
-      await this.getAsync(block);
-    });
     this.getAsync(PLANT_SESSION_COLLECTION);
     this.getAsync(SEED_SESSION_COLLECTION);
   }
@@ -26,17 +23,21 @@ export class SessionStorageService {
   }
 
   async getAsync(collection: string): Promise<any[]> {
+    if (collection.includes(TRUSS_SESSION_COLLECTION)) {
+      const block = collection.split('-')[3];
+      return await this.getDataFromAPI(collection, TRUSS_REQUEST.getTrussData + `/${block}`);
+    }
     if (collection == PLANT_SESSION_COLLECTION) {
       return await this.getDataFromAPI(collection, PLANT_REQUEST.getPlantData);
     }
     if (collection == SEED_SESSION_COLLECTION) {
       return await this.getDataFromAPI(collection, SEED_REQUEST.getSeedData);
     }
-    return await this.getDataFromAPI(collection, TRUSS_REQUEST.getTrussData + `/${collection}`);
+    return null;
   }
 
   async reset(collection: string): Promise<any[]> {
-    this.sessionStorage[collection] = null;
+    this.sessionStorage[collection] = undefined;
     return await this.getAsync(collection);
   }
 
@@ -51,13 +52,4 @@ export class SessionStorageService {
   get readySeedArr(): Seed[] {
     return this.seedArr.filter(seed => seed.isReadySeed);
   }
-
-  get trussData(): any {
-    const data = {};
-    BLOCK_ARR.forEach(block => {
-      data[block] = this.sessionStorage[block];
-    });
-    return data;
-  }
-
 }

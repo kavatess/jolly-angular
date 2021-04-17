@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
+import { TRUSS_SESSION_COLLECTION } from 'src/app/app-constants';
 import { SessionStorageService } from 'src/app/shared/services/session-storage.service';
 import { Truss } from '../../models/truss.model';
 
@@ -16,7 +17,9 @@ export class FarmModalComponent implements OnChanges {
   ngOnChanges(): void { }
 
   protected async reloadClickedTruss(): Promise<void> {
-    const newClickedTruss = (await this.sessionStorage.reset(this.clickedTruss.block)).find(truss => truss._id == this.clickedTruss._id);
+    this.reload.emit(this.clickedTruss);
+    const updatedTrussArr = await this.sessionStorage.reset(TRUSS_SESSION_COLLECTION + this.clickedTruss.block);
+    const newClickedTruss = updatedTrussArr.find(truss => truss._id == this.clickedTruss._id);
     this.reload.emit(newClickedTruss);
   }
 }

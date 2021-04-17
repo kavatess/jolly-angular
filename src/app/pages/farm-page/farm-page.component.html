@@ -1,10 +1,10 @@
 <app-page-layout [hasFooter]="true" [hasHeader]="true" [onLoad]="!dataReady">
     <div class="page-content">
         <!-- Map of farm -->
-        <app-farm [block]="selectedBlock"></app-farm>
+        <app-farm></app-farm>
 
         <!-- Modal truss information -->
-        <app-farm-modal [clickedTruss]="clickedTruss" (reload)="changeClickedTruss($event)"></app-farm-modal>
+        <app-farm-modal [clickedTruss]="clickedTruss" (reload)="changeClickedTruss($event); changeDataStatus(false)"></app-farm-modal>
 
         <!-- Modal for seed table -->
         <app-seed-modal></app-seed-modal>

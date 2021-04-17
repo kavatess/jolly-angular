@@ -1,5 +1,5 @@
 <div class="farm-container">
-    <ng-template [ngIf]=" block == 'A' ">
+    <ng-template [ngIf]=" selectedBlock == 'A' ">
         <div class="farm-main-container">
             <div class="farm-middle-container">
                 <!-- truss array A -->
@@ -22,7 +22,7 @@
     </ng-template>
 
     <!-- farm in block B -->
-    <ng-template [ngIf]=" block == 'B' ">
+    <ng-template [ngIf]=" selectedBlock == 'B' ">
         <div class="farm-main-container">
             <div class="farm-left-container">
                 <!-- truss array BN -->
@@ -40,7 +40,7 @@
     </ng-template>
 
     <!-- farm in block C & D -->
-    <ng-template [ngIf]=" block == 'C' ">
+    <ng-template [ngIf]=" selectedBlock == 'C' ">
         <div class="farm-main-container farm-card-group">
             <div class="farm-middle-container">
                 <div class="card text-center">
