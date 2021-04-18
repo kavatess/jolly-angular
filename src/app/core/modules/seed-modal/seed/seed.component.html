@@ -1,8 +1,16 @@
 <div *ngIf=" seedIndex == 0 " class="seed-list-header seed-element-container">
-    <span class="seed-status-container">TT</span>
-    <span class="seed-img-container">Hình</span>
-    <span class="seed-info-container">Thông tin</span>
-    <span class="seed-number-container">SL</span>
+    <span class="seed-status-container">
+        <div class="text">TT</div>
+    </span>
+    <span class="seed-img-container">
+        <div class="text">Hình</div>
+    </span>
+    <span class="seed-info-container">
+        <div class="text">Thông tin</div>
+    </span>
+    <span class="seed-number-container">
+        <div class="text">SL</div>
+    </span>
     <span class="seed-tool-container"></span>
 </div>
 
@@ -19,24 +27,30 @@
 
     <span class="seed-info-container">
         <div class="seed-info-content">
-            <span class="seed-info-title">Tên rau:</span>
-            <span class="seed-info-body" [style.color]=" seedEl.plantColor ">
-                {{ seedEl.plantName }}
+            <span class="seed-info-title">
+                <div class="text">Tên rau:</div>
+            </span>
+            <span class="seed-info-body">
+                <div class="text" [style.color]=" seedEl.plantColor ">{{ seedEl.plantName }}</div>
             </span>
         </div>
 
         <div class="seed-info-content">
-            <span class="seed-info-title">NT:</span>
-            <span class="seed-info-body" [style.color]=" seedEl.plantColor ">
-                {{ seedEl.startDate | date: 'dd/MM/yyyy' }}
+            <span class="seed-info-title">
+                <div class="text">NT:</div>
+            </span>
+            <span class="seed-info-body">
+                <div class="text" [style.color]=" seedEl.plantColor ">{{ seedEl.startDate | date: 'dd/MM/yyyy' }}</div>
             </span>
         </div>
 
         <div class="seed-info-content">
-            <span class="seed-info-title">Tuổi:</span>
+            <span class="seed-info-title">
+                <div class="text">Tuổi:</div>
+            </span>
             <span class="seed-info-body" [style.color]=" seedEl.plantColor ">
-                <span *ngIf=" seedEl.age > 0 ">{{ seedEl.age }} tuần</span>
-                <span *ngIf=" seedEl.age == 0 ">Mới trồng</span>
+                <div *ngIf=" seedEl.age > 0 " class="text">{{ seedEl.age }} tuần</div>
+                <div *ngIf=" seedEl.age == 0 " class="text">Mới trồng</div>
             </span>
         </div>
     </span>

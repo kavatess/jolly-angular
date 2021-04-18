@@ -124,8 +124,7 @@ $danger-color: #e30000;
 }
 
 .text {
-    font-size: 15px;
-    font-weight: 500;
+    font-size: 16px;
 }
 
 .text-header {
@@ -146,7 +145,6 @@ $danger-color: #e30000;
 @media only screen and (max-width: 325px) {
     .text {
         font-size: 14px;
-        font-weight: 500;
     }
     .status-img {
         width: 16px;

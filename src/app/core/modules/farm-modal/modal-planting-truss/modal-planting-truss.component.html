@@ -12,39 +12,49 @@
                         <i [class]=" clickedTruss.plantGrowth | plant_status_icon "></i>
                     </span>
                     <span class="info-body status-info">
-                        {{ clickedTruss.plantGrowth | plant_growth_str }}
+                        <div class="text">{{ clickedTruss.plantGrowth | plant_growth_str }}</div>
                     </span>
                 </div>
 
                 <div class="info-element">
-                    <span class="info-title">Tên rau:</span>
-                    <span class="info-body" [style.color]=" clickedTruss.plantColor ">
-                        {{ clickedTruss.plantName }}
+                    <span class="info-title">
+                        <div class="text">Tên rau:</div>
+                    </span>
+                    <span class="info-body" >
+                        <div class="text" [style.color]=" clickedTruss.plantColor ">
+                            {{ clickedTruss.plantName }}
+                        </div>
                     </span>
                 </div>
 
                 <div class="info-element">
-                    <span class="info-title">Ngày trồng:</span>
-                    <span class="info-body" [style.color]=" clickedTruss.plantColor ">
-                        {{ clickedTruss.startDate | date: 'dd/MM/yyyy' }}
+                    <span class="info-title">
+                        <div class="text">Ngày trồng:</div>
+                    </span>
+                    <span class="info-body">
+                        <div class="text" [style.color]=" clickedTruss.plantColor ">{{ clickedTruss.startDate | date: 'dd/MM/yyyy' }}</div>
                     </span>
                 </div>
 
                 <div class="info-element" *ngIf=" clickedTruss.plantGrowth < 3 ">
-                    <span class="info-title">Dự kiến TH:</span>
-                    <span class="info-body" [style.color]=" clickedTruss.plantColor ">
-                        {{ clickedTruss.harvestDate | harvest_days }} ngày nữa
+                    <span class="info-title">
+                        <div class="text">Dự kiến TH:</div>
+                    </span>
+                    <span class="info-body">
+                        <div class="text" [style.color]=" clickedTruss.plantColor ">{{ clickedTruss.harvestDate | harvest_days }} ngày nữa</div>
                     </span>
                 </div>
 
                 <div class="info-element" *ngIf=" clickedTruss.plantGrowth == 3 ">
-                    <span class="info-title">Đã TH được:</span>
-                    <span class="info-body" [style.color]=" clickedTruss.plantColor ">
-                        {{ clickedTruss.harvestDate | harvest_days }} ngày
+                    <span class="info-title">
+                        <div class="text">Đã TH được:</div>
+                    </span>
+                    <span class="info-body">
+                        <div class="text" [style.color]=" clickedTruss.plantColor ">{{ clickedTruss.harvestDate | harvest_days }} ngày</div>
                     </span>
                 </div>
             </span>
-            
+
         </div>
         <app-progress-bar [striped]="true" [height]="'28px'" [color]="clickedTruss.plantColor"
             [percentage]="clickedTruss.percentage" [content]="clickedTruss.plantNumber + '/ ' + clickedTruss.maxHole">

@@ -44,7 +44,6 @@ export class FarmPageComponent implements OnInit {
   }
   changeDataStatus(status: boolean): void {
     FarmPageComponent.dataReady = status;
-    console.log(FarmPageComponent.dataReady);
   }
 
   ngOnInit(): void {

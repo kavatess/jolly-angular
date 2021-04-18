@@ -12,11 +12,10 @@ import { PagesModule } from './pages/pages.module';
   ],
   imports: [
     BrowserModule,
-    BlocksModule,
-    PagesModule,
     AppRoutingModule,
+    BlocksModule,
+    PagesModule
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
