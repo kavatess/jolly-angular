@@ -7,7 +7,7 @@ import { TRUSS_REQUEST } from '../request-url-constants';
 })
 export class GetTimelineDataService {
   constructor(private httpReq: HttpRequestService) { }
-  getTimelineDataByIdService(trussId: string) {
-    return this.httpReq.getDataRequest(TRUSS_REQUEST.getTimelineById + `/${trussId}`);
+  getTimelineDataById(trussId: string) {
+    return this.httpReq.createPostRequest(TRUSS_REQUEST.getTimelineById + `/${trussId}`);
   }
 }

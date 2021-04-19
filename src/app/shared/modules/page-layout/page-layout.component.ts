@@ -6,8 +6,10 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./page-layout.component.scss']
 })
 export class PageLayoutComponent implements OnInit {
-  @Input() hasHeader: boolean = true;
-  @Input() hasFooter: boolean = true;
+  @Input() hasHeader = true;
+  @Input() hasFooter = true;
+  @Input() scroll = false;
+  @Input() onLoad = true;
   constructor() { }
 
   ngOnInit(): void {

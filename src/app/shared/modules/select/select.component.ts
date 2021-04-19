@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { SessionStorageService } from '../../services/session-storage.service';
 
 @Component({
   selector: 'app-select',
@@ -6,13 +7,13 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   styleUrls: ['./select.component.scss']
 })
 export class SelectComponent implements OnInit {
-  @Input() isStatisticsPage: boolean = false;
+  @Input() isStatisticsPage = false;
   @Output() selectedBlock = new EventEmitter<string>();
   @Output() selectedGrowth = new EventEmitter<number>();
   @Output() selectedPlant = new EventEmitter<number>();
 
   lastSelectedBlock: string = "A";
-  constructor() { }
+  constructor(public sessionService: SessionStorageService) { }
 
   ngOnInit(): void {
     this.lastSelectedBlock = this.isStatisticsPage ? window.sessionStorage.getItem('last-block-stat') : window.sessionStorage.getItem('last-block-farm');

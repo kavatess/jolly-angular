@@ -7,7 +7,7 @@ import { PLANT_REQUEST } from '../request-url-constants';
 })
 export class InsertPlantService {
   constructor(private httpReq: HttpRequestService) { }
-  insertOnePlantService(sentJSON: any) {
-    return this.httpReq.accessDataRequest(PLANT_REQUEST.insertOnePlant, sentJSON);
+  insertOnePlant(sentJSON: any) {
+    return this.httpReq.createPostRequest(PLANT_REQUEST.insertOnePlant, sentJSON);
   }
 }

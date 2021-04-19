@@ -1,17 +1,19 @@
 import { Injectable } from '@angular/core';
+import { CreateTrussBody } from '../../models/truss.request.model';
 import { HttpRequestService } from '../http-request.service';
-import { DeleteOneSeedService } from '../seed/delete-one-seed.service';
-import { createTrussBody } from '../../models/truss.request.model';
 import { TRUSS_REQUEST } from '../request-url-constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CreateTrussService {
-  constructor(private httpReq: HttpRequestService, private deleteSeedService: DeleteOneSeedService) { }
-  createTrussService(sentJSON: createTrussBody) {
-    this.deleteSeedService.deleteOneSeedService(sentJSON).subscribe(_response => {
-      this.httpReq.accessDataRequest(TRUSS_REQUEST.createTruss, sentJSON);
-    });
+  constructor(private httpReq: HttpRequestService) { }
+  createTruss(trussId: string, seedId: string) {
+    const reqBody: CreateTrussBody = {
+      _id: trussId,
+      seedId: seedId,
+      startDate: new Date().toString()
+    }
+    return this.httpReq.createPostRequest(TRUSS_REQUEST.createTruss, reqBody);
   }
 }

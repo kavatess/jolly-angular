@@ -7,12 +7,11 @@ import { SEED_REQUEST } from '../request-url-constants';
 })
 export class UpdateSeedNumberService {
   constructor(private httpReq: HttpRequestService) { }
-  updateSeedNumberService(sentJSON: updateSeedRequest) {
-    return this.httpReq.accessDataRequest(SEED_REQUEST.updateOneSeed, sentJSON);
+  updateSeedNumber(updatedSeedId: string, newPlantNumber: number) {
+    const reqBody = {
+      _id: updatedSeedId,
+      plantNumber: newPlantNumber
+    };
+    return this.httpReq.createPostRequest(SEED_REQUEST.updateOneSeed, reqBody);
   }
-}
-
-export interface updateSeedRequest {
-  _id: string;
-  plantNumber: number;
 }

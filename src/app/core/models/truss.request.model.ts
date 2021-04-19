@@ -1,26 +1,20 @@
-export interface createTrussBody {
+export interface CreateTrussBody {
     _id: string;
-    plantId: number;
+    seedId: string;
     startDate: string;
-    plantNumber: number;
-    createdSeedId: string;
 }
 
-export interface updateMaxHoleBody {
+export interface UpdateMaxHoleBody {
     _id: string;
     maxHole: number;
 }
 
-export interface simpleBody {
-    _id: string;
-}
-
-export interface revertTrussBody {
+export interface RevertTrussBody {
     _id: string;
     statusIndex: number;
 }
 
-export class updateStatusBody {
+export class UpdateStatusBody {
     _id: string;
     date: string;
     plantNumber: number;
