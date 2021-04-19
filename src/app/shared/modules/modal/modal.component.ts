@@ -8,6 +8,7 @@ import { Component, Input, OnChanges } from '@angular/core';
 export class ModalComponent implements OnChanges {
   @Input() Id = '';
   @Input() title = '';
+  @Input() onLoad = false;
   constructor() { }
 
   ngOnChanges(): void {

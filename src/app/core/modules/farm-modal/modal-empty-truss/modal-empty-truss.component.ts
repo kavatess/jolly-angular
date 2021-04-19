@@ -19,8 +19,7 @@ export class ModalEmptyTrussComponent extends FarmModalComponent implements OnCh
     super(sessionStorage);
   }
 
-  ngOnChanges(): void {
-  }
+  ngOnChanges(): void { }
 
   createTruss(): void {
     if (this.clickedTruss._id && this.selectedSeed._id) {

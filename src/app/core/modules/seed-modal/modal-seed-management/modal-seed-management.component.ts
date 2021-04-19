@@ -3,25 +3,27 @@ import { BasicSeedInfo, Seed } from 'src/app/core/models/seed.model';
 import { DeleteOneSeedService } from 'src/app/core/services/seed/delete-one-seed.service';
 import { UpdateSeedNumberService } from 'src/app/core/services/seed/update-seed-number.service';
 import { SessionStorageService } from 'src/app/shared/services/session-storage.service';
+import { SeedModalComponent } from '../seed-modal.component';
 
 @Component({
   selector: 'app-modal-seed-management',
   templateUrl: './modal-seed-management.component.html',
   styleUrls: ['./modal-seed-management.component.scss']
 })
-export class ModalSeedManagementComponent implements OnInit {
+export class ModalSeedManagementComponent extends SeedModalComponent implements OnInit {
   @Input() seedArr: Seed[] = [];
   @Input() clickEventActivated = false;
   @Output() seedElClick = new EventEmitter<BasicSeedInfo>();
 
   constructor(
-    private sessionStorage: SessionStorageService,
+    public sessionStorage: SessionStorageService,
     private deleteSeedService: DeleteOneSeedService,
     private updateSeedService: UpdateSeedNumberService
-  ) { }
-
-  ngOnInit(): void {
+  ) {
+    super(sessionStorage);
   }
+
+  ngOnInit(): void { }
 
   settingIconOnClick(settingIconEl: any, settingBtnGroupEl: any): void {
     settingIconEl.classList.add('d-none');
@@ -43,8 +45,8 @@ export class ModalSeedManagementComponent implements OnInit {
   deleteIconOnClick(deletedSeed: Seed): void {
     let confirm = window.confirm(`Bạn chắc chắn muốn loại bỏ hạt ${deletedSeed.plantName} này!`)
     if (confirm) {
-      this.deleteSeedService.deleteOneSeed(deletedSeed._id).subscribe(_response => {
-        this.sessionStorage.reset('seed-arr');
+      this.deleteSeedService.deleteOneSeed(deletedSeed._id).subscribe(async (_response) => {
+        await this.reloadSeedData();
       });
     }
   }
@@ -52,8 +54,8 @@ export class ModalSeedManagementComponent implements OnInit {
   updateIconOnClick(seedId: string, newPlantNumber: string): void {
     const plantNumber = Number(newPlantNumber);
     if (!isNaN(plantNumber)) {
-      this.updateSeedService.updateSeedNumber(seedId, plantNumber).subscribe(_response => {
-        this.sessionStorage.reset('seed-arr');
+      this.updateSeedService.updateSeedNumber(seedId, plantNumber).subscribe(async (_response) => {
+        await this.reloadSeedData();
       });
     }
   }

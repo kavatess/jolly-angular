@@ -7,11 +7,11 @@
     align-items: flex-start;
     justify-content: center;
     .plant-img {
-        width: 40%;
+        flex: 4;
         height: 100%;
     }
     .plant-info {
-        width: 60%;
+        flex: 6;
         height: 100%;
         display: flex;
         flex-direction: column;

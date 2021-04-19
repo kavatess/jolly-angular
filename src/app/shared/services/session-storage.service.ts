@@ -22,7 +22,7 @@ export class SessionStorageService {
     return this.sessionStorage[collection];
   }
 
-  async getAsync(collection: string): Promise<any[]> {
+  public async getAsync(collection: string): Promise<any[]> {
     if (collection.includes(TRUSS_SESSION_COLLECTION)) {
       const block = collection.split('-')[3];
       return await this.getDataFromAPI(collection, TRUSS_REQUEST.getTrussData + `/${block}`);
@@ -36,20 +36,20 @@ export class SessionStorageService {
     return null;
   }
 
-  async reset(collection: string): Promise<any[]> {
+  public async reset(collection: string): Promise<any[]> {
     this.sessionStorage[collection] = undefined;
     return await this.getAsync(collection);
   }
 
-  get plantArr(): Plant[] {
+  public get plantArr(): Plant[] {
     return this.sessionStorage[PLANT_SESSION_COLLECTION] || [];
   }
 
-  get seedArr(): Seed[] {
+  public get seedArr(): Seed[] {
     return this.sessionStorage[SEED_SESSION_COLLECTION] || [];
   }
 
-  get readySeedArr(): Seed[] {
+  public get readySeedArr(): Seed[] {
     return this.seedArr.filter(seed => seed.isReadySeed);
   }
 }

@@ -11,13 +11,20 @@ import { Truss } from '../../models/truss.model';
 export class FarmModalComponent implements OnChanges {
   @Input() clickedTruss: Truss = new Truss();
   @Output() reload = new EventEmitter<Truss>();
+  private static onReloading = false;
 
   constructor(protected sessionStorage: SessionStorageService) { }
 
-  ngOnChanges(): void { }
+  ngOnChanges(): void {
+    FarmModalComponent.onReloading = false;
+  }
+
+  get onReloading(): boolean {
+    return FarmModalComponent.onReloading;
+  }
 
   protected async reloadClickedTruss(): Promise<void> {
-    this.reload.emit(this.clickedTruss);
+    FarmModalComponent.onReloading = true;
     const updatedTrussArr = await this.sessionStorage.reset(TRUSS_SESSION_COLLECTION + this.clickedTruss.block);
     const newClickedTruss = updatedTrussArr.find(truss => truss._id == this.clickedTruss._id);
     this.reload.emit(newClickedTruss);
