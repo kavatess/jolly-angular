@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FarmLayoutComponent } from './farm-layout.component';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [FarmLayoutComponent],
   imports: [
     CommonModule
   ]
 })
-export class ServicesModule { }
+export class FarmLayoutModule { }
