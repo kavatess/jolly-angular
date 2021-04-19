@@ -7,7 +7,7 @@ import { PLANT_REQUEST } from '../request-url-constants';
 })
 export class DeletePlantService {
   constructor(private httpReq: HttpRequestService) { }
-  deleteOnePlantService(sentJSON: any) {
-    return this.httpReq.accessDataRequest(PLANT_REQUEST.deleteOnePlant, sentJSON);
+  deleteOnePlant(sentJSON: any) {
+    return this.httpReq.createPostRequest(PLANT_REQUEST.deleteOnePlant, sentJSON);
   }
 }
