@@ -5,7 +5,7 @@ import { SettingPageComponent } from './setting-page.component';
 @NgModule({
   declarations: [SettingPageComponent],
   imports: [
-    CommonModule
+    CommonModule,
   ]
 })
 export class SettingPageModule { }

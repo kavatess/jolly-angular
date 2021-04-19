@@ -5,7 +5,6 @@ import { SettingPageModule } from './setting-page/setting-page.module';
 import { StatisticPageModule } from './statistic-page/statistic-page.module';
 
 @NgModule({
-  declarations: [],
   imports: [
     CommonModule,
     FarmPageModule,
