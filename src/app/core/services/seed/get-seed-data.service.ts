@@ -10,6 +10,6 @@ import { SEED_REQUEST } from '../request-url-constants';
 export class GetSeedDataService {
   constructor(private httpReq: HttpRequestService) { }
   getSeedData(): Observable<Seed[]> {
-    return this.httpReq.getDataRequest(SEED_REQUEST.getSeedData);
+    return this.httpReq.createPostRequest(SEED_REQUEST.getSeedData);
   }
 }

@@ -16,7 +16,6 @@ import { FarmModule } from 'src/app/core/modules/farm/farm.module';
     FarmModalModule,
     SeedModalModule,
     SelectModule
-  ],
-  exports: [FarmPageComponent]
+  ]
 })
 export class FarmPageModule { }

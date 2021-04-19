@@ -8,7 +8,11 @@ import { RevertTrussBody } from '../../models/truss.request.model';
 })
 export class RevertStatusService {
   constructor(private httpReq: HttpRequestService) { }
-  revertStatusService(sentJSON: RevertTrussBody) {
-    return this.httpReq.accessDataRequest(TRUSS_REQUEST.revertStatus, sentJSON);
+  revertStatus(trussId: string, revertStatusIndex: number) {
+    const reqBody: RevertTrussBody = {
+      _id: trussId,
+      statusIndex: revertStatusIndex
+    }
+    return this.httpReq.createPostRequest(TRUSS_REQUEST.revertStatus, reqBody);
   }
 }

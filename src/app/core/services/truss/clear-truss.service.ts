@@ -8,6 +8,6 @@ import { TRUSS_REQUEST } from '../request-url-constants';
 export class ClearTrussService {
   constructor(private httpReq: HttpRequestService) { }
   clearTruss(trussId: string) {
-    return this.httpReq.getDataRequest(TRUSS_REQUEST.clearTruss + `/${trussId}`);
+    return this.httpReq.createPostRequest(TRUSS_REQUEST.clearTruss + `/${trussId}`);
   }
 }

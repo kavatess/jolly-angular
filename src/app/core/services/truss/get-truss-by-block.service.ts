@@ -10,6 +10,6 @@ import { TRUSS_REQUEST } from '../request-url-constants';
 export class GetTrussByBlockService {
   constructor(private httpReq: HttpRequestService) { }
   getTrussDataByBlock(block: string): Observable<Truss[]> {
-    return this.httpReq.getDataRequest(TRUSS_REQUEST.getTrussData + `/${block}`);
+    return this.httpReq.createPostRequest(TRUSS_REQUEST.getTrussData + `/${block}`);
   }
 }

@@ -17,7 +17,7 @@ export class SessionStorageService {
 
   private async getDataFromAPI(collection: string, request_url: string = ''): Promise<any[]> {
     if (!this.sessionStorage[collection]) {
-      this.sessionStorage[collection] = await this.requestService.getDataRequest(request_url).toPromise();
+      this.sessionStorage[collection] = await this.requestService.createPostRequest(request_url).toPromise();
     }
     return this.sessionStorage[collection];
   }

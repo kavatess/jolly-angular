@@ -8,7 +8,7 @@ import { SEED_REQUEST } from '../request-url-constants';
 })
 export class InsertSeedService {
   constructor(private httpReq: HttpRequestService) { }
-  insertManySeed(sentJSON: SimpleSeed[]) {
-    return this.httpReq.getDataRequest(SEED_REQUEST.insertManySeed, sentJSON);
+  insertManySeed(reqBody: SimpleSeed[]) {
+    return this.httpReq.createPostRequest(SEED_REQUEST.insertManySeed, reqBody);
   }
 }

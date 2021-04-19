@@ -7,11 +7,7 @@ import { SEED_REQUEST } from '../request-url-constants';
 })
 export class DeleteManySeedService {
   constructor(private httpReq: HttpRequestService) { }
-  deleteManySeedService(sentJSON: deleteManySeedRequest) {
-    return this.httpReq.accessDataRequest(SEED_REQUEST.deleteManySeed, sentJSON);
+  deleteManySeed(deletedSeedIdArr: string[]) {
+    return this.httpReq.createPostRequest(SEED_REQUEST.deleteManySeed, { idArr: deletedSeedIdArr });
   }
-}
-
-export interface deleteManySeedRequest {
-  idArr: string[];
 }

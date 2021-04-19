@@ -9,10 +9,6 @@ export interface UpdateMaxHoleBody {
     maxHole: number;
 }
 
-export interface SimpleBody {
-    _id: string;
-}
-
 export interface RevertTrussBody {
     _id: string;
     statusIndex: number;

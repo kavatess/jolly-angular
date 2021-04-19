@@ -10,6 +10,6 @@ import { PLANT_REQUEST } from '../request-url-constants';
 export class GetPlantDataService {
   constructor(private httpReq: HttpRequestService) { }
   getPlantData(): Observable<Plant[]> {
-    return this.httpReq.getDataRequest(PLANT_REQUEST.getPlantData);
+    return this.httpReq.createPostRequest(PLANT_REQUEST.getPlantData);
   }
 }

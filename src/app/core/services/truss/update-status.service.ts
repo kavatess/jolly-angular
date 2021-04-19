@@ -8,7 +8,7 @@ import { TRUSS_REQUEST } from '../request-url-constants';
 })
 export class UpdateStatusService {
   constructor(private httpReq: HttpRequestService) { }
-  updateStatusService(sentJSON: UpdateStatusBody) {
-    return this.httpReq.getDataRequest(TRUSS_REQUEST.updateStatus, sentJSON);
+  updateStatus(reqBody: UpdateStatusBody) {
+    return this.httpReq.createPostRequest(TRUSS_REQUEST.updateStatus, reqBody);
   }
 }

@@ -52,7 +52,7 @@ export class ModalPlantingTrussComponent extends FarmModalComponent implements O
   saveStatus(): void {
     if (this.isValidNewStatus) {
       const requestBody = new UpdateStatusBody(this.clickedTruss._id, this.newPlantNumber, this.newPlantGrowth);
-      this.updateStatusService.updateStatusService(requestBody).subscribe(async (_response) => {
+      this.updateStatusService.updateStatus(requestBody).subscribe(async (_response) => {
         await this.reloadClickedTruss();
       });
     }

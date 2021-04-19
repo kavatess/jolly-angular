@@ -1,5 +1,3 @@
-import { BasicPlant } from "./plant.model";
-
 export class Status {
     date: string;
     plantNumber: number;

@@ -14,6 +14,6 @@ export class CreateTrussService {
       seedId: seedId,
       startDate: new Date().toString()
     }
-    return this.httpReq.getDataRequest(TRUSS_REQUEST.createTruss, reqBody);
+    return this.httpReq.createPostRequest(TRUSS_REQUEST.createTruss, reqBody);
   }
 }
