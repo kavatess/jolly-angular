@@ -1,6 +1,6 @@
-<app-page-layout [scroll]="true" [onLoad]="false">
+<app-page-layout [scroll]="true" [onLoad]="!statArr.length">
     <div class="page-content">
-        aaaaaaaaaaaaaaaaaaaaa
+        <app-statistic [statArr]="statArr"></app-statistic>
     </div>
 
     <div class="footer">
