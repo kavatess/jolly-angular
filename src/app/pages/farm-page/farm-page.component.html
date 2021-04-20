@@ -12,7 +12,6 @@
 
     <!-- select group -->
     <div class="footer">
-        <app-select [isStatisticsPage]="false" (selectedBlock)="changeBlock($event)"
-            (selectedGrowth)="changePlantGrowth($event)" (selectedPlant)="changePlantId($event)"></app-select>
+        <app-select [isStatisticPage]="false" (selectChange)="selectOnChange($event)"></app-select>
     </div>
 </app-page-layout>

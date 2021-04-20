@@ -7,37 +7,29 @@ import { Truss } from 'src/app/core/models/truss.model';
   styleUrls: ['./farm-page.component.scss']
 })
 export class FarmPageComponent implements OnInit {
-  private static block = 'A';
-  private static plantId = '';
-  private static plantGrowth = 0;
+  private static selectionVal = null;
   private static clickedTruss: Truss = new Truss();
   private static dataReady = false;
 
   constructor() { }
 
-  get selectedBlock(): string {
-    return FarmPageComponent.block;
-  }
-  get selectedPlantId(): string {
-    return FarmPageComponent.plantId;
-  }
-  get selectedPlantGrowth(): number {
-    return FarmPageComponent.plantGrowth;
-  }
   get clickedTruss(): Truss {
     return FarmPageComponent.clickedTruss;
   }
   get dataReady(): boolean {
     return FarmPageComponent.dataReady;
   }
-  changeBlock(block: string): void {
-    FarmPageComponent.block = block;
+  get selectedBlock(): string {
+    return FarmPageComponent.selectionVal.block;
   }
-  changePlantId(plantId: string): void {
-    FarmPageComponent.plantId = plantId;
+  get selectedPlantId(): string {
+    return FarmPageComponent.selectionVal.plantId;
   }
-  changePlantGrowth(plantGrowth: number) {
-    FarmPageComponent.plantGrowth = plantGrowth;
+  get selectedPlantGrowth(): number {
+    return FarmPageComponent.selectionVal.plantGrowth;
+  }
+  selectOnChange(changeVal: any): void {
+    FarmPageComponent.selectionVal = changeVal;
   }
   changeClickedTruss(truss: Truss) {
     FarmPageComponent.clickedTruss = truss;
@@ -46,12 +38,5 @@ export class FarmPageComponent implements OnInit {
     FarmPageComponent.dataReady = status;
   }
 
-  ngOnInit(): void {
-    this.getLastBlock();
-  }
-
-  private getLastBlock(): void {
-    let lastBlock: string = window.sessionStorage.getItem('last-block-farm');
-    FarmPageComponent.block = lastBlock ? lastBlock : FarmPageComponent.block;
-  }
+  ngOnInit(): void { }
 }
