@@ -7,8 +7,9 @@ import { Statistics } from '../../models/statistic.model';
   styleUrls: ['./statistic.component.scss']
 })
 export class StatisticComponent implements OnInit {
-  @Input() statArr: Statistics[] = [];
-  constructor() { }
+  @Input() statArr: Statistics[] = []
+  constructor() {
+  }
 
   ngOnInit(): void { }
 

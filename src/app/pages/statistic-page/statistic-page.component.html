@@ -4,6 +4,6 @@
     </div>
 
     <div class="footer">
-        <app-select></app-select>
+        <app-select [isStatisticPage]="true" (selectChange)="selectOnChange($event)"></app-select>
     </div>
 </app-page-layout>

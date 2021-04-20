@@ -25,4 +25,3 @@ const config: HighchartsConfig = {
   exports: [StatisticComponent]
 })
 export class StatisticModule { }
-
