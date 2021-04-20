@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { Chart, Options } from 'highcharts';
-import { Statistics } from 'src/app/pages/statistic-page/statistic-page.component';
+import { Statistics } from 'src/app/core/models/statistic.model';
 
 @Component({
   selector: 'app-plant-stat-pie-chart',

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Statistics } from 'src/app/core/models/statistic.model';
 import { GetStatisticService } from 'src/app/core/services/truss/get-statistic.service';
 
 @Component({
@@ -13,14 +14,4 @@ export class StatisticPageComponent implements OnInit {
   async ngOnInit() {
     this.statArr = await this.getStatisticService.getFarmStatistics().toPromise();
   }
-
-}
-
-export interface Statistics {
-  block: string;
-  plantId: string;
-  plantName: string;
-  plantColor: string;
-  plantNumber: number;
-  plantGrowth: string;
 }

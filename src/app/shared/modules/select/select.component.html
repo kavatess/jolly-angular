@@ -1,15 +1,15 @@
-<div class="select-group">
+<form class="select-group" [formGroup]="selectGroup">
     <span class="select-block">
-        <select class="form-select form-select-sm" name="select-block" (change)="selectBlock($event)">
-            <option *ngIf="isStatisticsPage" value="" selected>--Tất cả rau--</option>
-            <option value="A" [selected]=" lastSelectedBlock == 'A' ">Vườn A</option>
-            <option value="B" [selected]=" lastSelectedBlock == 'B' ">Vườn B</option>
-            <option value="C" [selected]=" lastSelectedBlock == 'C' ">Vườn C và D</option>
+        <select class="form-select form-select-sm" formControlName="block">
+            <option *ngIf="isStatisticPage" value="" selected>--Tất cả vườn--</option>
+            <option value="A">Vườn A</option>
+            <option value="B">Vườn B</option>
+            <option value="C">Vườn C và D</option>
         </select>
     </span>
 
     <span class="select-growth">
-        <select class="form-select form-select-sm" name="select-block" (change)="selectGrowth($event)">
+        <select class="form-select form-select-sm" formControlName="plantGrowth">
             <option value="0">--Tình trạng--</option>
             <option value="1">Cây con</option>
             <option value="2">Cây trung</option>
@@ -18,11 +18,11 @@
     </span>
 
     <span class="select-plant">
-        <select class="form-select form-select-sm" name="select-block" (change)="selectPlant($event)">
-            <option [value]="''">--Tất cả rau--</option>
+        <select class="form-select form-select-sm" formControlName="plantId">
+            <option value="">--Tất cả rau--</option>
             <option *ngFor="let plant of sessionService.plantArr" [value]="plant._id">
                 {{ plant.plantName }}
             </option>
         </select>
     </span>
-</div>
+</form>
