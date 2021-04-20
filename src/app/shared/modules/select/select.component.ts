@@ -22,10 +22,19 @@ export class SelectComponent implements OnInit, OnDestroy {
   constructor(public sessionService: SessionStorageService) { }
 
   ngOnInit(): void {
+    this.getLastBlockVal();
+    this.selectChange.emit(this.selectGroup.value); // Emit the first default value
+    this.emitSelectValOnChange();
+  }
+
+  getLastBlockVal(): void {
     if (!this.isStatisticPage) {
       const lastBlock = window.sessionStorage.getItem(LAST_BLOCK_SESSION_COLLECTION);
       this.selectGroup.setControl('block', new FormControl(lastBlock || 'A'));
     }
+  }
+
+  emitSelectValOnChange(): void {
     this.subscription = this.selectGroup.valueChanges.subscribe(changeVal => {
       if (!this.isStatisticPage) {
         window.sessionStorage.setItem('last-block-stat', changeVal.block);
