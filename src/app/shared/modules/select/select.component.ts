@@ -1,4 +1,7 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import { LAST_BLOCK_SESSION_COLLECTION } from 'src/app/app-constants';
 import { SessionStorageService } from '../../services/session-storage.service';
 
 @Component({
@@ -6,35 +9,34 @@ import { SessionStorageService } from '../../services/session-storage.service';
   templateUrl: './select.component.html',
   styleUrls: ['./select.component.scss']
 })
-export class SelectComponent implements OnInit {
-  @Input() isStatisticsPage = false;
-  @Output() selectedBlock = new EventEmitter<string>();
-  @Output() selectedGrowth = new EventEmitter<number>();
-  @Output() selectedPlant = new EventEmitter<number>();
+export class SelectComponent implements OnInit, OnDestroy {
+  @Input() isStatisticPage = false;
+  selectGroup = new FormGroup({
+    block: new FormControl(''),
+    plantId: new FormControl(''),
+    plantGrowth: new FormControl(0)
+  });
+  subscription = new Subscription();
+  @Output() selectChange = new EventEmitter();
 
-  lastSelectedBlock: string = "A";
   constructor(public sessionService: SessionStorageService) { }
 
   ngOnInit(): void {
-    this.lastSelectedBlock = this.isStatisticsPage ? window.sessionStorage.getItem('last-block-stat') : window.sessionStorage.getItem('last-block-farm');
-  }
-
-  selectBlock(event: any): void {
-    const blockVal: string = event.target.value;
-    this.selectedBlock.emit(blockVal);
-    if (this.isStatisticsPage) {
-      window.sessionStorage.setItem('last-block-stat', blockVal);
-    } else {
-      window.sessionStorage.setItem('last-block-farm', blockVal);
+    if (!this.isStatisticPage) {
+      const lastBlock = window.sessionStorage.getItem(LAST_BLOCK_SESSION_COLLECTION);
+      this.selectGroup.setControl('block', new FormControl(lastBlock || 'A'));
     }
+    this.subscription = this.selectGroup.valueChanges.subscribe(changeVal => {
+      if (!this.isStatisticPage) {
+        window.sessionStorage.setItem('last-block-stat', changeVal.block);
+      }
+      changeVal.plantGrowth *= 1;
+      this.selectChange.emit(changeVal.value);
+    });
   }
 
-  selectGrowth(event: any): void {
-    this.selectedGrowth.emit(Number(event.target.value));
-  }
-
-  selectPlant(event: any): void {
-    this.selectedPlant.emit(event.target.value);
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
 }
