@@ -16,11 +16,8 @@ export class StatisticPageComponent implements OnInit {
   get statArr(): Statistics[] {
     return StatisticPageComponent.statArr;
   }
-  set newStatArr(filteredStats: Statistics[]) {
+  private set newStatArr(filteredStats: Statistics[]) {
     StatisticPageComponent.statArr = filteredStats;
-  }
-  async selectOnChange(reqQuery: any) {
-    await this.ngOnInit(reqQuery);
   }
 
   async ngOnInit(reqQuery: any = DEFAULT_STATISTIC_QUERY) {

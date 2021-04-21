@@ -1,9 +1,9 @@
 <app-page-layout [scroll]="true" [onLoad]="!statArr.length">
     <div class="page-content">
-        <app-statistic [statArr]="statArr"></app-statistic>
+        <app-statistic></app-statistic>
     </div>
 
     <div class="footer">
-        <app-select [isStatisticPage]="true" (selectChange)="selectOnChange($event)"></app-select>
+        <app-select [isStatisticPage]="true" (selectChange)="ngOnInit($event)"></app-select>
     </div>
 </app-page-layout>
