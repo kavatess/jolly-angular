@@ -1,4 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+$success-color: rgb(56, 176, 0);
+$danger-color: #e30000;
 html,
 body {
     height: 100%;
@@ -24,9 +26,6 @@ hr {
 .img-circle-border {
     border-radius: 50%;
 }
-
-$success-color: rgb(56, 176, 0);
-$danger-color: #e30000;
 
 .cl-success {
     color: $success-color;
