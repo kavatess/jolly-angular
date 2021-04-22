@@ -36,24 +36,30 @@ export class PlantStatPieChartComponent implements OnChanges {
           format: '<b>{point.name}</b>: {point.percentage:.2f} %'
         }
       }
-    }
+    },
+    series: [{
+      name: 'Loại cây',
+      colorByPoint: true,
+      type: 'pie',
+      data: []
+    }]
   };
   pieChart: Chart;
   constructor() { }
 
   ngOnChanges(): void {
-    const sumOfPlantNumber = this.statArr.length ? this.statArr.map(({ plantNumber }) => plantNumber).reduce((a, b) => a + b) : 1;
-    this.options.series = [{
-      name: 'Loại cây',
-      colorByPoint: true,
-      type: 'pie',
-      data: this.statArr.map(({ plantName, plantNumber }) => {
-        return {
-          name: plantName,
-          y: plantNumber / sumOfPlantNumber * 100
-        }
-      })
-    }];
+    if (this.pieChart) {
+      const sumOfPlantNumber = this.statArr.length ? this.statArr.map(({ plantNumber }) => plantNumber).reduce((a, b) => a + b) : 1;
+      const newStatArr = this.statArr.map(({ plantName, plantNumber }) => {
+        return { name: plantName, y: plantNumber / sumOfPlantNumber * 100 }
+      });
+      this.pieChart.series[0].setData(newStatArr);
+    }
+  }
+
+  onChartLoad(chart: Chart): void {
+    this.pieChart = chart;
+    this.ngOnChanges();
   }
 
 }

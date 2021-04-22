@@ -20,9 +20,15 @@ export class StatisticPageComponent implements OnInit {
     StatisticPageComponent.statArr = filteredStats;
   }
 
-  async ngOnInit(reqQuery: any = DEFAULT_STATISTIC_QUERY) {
+  ngOnInit(): void {
+    this.changeStatArr();
+  }
+
+  changeStatArr(reqQuery: any = DEFAULT_STATISTIC_QUERY): void {
     this.newStatArr = [];
-    this.newStatArr = await this.getStatisticService.getFarmStatistics(reqQuery).toPromise();
+    this.getStatisticService.getFarmStatistics(reqQuery).subscribe(newStats => {
+      this.newStatArr = newStats;
+    });
   }
 
 }

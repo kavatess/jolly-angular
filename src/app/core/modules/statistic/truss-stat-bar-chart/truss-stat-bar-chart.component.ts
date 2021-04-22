@@ -21,6 +21,12 @@ export class TrussStatBarChartComponent implements OnChanges {
     subtitle: {
       text: 'Đơn vị: cây'
     },
+    xAxis: {
+      categories: [],
+      title: {
+        text: null
+      }
+    },
     yAxis: {
       min: 0,
       title: {
@@ -46,28 +52,30 @@ export class TrussStatBarChartComponent implements OnChanges {
     },
     credits: {
       enabled: false
-    }
+    },
+    series: [{
+      name: 'Số lượng',
+      type: "bar",
+      data: []
+    }]
   };
   barChart: Chart;
   constructor() { }
 
   ngOnChanges(): void {
-    this.options.xAxis = {
-      categories: this.statArr.map(({ plantName }) => plantName),
-      title: {
-        text: null
-      }
-    };
-    this.options.series = [{
-      name: 'Số lượng',
-      type: "bar",
-      data: this.statArr.map(({ plantColor, plantNumber }) => {
-        return {
-          y: plantNumber,
-          color: plantColor
-        }
-      })
-    }];
+    if (this.barChart) {
+      const plantCategories = this.statArr.map(({ plantName }) => plantName);
+      this.barChart.xAxis[0].setCategories(plantCategories);
+      const newStatArr = this.statArr.map(({ plantColor, plantNumber }) => {
+        return { y: plantNumber, color: plantColor }
+      });
+      this.barChart.series[0].setData(newStatArr);
+    }
+  }
+
+  onChartLoad(chart: Chart): void {
+    this.barChart = chart;
+    this.ngOnChanges();
   }
 
 }
