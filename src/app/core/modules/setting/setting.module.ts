@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FarmPageComponent } from './farm-page.component';
+import { SettingComponent } from './setting.component';
 
 @NgModule({
-  declarations: [FarmPageComponent],
+  declarations: [SettingComponent],
   imports: [
     CommonModule
   ]
 })
-export class FarmPageModule { }
+export class SettingModule { }

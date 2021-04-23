@@ -4,14 +4,14 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { BlocksModule } from './blocks/blocks.module';
-import { PagesModule } from './pages/pages.module';
+import { ModulesModule } from './core/modules/modules.module';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
     BlocksModule,
-    PagesModule,
+    ModulesModule,
     AppRoutingModule
   ],
   providers: [],

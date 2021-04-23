@@ -5,7 +5,7 @@ import { Statistics } from 'src/app/core/models/statistic.model';
 @Component({
   selector: 'app-plant-stat-pie-chart',
   templateUrl: './plant-stat-pie-chart.component.html',
-  styleUrls: ['../statistic.component.scss']
+  styleUrls: ['../statistics.component.scss']
 })
 export class PlantStatPieChartComponent implements OnChanges {
   @Input() statArr: Statistics[] = [];

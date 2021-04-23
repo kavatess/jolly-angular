@@ -1,6 +1,7 @@
 <app-page-layout [scroll]="true" [onLoad]="!statArr.length" [loadTimeOut]="2000">
     <div class="page-content">
-        <app-statistic></app-statistic>
+        <app-truss-stat-bar-chart [statArr]="statArr"></app-truss-stat-bar-chart>
+        <app-plant-stat-pie-chart [statArr]="statArr"></app-plant-stat-pie-chart>
     </div>
 
     <div class="footer">

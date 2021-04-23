@@ -5,7 +5,7 @@ import { Statistics } from 'src/app/core/models/statistic.model';
 @Component({
   selector: 'app-truss-stat-bar-chart',
   templateUrl: './truss-stat-bar-chart.component.html',
-  styleUrls: ['../statistic.component.scss']
+  styleUrls: ['../statistics.component.scss']
 })
 export class TrussStatBarChartComponent implements OnChanges {
   @Input() statArr: Statistics[] = [];
