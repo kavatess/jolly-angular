@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StatisticsComponent } from './statistics.component';
-import { SelectModule } from 'src/app/shared/modules/select/select.module';
-import { PageLayoutModule } from 'src/app/shared/modules/page-layout/page-layout.module';
+import { SelectModule } from 'src/app/shared/components/select/select.module';
+import { PageLayoutModule } from 'src/app/shared/components/page-layout/page-layout.module';
 import { HighchartsConfig, HighchartsModule } from '@howtimeflies/ngx-highcharts';
 import { PlantStatPieChartComponent } from './plant-stat-pie-chart/plant-stat-pie-chart.component';
 import { TrussStatBarChartComponent } from './truss-stat-bar-chart/truss-stat-bar-chart.component';
