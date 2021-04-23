@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { FarmPageComponent } from './pages/farm-page/farm-page.component';
-import { SettingPageComponent } from './pages/setting-page/setting-page.component';
-import { StatisticPageComponent } from './pages/statistic-page/statistic-page.component';
+import { FarmComponent } from './core/modules/farm/farm.component';
+import { SettingComponent } from './core/modules/setting/setting.component';
+import { StatisticsComponent } from './core/modules/statistics/statistics.component';
 
 const routes: Routes = [
-  { path: '', component: FarmPageComponent },
-  { path: 'statistics', component: StatisticPageComponent },
-  { path: 'settings', component: SettingPageComponent }
+  { path: '', component: FarmComponent },
+  { path: 'statistics', component: StatisticsComponent },
+  { path: 'settings', component: SettingComponent }
 ];
 
 @NgModule({
