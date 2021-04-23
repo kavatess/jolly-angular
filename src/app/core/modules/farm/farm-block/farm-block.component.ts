@@ -15,6 +15,7 @@ export class FarmBlockComponent implements OnInit {
   @Input() plantGrowth = 0;
   trussArr: Truss[] = [];
   @Output() clickedTruss = new EventEmitter<Truss>();
+  @Output() loadDone = new EventEmitter();
 
   constructor(private sessionStorage: SessionStorageService, private getTrussService: GetTrussByBlockService) { }
 
@@ -25,8 +26,9 @@ export class FarmBlockComponent implements OnInit {
       this.getTrussService.getTrussDataByBlock(this.block).subscribe(trussArr => {
         this.sessionStorage.store(trussCollection, trussArr);
         this.trussArr = this.sessionStorage.retrieve(trussCollection);
+        this.loadDone.emit();
       });
-    }
+    };
   }
 
   // async ngDoCheck() {

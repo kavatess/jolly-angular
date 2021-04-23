@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterContentInit, Component, OnInit } from '@angular/core';
 import { SessionStorageService } from 'ngx-webstorage';
-import { PLANT_SESSION_COLLECTION, SEED_SESSION_COLLECTION } from 'src/app/app-constants';
+import { FARM_LAST_BLOCK_COLLECTION, PLANT_SESSION_COLLECTION } from 'src/app/app-constants';
 import { Truss } from '../../models/truss.model';
 import { GetPlantDataService } from '../../services/plant/get-plant-data.service';
 import { GetSeedDataService } from '../../services/seed/get-seed-data.service';
@@ -33,8 +33,11 @@ export class FarmComponent implements OnInit {
   set newClickedTruss(truss: Truss) {
     this.clickedTruss = truss;
   }
-  set dataStatus(status: boolean) {
-    this.dataReady = status;
+  emitUpdateSeedEvent(clickedTruss: Truss): void {
+    this.clickedTruss = clickedTruss;
+    this.dataReady = false;
+    this.selectedBlock = '';
+    this.selectedBlock = this.sessionStorage.retrieve(FARM_LAST_BLOCK_COLLECTION);
   }
 
   ngOnInit(): void { }

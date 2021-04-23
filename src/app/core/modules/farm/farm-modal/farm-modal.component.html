@@ -2,10 +2,10 @@
 <app-modal [Id]="'farm_modal'" [title]=" 'Thông tin giàn rau ' + clickedTruss.block + clickedTruss.index "
     [onLoad]="onReloading">
     <div *ngIf="clickedTruss.plantId" modal-content>
-        <app-modal-planting-truss [clickedTruss]="clickedTruss" (reload)="reload.emit($event)">
+        <app-modal-planting-truss [clickedTruss]="clickedTruss" (onUpdate)="onUpdate.emit($event)">
         </app-modal-planting-truss>
     </div>
     <div *ngIf="!clickedTruss.plantId" modal-content>
-        <app-modal-empty-truss [clickedTruss]="clickedTruss" (reload)="reload.emit($event)"></app-modal-empty-truss>
+        <app-modal-empty-truss [clickedTruss]="clickedTruss" (onUpdate)="onUpdate.emit($event)"></app-modal-empty-truss>
     </div>
 </app-modal>

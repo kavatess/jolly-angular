@@ -11,7 +11,7 @@ import { GetTrussByBlockService } from 'src/app/core/services/truss/get-truss-by
 })
 export class FarmModalComponent implements OnChanges {
   @Input() clickedTruss: Truss = new Truss();
-  @Output() reload = new EventEmitter<Truss>();
+  @Output() onUpdate = new EventEmitter<Truss>();
   private static onReloading = false;
 
   constructor(protected sessionStorage: SessionStorageService, protected getTrussService: GetTrussByBlockService) { }
@@ -31,6 +31,6 @@ export class FarmModalComponent implements OnChanges {
     const newTrussArr = await this.getTrussService.getTrussDataByBlock(this.clickedTruss.block).toPromise();
     this.sessionStorage.store(trussCollection, newTrussArr);
     const newClickedTruss = newTrussArr.find(truss => truss._id == this.clickedTruss._id);
-    this.reload.emit(newClickedTruss);
+    this.onUpdate.emit(newClickedTruss);
   }
 }

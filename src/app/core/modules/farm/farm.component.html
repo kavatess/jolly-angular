@@ -1,4 +1,4 @@
-<app-page-layout [onLoad]="false">
+<app-page-layout [onLoad]="!dataReady" [loadTimeOut]="2000">
     <div class="page-content">
         <!-- Map of farm -->
         <div class="farm-container">
@@ -93,7 +93,7 @@
         </div>
 
         <!-- Modal truss information -->
-        <app-farm-modal [clickedTruss]="clickedTruss" (reload)="newClickedTruss = $event; dataStatus = false">
+        <app-farm-modal [clickedTruss]="clickedTruss" (onUpdate)="emitUpdateSeedEvent($event)">
         </app-farm-modal>
 
         <!-- Modal for seed table -->
