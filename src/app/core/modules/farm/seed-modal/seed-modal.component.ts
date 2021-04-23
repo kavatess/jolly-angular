@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { SessionStorage, SessionStorageService } from 'ngx-webstorage';
 import { SEED_SESSION_COLLECTION } from 'src/app/app-constants';
-import { SessionStorageService } from 'src/app/shared/services/session-storage.service';
+import { Seed } from 'src/app/core/models/seed.model';
+import { GetSeedDataService } from 'src/app/core/services/seed/get-seed-data.service';
 
 @Component({
   selector: 'app-seed-modal',
@@ -11,7 +13,7 @@ export class SeedModalComponent implements OnInit {
   private static onReloading = false;
   private static addSeedMode = false;
 
-  constructor(public sessionStorage: SessionStorageService) { }
+  constructor(public sessionStorage: SessionStorageService, protected getSeedService: GetSeedDataService) { }
 
   get onReloading(): boolean {
     return SeedModalComponent.onReloading;
@@ -19,15 +21,23 @@ export class SeedModalComponent implements OnInit {
   get isAddMode(): boolean {
     return SeedModalComponent.addSeedMode;
   }
-  changeMode(mode: boolean): void {
+  set switchMode(mode: boolean) {
     SeedModalComponent.addSeedMode = mode;
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    if (!this.sessionStorage.retrieve(SEED_SESSION_COLLECTION)) {
+      this.getSeedService.getSeedData().subscribe(seedArr => {
+        this.sessionStorage.store(SEED_SESSION_COLLECTION, seedArr);
+      });
+    }
+  }
 
   protected async reloadSeedData(): Promise<void> {
     SeedModalComponent.onReloading = true;
-    await this.sessionStorage.reset(SEED_SESSION_COLLECTION);
+    this.sessionStorage.clear(SEED_SESSION_COLLECTION);
+    const newSeedArr = await this.getSeedService.getSeedData().toPromise();
+    this.sessionStorage.store(SEED_SESSION_COLLECTION, newSeedArr);
     SeedModalComponent.onReloading = false;
   }
 

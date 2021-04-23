@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { SessionStorageService } from 'ngx-webstorage';
+import { PLANT_SESSION_COLLECTION, SEED_SESSION_COLLECTION } from 'src/app/app-constants';
 import { Truss } from '../../models/truss.model';
+import { GetPlantDataService } from '../../services/plant/get-plant-data.service';
+import { GetSeedDataService } from '../../services/seed/get-seed-data.service';
 
 @Component({
   selector: 'app-farm',
@@ -13,7 +17,13 @@ export class FarmComponent implements OnInit {
   dataReady = false;
   clickedTruss: Truss = new Truss();
 
-  constructor() { }
+  constructor(private sessionStorage: SessionStorageService, private getPlantService: GetPlantDataService, private getSeedService: GetSeedDataService) {
+    if (!this.sessionStorage.retrieve(PLANT_SESSION_COLLECTION)) {
+      this.getPlantService.getPlantData().subscribe(plantArr => {
+        this.sessionStorage.store(PLANT_SESSION_COLLECTION, plantArr);
+      });
+    }
+  }
 
   set newSelectVal({ block, plantId, plantGrowth }: any) {
     this.selectedBlock = block;

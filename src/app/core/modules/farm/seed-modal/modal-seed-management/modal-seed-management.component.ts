@@ -1,8 +1,9 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { SessionStorageService } from 'ngx-webstorage';
 import { BasicSeedInfo, Seed } from 'src/app/core/models/seed.model';
 import { DeleteOneSeedService } from 'src/app/core/services/seed/delete-one-seed.service';
+import { GetSeedDataService } from 'src/app/core/services/seed/get-seed-data.service';
 import { UpdateSeedNumberService } from 'src/app/core/services/seed/update-seed-number.service';
-import { SessionStorageService } from 'src/app/shared/services/session-storage.service';
 import { SeedModalComponent } from '../seed-modal.component';
 
 @Component({
@@ -17,10 +18,11 @@ export class ModalSeedManagementComponent extends SeedModalComponent implements 
 
   constructor(
     public sessionStorage: SessionStorageService,
+    protected getSeedService: GetSeedDataService,
     private deleteSeedService: DeleteOneSeedService,
     private updateSeedService: UpdateSeedNumberService
   ) {
-    super(sessionStorage);
+    super(sessionStorage, getSeedService);
   }
 
   ngOnInit(): void { }

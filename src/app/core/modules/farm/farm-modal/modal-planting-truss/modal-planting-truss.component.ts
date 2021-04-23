@@ -1,9 +1,10 @@
 import { Component, OnChanges } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { SessionStorageService } from 'ngx-webstorage';
 import { UpdateStatusBody } from 'src/app/core/models/truss.request.model';
 import { ClearTrussService } from 'src/app/core/services/truss/clear-truss.service';
+import { GetTrussByBlockService } from 'src/app/core/services/truss/get-truss-by-block.service';
 import { UpdateStatusService } from 'src/app/core/services/truss/update-status.service';
-import { SessionStorageService } from 'src/app/shared/services/session-storage.service';
 import { FarmModalComponent } from '../farm-modal.component';
 
 @Component({
@@ -20,10 +21,11 @@ export class ModalPlantingTrussComponent extends FarmModalComponent implements O
 
   constructor(
     protected sessionStorage: SessionStorageService,
+    protected getTrussService: GetTrussByBlockService,
     private updateStatusService: UpdateStatusService,
     private clearTrussService: ClearTrussService
   ) {
-    super(sessionStorage);
+    super(sessionStorage, getTrussService);
   }
 
   ngOnChanges(): void {

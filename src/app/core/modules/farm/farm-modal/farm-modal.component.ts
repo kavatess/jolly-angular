@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
+import { SessionStorageService } from 'ngx-webstorage';
 import { TRUSS_SESSION_COLLECTION } from 'src/app/app-constants';
 import { Truss } from 'src/app/core/models/truss.model';
-import { SessionStorageService } from 'src/app/shared/services/session-storage.service';
+import { GetTrussByBlockService } from 'src/app/core/services/truss/get-truss-by-block.service';
 
 @Component({
   selector: 'app-farm-modal',
@@ -13,7 +14,7 @@ export class FarmModalComponent implements OnChanges {
   @Output() reload = new EventEmitter<Truss>();
   private static onReloading = false;
 
-  constructor(protected sessionStorage: SessionStorageService) { }
+  constructor(protected sessionStorage: SessionStorageService, protected getTrussService: GetTrussByBlockService) { }
 
   ngOnChanges(): void {
     FarmModalComponent.onReloading = false;
@@ -25,8 +26,11 @@ export class FarmModalComponent implements OnChanges {
 
   protected async reloadClickedTruss(): Promise<void> {
     FarmModalComponent.onReloading = true;
-    const updatedTrussArr = await this.sessionStorage.reset(TRUSS_SESSION_COLLECTION + this.clickedTruss.block);
-    const newClickedTruss = updatedTrussArr.find(truss => truss._id == this.clickedTruss._id);
+    const trussCollection = TRUSS_SESSION_COLLECTION + this.clickedTruss.block;
+    this.sessionStorage.clear(trussCollection);
+    const newTrussArr = await this.getTrussService.getTrussDataByBlock(this.clickedTruss.block).toPromise();
+    this.sessionStorage.store(trussCollection, newTrussArr);
+    const newClickedTruss = newTrussArr.find(truss => truss._id == this.clickedTruss._id);
     this.reload.emit(newClickedTruss);
   }
 }
