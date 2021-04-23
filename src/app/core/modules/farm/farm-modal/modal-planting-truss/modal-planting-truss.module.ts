@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ModalPlantingTrussComponent } from './modal-planting-truss.component';
 import { PipesModule } from 'src/app/shared/pipes/pipes.module';
-import { ProgressBarModule } from 'src/app/shared/modules/progress-bar/progress-bar.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ProgressBarModule } from 'src/app/shared/components/progress-bar/progress-bar.module';
 
 @NgModule({
   declarations: [ModalPlantingTrussComponent],

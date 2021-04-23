@@ -40,7 +40,7 @@ export class SelectComponent implements OnInit, OnDestroy {
         window.sessionStorage.setItem('last-block-stat', changeVal.block);
       }
       changeVal.plantGrowth *= 1;
-      this.selectChange.emit(changeVal.value);
+      this.selectChange.emit(changeVal);
     });
   }
 

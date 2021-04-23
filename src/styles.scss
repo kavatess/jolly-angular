@@ -1,4 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+$success-color: rgb(56, 176, 0);
+$danger-color: #e30000;
 html,
 body {
     height: 100%;
@@ -25,9 +27,6 @@ hr {
     border-radius: 50%;
 }
 
-$success-color: rgb(56, 176, 0);
-$danger-color: #e30000;
-
 .cl-success {
     color: $success-color;
 }
@@ -44,12 +43,17 @@ $danger-color: #e30000;
     justify-content: center;
 }
 
+.spinner-8rem {
+    width: 8rem;
+    height: 8rem;
+}
+
 .spinner-100 {
     width: 100px;
     height: 100px;
 }
 
-.spinner-30 {
+.spinner-50 {
     width: 50px;
     height: 50px;
 }
@@ -160,19 +164,6 @@ $danger-color: #e30000;
     box-sizing: border-box;
 }
 
-.page-content-setting {
-    padding-right: 7px;
-    padding-left: 7px;
-}
-
-@media only screen and (max-width: 325px) {
-    .text {
-        font-size: 14px;
-    }
-    .status-img {
-        width: 16px;
-    }
-}
 .modal-body {
     max-height: 450px;
     overflow: scroll;
@@ -203,6 +194,9 @@ $danger-color: #e30000;
 }
 
 @media only screen and (max-width: 325px) {
+    .text {
+        font-size: 14px;
+    }
     img {
         max-height: 100px;
     }

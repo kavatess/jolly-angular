@@ -1,0 +1,23 @@
+<div class="page-container">
+    <header *ngIf="hasHeader">
+        <app-header></app-header>
+    </header>
+
+    <article [style.overflow]="scroll ? 'scroll' : ''">
+        <ng-template [ngIf]="onLoad">
+            <div class="spinner-container">
+                <div class="spinner-border spinner-8rem text-success" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+        </ng-template>
+
+        <ng-template [ngIf]="!onLoad">
+            <ng-content select=".page-content"></ng-content>
+        </ng-template>
+    </article>
+
+    <footer *ngIf="hasFooter">
+        <ng-content select=".footer"></ng-content>
+    </footer>
+</div>
