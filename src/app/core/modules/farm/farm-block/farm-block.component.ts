@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { SessionStorageService } from 'ngx-webstorage';
 import { TRUSS_SESSION_COLLECTION } from 'src/app/app-constants';
 import { Truss } from 'src/app/core/models/truss.model';
@@ -9,7 +9,7 @@ import { GetTrussByBlockService } from 'src/app/core/services/truss/get-truss-by
   templateUrl: './farm-block.component.html',
   styleUrls: ['./farm-block.component.scss']
 })
-export class FarmBlockComponent implements OnInit {
+export class FarmBlockComponent implements OnChanges {
   @Input() block = '';
   @Input() plantId = '';
   @Input() plantGrowth = 0;
@@ -19,13 +19,13 @@ export class FarmBlockComponent implements OnInit {
 
   constructor(private sessionStorage: SessionStorageService, private getTrussService: GetTrussByBlockService) { }
 
-  ngOnInit(): void {
+  ngOnChanges(): void {
     const trussCollection = TRUSS_SESSION_COLLECTION + this.block;
     this.trussArr = this.sessionStorage.retrieve(trussCollection);
     if (!this.trussArr) {
       this.getTrussService.getTrussDataByBlock(this.block).subscribe(trussArr => {
+        this.trussArr = trussArr;
         this.sessionStorage.store(trussCollection, trussArr);
-        this.trussArr = this.sessionStorage.retrieve(trussCollection);
         this.loadDone.emit();
       });
     };

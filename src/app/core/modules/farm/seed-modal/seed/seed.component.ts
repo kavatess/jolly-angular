@@ -14,8 +14,7 @@ export class SeedComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
   seedElOnClick(seedContainerEl: any): void {
     if (this.hasClickEvent) {

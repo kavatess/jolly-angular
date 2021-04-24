@@ -23,7 +23,6 @@ export class SelectComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getLastBlockVal();
-    this.selectChange.emit(this.selectGroup.value); // Emit the first default value
     this.emitSelectValOnChange();
   }
 

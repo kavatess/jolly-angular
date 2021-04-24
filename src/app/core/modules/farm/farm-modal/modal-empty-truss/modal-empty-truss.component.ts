@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { SessionStorageService } from 'ngx-webstorage';
 import { SEED_SESSION_COLLECTION } from 'src/app/app-constants';
 import { Seed } from 'src/app/core/models/seed.model';
-import { GetSeedDataService } from 'src/app/core/services/seed/get-seed-data.service';
 import { CreateTrussService } from 'src/app/core/services/truss/create-truss.service';
 import { GetTrussByBlockService } from 'src/app/core/services/truss/get-truss-by-block.service';
 import { FarmModalComponent } from '../farm-modal.component';
@@ -19,7 +18,6 @@ export class ModalEmptyTrussComponent extends FarmModalComponent implements OnIn
   constructor(
     protected sessionStorage: SessionStorageService,
     protected getTrussService: GetTrussByBlockService,
-    private getSeedService: GetSeedDataService,
     private createTrussService: CreateTrussService
   ) {
     super(sessionStorage, getTrussService);
@@ -27,12 +25,6 @@ export class ModalEmptyTrussComponent extends FarmModalComponent implements OnIn
 
   ngOnInit(): void {
     this.readySeed = this.sessionStorage.retrieve(SEED_SESSION_COLLECTION) || [];
-    if (!this.readySeed.length) {
-      this.getSeedService.getSeedData().subscribe(seedArr => {
-        this.readySeed = seedArr.filter(({ isReadySeed }) => isReadySeed);
-        this.sessionStorage.store(SEED_SESSION_COLLECTION, seedArr);
-      });
-    }
     this.readySeed = this.readySeed.filter(({ isReadySeed }) => isReadySeed);
   }
 

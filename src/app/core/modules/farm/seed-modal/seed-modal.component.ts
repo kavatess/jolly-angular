@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { SessionStorage, SessionStorageService } from 'ngx-webstorage';
+import { SessionStorageService } from 'ngx-webstorage';
 import { SEED_SESSION_COLLECTION } from 'src/app/app-constants';
-import { Seed } from 'src/app/core/models/seed.model';
 import { GetSeedDataService } from 'src/app/core/services/seed/get-seed-data.service';
 
 @Component({
