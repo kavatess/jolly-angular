@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { SessionStorageService } from 'ngx-webstorage';
 import { Subscription } from 'rxjs';
-import { LAST_BLOCK_SESSION_COLLECTION } from 'src/app/app-constants';
-import { SessionStorageService } from '../../services/session-storage.service';
+import { FARM_LAST_BLOCK_COLLECTION, STAT_LAST_BLOCK_COLLECTION } from 'src/app/app-constants';
 
 @Component({
   selector: 'app-select',
@@ -28,16 +28,21 @@ export class SelectComponent implements OnInit, OnDestroy {
   }
 
   getLastBlockVal(): void {
-    if (!this.isStatisticPage) {
-      const lastBlock = window.sessionStorage.getItem(LAST_BLOCK_SESSION_COLLECTION);
-      this.selectGroup.setControl('block', new FormControl(lastBlock || 'A'));
+    let lastBlock = '';
+    if (this.isStatisticPage) {
+      lastBlock = this.sessionService.retrieve(STAT_LAST_BLOCK_COLLECTION) || '';
+    } else {
+      lastBlock = this.sessionService.retrieve(FARM_LAST_BLOCK_COLLECTION) || 'A';
     }
+    this.selectGroup.setControl('block', new FormControl(lastBlock));
   }
 
   emitSelectValOnChange(): void {
     this.subscription = this.selectGroup.valueChanges.subscribe(changeVal => {
-      if (!this.isStatisticPage) {
-        window.sessionStorage.setItem('last-block-stat', changeVal.block);
+      if (this.isStatisticPage) {
+        this.sessionService.store(STAT_LAST_BLOCK_COLLECTION, changeVal.block);
+      } else {
+        this.sessionService.store(FARM_LAST_BLOCK_COLLECTION, changeVal.block);
       }
       changeVal.plantGrowth *= 1;
       this.selectChange.emit(changeVal);
