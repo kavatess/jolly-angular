@@ -1,10 +1,13 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { NgxWebstorageModule } from 'ngx-webstorage';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { BlocksModule } from './blocks/blocks.module';
-import { ModulesModule } from './core/modules/modules.module';
+import { FarmModule } from './core/modules/farm/farm.module';
+import { SettingModule } from './core/modules/setting/setting.module';
+import { StatisticsModule } from './core/modules/statistics/statistics.module';
 
 @NgModule({
   declarations: [
@@ -13,8 +16,11 @@ import { ModulesModule } from './core/modules/modules.module';
   imports: [
     BrowserModule,
     BlocksModule,
-    ModulesModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FarmModule,
+    SettingModule,
+    StatisticsModule,
+    NgxWebstorageModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
