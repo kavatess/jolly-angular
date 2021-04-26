@@ -2,11 +2,12 @@
     <div class="page-content">
         <!-- Map of farm -->
         <div class="farm-container">
-            <ng-template [ngIf]="selectedBlock === 'A'">
+            <ng-template [ngIf]="selectedBlock == 'A'">
                 <div class="farm-main-container">
                     <div class="farm-middle-container">
                         <!-- truss array A -->
-                        <app-farm-block [block]="'A'"></app-farm-block>
+                        <app-farm-block [block]="'A'" [farmComponent]="this" (clickedTruss)="clickedTruss = $event"
+                            (loadDone)="dataReady = $event"></app-farm-block>
                     </div>
                     <div class="farm-right-container">
                         <div class="seed-table">
@@ -27,25 +28,28 @@
             </ng-template>
 
             <!-- farm in block B -->
-            <ng-template [ngIf]="selectedBlock === 'B'">
+            <ng-template [ngIf]="selectedBlock == 'B'">
                 <div class="farm-main-container">
                     <div class="farm-left-container">
                         <!-- truss array BN -->
-                        <app-farm-block [block]="'BN'"></app-farm-block>
+                        <app-farm-block [block]="'BN'" [farmComponent]="this" (clickedTruss)="clickedTruss = $event"
+                            (loadDone)="dataReady = $event"></app-farm-block>
                     </div>
                     <div class="farm-middle-container">
                         <!-- truss array B -->
-                        <app-farm-block [block]="'B'"></app-farm-block>
+                        <app-farm-block [block]="'B'" [farmComponent]="this" (clickedTruss)="clickedTruss = $event"
+                            (loadDone)="dataReady = $event"></app-farm-block>
                     </div>
                     <div class="farm-right-container">
                         <!-- truss array BS -->
-                        <app-farm-block [block]="'BS'"></app-farm-block>
+                        <app-farm-block [block]="'BS'" [farmComponent]="this" (clickedTruss)="clickedTruss = $event"
+                            (loadDone)="dataReady = $event"></app-farm-block>
                     </div>
                 </div>
             </ng-template>
 
             <!-- farm in block C & D -->
-            <ng-template [ngIf]="selectedBlock === 'C'">
+            <ng-template [ngIf]="selectedBlock == 'C'">
                 <div class="farm-main-container farm-card-group">
                     <div class="farm-middle-container">
                         <div class="card text-center">
@@ -54,7 +58,8 @@
                             </div>
                             <div class="card-body">
                                 <!-- truss array C -->
-                                <app-farm-block [block]="'C'">
+                                <app-farm-block [block]="'C'" [farmComponent]="this"
+                                    (clickedTruss)="clickedTruss = $event" (loadDone)="dataReady = $event">
                                 </app-farm-block>
                             </div>
                         </div>
@@ -65,7 +70,8 @@
                             </div>
                             <div class="card-body">
                                 <!-- truss array CT -->
-                                <app-farm-block [block]="'CT'">
+                                <app-farm-block [block]="'CT'" [farmComponent]="this"
+                                    (clickedTruss)="clickedTruss = $event" (loadDone)="dataReady = $event">
                                 </app-farm-block>
                             </div>
                         </div>
@@ -76,7 +82,8 @@
                             </div>
                             <div class="card-body">
                                 <!-- truss array D -->
-                                <app-farm-block [block]="'D'">
+                                <app-farm-block [block]="'D'" [farmComponent]="this"
+                                    (clickedTruss)="clickedTruss = $event" (loadDone)="dataReady = $event">
                                 </app-farm-block>
                             </div>
                         </div>

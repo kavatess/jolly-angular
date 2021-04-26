@@ -48,7 +48,7 @@ export class ModalSeedManagementComponent extends SeedModalComponent implements 
     let confirm = window.confirm(`Bạn chắc chắn muốn loại bỏ hạt ${deletedSeed.plantName} này!`)
     if (confirm) {
       this.deleteSeedService.deleteOneSeed(deletedSeed._id).subscribe(async (_response) => {
-        await this.reloadSeedData();
+        await this.reloadData();
       });
     }
   }
@@ -57,7 +57,7 @@ export class ModalSeedManagementComponent extends SeedModalComponent implements 
     const plantNumber = Number(newPlantNumber);
     if (!isNaN(plantNumber)) {
       this.updateSeedService.updateSeedNumber(seedId, plantNumber).subscribe(async (_response) => {
-        await this.reloadSeedData();
+        await this.reloadData();
       });
     }
   }

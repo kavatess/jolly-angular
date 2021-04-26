@@ -5,10 +5,7 @@ import { ProgressBarModule } from 'src/app/shared/components/progress-bar/progre
 
 @NgModule({
   declarations: [FarmBlockComponent],
-  imports: [
-    CommonModule,
-    ProgressBarModule
-  ],
+  imports: [CommonModule, ProgressBarModule],
   exports: [FarmBlockComponent]
 })
 export class FarmBlockModule { }

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { SessionStorageService } from 'ngx-webstorage';
 import { TRUSS_SESSION_COLLECTION } from 'src/app/app-constants';
 import { Truss } from 'src/app/core/models/truss.model';
@@ -11,13 +11,13 @@ import { FarmComponent } from '../farm.component';
   templateUrl: './farm-block.component.html',
   styleUrls: ['./farm-block.component.scss']
 })
-export class FarmBlockComponent extends FarmComponent implements OnInit {
+export class FarmBlockComponent implements OnInit {
   @Input() block = '';
+  @Input() farmComponent: FarmComponent = null;
+  @Output() clickedTruss = new EventEmitter<Truss>();
+  @Output() loadDone = new EventEmitter();
   trussArr: Truss[] = [];
-
-  constructor(protected sessionStorage: SessionStorageService, protected getPlantService: GetPlantDataService, private getTrussService: GetTrussByBlockService) {
-    super(sessionStorage, getPlantService);
-  }
+  constructor(protected sessionStorage: SessionStorageService, protected getPlantService: GetPlantDataService, private getTrussService: GetTrussByBlockService) { }
 
   ngOnInit(): void {
     const trussCollection = TRUSS_SESSION_COLLECTION + this.block;
@@ -26,13 +26,13 @@ export class FarmBlockComponent extends FarmComponent implements OnInit {
       this.getTrussService.getTrussDataByBlock(this.block).subscribe(trussArr => {
         this.trussArr = trussArr;
         this.sessionStorage.store(trussCollection, trussArr);
-        this.changeDataStatus(true);
+        this.loadDone.emit(true);
       });
-    };
+    }
   }
 
   ngDoCheck(): void {
-    if (!this.dataReady) {
+    if (!this.farmComponent.dataReady) {
       this.ngOnInit();
     }
   }

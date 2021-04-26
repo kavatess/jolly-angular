@@ -54,7 +54,7 @@ export class ModalCreateSeedComponent extends SeedModalComponent implements OnIn
         return { plantId, startDate, plantNumber };
       });
       this.addSeedService.insertManySeed(newSeedArr).subscribe(async (_response) => {
-        await this.reloadSeedData();
+        await this.reloadData();
         this.switchMode = false;
       });
     }

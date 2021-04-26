@@ -46,7 +46,7 @@ export class ModalPlantingTrussComponent extends FarmModalComponent implements O
     let confirm = window.confirm(`Bạn chắc chắn muốn xóa giàn ${this.clickedTruss.block + this.clickedTruss.index} này chứ!`);
     if (confirm) {
       this.clearTrussService.clearTruss(this.clickedTruss._id).subscribe(async (_response) => {
-        await this.reloadClickedTruss();
+        await this.reloadData();
       });
     }
   }
@@ -55,7 +55,7 @@ export class ModalPlantingTrussComponent extends FarmModalComponent implements O
     if (this.isValidNewStatus) {
       const requestBody = new UpdateStatusBody(this.clickedTruss._id, this.newPlantNumber, this.newPlantGrowth);
       this.updateStatusService.updateStatus(requestBody).subscribe(async (_response) => {
-        await this.reloadClickedTruss();
+        await this.reloadData();
       });
     }
   }

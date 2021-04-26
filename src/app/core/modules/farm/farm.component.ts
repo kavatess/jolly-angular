@@ -10,48 +10,27 @@ import { GetPlantDataService } from '../../services/plant/get-plant-data.service
   styleUrls: ['./farm.component.scss']
 })
 export class FarmComponent implements OnInit {
-  private static dataReady = false;
-  private static selectedBlock = '';
-  private static selectedPlantId = '';
-  private static selectedPlantGrowth = 0;
-  private static clickedTruss: Truss = new Truss();
+  dataReady = false;
+  selectedBlock = '';
+  selectedPlantId = '';
+  selectedPlantGrowth = 0;
+  clickedTruss: Truss = new Truss();
 
   constructor(protected sessionStorage: SessionStorageService, protected getPlantService: GetPlantDataService) { }
 
-  get selectedBlock(): string {
-    return FarmComponent.selectedBlock;
-  }
-  get selectedPlantId(): string {
-    return FarmComponent.selectedPlantId;
-  }
-  get selectedPlantGrowth(): number {
-    return FarmComponent.selectedPlantGrowth;
-  }
-  get dataReady(): boolean {
-    return FarmComponent.dataReady;
-  }
-  get clickedTruss(): Truss {
-    return FarmComponent.clickedTruss;
-  }
-  changeClickedTruss(truss: Truss): void {
-    FarmComponent.clickedTruss = truss;
-  }
-  changeDataStatus(isReady: boolean): void {
-    FarmComponent.dataReady = isReady;
-  }
   emitSelectChanges({ block, plantId, plantGrowth }: any): void {
-    FarmComponent.selectedBlock = block;
-    FarmComponent.selectedPlantId = plantId;
-    FarmComponent.selectedPlantGrowth = plantGrowth;
+    this.selectedBlock = block;
+    this.selectedPlantId = plantId;
+    this.selectedPlantGrowth = plantGrowth;
   }
   emitUpdateSeedEvent(clickedTruss: Truss): void {
-    this.changeClickedTruss(clickedTruss);
-    this.changeDataStatus(false);
+    this.clickedTruss = clickedTruss;
+    this.dataReady = false;
     this.sessionStorage.clear(TRUSS_SESSION_COLLECTION + this.clickedTruss.block);
   }
 
   ngOnInit(): void {
-    FarmComponent.selectedBlock = this.sessionStorage.retrieve(FARM_LAST_BLOCK_COLLECTION) || 'A';
+    this.selectedBlock = this.sessionStorage.retrieve(FARM_LAST_BLOCK_COLLECTION) || 'A';
     if (!this.sessionStorage.retrieve(PLANT_SESSION_COLLECTION)) {
       this.getPlantService.getPlantData().subscribe(plantArr => {
         this.sessionStorage.store(PLANT_SESSION_COLLECTION, plantArr);

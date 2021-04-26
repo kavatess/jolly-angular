@@ -31,7 +31,7 @@ export class ModalEmptyTrussComponent extends FarmModalComponent implements OnIn
   createTruss(): void {
     if (this.clickedTruss._id && this.selectedSeed._id) {
       this.createTrussService.createTruss(this.clickedTruss._id, this.selectedSeed._id).subscribe(async (_response) => {
-        await this.reloadClickedTruss();
+        await this.reloadData();
       });
     }
   }
