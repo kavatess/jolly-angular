@@ -31,11 +31,6 @@ export class FarmComponent implements OnInit {
 
   ngOnInit(): void {
     this.selectedBlock = this.sessionStorage.retrieve(FARM_LAST_BLOCK_COLLECTION) || 'A';
-    if (!this.sessionStorage.retrieve(PLANT_SESSION_COLLECTION)) {
-      this.getPlantService.getPlantData().subscribe(plantArr => {
-        this.sessionStorage.store(PLANT_SESSION_COLLECTION, plantArr);
-      });
-    }
   }
 
 }
