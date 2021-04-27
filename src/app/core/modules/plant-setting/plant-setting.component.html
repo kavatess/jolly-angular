@@ -1,6 +1,55 @@
 <app-page-layout [scroll]="true" [onLoad]="false">
     <div class="page-content">
-        <h6 class="text-center">Quản lý dữ liệu các loại rau</h6>
-        <app-form-plant-info></app-form-plant-info>
+        <!-- Display Mode -->
+        <ng-template [ngIf]="situation == 0 || situation == 1">
+            <h6 class="text-center">Quản lý dữ liệu các loại rau</h6>
+            <app-form-plant-info [readOnly]="readonly" (plantValOnChange)="plantInfo = $event">
+            </app-form-plant-info>
+        </ng-template>
+
+        <!-- Add Mode -->
+        <ng-template [ngIf]="situation == 2">
+            <h6 class="text-center">Thêm giống cây trồng mới</h6>
+            <app-form-plant-info [readOnly]="false" (plantValOnChange)="plantInfo = $event">
+            </app-form-plant-info>
+        </ng-template>
+    </div>
+
+    <div class="footer">
+        <ng-template [ngIf]="situation == 0">
+            <button class="btn btn-sm left-btn-container" [routerLink]="['/settings']" routerLinkActive="active">
+                <span class="fa-icon">
+                    <i class="fas fa-arrow-circle-left"></i>
+                </span>
+                <span class="text">Quay về</span>
+            </button>
+
+            <button class="btn btn-sm btn-outline-success right-btn-container" (click)="situation = 1">
+                <span class="fa-icon">
+                    <i class="fas fa-wrench"></i>
+                </span>
+                <span class="text">Thay đổi</span>
+            </button>
+        </ng-template>
+
+        <ng-template [ngIf]="situation == 1">
+            <button class="btn btn-sm left-btn-container">
+                <span class="fa-icon">
+                    <i class="fas fa-history"></i>
+                </span>
+                <span class="text">Phục hồi mặc định</span>
+            </button>
+
+            <button class="btn btn-sm btn-success right-btn-container">
+                <span class="fa-icon">
+                    <i class="fas fa-check"></i>
+                </span>
+                <span class="text">Lưu thay đổi</span>
+            </button>
+        </ng-template>
+
+        <ng-template [ngIf]="situation == 2">
+
+        </ng-template>
     </div>
 </app-page-layout>
