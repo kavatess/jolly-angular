@@ -13,8 +13,7 @@ import { Plant } from 'src/app/core/models/plant.model';
 export class FormPlantInfoComponent implements OnInit, OnChanges, OnDestroy {
   @SessionStorage(PLANT_SESSION_COLLECTION)
   plantArr: Plant[];
-  @Input() readOnly = false;
-  @Input() plantNameDisabled = true;
+  @Input() situation = 0;
   @Output() plantValOnChange = new EventEmitter<Plant>();
   @Output() selectedImg = new EventEmitter<File>();
   plantForm = new FormGroup({});
@@ -23,18 +22,23 @@ export class FormPlantInfoComponent implements OnInit, OnChanges, OnDestroy {
   constructor(public sessionStorage: SessionStorageService) { }
 
   ngOnInit(): void {
-    this.changeFormVal(this.plantArr[0]._id);
+    if (this.situation < 2) {
+      this.changeFormVal(this.plantArr[0]._id);
+    } else {
+      this.changeFormVal();
+    }
     this.subcribePlantValChanges();
   }
 
   ngOnChanges(): void {
-    // if (this.readOnly) {
-    //   this.changeFormVal()
-    // }
+    if (this.situation == 0 && this.plantForm.get('plantId')) {
+      const plantId = this.plantForm.get('plantId').value;
+      this.changeFormVal(plantId);
+    }
   }
 
-  changeFormVal(plantId: string): void {
-    const plantInfo = this.plantArr.find(({ _id }) => _id == plantId);
+  changeFormVal(plantId: string = ''): void {
+    const plantInfo = this.plantArr.find(({ _id }) => _id == plantId) || new Plant();
     if (plantInfo._id) {
       this.plantForm.setControl('plantId', new FormControl(plantInfo._id));
     } else {

@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { SessionStorage } from 'ngx-webstorage';
-import { PLANT_SESSION_COLLECTION } from 'src/app/app-constants';
 import { Plant } from '../../models/plant.model';
 
 @Component({
@@ -10,14 +8,17 @@ import { Plant } from '../../models/plant.model';
 })
 export class PlantSettingComponent implements OnInit {
   situation = 0;
-  readonly = true;
   plantInfo: Plant = new Plant();
-  // Variables for modify plant
-
-  // Variables for add plant
 
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit(): void { }
+
+  changeTab(tabNum: number, navbarEl: any): void {
+    this.situation = tabNum;
+    document.querySelectorAll('.nav-link').forEach(element => {
+      element.classList.remove('active');
+    });
+    navbarEl.target.classList.add('active');
   }
 }

@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 import { PlantSettingComponent } from './plant-setting.component';
 import { PageLayoutModule } from 'src/app/shared/components/page-layout/page-layout.module';
 import { FormPlantInfoModule } from './form-plant-info/form-plant-info.module';
-import { AddPlantModule } from './add-plant/add-plant.module';
-import { ModifyPlantModule } from './modify-plant/modify-plant.module';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
@@ -13,8 +11,6 @@ import { RouterModule } from '@angular/router';
     CommonModule,
     PageLayoutModule,
     FormPlantInfoModule,
-    AddPlantModule,
-    ModifyPlantModule,
     RouterModule
   ]
 })

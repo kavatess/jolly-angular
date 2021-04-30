@@ -1,16 +1,26 @@
 <app-page-layout [scroll]="true" [onLoad]="false">
     <div class="page-content">
-        <!-- Display Mode -->
+        <ul class="nav nav-tabs">
+            <!-- Navigate for setting mode -->
+            <li class="nav-item">
+                <a class="nav-link active" (click)="changeTab(0, $event)">Quản lý dữ liệu các loại rau</a>
+            </li>
+
+            <!-- Navigate for add mode -->
+            <li class="nav-item">
+                <a class="nav-link" (click)="changeTab(2, $event)">Thêm loại rau mới</a>
+            </li>
+        </ul>
+
+        <!-- Setting Mode -->
         <ng-template [ngIf]="situation == 0 || situation == 1">
-            <h6 class="text-center">Quản lý dữ liệu các loại rau</h6>
-            <app-form-plant-info [readOnly]="readonly" (plantValOnChange)="plantInfo = $event">
+            <app-form-plant-info [situation]="situation" (plantValOnChange)="plantInfo = $event">
             </app-form-plant-info>
         </ng-template>
 
         <!-- Add Mode -->
         <ng-template [ngIf]="situation == 2">
-            <h6 class="text-center">Thêm giống cây trồng mới</h6>
-            <app-form-plant-info [readOnly]="false" (plantValOnChange)="plantInfo = $event">
+            <app-form-plant-info [situation]="situation" (plantValOnChange)="plantInfo = $event">
             </app-form-plant-info>
         </ng-template>
     </div>
@@ -33,7 +43,7 @@
         </ng-template>
 
         <ng-template [ngIf]="situation == 1">
-            <button class="btn btn-sm left-btn-container">
+            <button class="btn btn-sm left-btn-container" (click)="situation = 0">
                 <span class="fa-icon">
                     <i class="fas fa-history"></i>
                 </span>
@@ -49,7 +59,19 @@
         </ng-template>
 
         <ng-template [ngIf]="situation == 2">
+            <button class="btn btn-sm left-btn-container" [routerLink]="['/settings']" routerLinkActive="active">
+                <span class="fa-icon">
+                    <i class="fas fa-arrow-circle-left"></i>
+                </span>
+                <span class="text">Quay về</span>
+            </button>
 
+            <button class="btn btn-sm btn-success right-btn-container">
+                <span class="fa-icon">
+                    <i class="fas fa-plus"></i>
+                </span>
+                <span class="text">Thêm</span>
+            </button>
         </ng-template>
     </div>
 </app-page-layout>
