@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SessionStorage, SessionStorageService } from 'ngx-webstorage';
 import { Subscription } from 'rxjs';
 import { PLANT_SESSION_COLLECTION } from 'src/app/app-constants';
@@ -22,40 +22,7 @@ export class FormPlantInfoComponent implements OnInit, OnChanges, OnDestroy {
   constructor(public sessionStorage: SessionStorageService) { }
 
   ngOnInit(): void {
-    if (this.situation < 2) {
-      this.changeFormVal(this.plantArr[0]._id);
-    } else {
-      this.changeFormVal();
-    }
-    this.subcribePlantValChanges();
-  }
-
-  ngOnChanges(): void {
-    if (this.situation == 0 && this.plantForm.get('plantId')) {
-      const plantId = this.plantForm.get('plantId').value;
-      this.changeFormVal(plantId);
-    }
-  }
-
-  changeFormVal(plantId: string = ''): void {
-    const plantInfo = this.plantArr.find(({ _id }) => _id == plantId) || new Plant();
-    if (plantInfo._id) {
-      this.plantForm.setControl('plantId', new FormControl(plantInfo._id));
-    } else {
-      this.plantForm.removeControl('plantId');
-    }
-    this.plantForm.setControl('plantName', new FormControl(plantInfo.plantName));
-    this.plantForm.setControl('plantColor', new FormControl(plantInfo.plantColor));
-    this.plantForm.setControl('growUpTime', new FormControl(plantInfo.growUpTime));
-    this.plantForm.setControl('mediumGrowthTime', new FormControl(plantInfo.mediumGrowthTime));
-    this.plantForm.setControl('seedUpTime', new FormControl(plantInfo.seedUpTime));
-    this.plantForm.setControl('numberPerKg', new FormControl(plantInfo.numberPerKg));
-    this.plantForm.setControl('alivePercent', new FormControl(plantInfo.alivePercent));
-    this.plantForm.setControl('worm', new FormControl(plantInfo.worm));
-    this.plantForm.setControl('wormMonth', new FormControl(plantInfo.wormMonth));
-  }
-
-  subcribePlantValChanges(): void {
+    this.changeFormVal(this.plantArr[0]);
     this.subscription = this.plantForm.valueChanges.subscribe(plantVal => {
       plantVal.growUpTime *= 1;
       plantVal.mediumGrowthTime *= 1;
@@ -63,6 +30,38 @@ export class FormPlantInfoComponent implements OnInit, OnChanges, OnDestroy {
       plantVal.numberPerKg *= 1;
       plantVal.alivePercent *= 1;
       this.plantValOnChange.emit(plantVal);
+    });
+  }
+
+  ngOnChanges(): void {
+    if (this.situation == 0) {
+      const plantId = this.plantForm.value._id;
+      plantId ? this.changePlantInfo(plantId) : this.changeFormVal(this.plantArr[0]);
+    }
+    if (this.situation == 2) {
+      this.changeFormVal();
+    }
+  }
+
+  changePlantInfo(plantId: string): void {
+    const plantInfo = this.plantArr.find(({ _id }) => _id == plantId);
+    this.changeFormVal(plantInfo);
+  }
+
+  changeFormVal(plantInfo: Plant = new Plant()): void {
+    const numberValidator = [Validators.required, Validators.max(999)];
+    this.plantForm = new FormGroup({
+      _id: new FormControl(plantInfo._id),
+      plantName: new FormControl(plantInfo.plantName, Validators.required),
+      imgSrc: new FormControl(plantInfo.imgSrc, Validators.required),
+      plantColor: new FormControl(plantInfo.plantColor, Validators.required),
+      growUpTime: new FormControl(plantInfo.growUpTime, numberValidator),
+      mediumGrowthTime: new FormControl(plantInfo.mediumGrowthTime, numberValidator),
+      seedUpTime: new FormControl(plantInfo.seedUpTime, numberValidator),
+      numberPerKg: new FormControl(plantInfo.numberPerKg, numberValidator),
+      alivePercent: new FormControl(plantInfo.alivePercent, [Validators.required, Validators.max(100)]),
+      worm: new FormControl(plantInfo.worm),
+      wormMonth: new FormControl(plantInfo.wormMonth)
     });
   }
 

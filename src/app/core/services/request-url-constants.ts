@@ -29,3 +29,4 @@ export const SEED_REQUEST = {
     deleteManySeed: SEED_REQUEST_HEAD + DELETE_REQUEST,
     deleteOneSeed: SEED_REQUEST_HEAD + '/remove'
 }
+export const UPLOAD_IMGBB_REQUEST = "https://api.imgbb.com/1/upload";

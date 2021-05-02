@@ -12,17 +12,8 @@
             </li>
         </ul>
 
-        <!-- Setting Mode -->
-        <ng-template [ngIf]="situation == 0 || situation == 1">
-            <app-form-plant-info [situation]="situation" (plantValOnChange)="plantInfo = $event">
-            </app-form-plant-info>
-        </ng-template>
-
-        <!-- Add Mode -->
-        <ng-template [ngIf]="situation == 2">
-            <app-form-plant-info [situation]="situation" (plantValOnChange)="plantInfo = $event">
-            </app-form-plant-info>
-        </ng-template>
+        <app-form-plant-info [situation]="situation" (plantValOnChange)="plantInfo = $event" (selectedImg)="imgFile = $event">
+        </app-form-plant-info>
     </div>
 
     <div class="footer">
@@ -50,7 +41,7 @@
                 <span class="text">Phục hồi mặc định</span>
             </button>
 
-            <button class="btn btn-sm btn-success right-btn-container">
+            <button class="btn btn-sm btn-success right-btn-container" (click)="modifyPlantInfo()">
                 <span class="fa-icon">
                     <i class="fas fa-check"></i>
                 </span>

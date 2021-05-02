@@ -9,6 +9,7 @@ import { Plant } from '../../models/plant.model';
 export class PlantSettingComponent implements OnInit {
   situation = 0;
   plantInfo: Plant = new Plant();
+  imgFile: File = null;
 
   constructor() { }
 
@@ -20,5 +21,11 @@ export class PlantSettingComponent implements OnInit {
       element.classList.remove('active');
     });
     navbarEl.target.classList.add('active');
+  }
+
+  modifyPlantInfo(): void {
+    if (this.situation == 1) {
+      console.log(this.plantInfo, this.imgFile);
+    }
   }
 }
