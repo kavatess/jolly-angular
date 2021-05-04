@@ -14,6 +14,7 @@ export class FormPlantInfoComponent implements OnInit, OnChanges, OnDestroy {
   @SessionStorage(PLANT_SESSION_COLLECTION)
   plantArr: Plant[];
   @Input() situation = 0;
+  @Output() isValidFormVal = new EventEmitter();
   @Output() plantValOnChange = new EventEmitter<Plant>();
   @Output() selectedImg = new EventEmitter<File>();
   plantForm = new FormGroup({});
@@ -23,14 +24,7 @@ export class FormPlantInfoComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnInit(): void {
     this.changeFormVal(this.plantArr[0]);
-    this.subscription = this.plantForm.valueChanges.subscribe(plantVal => {
-      plantVal.growUpTime *= 1;
-      plantVal.mediumGrowthTime *= 1;
-      plantVal.seedUpTime *= 1;
-      plantVal.numberPerKg *= 1;
-      plantVal.alivePercent *= 1;
-      this.plantValOnChange.emit(plantVal);
-    });
+    this.emitPlantValChanges();
   }
 
   ngOnChanges(): void {
@@ -49,12 +43,12 @@ export class FormPlantInfoComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   changeFormVal(plantInfo: Plant = new Plant()): void {
-    const numberValidator = [Validators.required, Validators.max(999)];
+    const numberValidator = [Validators.required, Validators.max(9999)];
     this.plantForm = new FormGroup({
       _id: new FormControl(plantInfo._id),
       plantName: new FormControl(plantInfo.plantName, Validators.required),
-      imgSrc: new FormControl(plantInfo.imgSrc, Validators.required),
-      plantColor: new FormControl(plantInfo.plantColor, Validators.required),
+      imgSrc: new FormControl(plantInfo.imgSrc),
+      plantColor: new FormControl(plantInfo.plantColor, [Validators.required, Validators.maxLength(7)]),
       growUpTime: new FormControl(plantInfo.growUpTime, numberValidator),
       mediumGrowthTime: new FormControl(plantInfo.mediumGrowthTime, numberValidator),
       seedUpTime: new FormControl(plantInfo.seedUpTime, numberValidator),
@@ -62,6 +56,20 @@ export class FormPlantInfoComponent implements OnInit, OnChanges, OnDestroy {
       alivePercent: new FormControl(plantInfo.alivePercent, [Validators.required, Validators.max(100)]),
       worm: new FormControl(plantInfo.worm),
       wormMonth: new FormControl(plantInfo.wormMonth)
+    });
+    this.emitPlantValChanges();
+  }
+
+  emitPlantValChanges(): void {
+    this.subscription = this.plantForm.valueChanges.subscribe(plantVal => {
+      plantVal.growUpTime *= 1;
+      plantVal.mediumGrowthTime *= 1;
+      plantVal.seedUpTime *= 1;
+      plantVal.numberPerKg *= 1;
+      plantVal.alivePercent *= 1;
+      console.log(this.plantForm.valid)
+      this.isValidFormVal.emit(this.plantForm.valid);
+      this.plantValOnChange.emit(plantVal);
     });
   }
 

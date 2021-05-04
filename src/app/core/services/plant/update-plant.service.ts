@@ -8,7 +8,7 @@ import { PLANT_REQUEST } from '../request-url-constants';
 })
 export class UpdatePlantService {
   constructor(private httpReq: HttpRequestService) { }
-  updatePlant(sentJSON: Plant) {
-    return this.httpReq.createPostRequest(PLANT_REQUEST.updateOnePlant, sentJSON);
+  updatePlant(plant: Plant) {
+    return this.httpReq.createPostRequest(PLANT_REQUEST.updateOnePlant, plant);
   }
 }

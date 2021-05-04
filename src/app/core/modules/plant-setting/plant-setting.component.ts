@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { PLANT_SESSION_COLLECTION } from 'src/app/app-constants';
+import { SessionService } from 'src/app/shared/services/session.service';
 import { Plant } from '../../models/plant.model';
+import { UpdatePlantService } from '../../services/plant/update-plant.service';
 
 @Component({
   selector: 'app-plant-setting',
@@ -9,11 +12,14 @@ import { Plant } from '../../models/plant.model';
 export class PlantSettingComponent implements OnInit {
   situation = 0;
   plantInfo: Plant = new Plant();
+  validPlantInfo = false;
   imgFile: File = null;
 
-  constructor() { }
+  constructor(private updatePlantService: UpdatePlantService, private sessionStorage: SessionService) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.sessionStorage.getAsync(PLANT_SESSION_COLLECTION);
+  }
 
   changeTab(tabNum: number, navbarEl: any): void {
     this.situation = tabNum;
@@ -25,7 +31,11 @@ export class PlantSettingComponent implements OnInit {
 
   modifyPlantInfo(): void {
     if (this.situation == 1) {
-      console.log(this.plantInfo, this.imgFile);
+      this.updatePlantService.updatePlant(this.plantInfo).subscribe(response => {
+        this.sessionStorage.store(PLANT_SESSION_COLLECTION, response);
+        this.situation = 0;
+        this.validPlantInfo = false;
+      });
     }
   }
 }

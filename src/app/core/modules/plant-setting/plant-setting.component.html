@@ -3,16 +3,16 @@
         <ul class="nav nav-tabs">
             <!-- Navigate for setting mode -->
             <li class="nav-item">
-                <a class="nav-link active" (click)="changeTab(0, $event)">Quản lý dữ liệu các loại rau</a>
+                <a class="text nav-link active" (click)="changeTab(0, $event)">Quản lý dữ liệu các loại rau</a>
             </li>
 
             <!-- Navigate for add mode -->
             <li class="nav-item">
-                <a class="nav-link" (click)="changeTab(2, $event)">Thêm loại rau mới</a>
+                <a class="text nav-link" (click)="changeTab(2, $event)">Thêm loại rau mới</a>
             </li>
         </ul>
 
-        <app-form-plant-info [situation]="situation" (plantValOnChange)="plantInfo = $event" (selectedImg)="imgFile = $event">
+        <app-form-plant-info [situation]="situation" (plantValOnChange)="plantInfo = $event" (selectedImg)="imgFile = $event" (isValidFormVal)="validPlantInfo = $event">
         </app-form-plant-info>
     </div>
 
@@ -41,7 +41,7 @@
                 <span class="text">Phục hồi mặc định</span>
             </button>
 
-            <button class="btn btn-sm btn-success right-btn-container" (click)="modifyPlantInfo()">
+            <button class="btn btn-sm btn-success right-btn-container" (click)="modifyPlantInfo()" [disabled]="!validPlantInfo">
                 <span class="fa-icon">
                     <i class="fas fa-check"></i>
                 </span>
@@ -57,7 +57,7 @@
                 <span class="text">Quay về</span>
             </button>
 
-            <button class="btn btn-sm btn-success right-btn-container">
+            <button class="btn btn-sm btn-success right-btn-container" [disabled]="!validPlantInfo">
                 <span class="fa-icon">
                     <i class="fas fa-plus"></i>
                 </span>
