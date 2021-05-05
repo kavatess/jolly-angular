@@ -1,7 +1,7 @@
 <form [formGroup]="plantForm">
     <div class="form-item">
         <label class="text">Tên rau:</label>
-        <select *ngIf="situation == 0" class="form-select" (change)="changePlantInfo($event.target.value)"
+        <select *ngIf="situation == 0" class="form-select" (change)="changeFormValByPlantId($event.target.value)"
             (onload)="changeFormVal(plantArr[0])">
             <option *ngFor="let plant of plantArr; let i = index" [value]="plant._id"
                 [selected]="plantForm.value._id == plant._id">

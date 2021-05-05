@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { PLANT_SESSION_COLLECTION } from 'src/app/app-constants';
 import { SessionService } from 'src/app/shared/services/session.service';
 import { Plant } from '../../models/plant.model';
+import { UploadImgbbService } from '../../services/img/upload-imgbb.service';
+import { InsertPlantService } from '../../services/plant/insert-plant.service';
 import { UpdatePlantService } from '../../services/plant/update-plant.service';
 
 @Component({
@@ -15,27 +17,55 @@ export class PlantSettingComponent implements OnInit {
   validPlantInfo = false;
   imgFile: File = null;
 
-  constructor(private updatePlantService: UpdatePlantService, private sessionStorage: SessionService) { }
+  constructor(
+    private sessionStorage: SessionService,
+    private updatePlantService: UpdatePlantService,
+    private insertPlantService: InsertPlantService,
+    private uploadImgService: UploadImgbbService
+  ) { }
 
   ngOnInit(): void {
     this.sessionStorage.getAsync(PLANT_SESSION_COLLECTION);
   }
 
-  changeTab(tabNum: number, navbarEl: any): void {
-    this.situation = tabNum;
+  changeSituation(newSit: number): void {
+    this.situation = newSit;
+    this.validPlantInfo = false;
+    this.imgFile = null;
+  }
+
+  changeTab(situation: number, navbarEl: any): void {
+    this.changeSituation(situation);
     document.querySelectorAll('.nav-link').forEach(element => {
       element.classList.remove('active');
     });
     navbarEl.target.classList.add('active');
   }
 
-  modifyPlantInfo(): void {
-    if (this.situation == 1) {
-      this.updatePlantService.updatePlant(this.plantInfo).subscribe(response => {
-        this.sessionStorage.store(PLANT_SESSION_COLLECTION, response);
-        this.situation = 0;
-        this.validPlantInfo = false;
-      });
+  private async uploadImgIfNeeded() {
+    if (this.imgFile) {
+      this.plantInfo.imgSrc = await this.uploadImgService.uploadImgBB(this.imgFile).toPromise();
     }
+  }
+
+  async modifyPlantInfo() {
+    if (this.situation == 1 && this.validPlantInfo) {
+      await this.uploadImgIfNeeded();
+      const updatedPlantArr = await this.updatePlantService.updatePlant(this.plantInfo).toPromise();
+      this.reloadPlantData(updatedPlantArr)
+    }
+  }
+
+  async addPlantInfo() {
+    if (this.situation == 2 && this.validPlantInfo) {
+      await this.uploadImgIfNeeded();
+      const updatedPlantArr = await this.insertPlantService.insertOnePlant(this.plantInfo).toPromise();
+      this.reloadPlantData(updatedPlantArr)
+    }
+  }
+
+  reloadPlantData(newPlantArr: Plant[]): void {
+    this.sessionStorage.store(PLANT_SESSION_COLLECTION, newPlantArr);
+    this.changeSituation(0);
   }
 }

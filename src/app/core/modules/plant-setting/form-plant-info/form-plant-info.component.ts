@@ -30,14 +30,14 @@ export class FormPlantInfoComponent implements OnInit, OnChanges, OnDestroy {
   ngOnChanges(): void {
     if (this.situation == 0) {
       const plantId = this.plantForm.value._id;
-      plantId ? this.changePlantInfo(plantId) : this.changeFormVal(this.plantArr[0]);
+      plantId ? this.changeFormValByPlantId(plantId) : this.changeFormVal(this.plantArr[0]);
     }
     if (this.situation == 2) {
       this.changeFormVal();
     }
   }
 
-  changePlantInfo(plantId: string): void {
+  changeFormValByPlantId(plantId: string): void {
     const plantInfo = this.plantArr.find(({ _id }) => _id == plantId);
     this.changeFormVal(plantInfo);
   }
@@ -80,5 +80,4 @@ export class FormPlantInfoComponent implements OnInit, OnChanges, OnDestroy {
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
-
 }
