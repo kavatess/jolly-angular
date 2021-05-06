@@ -52,7 +52,7 @@ export class PlantSettingComponent implements OnInit {
     if (this.situation == 1 && this.validPlantInfo) {
       await this.uploadImgIfNeeded();
       const updatedPlantArr = await this.updatePlantService.updatePlant(this.plantInfo).toPromise();
-      this.reloadPlantData(updatedPlantArr)
+      this.reloadPlantData(updatedPlantArr);
     }
   }
 
@@ -60,7 +60,7 @@ export class PlantSettingComponent implements OnInit {
     if (this.situation == 2 && this.validPlantInfo) {
       await this.uploadImgIfNeeded();
       const updatedPlantArr = await this.insertPlantService.insertOnePlant(this.plantInfo).toPromise();
-      this.reloadPlantData(updatedPlantArr)
+      this.reloadPlantData(updatedPlantArr);
     }
   }
 

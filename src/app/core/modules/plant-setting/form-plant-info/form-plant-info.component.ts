@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { SessionStorage, SessionStorageService } from 'ngx-webstorage';
+import { SessionStorage } from 'ngx-webstorage';
 import { Subscription } from 'rxjs';
 import { PLANT_SESSION_COLLECTION } from 'src/app/app-constants';
 import { Plant } from 'src/app/core/models/plant.model';
@@ -20,21 +20,22 @@ export class FormPlantInfoComponent implements OnInit, OnChanges, OnDestroy {
   plantForm = new FormGroup({});
   private subscription: Subscription = new Subscription();
 
-  constructor(public sessionStorage: SessionStorageService) { }
+  constructor() { }
 
   ngOnInit(): void {
     this.changeFormVal(this.plantArr[0]);
-    this.emitPlantValChanges();
   }
 
   ngOnChanges(): void {
+    if (this.situation == 1) return;
     if (this.situation == 0) {
       const plantId = this.plantForm.value._id;
-      plantId ? this.changeFormValByPlantId(plantId) : this.changeFormVal(this.plantArr[0]);
+      if (plantId) {
+        return this.changeFormValByPlantId(plantId);
+      }
+      return this.ngOnInit();
     }
-    if (this.situation == 2) {
-      this.changeFormVal();
-    }
+    return this.changeFormVal();
   }
 
   changeFormValByPlantId(plantId: string): void {
@@ -67,14 +68,15 @@ export class FormPlantInfoComponent implements OnInit, OnChanges, OnDestroy {
       plantVal.seedUpTime *= 1;
       plantVal.numberPerKg *= 1;
       plantVal.alivePercent *= 1;
-      console.log(this.plantForm.valid)
-      this.isValidFormVal.emit(this.plantForm.valid);
       this.plantValOnChange.emit(plantVal);
+      this.isValidFormVal.emit(this.plantForm.valid);
     });
   }
 
   onFileChanged(imgInput: any): void {
     this.selectedImg.emit(imgInput.target.files[0]);
+    this.plantValOnChange.emit(this.plantForm.value);
+    this.isValidFormVal.emit(this.plantForm.valid);
   }
 
   ngOnDestroy(): void {

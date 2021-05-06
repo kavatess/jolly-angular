@@ -12,5 +12,5 @@ export class BasicPlant {
 }
 
 export class Plant extends BasicPlant {
-    _id: string = '';
+    _id: string = null;
 }

@@ -12,11 +12,11 @@
             [readOnly]="situation == 1">
     </div>
 
-    <div class="form-item">
+    <div *ngIf="plantForm.value.imgSrc || situation > 0" class="form-item">
         <label class="text">Hình ảnh cây trồng:</label>
         <input *ngIf="situation > 0" type="file" class="form-control" accept="image/*" (change)="onFileChanged($event)">
-        <div class="img-container">
-            <img *ngIf="plantForm.value.imgSrc" class="img-120" [src]="plantForm.value.imgSrc" alt="">
+        <div *ngIf="plantForm.value.imgSrc" class="img-container">
+            <img class="img-120" [src]="plantForm.value.imgSrc" alt="">
         </div>
     </div>
 
