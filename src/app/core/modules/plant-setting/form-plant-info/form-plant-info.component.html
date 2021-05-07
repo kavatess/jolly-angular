@@ -1,4 +1,4 @@
-<form [formGroup]="plantForm">
+<form *ngIf="plantArr" [formGroup]="plantForm">
     <div class="form-item">
         <label class="text">Tên rau:</label>
         <select *ngIf="situation == 0" class="form-select" (change)="changeFormValByPlantId($event.target.value)"
@@ -12,12 +12,13 @@
             [readOnly]="situation == 1">
     </div>
 
-    <div *ngIf="plantForm.value.imgSrc || situation > 0" class="form-item">
+    <div *ngIf="(situation == 0 && plantForm.value.imgSrc) || situation > 0" class="form-item">
         <label class="text">Hình ảnh cây trồng:</label>
-        <input *ngIf="situation > 0" type="file" class="form-control" accept="image/*" (change)="onFileChanged($event)">
-        <div *ngIf="plantForm.value.imgSrc" class="img-container">
-            <img class="img-120" [src]="plantForm.value.imgSrc" alt="">
-        </div>
+
+        <input *ngIf="situation > 0" type="file" class="form-control" accept="image/*"
+            (change)="onFileChanged($event.target.files[0])">
+        <img *ngIf="plantForm.value.imgSrc && situation < 2" id="chosen-img" class="img img-120" [src]="plantForm.value.imgSrc" alt="">
+        <img *ngIf="situation == 2" id="chosen-img" class="img img-120 d-none" alt="">
     </div>
 
     <div class="form-item">
@@ -62,3 +63,5 @@
         <input type="text" class="form-control" formControlName="wormMonth" [readOnly]="situation == 0">
     </div>
 </form>
+
+<div *ngIf="!plantArr" class="text">Không thể lấy được dữ liệu cây trồng. Xin vui lòng quay lại sau</div>

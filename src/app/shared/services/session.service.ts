@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { SessionStorageService } from 'ngx-webstorage';
+import { Observable } from 'rxjs';
 import { PLANT_SESSION_COLLECTION, SEED_SESSION_COLLECTION, TRUSS_SESSION_COLLECTION } from 'src/app/app-constants';
 import { HttpRequestService } from 'src/app/core/services/http-request.service';
 import { PLANT_REQUEST, SEED_REQUEST, TRUSS_REQUEST } from 'src/app/core/services/request-url-constants';
@@ -10,6 +11,14 @@ import { PLANT_REQUEST, SEED_REQUEST, TRUSS_REQUEST } from 'src/app/core/service
 export class SessionService {
 
   constructor(private httpReq: HttpRequestService, private sessionStorage: SessionStorageService) { }
+
+  observe(colName: string): Observable<any> {
+    return this.sessionStorage.observe(colName);
+  }
+
+  retrieve(colName: string): any {
+    return this.sessionStorage.retrieve(colName);
+  }
 
   store(colName: string, value: any): void {
     return this.sessionStorage.store(colName, value);
@@ -25,7 +34,7 @@ export class SessionService {
     if (!sessionData) {
       const requestURL = this.getRequestUrlByColName(colName);
       const data = await this.httpReq.createPostRequest(requestURL).toPromise();
-      this.sessionStorage.store(colName, data);
+      this.store(colName, data);
     }
     return sessionData;
   }

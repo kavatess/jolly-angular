@@ -73,10 +73,20 @@ export class FormPlantInfoComponent implements OnInit, OnChanges, OnDestroy {
     });
   }
 
-  onFileChanged(imgInput: any): void {
-    this.selectedImg.emit(imgInput.target.files[0]);
+  onFileChanged(imgInput: File): void {
+    this.showPreviewImg(imgInput);
+    this.selectedImg.emit(imgInput);
     this.plantValOnChange.emit(this.plantForm.value);
     this.isValidFormVal.emit(this.plantForm.valid);
+  }
+
+  private showPreviewImg(imgFile: File): void {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      $('#chosen-img').attr('src', e.target.result.toString());
+      document.getElementById('chosen-img').classList.remove('d-none');
+    }
+    reader.readAsDataURL(imgFile);
   }
 
   ngOnDestroy(): void {
