@@ -1,3 +1,33 @@
 <app-page-layout [onLoad]="false">
-    
+    <div class="page-content">
+        <h6 class="text-center">Quản lý dữ liệu giàn</h6>
+        
+        <div class="form-item">
+            <span class="text">Khu vực vườn:</span>
+            <select class="form-control form-control-sm" (change)="changeBlock($event.target.value)">
+                <option *ngFor="let block of blockArr" [value]="block">{{ block }}</option>
+            </select>
+        </div>
+
+        <div class="form-item">
+            <span class="text">Thứ tự máng:</span>
+            <select class="form-control form-control-sm">
+                <option *ngFor="let truss of trussArr" [value]="truss._id">{{ truss.block + truss.index }}</option>
+            </select>
+        </div>
+
+        <div class="form-item">
+            <span class="text">Thứ tự máng:</span>
+            <input type="number" class="form-control form-control-sm">
+        </div>
+    </div>
+
+    <div class="footer">
+        <button class="btn btn-sm left-btn-container" [routerLink]="['/settings']" routerLinkActive="active">
+            <span class="fa-icon">
+                <i class="fas fa-arrow-circle-left"></i>
+            </span>
+            <span class="text">Quay về</span>
+        </button>
+    </div>
 </app-page-layout>

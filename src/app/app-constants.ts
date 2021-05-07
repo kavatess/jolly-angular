@@ -9,3 +9,12 @@ export const DEFAULT_STATISTIC_QUERY = {
     plantId: '',
     plantGrowth: 0
 }
+export enum TRUSS_NUMBER {
+    block_A = 33,
+    block_B = 33,
+    block_BS = 15,
+    block_BN = 8,
+    block_C = 16,
+    block_CT = 12,
+    block_D = 7
+}
