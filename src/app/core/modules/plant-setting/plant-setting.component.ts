@@ -12,10 +12,12 @@ import { UpdatePlantService } from '../../services/plant/update-plant.service';
   styleUrls: ['./plant-setting.component.scss']
 })
 export class PlantSettingComponent implements OnInit {
+  plantArr: Plant[] = [];
   situation = 0;
   plantInfo: Plant = new Plant();
-  validPlantInfo = false;
   imgFile: File = null;
+  onLoading = false;
+  validPlantInfo = false;
 
   constructor(
     private sessionStorage: SessionService,
@@ -24,8 +26,8 @@ export class PlantSettingComponent implements OnInit {
     private uploadImgService: UploadImgbbService
   ) { }
 
-  ngOnInit(): void {
-    this.sessionStorage.getAsync(PLANT_SESSION_COLLECTION);
+  async ngOnInit() {
+    this.plantArr = await this.sessionStorage.getAsync(PLANT_SESSION_COLLECTION);
   }
 
   changeSituation(newSit: number): void {
@@ -48,24 +50,41 @@ export class PlantSettingComponent implements OnInit {
     }
   }
 
-  async modifyPlantInfo() {
-    if (this.situation == 1 && this.validPlantInfo) {
-      await this.uploadImgIfNeeded();
-      const updatedPlantArr = await this.updatePlantService.updatePlant(this.plantInfo).toPromise();
-      this.reloadPlantData(updatedPlantArr);
+  private async callApiByUpdateType(updateType: string): Promise<any> {
+    if (updateType == 'modify') {
+      return await this.updatePlantService.updatePlant(this.plantInfo).toPromise();
     }
+    if (updateType == 'add') {
+      return await this.insertPlantService.insertOnePlant(this.plantInfo).toPromise();
+    }
+    return null;
   }
 
-  async addPlantInfo() {
-    if (this.situation == 2 && this.validPlantInfo) {
-      await this.uploadImgIfNeeded();
-      const updatedPlantArr = await this.insertPlantService.insertOnePlant(this.plantInfo).toPromise();
-      this.reloadPlantData(updatedPlantArr);
-    }
-  }
-
-  reloadPlantData(newPlantArr: Plant[]): void {
+  private reloadPlantData(newPlantArr: Plant[]): void {
     this.sessionStorage.store(PLANT_SESSION_COLLECTION, newPlantArr);
+    this.plantArr = newPlantArr;
     this.changeSituation(0);
+    this.onLoading = false;
+  }
+
+  async updateDataByType(updateType: string): Promise<void> {
+    if (this.validPlantInfo) {
+      this.onLoading = true;
+      await this.uploadImgIfNeeded();
+      const response = await this.callApiByUpdateType(updateType);
+      this.reloadPlantData(response);
+    }
+  }
+
+  async modifyPlantInfo(): Promise<void> {
+    if (this.situation == 1) {
+      this.updateDataByType('modify');
+    }
+  }
+
+  async addPlantInfo(): Promise<void> {
+    if (this.situation == 2) {
+      this.updateDataByType('add');
+    }
   }
 }

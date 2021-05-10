@@ -1,8 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { SessionStorage } from 'ngx-webstorage';
 import { Subscription } from 'rxjs';
-import { PLANT_SESSION_COLLECTION } from 'src/app/app-constants';
 import { Plant } from 'src/app/core/models/plant.model';
 
 @Component({
@@ -11,14 +9,13 @@ import { Plant } from 'src/app/core/models/plant.model';
   styleUrls: ['./form-plant-info.component.scss']
 })
 export class FormPlantInfoComponent implements OnInit, OnChanges, OnDestroy {
-  @SessionStorage(PLANT_SESSION_COLLECTION)
-  plantArr: Plant[];
+  @Input() plantArr: Plant[] = [];
   @Input() situation = 0;
   @Output() isValidFormVal = new EventEmitter();
   @Output() plantValOnChange = new EventEmitter<Plant>();
   @Output() selectedImg = new EventEmitter<File>();
   plantForm = new FormGroup({});
-  private subscription: Subscription = new Subscription();
+  private formSubscription: Subscription = new Subscription();
 
   constructor() { }
 
@@ -27,11 +24,11 @@ export class FormPlantInfoComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges(): void {
+    $('#chosen-img').attr('src', this.plantForm.value.imgSrc);
     if (this.situation == 1) return;
     if (this.situation == 0) {
-      const plantId = this.plantForm.value._id;
-      if (plantId) {
-        return this.changeFormValByPlantId(plantId);
+      if (this.plantForm.value._id) {
+        return this.changeFormValByPlantId(this.plantForm.value._id);
       }
       return this.ngOnInit();
     }
@@ -62,7 +59,7 @@ export class FormPlantInfoComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   emitPlantValChanges(): void {
-    this.subscription = this.plantForm.valueChanges.subscribe(plantVal => {
+    this.formSubscription = this.plantForm.valueChanges.subscribe(plantVal => {
       plantVal.growUpTime *= 1;
       plantVal.mediumGrowthTime *= 1;
       plantVal.seedUpTime *= 1;
@@ -84,12 +81,12 @@ export class FormPlantInfoComponent implements OnInit, OnChanges, OnDestroy {
     var reader = new FileReader();
     reader.onload = function (e) {
       $('#chosen-img').attr('src', e.target.result.toString());
-      document.getElementById('chosen-img').classList.remove('d-none');
+      $('#chosen-img').removeClass('d-none');
     }
     reader.readAsDataURL(imgFile);
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.formSubscription.unsubscribe();
   }
 }

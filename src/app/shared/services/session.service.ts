@@ -30,13 +30,12 @@ export class SessionService {
   }
 
   async getAsync(colName: string): Promise<any> {
-    const sessionData = this.sessionStorage.retrieve(colName);
-    if (!sessionData) {
+    if (!this.retrieve(colName)) {
       const requestURL = this.getRequestUrlByColName(colName);
       const data = await this.httpReq.createPostRequest(requestURL).toPromise();
       this.store(colName, data);
     }
-    return sessionData;
+    return this.retrieve(colName);
   }
 
   private getRequestUrlByColName(colName: string): string {

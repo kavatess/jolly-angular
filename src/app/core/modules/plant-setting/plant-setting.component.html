@@ -1,4 +1,4 @@
-<app-page-layout [scroll]="true" [onLoad]="false">
+<app-page-layout [scroll]="true" [onLoad]="onLoading">
     <div class="page-content">
         <ul class="nav nav-tabs">
             <!-- Navigate for setting mode -->
@@ -12,7 +12,7 @@
             </li>
         </ul>
 
-        <app-form-plant-info [situation]="situation" (plantValOnChange)="plantInfo = $event" (selectedImg)="imgFile = $event" (isValidFormVal)="validPlantInfo = $event">
+        <app-form-plant-info *ngIf="plantArr.length" [plantArr]="plantArr" [situation]="situation" (plantValOnChange)="plantInfo = $event" (selectedImg)="imgFile = $event" (isValidFormVal)="validPlantInfo = $event">
         </app-form-plant-info>
     </div>
 
@@ -25,7 +25,7 @@
                 <span class="text">Quay về</span>
             </button>
 
-            <button class="btn btn-sm btn-outline-success right-btn-container" (click)="changeSituation(1)">
+            <button class="btn btn-sm btn-outline-success right-btn-container" (click)="changeSituation(1)" [disabled]="!plantArr.length">
                 <span class="fa-icon">
                     <i class="fas fa-wrench"></i>
                 </span>
@@ -57,7 +57,7 @@
                 <span class="text">Quay về</span>
             </button>
 
-            <button class="btn btn-sm btn-success right-btn-container" [disabled]="!validPlantInfo" (click)="addPlantInfo()">
+            <button class="btn btn-sm btn-success right-btn-container" [disabled]="!validPlantInfo || !plantArr.length" (click)="addPlantInfo()">
                 <span class="fa-icon">
                     <i class="fas fa-plus"></i>
                 </span>

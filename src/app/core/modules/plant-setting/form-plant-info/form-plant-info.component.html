@@ -17,8 +17,7 @@
 
         <input *ngIf="situation > 0" type="file" class="form-control" accept="image/*"
             (change)="onFileChanged($event.target.files[0])">
-        <img *ngIf="plantForm.value.imgSrc && situation < 2" id="chosen-img" class="img img-120" [src]="plantForm.value.imgSrc" alt="">
-        <img *ngIf="situation == 2" id="chosen-img" class="img img-120 d-none" alt="">
+        <img id="chosen-img" class="img img-120" [ngClass]="{ 'd-none': !plantForm.value.imgSrc || situation == 2 }" [src]="plantForm.value.imgSrc" alt="">
     </div>
 
     <div class="form-item">
