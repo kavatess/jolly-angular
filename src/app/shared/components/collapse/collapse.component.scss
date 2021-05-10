@@ -1,0 +1,15 @@
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    .fa-icon {
+        margin-right: 10px;
+    }
+}
+
+@media screen and (max-height: 600px) {
+    .btn{
+        padding: 9px;
+        padding-left: 15px;
+    }
+}

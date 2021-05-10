@@ -61,10 +61,10 @@ export class PlantSettingComponent implements OnInit {
   }
 
   private reloadPlantData(newPlantArr: Plant[]): void {
-    this.sessionStorage.store(PLANT_SESSION_COLLECTION, newPlantArr);
     this.plantArr = newPlantArr;
     this.changeSituation(0);
     this.onLoading = false;
+    this.sessionStorage.store(PLANT_SESSION_COLLECTION, newPlantArr);
   }
 
   async updateDataByType(updateType: string): Promise<void> {

@@ -1,7 +1,7 @@
-<app-page-layout [onLoad]="false">
+<app-page-layout [scroll]="true" [onLoad]="false">
     <div class="page-content">
         <h6 class="text-center">Quản lý dữ liệu giàn</h6>
-        
+
         <div class="form-item">
             <span class="text">Khu vực vườn:</span>
             <select class="form-control form-control-sm" (change)="changeBlock($event.target.value)">
@@ -11,15 +11,21 @@
 
         <div class="form-item">
             <span class="text">Thứ tự máng:</span>
-            <select class="form-control form-control-sm">
+            <select class="form-control form-control-sm" (change)="selectTruss($event.target.value)">
                 <option *ngFor="let truss of trussArr" [value]="truss._id">{{ truss.block + truss.index }}</option>
             </select>
         </div>
 
         <div class="form-item">
-            <span class="text">Thứ tự máng:</span>
-            <input type="number" class="form-control form-control-sm">
+            <span class="text">Số lỗ tối đa:</span>
+            <input id="max-hole-ip" type="number" class="form-control form-control-sm" max="1200">
         </div>
+
+        <app-collapse [collapseId]="'collapse1'" [headerContent]="'Ngay 1 thang 5 nam 2020'">
+            <div class="collapse-body-content">
+
+            </div>
+        </app-collapse>
     </div>
 
     <div class="footer">
