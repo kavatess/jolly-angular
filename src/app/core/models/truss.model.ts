@@ -1,3 +1,5 @@
+import { BasicPlant } from "./plant.model";
+
 export class Status {
     date: string;
     plantNumber: number;
@@ -21,4 +23,12 @@ export class Truss {
     imgSrc: string;
     plantColor: string;
     numberPerKg: number;
+}
+
+export interface History extends BasicPlant {
+    _id: string;
+    trussId: string;
+    plantId: string;
+    startDate: string;
+    realStatus: Status[];
 }

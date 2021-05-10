@@ -1,19 +1,22 @@
 .page-content {
     padding: 7px;
     padding-bottom: 0px;
-    .form-item {
-        width: 100%;
-        display: inline-flex;
-        justify-content: center;
-        margin-bottom: 5px;
-        span {
-            flex: 4;
-            display: flex;
-            align-items: center;
-        }
-        select,
-        input {
-            flex: 6;
+    .input-group{
+        margin-bottom: 7px;
+        .form-item {
+            width: 100%;
+            display: inline-flex;
+            justify-content: center;
+            margin-bottom: 5px;
+            span {
+                flex: 4;
+                display: flex;
+                align-items: center;
+            }
+            select,
+            input {
+                flex: 6;
+            }
         }
     }
 }

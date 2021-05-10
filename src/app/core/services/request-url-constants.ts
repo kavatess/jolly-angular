@@ -14,7 +14,7 @@ export const TRUSS_REQUEST = {
     clearTruss: TRUSS_REQUEST_HEAD + '/clear',
     updateMaxHole: TRUSS_REQUEST_HEAD + '/update/maxhole',
     revertStatus: TRUSS_REQUEST_HEAD + '/revert/status',
-    getTimelineById: TRUSS_REQUEST_HEAD + '/timeline'
+    getTimelineById: TRUSS_REQUEST_HEAD + '/history'
 }
 export const PLANT_REQUEST = {
     getPlantData: PLANT_REQUEST_HEAD,

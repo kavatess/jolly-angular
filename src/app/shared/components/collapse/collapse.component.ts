@@ -1,19 +1,23 @@
-import { AfterContentChecked, Component, Input } from '@angular/core';
+import { Component, DoCheck, Input } from '@angular/core';
 
 @Component({
   selector: 'app-collapse',
   templateUrl: './collapse.component.html',
   styleUrls: ['./collapse.component.scss']
 })
-export class CollapseComponent implements AfterContentChecked {
+export class CollapseComponent implements DoCheck {
   @Input() collapseId = '';
-  @Input() headerContent = '';
+  @Input() title = '';
   active = false;
 
   constructor() { }
 
-  ngAfterContentChecked(): void {
-    const collapseBtn = $('#btn-' + this.collapseId);
+  toggleCollapse(): void {
+    this.active = !this.active;
+  }
+
+  ngDoCheck(): void {
+    const collapseBtn = $(`#btn-${this.collapseId}`);
     collapseBtn.attr('data-target', `#${this.collapseId}`);
     collapseBtn.attr('aria-controls', this.collapseId);
   }

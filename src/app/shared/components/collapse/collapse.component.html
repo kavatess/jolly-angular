@@ -1,12 +1,12 @@
 <div id="accordion">
     <div class="card">
-        <button class="btn card-header" [id]=" 'btn-' + collapseId " data-toggle="collapse" data-target="#collapseOne"
-            aria-expanded="false" aria-controls="collapseOne" (click)="active = !active">
+        <button class="btn card-header" [id]=" 'btn-' + collapseId " data-toggle="collapse"
+            data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" (click)="toggleCollapse()">
             <span class="fa-icon">
                 <i *ngIf="!active" class="fas fa-chevron-right"></i>
                 <i *ngIf="active" class="fas fa-chevron-down"></i>
             </span>
-            <span class="text">{{ headerContent }}</span>
+            <span class="text">{{ title }}</span>
         </button>
 
         <div [id]="collapseId" class="collapse" data-parent="#accordion">

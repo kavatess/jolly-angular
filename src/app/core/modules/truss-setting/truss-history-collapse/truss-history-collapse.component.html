@@ -1,0 +1,15 @@
+<app-collapse [collapseId]=" 'his-' + history._id " [title]="collapseTitle">
+    <div class="collapse-body-content">
+        <div class="truss-info">
+            <span class="text">Trồng cây:</span>
+            <span class="text">{{ history.plantName }}</span>
+        </div>
+
+        <div class="truss-info">
+            <span class="text">Ngày trồng:</span>
+            <span class="text">{{ history.startDate | date: 'dd/MM/yyyy' }}</span>
+        </div>
+
+        <app-truss-timeline [history]="history"></app-truss-timeline>
+    </div>
+</app-collapse>

@@ -1,1 +1,18 @@
-<p>truss-timeline works!</p>
+<div *ngFor="let status of history.realStatus; let i=index" class="truss-status">
+    <span class="growth-info">
+        <span class="fa-icon">
+            <i [class]="status.plantGrowth | plant_status_icon"></i>
+        </span>
+        <span class="text">{{ status.plantGrowth | plant_growth_str }}</span>
+    </span>
+
+    <span class="date-info">
+        <span class="fa-icon">
+            <i class="far fa-calendar-alt"></i>
+        </span>
+        <span class="text">{{ status.date | date: 'dd/MM/yyyy' }}</span>
+    </span>
+
+    <app-progress-bar [striped]="true" [height]="'25px'" [color]="history.plantColor" [content]="progressBarContent[i]"
+        [percentage]="percentageArr[i]"></app-progress-bar>
+</div>
