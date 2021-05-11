@@ -3,11 +3,11 @@ import { CommonModule } from '@angular/common';
 import { TrussSettingComponent } from './truss-setting.component';
 import { PageLayoutModule } from 'src/app/shared/components/page-layout/page-layout.module';
 import { RouterModule } from '@angular/router';
-import { TrussTimelineModule } from './truss-timeline/truss-timeline.module';
-import { CollapseModule } from 'src/app/shared/components/collapse/collapse.module';
+import { TrussRecentStatusCardModule } from './truss-recent-status-card/truss-recent-status-card.module';
+import { TrussHistoryListModule } from './truss-history-list/truss-history-list.module';
 
 @NgModule({
   declarations: [TrussSettingComponent],
-  imports: [CommonModule, PageLayoutModule, RouterModule, TrussTimelineModule, CollapseModule]
+  imports: [CommonModule, PageLayoutModule, RouterModule, TrussRecentStatusCardModule, TrussHistoryListModule]
 })
 export class TrussSettingModule { }

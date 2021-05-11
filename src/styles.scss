@@ -194,6 +194,21 @@ hr {
     padding: 14px;
 }
 
+.footer-btn-group {
+    width: 100%;
+    height: 100%;
+    padding: 10px 3px 10px 3px;
+    .left-btn-container {
+        float: left !important;
+    }
+    .right-btn-container {
+        float: right !important;
+    }
+    @media screen and (max-width: 340px) {
+        padding: 5px;
+    }
+}
+
 @media screen and (min-height: 700px) {
     .modal-body {
         max-height: 525px;

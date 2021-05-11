@@ -1,0 +1,16 @@
+<div id="recent-status-info" class="card">
+    <div class="card-header">
+        <h6 class="text-center">Tình trạng hiện tại của giàn</h6>
+    </div>
+
+    <div class="card-body">
+        <ng-template [ngIf]="truss.realStatus.length">
+            <app-truss-timeline [history]="truss" [maxHole]="truss.maxHole">
+            </app-truss-timeline>
+        </ng-template>
+
+        <ng-template [ngIf]="!truss.realStatus.length">
+            <div class="text text-center">Máng hiện đang trống.</div>
+        </ng-template>
+    </div>
+</div>
