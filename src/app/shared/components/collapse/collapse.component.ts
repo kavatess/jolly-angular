@@ -7,14 +7,8 @@ import { Component, DoCheck, Input } from '@angular/core';
 })
 export class CollapseComponent implements DoCheck {
   @Input() collapseId = '';
-  @Input() title = '';
-  active = false;
 
   constructor() { }
-
-  toggleCollapse(): void {
-    this.active = !this.active;
-  }
 
   ngDoCheck(): void {
     const collapseBtn = $(`#btn-${this.collapseId}`);

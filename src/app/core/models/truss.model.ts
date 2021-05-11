@@ -6,23 +6,29 @@ export class Status {
     plantGrowth: number;
 }
 
-export class Truss {
+class BasicTrussInfo {
     _id: string;
     block: string;
     index: number;
     maxHole: number;
     plantId: string;
     startDate: string;
+}
+
+export class Truss extends BasicTrussInfo {
+    plantName: string;
+    imgSrc: string;
+    plantColor: string;
+    numberPerKg: number;
     plantNumber: number;
     plantGrowth: number;
     harvestDate: string;
     mediumGrowthDate: string;
     percentage: number;
-    // Plant info
-    plantName: string;
-    imgSrc: string;
-    plantColor: string;
-    numberPerKg: number;
+}
+
+export class RawTruss extends BasicTrussInfo {
+    realStatus: Status[];
 }
 
 export interface History extends BasicPlant {

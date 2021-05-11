@@ -1,4 +1,14 @@
-<div *ngFor="let status of history.realStatus; let i=index" class="truss-status">
+<div class="truss-info">
+    <span class="text">Trồng cây:</span>
+    <span class="text text-thick" [style.color]="history.plantColor">{{ history.plantName }}</span>
+</div>
+
+<div class="truss-info">
+    <span class="text">Ngày trồng:</span>
+    <span class="text text-thick" [style.color]="history.plantColor">{{ history.startDate | date: 'dd/MM/yyyy' }}</span>
+</div>
+
+<div *ngFor="let status of history.realStatus; let i = index" class="truss-status">
     <span class="growth-info">
         <span class="fa-icon">
             <i [class]="status.plantGrowth | plant_status_icon"></i>
@@ -13,6 +23,5 @@
         <span class="text">{{ status.date | date: 'dd/MM/yyyy' }}</span>
     </span>
 
-    <app-progress-bar [striped]="true" [height]="'25px'" [color]="history.plantColor" [content]="progressBarContent[i]"
-        [percentage]="percentageArr[i]"></app-progress-bar>
+    <app-progress-bar [striped]="true" [height]="'25px'" [color]="history.plantColor" [maxHole]="maxHole" [plantNumber]="status.plantNumber"></app-progress-bar>
 </div>

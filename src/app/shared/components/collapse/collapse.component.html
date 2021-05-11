@@ -1,17 +1,16 @@
 <div id="accordion">
     <div class="card">
         <button class="btn card-header" [id]=" 'btn-' + collapseId " data-toggle="collapse"
-            data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" (click)="toggleCollapse()">
+            data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
             <span class="fa-icon">
-                <i *ngIf="!active" class="fas fa-chevron-right"></i>
-                <i *ngIf="active" class="fas fa-chevron-down"></i>
+                <i class="far fa-bookmark"></i>
             </span>
-            <span class="text">{{ title }}</span>
+            <ng-content select=".collapse-header"></ng-content>
         </button>
 
         <div [id]="collapseId" class="collapse" data-parent="#accordion">
             <div class="card-body">
-                <ng-content select=".collapse-body-content"></ng-content>
+                <ng-content select=".collapse-body"></ng-content>
             </div>
         </div>
     </div>

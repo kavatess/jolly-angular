@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { BLOCK_ARR, TRUSS_SESSION_COLLECTION } from 'src/app/app-constants';
+import { BLOCK_ARR, RAW_TRUSS_SESSION_COLLECTION } from 'src/app/app-constants';
 import { SessionService } from 'src/app/shared/services/session.service';
-import { History, Truss } from '../../models/truss.model';
+import { History, RawTruss } from '../../models/truss.model';
 import { GetHistoryDataService } from '../../services/truss/get-history-data.service';
 
 @Component({
@@ -11,8 +11,8 @@ import { GetHistoryDataService } from '../../services/truss/get-history-data.ser
 })
 export class TrussSettingComponent implements OnInit {
   blockArr: string[] = BLOCK_ARR;
-  trussArr: Truss[] = [];
-  selectedTruss: Truss = new Truss();
+  trussArr: RawTruss[] = [];
+  selectedTruss: RawTruss = null;
   historyArr: History[] = [];
 
   constructor(private sessionStorage: SessionService, private getHistoryService: GetHistoryDataService) { }
@@ -21,8 +21,8 @@ export class TrussSettingComponent implements OnInit {
     this.changeBlock(this.blockArr[0]);
   }
 
-  async changeBlock(block: string) {
-    this.trussArr = await this.sessionStorage.getAsync(TRUSS_SESSION_COLLECTION + block);
+  async changeBlock(block: string): Promise<void> {
+    this.trussArr = await this.sessionStorage.getAsync(RAW_TRUSS_SESSION_COLLECTION + block);
     this.trussArr = this.trussArr.filter(truss => truss != null).sort((a, b) => a.index - b.index);
     this.selectTruss(this.trussArr[0]._id);
   }

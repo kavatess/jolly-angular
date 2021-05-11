@@ -1,4 +1,4 @@
-import { Component, DoCheck, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { History } from 'src/app/core/models/truss.model';
 
 @Component({
@@ -6,18 +6,11 @@ import { History } from 'src/app/core/models/truss.model';
   templateUrl: './truss-timeline.component.html',
   styleUrls: ['./truss-timeline.component.scss']
 })
-export class TrussTimelineComponent implements DoCheck {
+export class TrussTimelineComponent implements OnInit {
   @Input() history: History = null;
-  progressBarContent = [];
-  percentageArr = [];
+  @Input() maxHole = 0;
 
   constructor() { }
 
-  ngDoCheck(): void {
-    this.history.realStatus.forEach(status => {
-      const maxNum = this.history.realStatus[0].plantNumber;
-      this.progressBarContent.push(`${status.plantNumber}/ ${maxNum}`);
-      this.percentageArr.push(status.plantNumber / maxNum * 100);
-    });
-  }
+  ngOnInit(): void { }
 }

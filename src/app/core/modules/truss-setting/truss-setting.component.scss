@@ -1,7 +1,7 @@
 .page-content {
     padding: 7px;
     padding-bottom: 0px;
-    .input-group{
+    #input-group {
         margin-bottom: 7px;
         .form-item {
             width: 100%;
@@ -16,6 +16,20 @@
             select,
             input {
                 flex: 6;
+            }
+        }
+    }
+    #recent-status-info {
+        margin-bottom: 10px;
+        h6 {
+            margin-bottom: 0;
+        }
+    }
+    #history-info {
+        .collapse-header {
+            .fa-icon {
+                margin-right: 20px;
+                margin-left: 20px;
             }
         }
     }

@@ -1,12 +1,23 @@
+.truss-info {
+    width: 100%;
+    display: inline-flex;
+    span:nth-child(1) {
+        flex: 4;
+    }
+    span:nth-child(2) {
+        flex: 6;
+    }
+}
+
 .truss-status {
     width: 100%;
-    margin-top: 15px;
+    margin-top: 12px;
     .growth-info {
         float: left;
-        margin-bottom: 3px;
+        margin-bottom: 2px;
     }
     .date-info {
         float: right;
-        margin-bottom: 3px;
+        margin-bottom: 2px;
     }
 }
