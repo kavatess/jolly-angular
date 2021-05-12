@@ -21,10 +21,10 @@ export class TrussSettingComponent implements OnInit {
     this.changeBlock(this.blockArr[0]);
   }
 
-  async changeBlock(block: string): Promise<void> {
+  async changeBlock(block: string, trussId: string = null): Promise<void> {
     this.trussArr = await this.sessionStorage.getAsync(RAW_TRUSS_SESSION_COLLECTION + block);
     this.trussArr = this.trussArr.filter(truss => truss != null).sort((a, b) => a.index - b.index);
-    this.selectTruss(this.trussArr[0]._id);
+    this.selectTruss(trussId || this.trussArr[0]._id);
   }
 
   selectTruss(trussId: string): void {

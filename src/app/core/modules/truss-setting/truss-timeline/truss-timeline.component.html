@@ -8,7 +8,7 @@
     <span class="text text-thick" [style.color]="history.plantColor">{{ history.startDate | date: 'dd/MM/yyyy' }}</span>
 </div>
 
-<div #status_container *ngFor="let status of history.realStatus; let i = index" class="truss-status" (click)="selectTrussStatus(status_container)">
+<div #status_container *ngFor="let status of history.realStatus; let i = index" class="truss-status" (click)="selectTrussStatus(status_container, i)">
     <span class="growth-info">
         <span class="fa-icon">
             <i [class]="status.plantGrowth | plant_status_icon"></i>

@@ -23,19 +23,19 @@
             <!-- input display maxHole -->
             <div class="form-item">
                 <span class="text">Số lỗ tối đa:</span>
-                <input id="max-hole-ip" type="number" class="form-control form-control-sm" max="1200"
-                    readonly>
+                <input id="max-hole-ip" type="number" class="form-control form-control-sm" max="1200" readonly>
             </div>
         </div>
 
-        
+
         <ng-template [ngIf]="selectedTruss">
             <!-- Recent truss status -->
             <app-truss-recent-status-card [truss]="selectedTruss">
             </app-truss-recent-status-card>
 
             <!-- Modal revert status -->
-            <app-modal-revert-status *ngIf="selectedTruss.realStatus.length" [truss]="selectedTruss"></app-modal-revert-status>
+            <app-modal-revert-status *ngIf="selectedTruss.realStatus.length > 1" [truss]="selectedTruss" (revertEv)="changeBlock(selectedTruss.block, selectedTruss._id)">
+            </app-modal-revert-status>
         </ng-template>
 
         <ng-template [ngIf]="historyArr.length">
