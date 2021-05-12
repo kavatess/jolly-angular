@@ -1,6 +1,19 @@
 #recent-status-info {
     margin-bottom: 10px;
-    h6 {
-        margin-bottom: 0;
+    .card-header {
+        display: inline-flex;
+        h6 {
+            flex: 1;
+            display: inline-flex;
+            align-items: center;
+            margin-bottom: 0;
+        }
+        .btn {
+            padding: 0;
+        }
     }
+}
+
+.modal-body {
+    padding: 20px;
 }

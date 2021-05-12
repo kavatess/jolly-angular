@@ -1,16 +1,15 @@
 <div id="recent-status-info" class="card">
     <div class="card-header">
-        <h6 class="text-center">Tình trạng hiện tại của giàn</h6>
+        <h6>Tình trạng hiện tại của giàn</h6>
+        <button *ngIf="truss.realStatus.length" class="btn" data-toggle="modal" data-target="#revert-status">
+            <i class="fas fa-cog"></i>
+        </button>
     </div>
 
     <div class="card-body">
-        <ng-template [ngIf]="truss.realStatus.length">
-            <app-truss-timeline [history]="truss" [maxHole]="truss.maxHole">
-            </app-truss-timeline>
-        </ng-template>
+        <app-truss-timeline *ngIf="truss.realStatus.length" [history]="truss" [maxHole]="truss.maxHole">
+        </app-truss-timeline>
 
-        <ng-template [ngIf]="!truss.realStatus.length">
-            <div class="text text-center">Máng hiện đang trống.</div>
-        </ng-template>
+        <div *ngIf="!truss.realStatus.length" class="text text-center">Máng hiện đang trống.</div>
     </div>
 </div>

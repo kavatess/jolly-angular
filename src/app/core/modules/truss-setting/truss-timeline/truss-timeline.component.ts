@@ -13,4 +13,16 @@ export class TrussTimelineComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void { }
+
+  selectTrussStatus(clickedStatusEl: any): void {
+    const statusElArr = document.getElementsByClassName('truss-status');
+    for (let i = 0; i < statusElArr.length; i++) {
+      const statusEl = statusElArr.item(i);
+      if (statusEl == clickedStatusEl) {
+        statusEl.classList.toggle('active');
+        continue;
+      }
+      statusEl.classList.remove('active');
+    }
+  }
 }

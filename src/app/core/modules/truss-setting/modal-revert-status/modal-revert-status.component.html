@@ -1,0 +1,20 @@
+<app-modal [Id]="'revert-status'" [title]="'Thay đổi trạng thái của máng'">
+    <div modal-content>
+        <div class="modal-body">
+            <h6>Bạn hãy chọn tình trạng cần quay lại.</h6>
+
+            <app-truss-timeline *ngIf="truss.realStatus.length" [history]="truss" [maxHole]="truss.maxHole">
+            </app-truss-timeline>
+        </div>
+
+        <div class="modal-footer">
+            <!-- revert button -->
+            <button class="btn btn-sm btn-danger right-btn-container" (click)="revertStatus()">
+                <span class="fa-icon">
+                    <i class="fas fa-undo"></i>
+                </span>
+                <span class="text">Quay lại</span>
+            </button>
+        </div>
+    </div>
+</app-modal>

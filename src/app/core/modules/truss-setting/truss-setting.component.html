@@ -23,17 +23,23 @@
             <!-- input display maxHole -->
             <div class="form-item">
                 <span class="text">Số lỗ tối đa:</span>
-                <input id="max-hole-ip" type="number" class="form-control form-control-sm" max="1200">
+                <input id="max-hole-ip" type="number" class="form-control form-control-sm" max="1200"
+                    readonly>
             </div>
         </div>
 
-        <!-- Recent truss status -->
+        
         <ng-template [ngIf]="selectedTruss">
-            <app-truss-recent-status-card [truss]="selectedTruss"></app-truss-recent-status-card>
+            <!-- Recent truss status -->
+            <app-truss-recent-status-card [truss]="selectedTruss">
+            </app-truss-recent-status-card>
+
+            <!-- Modal revert status -->
+            <app-modal-revert-status *ngIf="selectedTruss.realStatus.length" [truss]="selectedTruss"></app-modal-revert-status>
         </ng-template>
 
-        <!-- Truss history list -->
         <ng-template [ngIf]="historyArr.length">
+            <!-- Truss history list -->
             <app-truss-history-list [historyArr]="historyArr" [truss]="selectedTruss"></app-truss-history-list>
         </ng-template>
 
@@ -49,14 +55,6 @@
                 <i class="fas fa-arrow-circle-left"></i>
             </span>
             <span class="text">Quay về</span>
-        </button>
-
-        <!-- Modify button -->
-        <button class="btn btn-sm btn-outline-success right-btn-container">
-            <span class="fa-icon">
-                <i class="fas fa-wrench"></i>
-            </span>
-            <span class="text">Thay đổi</span>
         </button>
     </div>
 </app-page-layout>
