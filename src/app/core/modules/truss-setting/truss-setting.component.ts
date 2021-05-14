@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BLOCK_ARR, RAW_TRUSS_SESSION_COLLECTION } from 'src/app/app-constants';
 import { SessionService } from 'src/app/shared/services/session.service';
-import { History, RawTruss } from '../../models/truss.model';
+import { TrussHistoryInfo, RawTruss } from '../../models/truss.model';
 import { GetHistoryDataService } from '../../services/truss/get-history-data.service';
 
 @Component({
@@ -13,7 +13,7 @@ export class TrussSettingComponent implements OnInit {
   blockArr: string[] = BLOCK_ARR;
   trussArr: RawTruss[] = [];
   selectedTruss: RawTruss = null;
-  historyArr: History[] = [];
+  historyArr: TrussHistoryInfo[] = [];
 
   constructor(private sessionStorage: SessionService, private getHistoryService: GetHistoryDataService) { }
 

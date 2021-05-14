@@ -31,10 +31,5 @@ export class RawTruss extends BasicTrussInfo {
     realStatus: Status[];
 }
 
-export interface History extends BasicPlant {
-    _id: string;
-    trussId: string;
-    plantId: string;
-    startDate: string;
-    realStatus: Status[];
+export interface TrussHistoryInfo extends BasicPlant, RawTruss {
 }
