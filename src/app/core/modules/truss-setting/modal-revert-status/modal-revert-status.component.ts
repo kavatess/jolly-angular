@@ -17,20 +17,20 @@ export class ModalRevertStatusComponent implements OnChanges {
 
   constructor(private revertStatusService: RevertStatusService, private sessionStorage: SessionService) { }
 
-  ngOnChanges(): void {
-  }
+  ngOnChanges(): void { }
 
   receiveStatusIndex(statusIndex: number): void {
     this.statusIndex = this.statusIndex == statusIndex ? -1 : statusIndex;
   }
 
   revertStatus(): void {
-    if (this.statusIndex > -1 && this.truss.realStatus.length > 1) {
+    if (this.statusIndex > -1) {
       this.onLoad = true;
       this.revertStatusService.revertStatus(this.truss._id, this.statusIndex).subscribe(_response => {
         this.sessionStorage.restore(RAW_TRUSS_SESSION_COLLECTION + this.truss.block);
         this.revertEv.emit();
         this.onLoad = false;
+        $('.close').click();
       });
       this.statusIndex = -1;
     }

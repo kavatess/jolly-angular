@@ -13,10 +13,10 @@
             </div>
 
             <!-- select truss -->
-            <div class="form-item">
+            <div *ngIf="trussArr.length" class="form-item">
                 <span class="text">Thứ tự máng:</span>
                 <select class="form-control form-control-sm" (change)="selectTruss($event.target.value)">
-                    <option *ngFor="let truss of trussArr" [value]="truss._id">{{ truss.block + truss.index }}</option>
+                    <option *ngFor="let truss of trussArr" [value]="truss._id" [selected]="selectedTruss._id == truss._id">{{ truss.block + truss.index }}</option>
                 </select>
             </div>
 
@@ -27,14 +27,13 @@
             </div>
         </div>
 
-
         <ng-template [ngIf]="selectedTruss">
             <!-- Recent truss status -->
             <app-truss-recent-status-card [truss]="selectedTruss">
             </app-truss-recent-status-card>
 
             <!-- Modal revert status -->
-            <app-modal-revert-status *ngIf="selectedTruss.realStatus.length > 1" [truss]="selectedTruss" (revertEv)="changeBlock(selectedTruss.block, selectedTruss._id)">
+            <app-modal-revert-status [truss]="selectedTruss" (revertEv)="changeBlock(selectedTruss.block, selectedTruss._id)">
             </app-modal-revert-status>
         </ng-template>
 
