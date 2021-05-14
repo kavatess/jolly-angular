@@ -7,23 +7,36 @@
             <!-- select block -->
             <div class="form-item">
                 <span class="text">Khu vực vườn:</span>
-                <select class="form-control form-control-sm" (change)="changeBlock($event.target.value)">
-                    <option *ngFor="let block of blockArr" [value]="block">{{ block }}</option>
-                </select>
+
+                <span class="input-container">
+                    <select class="form-control form-control-sm" (change)="changeBlock($event.target.value)">
+                        <option *ngFor="let block of blockArr" [value]="block">{{ block }}</option>
+                    </select>
+                </span>
             </div>
 
             <!-- select truss -->
-            <div *ngIf="trussArr.length" class="form-item">
+            <div class="form-item">
                 <span class="text">Thứ tự máng:</span>
-                <select class="form-control form-control-sm" (change)="selectTruss($event.target.value)">
-                    <option *ngFor="let truss of trussArr" [value]="truss._id" [selected]="selectedTruss._id == truss._id">{{ truss.block + truss.index }}</option>
-                </select>
+
+                <span class="input-container">
+                    <select class="form-control form-control-sm" (change)="selectTruss($event.target.value)">
+                        <option *ngFor="let truss of trussArr" [value]="truss._id"
+                            [selected]="selectedTruss._id == truss._id">{{ truss.block + truss.index }}</option>
+                    </select>
+                </span>
             </div>
 
             <!-- input display maxHole -->
             <div class="form-item">
                 <span class="text">Số lỗ tối đa:</span>
-                <input id="max-hole-ip" type="number" class="form-control form-control-sm" max="1200" readonly>
+
+                <span class="input-container">
+                    <input id="max-hole-ip" type="number" class="form-control form-control-sm" max="1200" readonly>
+                    <button class="btn btn-outline-success" data-toggle="modal" data-target="#revert-status">
+                        <i class="fas fa-tools"></i>
+                    </button>
+                </span>
             </div>
         </div>
 
@@ -32,9 +45,9 @@
             <app-truss-recent-status-card [truss]="selectedTruss">
             </app-truss-recent-status-card>
 
-            <!-- Modal revert status -->
-            <app-modal-revert-status [truss]="selectedTruss" (revertEv)="changeBlock(selectedTruss.block, selectedTruss._id)">
-            </app-modal-revert-status>
+            <!-- Modal setting -->
+            <app-modal-truss-setting [truss]="selectedTruss"
+                (updateEv)="changeBlock(selectedTruss.block, selectedTruss._id)"></app-modal-truss-setting>
         </ng-template>
 
         <ng-template [ngIf]="historyArr.length">
@@ -43,7 +56,7 @@
         </ng-template>
 
         <ng-template [ngIf]="!selectedTruss">
-            <div class="text">Dữ liệu về máng không tồn tại.</div>
+            <div class="text">Dữ liệu máng hiện đang trống.</div>
         </ng-template>
     </div>
 

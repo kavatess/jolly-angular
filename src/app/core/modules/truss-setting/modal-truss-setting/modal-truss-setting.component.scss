@@ -1,0 +1,22 @@
+.modal-body {
+    padding: 5px;
+    .card {
+        .card-body {
+            .text {
+                padding-left: 5px;
+                font-style: italic;
+            }
+            .input-container {
+                width: 100%;
+                margin-top: 5px;
+                display: inline-flex;
+                i {
+                    font-size: 38px;
+                }
+                input {
+                    margin-left: 10px;
+                }
+            }
+        }
+    }
+}

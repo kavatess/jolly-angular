@@ -13,9 +13,13 @@
                 display: flex;
                 align-items: center;
             }
-            select,
-            input {
+            .input-container {
                 flex: 6;
+            }
+            .btn {
+                height: 31px;
+                padding: .25rem .75rem;
+                margin-left: 5px;
             }
         }
     }

@@ -21,7 +21,8 @@
 
             <!-- Else after updated new data, show the content -->
             <ng-template [ngIf]="!onLoad">
-                <ng-content select="[modal-content]"></ng-content>
+                <ng-content select=".modal-body"></ng-content>
+                <ng-content select=".modal-footer"></ng-content>
             </ng-template>
         </div>
     </div>

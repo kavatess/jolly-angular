@@ -5,7 +5,7 @@ import { PageLayoutModule } from 'src/app/shared/components/page-layout/page-lay
 import { RouterModule } from '@angular/router';
 import { TrussRecentStatusCardModule } from './truss-recent-status-card/truss-recent-status-card.module';
 import { TrussHistoryListModule } from './truss-history-list/truss-history-list.module';
-import { ModalRevertStatusModule } from './modal-revert-status/modal-revert-status.module';
+import { ModalTrussSettingModule } from './modal-truss-setting/modal-truss-setting.module';
 
 @NgModule({
   declarations: [TrussSettingComponent],
@@ -15,7 +15,7 @@ import { ModalRevertStatusModule } from './modal-revert-status/modal-revert-stat
     RouterModule,
     TrussRecentStatusCardModule,
     TrussHistoryListModule,
-    ModalRevertStatusModule
+    ModalTrussSettingModule
   ]
 })
 export class TrussSettingModule { }
