@@ -1,0 +1,70 @@
+<app-modal [Id]="'revert-status'" [title]="'Thay đổi dữ liệu máng'" [onLoad]="onLoad">
+    <div class="modal-body">
+        <!-- modify truss maxhole card -->
+        <div class="card">
+            <div class="card-header">
+                <h6 class="text-center">Nhập liệu số lỗ tối đa của máng {{ truss.block + truss.index }}</h6>
+            </div>
+
+            <div class="card-body">
+                <div class="text">
+                    - Bạn hãy nhập số lượng lỗ tối đa của máng vào ô trống dưới đây.
+                </div>
+
+                <div class="text">
+                    - Xin chú ý: dữ liệu này ảnh hưởng rất nhiều đến những dữ liệu khác.
+                </div>
+
+                <div class="text">
+                    - Xin vui lòng nhập chính xác.
+                </div>
+
+                <span class="input-container">
+                    <i class="fas fa-success fa-tree"></i>
+                    <input id="update-maxhole-input" type="number" class="form-control" max="1200" [formControl]="maxHoleCtrl">
+                </span>
+            </div>
+
+            <div class="card-footer">
+                <div class="footer-btn-group">
+                    <!-- modify button -->
+                    <button class="btn btn-sm btn-success right-btn-container"
+                        (click)="modifyTrussMaxHole()" [disabled]="!isValidMaxHole">
+                        <span class="fa-icon">
+                            <i class="fas fa-wrench"></i>
+                        </span>
+                        <span class="text">Thay đổi</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- revert status card -->
+        <div *ngIf="truss.realStatus.length > 1" class="card">
+            <div class="card-header">
+                <h6 class="text-center">Quay lại trạng thái cũ của máng {{ truss.block + truss.index }}</h6>
+            </div>
+
+            <div class="card-body">
+                <div class="text">Bạn hãy chọn tình trạng cần quay lại.</div>
+
+                <app-truss-timeline [history]="truss" [maxHole]="truss.maxHole" [clickEv]="true"
+                    (clickedStatus)="receiveStatusIndex($event)">
+                </app-truss-timeline>
+            </div>
+
+            <div class="card-footer">
+                <div class="footer-btn-group">
+                    <!-- revert button -->
+                    <button class="btn btn-sm btn-danger right-btn-container" (click)="revertStatus()"
+                        [disabled]="!isValidStatusIndex">
+                        <span class="fa-icon">
+                            <i class="fas fa-undo"></i>
+                        </span>
+                        <span class="text">Quay lại</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</app-modal>

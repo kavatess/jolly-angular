@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { History } from 'src/app/core/models/truss.model';
+import { TrussHistoryInfo } from 'src/app/core/models/truss.model';
 
 @Component({
   selector: 'app-truss-timeline',
@@ -7,7 +7,7 @@ import { History } from 'src/app/core/models/truss.model';
   styleUrls: ['./truss-timeline.component.scss']
 })
 export class TrussTimelineComponent implements OnInit {
-  @Input() history: History = null;
+  @Input() history: TrussHistoryInfo = null;
   @Input() maxHole = 0;
   @Input() clickEv = false;
   @Output() clickedStatus = new EventEmitter();
