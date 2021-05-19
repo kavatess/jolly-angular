@@ -1,0 +1,11 @@
+<div class="modal-body">
+    <h6 class="text-center">Danh sách hạt đã sẵn sàng</h6>
+    <app-modal-seed-management [isReadySeed]="true" [clickEventActivated]="true" (seedElClick)="selectedSeed = $event">
+    </app-modal-seed-management>
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-success" [disabled]="!selectedSeed._id || !clickedTruss._id" (click)="createTruss()">Tạo
+        giàn</button>
+    <button class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+</div>

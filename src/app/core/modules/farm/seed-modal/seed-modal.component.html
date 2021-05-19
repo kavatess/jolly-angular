@@ -1,0 +1,16 @@
+<app-modal [Id]="'seed_modal'" [title]="'Danh sách hạt đang ươm'" [onLoad]="onReloading">
+    <!-- Seed management mode -->
+    <div *ngIf="!isCreateSeedMode" modal-content>
+        <div class="modal-body">
+            <app-modal-seed-management></app-modal-seed-management>
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn btn-info" (click)="switchModeTo(true)">Ươm hạt mới</button>
+            <button class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+        </div>
+    </div>
+
+    <!-- Create seed modal comp -->
+    <app-modal-create-seed *ngIf="isCreateSeedMode" modal-content></app-modal-create-seed>
+</app-modal>

@@ -1,1 +1,104 @@
-<p>farm works!</p>
+<app-page-layout [onLoad]="!dataReady" [loadTimeOut]="2000">
+    <div class="page-content">
+        <!-- Map of farm -->
+        <div class="farm-container">
+            <ng-template [ngIf]="selectedBlock == 'A'">
+                <div class="farm-main-container">
+                    <div class="farm-middle-container">
+                        <!-- truss array A -->
+                        <app-farm-block [block]="'A'" [farmComponent]="this">
+                        </app-farm-block>
+                    </div>
+                    <div class="farm-right-container">
+                        <div class="seed-table">
+                            <!-- seed nursery table -->
+                            <button class="btn btn-info seed-table-vertical" data-toggle="modal"
+                                data-target="#seed_modal"></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="farm-bottom-container">
+                    <div class="seed-table">
+                        <!-- seed nursery table -->
+                        <button class="btn btn-info seed-table-horizontal" data-toggle="modal"
+                            data-target="#seed_modal"></button>
+                    </div>
+                </div>
+            </ng-template>
+
+            <!-- farm in block B -->
+            <ng-template [ngIf]="selectedBlock == 'B'">
+                <div class="farm-main-container">
+                    <div class="farm-left-container">
+                        <!-- truss array BN -->
+                        <app-farm-block [block]="'BN'" [farmComponent]="this">
+                        </app-farm-block>
+                    </div>
+                    <div class="farm-middle-container">
+                        <!-- truss array B -->
+                        <app-farm-block [block]="'B'" [farmComponent]="this">
+                        </app-farm-block>
+                    </div>
+                    <div class="farm-right-container">
+                        <!-- truss array BS -->
+                        <app-farm-block [block]="'BS'" [farmComponent]="this">
+                        </app-farm-block>
+                    </div>
+                </div>
+            </ng-template>
+
+            <!-- farm in block C & D -->
+            <ng-template [ngIf]="selectedBlock == 'C'">
+                <div class="farm-main-container farm-card-group">
+                    <div class="farm-middle-container">
+                        <div class="card text-center">
+                            <div class="card-header">
+                                Tầng 1 vườn C
+                            </div>
+                            <div class="card-body">
+                                <!-- truss array C -->
+                                <app-farm-block [block]="'C'" [farmComponent]="this">
+                                </app-farm-block>
+                            </div>
+                        </div>
+
+                        <div class="card text-center">
+                            <div class="card-header">
+                                Tầng 2 vườn C
+                            </div>
+                            <div class="card-body">
+                                <!-- truss array CT -->
+                                <app-farm-block [block]="'CT'" [farmComponent]="this">
+                                </app-farm-block>
+                            </div>
+                        </div>
+
+                        <div class="card text-center">
+                            <div class="card-header">
+                                Vườn D
+                            </div>
+                            <div class="card-body">
+                                <!-- truss array D -->
+                                <app-farm-block [block]="'D'" [farmComponent]="this">
+                                </app-farm-block>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </div>
+
+        <!-- Modal truss information -->
+        <app-farm-modal [clickedTruss]="clickedTruss" (onUpdate)="trussUpdatedEvHandler($event)">
+        </app-farm-modal>
+
+        <!-- Modal for seed table -->
+        <app-seed-modal></app-seed-modal>
+    </div>
+
+    <!-- select group -->
+    <div class="footer">
+        <app-select (selectChange)="selectChangeHandler($event)"></app-select>
+    </div>
+</app-page-layout>

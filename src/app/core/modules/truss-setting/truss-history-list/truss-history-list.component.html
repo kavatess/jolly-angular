@@ -1,0 +1,19 @@
+<div id="history-info">
+    <h6>Lịch sử giàn rau {{ truss.block + truss.index }}</h6>
+
+    <app-collapse *ngFor="let history of historyArr" [collapseId]=" 'his-' + history._id ">
+        <div class="collapse-header">
+            <span class="text">{{ history.startDate | date: 'dd/MM/yyyy' }}</span>
+            <span class="fa-icon">
+                <i class="fas fa-arrow-alt-circle-right"></i>
+            </span>
+            <span class="text">{{ history.realStatus[history.realStatus.length - 1].date | date:
+                'dd/MM/yyyy'
+                }}</span>
+        </div>
+    
+        <div class="collapse-body">
+            <app-truss-timeline [history]="history" [maxHole]="truss.maxHole"></app-truss-timeline>
+        </div>
+    </app-collapse>
+</div>

@@ -23,5 +23,4 @@ export class StatisticsComponent implements OnInit {
       this.statArr = newStats;
     });
   }
-
 }

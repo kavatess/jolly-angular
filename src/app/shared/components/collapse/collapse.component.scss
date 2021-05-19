@@ -1,0 +1,13 @@
+#accordion {
+    margin-bottom: 10px;
+    .card {
+        .card-header {
+            display: inline-flex;
+            align-items: center;
+            justify-content: flex-start;
+            .fa-icon {
+                margin-right: 20px;
+            }
+        }
+    }
+}

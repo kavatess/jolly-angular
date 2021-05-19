@@ -1,0 +1,22 @@
+form {
+    .form-item {
+        min-height: 60px;
+        margin-bottom: 15px;
+        label {
+            margin-bottom: 0.2rem;
+        }
+        img {
+            margin-top: 5px;
+        }
+        @media screen and (max-width: 900px) {
+            input,
+            select {
+                max-height: 33px;
+            }
+            input[type="file"] {
+                max-height: unset;
+                min-height: 44px;
+            }
+        }
+    }
+}

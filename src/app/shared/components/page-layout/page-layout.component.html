@@ -5,11 +5,7 @@
 
     <article [style.overflow]="scroll ? 'scroll' : ''">
         <ng-template [ngIf]="onLoad">
-            <div class="spinner-container">
-                <div class="spinner-border spinner-8rem text-success" role="status">
-                    <span class="sr-only">Loading...</span>
-                </div>
-            </div>
+            <app-circle-loading></app-circle-loading>
         </ng-template>
 
         <ng-template [ngIf]="!onLoad">

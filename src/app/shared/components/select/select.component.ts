@@ -1,8 +1,9 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { SessionStorageService } from 'ngx-webstorage';
 import { Subscription } from 'rxjs';
-import { FARM_LAST_BLOCK_COLLECTION, STAT_LAST_BLOCK_COLLECTION } from 'src/app/app-constants';
+import { FARM_LAST_BLOCK_COLLECTION, PLANT_SESSION_COLLECTION, STAT_LAST_BLOCK_COLLECTION } from 'src/app/app-constants';
+import { Plant } from 'src/app/core/models/plant.model';
+import { SessionService } from '../../services/session.service';
 
 @Component({
   selector: 'app-select',
@@ -10,6 +11,7 @@ import { FARM_LAST_BLOCK_COLLECTION, STAT_LAST_BLOCK_COLLECTION } from 'src/app/
   styleUrls: ['./select.component.scss']
 })
 export class SelectComponent implements OnInit, OnDestroy {
+  plantArr: Plant[] = [];
   @Input() isStatisticPage = false;
   selectGroup = new FormGroup({
     block: new FormControl(''),
@@ -19,11 +21,11 @@ export class SelectComponent implements OnInit, OnDestroy {
   subscription = new Subscription();
   @Output() selectChange = new EventEmitter();
 
-  constructor(public sessionService: SessionStorageService) { }
+  constructor(private sessionService: SessionService) { }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    this.plantArr = await this.sessionService.getAsync(PLANT_SESSION_COLLECTION);
     this.getLastBlockVal();
-    this.selectChange.emit(this.selectGroup.value); // Emit the first default value
     this.emitSelectValOnChange();
   }
 
@@ -52,5 +54,4 @@ export class SelectComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
-
 }
