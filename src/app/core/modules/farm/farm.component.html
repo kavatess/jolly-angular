@@ -6,8 +6,8 @@
                 <div class="farm-main-container">
                     <div class="farm-middle-container">
                         <!-- truss array A -->
-                        <app-farm-block [block]="'A'" [farmComponent]="this" (clickedTruss)="clickedTruss = $event"
-                            (loadDone)="dataReady = $event"></app-farm-block>
+                        <app-farm-block [block]="'A'" [farmComponent]="this">
+                        </app-farm-block>
                     </div>
                     <div class="farm-right-container">
                         <div class="seed-table">
@@ -32,18 +32,18 @@
                 <div class="farm-main-container">
                     <div class="farm-left-container">
                         <!-- truss array BN -->
-                        <app-farm-block [block]="'BN'" [farmComponent]="this" (clickedTruss)="clickedTruss = $event"
-                            (loadDone)="dataReady = $event"></app-farm-block>
+                        <app-farm-block [block]="'BN'" [farmComponent]="this">
+                        </app-farm-block>
                     </div>
                     <div class="farm-middle-container">
                         <!-- truss array B -->
-                        <app-farm-block [block]="'B'" [farmComponent]="this" (clickedTruss)="clickedTruss = $event"
-                            (loadDone)="dataReady = $event"></app-farm-block>
+                        <app-farm-block [block]="'B'" [farmComponent]="this">
+                        </app-farm-block>
                     </div>
                     <div class="farm-right-container">
                         <!-- truss array BS -->
-                        <app-farm-block [block]="'BS'" [farmComponent]="this" (clickedTruss)="clickedTruss = $event"
-                            (loadDone)="dataReady = $event"></app-farm-block>
+                        <app-farm-block [block]="'BS'" [farmComponent]="this">
+                        </app-farm-block>
                     </div>
                 </div>
             </ng-template>
@@ -58,8 +58,7 @@
                             </div>
                             <div class="card-body">
                                 <!-- truss array C -->
-                                <app-farm-block [block]="'C'" [farmComponent]="this"
-                                    (clickedTruss)="clickedTruss = $event" (loadDone)="dataReady = $event">
+                                <app-farm-block [block]="'C'" [farmComponent]="this">
                                 </app-farm-block>
                             </div>
                         </div>
@@ -70,8 +69,7 @@
                             </div>
                             <div class="card-body">
                                 <!-- truss array CT -->
-                                <app-farm-block [block]="'CT'" [farmComponent]="this"
-                                    (clickedTruss)="clickedTruss = $event" (loadDone)="dataReady = $event">
+                                <app-farm-block [block]="'CT'" [farmComponent]="this">
                                 </app-farm-block>
                             </div>
                         </div>
@@ -82,8 +80,7 @@
                             </div>
                             <div class="card-body">
                                 <!-- truss array D -->
-                                <app-farm-block [block]="'D'" [farmComponent]="this"
-                                    (clickedTruss)="clickedTruss = $event" (loadDone)="dataReady = $event">
+                                <app-farm-block [block]="'D'" [farmComponent]="this">
                                 </app-farm-block>
                             </div>
                         </div>
@@ -93,7 +90,7 @@
         </div>
 
         <!-- Modal truss information -->
-        <app-farm-modal [clickedTruss]="clickedTruss" (onUpdate)="emitUpdateSeedEvent($event)">
+        <app-farm-modal [clickedTruss]="clickedTruss" (onUpdate)="trussUpdatedEvHandler($event)">
         </app-farm-modal>
 
         <!-- Modal for seed table -->
@@ -102,6 +99,6 @@
 
     <!-- select group -->
     <div class="footer">
-        <app-select (selectChange)="emitSelectChanges($event)"></app-select>
+        <app-select (selectChange)="selectChangeHandler($event)"></app-select>
     </div>
 </app-page-layout>

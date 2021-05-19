@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { SessionStorageService } from 'ngx-webstorage';
-import { FARM_LAST_BLOCK_COLLECTION, PLANT_SESSION_COLLECTION, TRUSS_SESSION_COLLECTION } from 'src/app/app-constants';
+import { FARM_LAST_BLOCK_COLLECTION } from 'src/app/app-constants';
+import { SessionService } from 'src/app/shared/services/session.service';
 import { Truss } from '../../models/truss.model';
 import { GetPlantDataService } from '../../services/plant/get-plant-data.service';
 
@@ -10,27 +10,67 @@ import { GetPlantDataService } from '../../services/plant/get-plant-data.service
   styleUrls: ['./farm.component.scss']
 })
 export class FarmComponent implements OnInit {
-  dataReady = false;
-  selectedBlock = '';
-  selectedPlantId = '';
-  selectedPlantGrowth = 0;
-  clickedTruss: Truss = new Truss();
+  private _dataReady = false;
+  private _selectedBlock = '';
+  private _selectedPlantId = '';
+  private _selectedPlantGrowth = 0;
+  private _clickedTruss: Truss = new Truss();
 
-  constructor(protected sessionStorage: SessionStorageService, protected getPlantService: GetPlantDataService) { }
+  constructor(protected sessionStorage: SessionService, protected getPlantService: GetPlantDataService) { }
 
-  emitSelectChanges({ block, plantId, plantGrowth }: any): void {
-    this.selectedBlock = block;
-    this.selectedPlantId = plantId;
-    this.selectedPlantGrowth = plantGrowth;
+  get dataReady(): boolean {
+    return this._dataReady;
   }
-  emitUpdateSeedEvent(clickedTruss: Truss): void {
-    this.clickedTruss = clickedTruss;
-    this.dataReady = false;
-    this.sessionStorage.clear(TRUSS_SESSION_COLLECTION + this.clickedTruss.block);
+
+  get selectedBlock(): string {
+    return this._selectedBlock;
+  }
+
+  get selectedPlantId(): string {
+    return this._selectedPlantId;
+  }
+
+  get selectedPlantGrowth(): number {
+    return this._selectedPlantGrowth;
+  }
+
+  get clickedTruss(): Truss {
+    return this._clickedTruss;
+  }
+
+  changeDataReadyTo(status: boolean): void {
+    this._dataReady = status;
+  }
+
+  private changeSelectedBlock(newBlock: string): void {
+    this._selectedBlock = newBlock;
+  }
+
+  private changeSelectedPlantId(newPlantId: string): void {
+    this._selectedPlantId = newPlantId;
+  }
+
+  private changeSelectedPlantGrowth(newPlantGrowth: number): void {
+    this._selectedPlantGrowth = Number(newPlantGrowth);
+  }
+
+  changeClickedTruss(newClickedTruss: Truss): void {
+    this._clickedTruss = newClickedTruss;
+  }
+
+  selectChangeHandler({ block, plantId, plantGrowth }: any): void {
+    this.changeSelectedBlock(block);
+    this.changeSelectedPlantId(plantId);
+    this.changeSelectedPlantGrowth(plantGrowth);
+  }
+
+  trussUpdatedEvHandler(newClickedTruss: Truss): void {
+    this.changeClickedTruss(newClickedTruss);
+    this.changeDataReadyTo(false);
   }
 
   ngOnInit(): void {
-    this.selectedBlock = this.sessionStorage.retrieve(FARM_LAST_BLOCK_COLLECTION) || 'A';
+    const lastBlock = this.sessionStorage.retrieve(FARM_LAST_BLOCK_COLLECTION) || 'A';
+    this.changeSelectedBlock(lastBlock);
   }
-
 }

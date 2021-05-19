@@ -25,5 +25,4 @@ export class SeedComponent implements OnInit {
       this.seedElClick.emit(this.seedEl);
     }
   }
-
 }

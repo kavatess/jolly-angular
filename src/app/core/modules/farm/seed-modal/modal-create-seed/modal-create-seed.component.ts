@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { SessionStorageService } from 'ngx-webstorage';
 import { PLANT_SESSION_COLLECTION } from 'src/app/app-constants';
+import { Plant } from 'src/app/core/models/plant.model';
 import { BasicSeedInfo, SimpleSeed } from 'src/app/core/models/seed.model';
-import { GetSeedDataService } from 'src/app/core/services/seed/get-seed-data.service';
 import { InsertSeedService } from 'src/app/core/services/seed/insert-seed.service';
+import { SessionService } from 'src/app/shared/services/session.service';
 import { SeedModalComponent } from '../seed-modal.component';
 
 @Component({
@@ -13,14 +13,16 @@ import { SeedModalComponent } from '../seed-modal.component';
   styleUrls: ['./modal-create-seed.component.scss']
 })
 export class ModalCreateSeedComponent extends SeedModalComponent implements OnInit {
+  plantArr: Plant[] = [];
   createSeedForm: FormGroup = new FormGroup({});
   seedCreatedArr: BasicSeedInfo[] = [];
 
-  constructor(public sessionStorage: SessionStorageService, protected getSeedService: GetSeedDataService, private addSeedService: InsertSeedService) {
-    super(sessionStorage, getSeedService);
+  constructor(protected sessionStorage: SessionService, private addSeedService: InsertSeedService) {
+    super(sessionStorage);
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    this.plantArr = await this.sessionStorage.getAsync(PLANT_SESSION_COLLECTION);
     this.initializeForm();
   }
 
@@ -33,13 +35,11 @@ export class ModalCreateSeedComponent extends SeedModalComponent implements OnIn
         Validators.maxLength(4)
       ])
     });
-    const plantArr = this.sessionStorage.retrieve(PLANT_SESSION_COLLECTION);
-    this.createSeedForm.setControl('plantId', new FormControl(plantArr[0]._id));
+    this.createSeedForm.setControl('plantId', new FormControl(this.plantArr[0]._id));
   }
 
   addNewSeed(): void {
-    const plantArr = this.sessionStorage.retrieve(PLANT_SESSION_COLLECTION);
-    const plantType = plantArr.find(({ _id }) => _id == this.createSeedForm.value.plantId);
+    const plantType = this.plantArr.find(({ _id }) => _id == this.createSeedForm.value.plantId);
     const newSeed = new BasicSeedInfo(this.createSeedForm.value, plantType);
     this.seedCreatedArr.push(newSeed);
   }
@@ -55,9 +55,8 @@ export class ModalCreateSeedComponent extends SeedModalComponent implements OnIn
       });
       this.addSeedService.insertManySeed(newSeedArr).subscribe(async (_response) => {
         await this.reloadData();
-        this.switchMode = false;
+        this.switchModeTo(false);
       });
     }
   }
-
 }

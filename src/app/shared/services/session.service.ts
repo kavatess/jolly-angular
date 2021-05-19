@@ -24,9 +24,9 @@ export class SessionService {
     return this.sessionStorage.store(colName, value);
   }
 
-  async restore(colName: string): Promise<void> {
+  async restore(colName: string): Promise<any> {
     this.sessionStorage.clear(colName);
-    await this.getAsync(colName);
+    return await this.getAsync(colName);
   }
 
   async getAsync(colName: string): Promise<any> {

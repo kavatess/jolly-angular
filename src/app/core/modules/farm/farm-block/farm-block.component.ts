@@ -1,9 +1,9 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { SessionStorageService } from 'ngx-webstorage';
+import { Component, DoCheck, Input, OnInit } from '@angular/core';
 import { TRUSS_SESSION_COLLECTION } from 'src/app/app-constants';
 import { Truss } from 'src/app/core/models/truss.model';
 import { GetPlantDataService } from 'src/app/core/services/plant/get-plant-data.service';
 import { GetTrussByBlockService } from 'src/app/core/services/truss/get-truss-by-block.service';
+import { SessionService } from 'src/app/shared/services/session.service';
 import { FarmComponent } from '../farm.component';
 
 @Component({
@@ -11,24 +11,16 @@ import { FarmComponent } from '../farm.component';
   templateUrl: './farm-block.component.html',
   styleUrls: ['./farm-block.component.scss']
 })
-export class FarmBlockComponent implements OnInit {
+export class FarmBlockComponent implements OnInit, DoCheck {
+  trussArr: Truss[] = [];
   @Input() block = '';
   @Input() farmComponent: FarmComponent = null;
-  @Output() clickedTruss = new EventEmitter<Truss>();
-  @Output() loadDone = new EventEmitter();
-  trussArr: Truss[] = [];
-  constructor(protected sessionStorage: SessionStorageService, protected getPlantService: GetPlantDataService, private getTrussService: GetTrussByBlockService) { }
 
-  ngOnInit(): void {
-    const trussCollection = TRUSS_SESSION_COLLECTION + this.block;
-    this.trussArr = this.sessionStorage.retrieve(trussCollection);
-    if (!this.trussArr) {
-      this.getTrussService.getTrussDataByBlock(this.block).subscribe(trussArr => {
-        this.trussArr = trussArr;
-        this.sessionStorage.store(trussCollection, trussArr);
-        this.loadDone.emit(true);
-      });
-    }
+  constructor(protected sessionStorage: SessionService, protected getPlantService: GetPlantDataService, private getTrussService: GetTrussByBlockService) { }
+
+  async ngOnInit(): Promise<void> {
+    this.trussArr = await this.sessionStorage.getAsync(TRUSS_SESSION_COLLECTION + this.block);
+    this.farmComponent.changeDataReadyTo(true);
   }
 
   ngDoCheck(): void {
@@ -36,5 +28,4 @@ export class FarmBlockComponent implements OnInit {
       this.ngOnInit();
     }
   }
-
 }

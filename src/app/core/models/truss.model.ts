@@ -24,7 +24,6 @@ export class Truss extends BasicTrussInfo {
     plantGrowth: number;
     harvestDate: string;
     mediumGrowthDate: string;
-    percentage: number;
 }
 
 export class RawTruss extends BasicTrussInfo {

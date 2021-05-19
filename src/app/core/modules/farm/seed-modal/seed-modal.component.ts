@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { SessionStorageService } from 'ngx-webstorage';
 import { SEED_SESSION_COLLECTION } from 'src/app/app-constants';
-import { GetSeedDataService } from 'src/app/core/services/seed/get-seed-data.service';
 import { ModalComp } from 'src/app/shared/base-component/base-modal.component';
+import { SessionService } from 'src/app/shared/services/session.service';
 
 @Component({
   selector: 'app-seed-modal',
@@ -10,34 +9,27 @@ import { ModalComp } from 'src/app/shared/base-component/base-modal.component';
   styleUrls: ['./seed-modal.component.scss']
 })
 export class SeedModalComponent extends ModalComp implements OnInit {
-  private static addSeedMode = false;
+  private static isCreateSeedMode = false;
 
-  constructor(public sessionStorage: SessionStorageService, protected getSeedService: GetSeedDataService) {
+  constructor(protected sessionStorage: SessionService) {
     super();
   }
 
-  get isAddMode(): boolean {
-    return SeedModalComponent.addSeedMode;
+  get isCreateSeedMode(): boolean {
+    return SeedModalComponent.isCreateSeedMode;
   }
-  set switchMode(mode: boolean) {
-    SeedModalComponent.addSeedMode = mode;
+  switchModeTo(mode: boolean) {
+    SeedModalComponent.isCreateSeedMode = mode;
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.changeLoadStatus(false);
-    if (!this.sessionStorage.retrieve(SEED_SESSION_COLLECTION)) {
-      this.getSeedService.getSeedData().subscribe(seedArr => {
-        this.sessionStorage.store(SEED_SESSION_COLLECTION, seedArr);
-      });
-    }
+    await this.sessionStorage.getAsync(SEED_SESSION_COLLECTION);
   }
 
   protected async reloadData(): Promise<void> {
     this.changeLoadStatus(true);
-    this.sessionStorage.clear(SEED_SESSION_COLLECTION);
-    const newSeedArr = await this.getSeedService.getSeedData().toPromise();
-    this.sessionStorage.store(SEED_SESSION_COLLECTION, newSeedArr);
+    await this.sessionStorage.restore(SEED_SESSION_COLLECTION);
     this.changeLoadStatus(false);
   }
-
 }

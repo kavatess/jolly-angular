@@ -17,7 +17,7 @@
 
                 <div class="form-input-container">
                     <select class="form-select form-select-sm" formControlName="plantId">
-                        <option *ngFor="let plant of sessionStorage.retrieve('plant-arr')" [value]="plant._id">
+                        <option *ngFor="let plant of plantArr" [value]="plant._id">
                             {{ plant.plantName }}
                         </option>
                     </select>
@@ -60,5 +60,5 @@
 
 <div class="modal-footer">
     <button class="btn btn-success" [disabled]="seedCreatedArr.length == 0" (click)="insertToDB()">Lưu</button>
-    <button class="btn btn-secondary" (click)="switchMode = false">Quay về</button>
+    <button class="btn btn-secondary" (click)="switchModeTo(false)">Quay về</button>
 </div>
