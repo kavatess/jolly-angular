@@ -1,0 +1,60 @@
+<app-page-layout [scroll]="true" [onLoad]="false">
+    <div class="page-content">
+        <!-- select group -->
+        <div id="input-group">
+            <h6 class="text-center">Quản lý dữ liệu giàn</h6>
+
+            <!-- select block -->
+            <div class="form-item">
+                <span class="text">Khu vực vườn:</span>
+                <select class="form-control form-control-sm" (change)="changeBlock($event.target.value)">
+                    <option *ngFor="let block of blockArr" [value]="block">{{ block }}</option>
+                </select>
+            </div>
+
+            <!-- select truss -->
+            <div class="form-item">
+                <span class="text">Thứ tự máng:</span>
+                <select class="form-control form-control-sm" (change)="selectTruss($event.target.value)">
+                    <option *ngFor="let truss of trussArr" [value]="truss._id">{{ truss.block + truss.index }}</option>
+                </select>
+            </div>
+
+            <!-- input display maxHole -->
+            <div class="form-item">
+                <span class="text">Số lỗ tối đa:</span>
+                <input id="max-hole-ip" type="number" class="form-control form-control-sm" max="1200" readonly>
+            </div>
+        </div>
+
+
+        <ng-template [ngIf]="selectedTruss">
+            <!-- Recent truss status -->
+            <app-truss-recent-status-card [truss]="selectedTruss">
+            </app-truss-recent-status-card>
+
+            <!-- Modal revert status -->
+            <app-modal-revert-status *ngIf="selectedTruss.realStatus.length > 1" [truss]="selectedTruss" (revertEv)="changeBlock(selectedTruss.block, selectedTruss._id)">
+            </app-modal-revert-status>
+        </ng-template>
+
+        <ng-template [ngIf]="historyArr.length">
+            <!-- Truss history list -->
+            <app-truss-history-list [historyArr]="historyArr" [truss]="selectedTruss"></app-truss-history-list>
+        </ng-template>
+
+        <ng-template [ngIf]="!selectedTruss">
+            <div class="text">Dữ liệu về máng không tồn tại.</div>
+        </ng-template>
+    </div>
+
+    <div class="footer footer-btn-group">
+        <!-- return button -->
+        <button class="btn btn-sm left-btn-container" [routerLink]="['/settings']" routerLinkActive="active">
+            <span class="fa-icon">
+                <i class="fas fa-arrow-circle-left"></i>
+            </span>
+            <span class="text">Quay về</span>
+        </button>
+    </div>
+</app-page-layout>

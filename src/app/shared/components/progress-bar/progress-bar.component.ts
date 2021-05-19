@@ -1,22 +1,27 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'app-progress-bar',
   templateUrl: './progress-bar.component.html',
   styleUrls: ['./progress-bar.component.scss']
 })
-export class ProgressBarComponent implements OnInit {
+export class ProgressBarComponent implements OnChanges {
   @Input() verticalBar = false;
   @Input() striped = false;
-  @Input() smallContent = false;
+  @Input() hasContent = true;
   @Input() height = '';
   @Input() color = '';
-  @Input() content = '';
-  @Input() percentage = 0;
+  @Input() maxHole = 0;
+  @Input() plantNumber = 0;
+  percentage = 0;
+  content = '';
 
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnChanges(): void {
+    if (this.plantNumber && this.maxHole) {
+      this.percentage = this.plantNumber / this.maxHole * 100;
+      this.content = `${this.plantNumber}/ ${this.maxHole}`;
+    }
   }
-
 }

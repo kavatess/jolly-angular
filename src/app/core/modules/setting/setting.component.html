@@ -1,1 +1,25 @@
-<p>setting works!</p>
+<app-page-layout [hasFooter]="false" [onLoad]="false">
+    <div class="page-content">
+        <div class="card" [routerLink]="['/plant-setting']" routerLinkActive="active">
+            <a class="card-header">
+                <h5 class="mb-0 text">
+                    Quản lý dữ liệu cây trồng
+                </h5>
+                <span class="arrow-icon">
+                    <i class="fas fa-arrow-right"></i>
+                </span>
+            </a>
+        </div>
+
+        <div class="card" [routerLink]="['/truss-setting']" routerLinkActive="active">
+            <a class="card-header">
+                <h5 class="mb-0 text">
+                    Quản lý dữ liệu giàn
+                </h5>
+                <span class="arrow-icon">
+                    <i class="fas fa-arrow-right"></i>
+                </span>
+            </a>
+        </div>
+    </div>
+</app-page-layout>

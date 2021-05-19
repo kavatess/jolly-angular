@@ -1,0 +1,20 @@
+<app-modal *ngIf="truss.realStatus.length" [Id]="'revert-status'" [title]="'Thay đổi trạng thái của máng'" [onLoad]="onLoad">
+    <div modal-content>
+        <div class="modal-body">
+            <h6>Bạn hãy chọn tình trạng cần quay lại.</h6>
+
+            <app-truss-timeline [history]="truss" [maxHole]="truss.maxHole" [clickEv]="true" (clickedStatus)="receiveStatusIndex($event)">
+            </app-truss-timeline>
+        </div>
+
+        <div class="modal-footer">
+            <!-- revert button -->
+            <button class="btn btn-sm btn-danger right-btn-container" (click)="revertStatus()" [disabled]="statusIndex < 0 || truss.realStatus.length <= 1">
+                <span class="fa-icon">
+                    <i class="fas fa-undo"></i>
+                </span>
+                <span class="text">Quay lại</span>
+            </button>
+        </div>
+    </div>
+</app-modal>

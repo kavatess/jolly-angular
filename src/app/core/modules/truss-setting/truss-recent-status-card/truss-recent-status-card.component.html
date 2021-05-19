@@ -1,0 +1,15 @@
+<div id="recent-status-info" class="card">
+    <div class="card-header">
+        <h6>Tình trạng hiện tại của giàn</h6>
+        <button *ngIf="truss.realStatus.length > 1" class="btn" data-toggle="modal" data-target="#revert-status">
+            <i class="fas fa-cog"></i>
+        </button>
+    </div>
+
+    <div class="card-body">
+        <app-truss-timeline *ngIf="truss.realStatus.length" [history]="truss" [maxHole]="truss.maxHole">
+        </app-truss-timeline>
+
+        <div *ngIf="!truss.realStatus.length" class="text text-center">Máng hiện đang trống.</div>
+    </div>
+</div>
