@@ -21,7 +21,6 @@
     "@angular/platform-browser-dynamic": "^11.2.6",
     "@angular/router": "~11.2.6",
     "@howtimeflies/ngx-highcharts": "^1.2.0",
-    "@ng-bootstrap/ng-bootstrap": "^9.1.0",
     "ngx-webstorage": "^7.0.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",

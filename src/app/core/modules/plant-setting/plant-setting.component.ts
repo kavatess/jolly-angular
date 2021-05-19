@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PLANT_SESSION_COLLECTION } from 'src/app/app-constants';
 import { SessionService } from 'src/app/shared/services/session.service';
 import { Plant } from '../../models/plant.model';
-import { UploadImgbbService } from '../../services/img/upload-imgbb.service';
+import { UploadImgbbService } from '../../services/others/upload-imgbb.service';
 import { InsertPlantService } from '../../services/plant/insert-plant.service';
 import { UpdatePlantService } from '../../services/plant/update-plant.service';
 

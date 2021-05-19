@@ -1,0 +1,21 @@
+<div class="login-form-container">
+    <div class="img-container">
+        <img class="img-120" src="https://i.ibb.co/hVs4Pn7/jolly-farm-ico.jpg" alt="jolly-farm-ico">
+    </div>
+
+    <form class="login-form" [formGroup]="loginForm">
+        <div class="form-group">
+            <label>Số điện thoại:</label>
+            <input type="text" class="form-control" formControlName="phoneNumber">
+            <small class="form-text text-muted">Số điện thoại có độ dài từ 10-11 số.</small>
+        </div>
+
+        <div class="form-group">
+            <label>Mật khẩu:</label>
+            <input type="password" class="form-control" formControlName="password">
+            <small class="form-text text-muted">Đừng chia sẻ mật khẩu đăng nhập với bất kỳ ai.</small>
+        </div>
+
+        <button type="submit" class="btn btn-success" (click)="login()" [disabled]="loginForm.invalid">Đăng nhập</button>
+    </form>
+</div>
