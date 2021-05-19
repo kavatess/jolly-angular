@@ -64,6 +64,7 @@ export class ModalSeedManagementComponent extends SeedModalComponent implements 
     if (!isNaN(plantNumber)) {
       this.updateSeedService.updateSeedNumber(seedId, plantNumber).subscribe(async (_response) => {
         await this.reloadData();
+        await this.ngOnInit();
       });
     }
   }

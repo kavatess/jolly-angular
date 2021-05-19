@@ -1,5 +1,5 @@
 <div class="modal-body">
-    <div class="created-seed-table">
+    <div *ngIf="seedCreatedArr.length" class="created-seed-table">
         <app-seed *ngFor="let seed of seedCreatedArr; let i = index" [seedEl]="seed" [seedIndex]="i">
             <span class="seed-number-content" [style.color]="seed.plantColor">{{ seed.plantNumber }}</span>
             <span class="seed-tool-content">
@@ -8,7 +8,7 @@
         </app-seed>
     </div>
 
-    <div class="form-create-seed-container">
+    <div *ngIf="createSeedForm" class="form-create-seed-container">
         <form class="form-create-seed" [formGroup]="createSeedForm">
             <div class="form-item-container">
                 <div class="form-title">

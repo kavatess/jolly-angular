@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { PLANT_SESSION_COLLECTION } from 'src/app/app-constants';
 import { Plant } from 'src/app/core/models/plant.model';
 import { BasicSeedInfo, SimpleSeed } from 'src/app/core/models/seed.model';
@@ -14,7 +14,7 @@ import { SeedModalComponent } from '../seed-modal.component';
 })
 export class ModalCreateSeedComponent extends SeedModalComponent implements OnInit {
   plantArr: Plant[] = [];
-  createSeedForm: FormGroup = new FormGroup({});
+  createSeedForm: FormGroup = null;
   seedCreatedArr: BasicSeedInfo[] = [];
 
   constructor(protected sessionStorage: SessionService, private addSeedService: InsertSeedService) {
@@ -28,14 +28,13 @@ export class ModalCreateSeedComponent extends SeedModalComponent implements OnIn
 
   initializeForm(): void {
     this.createSeedForm = new FormGroup({
-      plantId: new FormControl(''),
+      plantId: new FormControl(this.plantArr[0]._id),
       startDate: new FormControl(new Date().toString()),
       plantNumber: new FormControl(300, [
         Validators.required,
         Validators.maxLength(4)
       ])
     });
-    this.createSeedForm.setControl('plantId', new FormControl(this.plantArr[0]._id));
   }
 
   addNewSeed(): void {
