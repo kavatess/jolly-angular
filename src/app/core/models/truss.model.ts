@@ -1,4 +1,4 @@
-import { BasicPlant } from "./plant.model";
+import { Plant } from "./plant.model";
 
 export class Status {
     date: string;
@@ -28,7 +28,14 @@ export class Truss extends BasicTrussInfo {
 
 export class RawTruss extends BasicTrussInfo {
     realStatus: Status[];
+    plantType: Plant;
 }
 
-export interface TrussHistoryInfo extends BasicPlant, RawTruss {
+export interface TrussHistoryInfo {
+    _id: string;
+    trussId: string;
+    plantId: string;
+    startDate: string;
+    realStatus: Status[];
+    plantType: Plant;
 }

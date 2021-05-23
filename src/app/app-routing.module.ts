@@ -7,6 +7,7 @@ import { PlantSettingComponent } from './core/modules/plant-setting/plant-settin
 import { SettingComponent } from './core/modules/setting/setting.component';
 import { StatisticsComponent } from './core/modules/statistics/statistics.component';
 import { TrussSettingComponent } from './core/modules/truss-setting/truss-setting.component';
+import { UserInfoSettingComponent } from './core/modules/user-info-setting/user-info-setting.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -15,7 +16,8 @@ const routes: Routes = [
   { path: 'statistics', component: StatisticsComponent, canActivate: [AuthGuard] },
   { path: 'settings', component: SettingComponent, canActivate: [AuthGuard] },
   { path: 'plant-setting', component: PlantSettingComponent, canActivate: [AuthGuard] },
-  { path: 'truss-setting', component: TrussSettingComponent, canActivate: [AuthGuard] }
+  { path: 'truss-setting', component: TrussSettingComponent, canActivate: [AuthGuard] },
+  { path: 'user-info', component: UserInfoSettingComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

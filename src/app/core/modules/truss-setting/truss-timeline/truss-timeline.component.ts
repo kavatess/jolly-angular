@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Plant } from 'src/app/core/models/plant.model';
 import { TrussHistoryInfo } from 'src/app/core/models/truss.model';
 
 @Component({
@@ -15,6 +16,10 @@ export class TrussTimelineComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void { }
+
+  get plantType(): Plant {
+    return this.history.plantType || new Plant();
+  }
 
   selectTrussStatus(clickedStatusEl: any, statusIndex: number): void {
     if (this.clickEv) {

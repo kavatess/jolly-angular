@@ -11,7 +11,7 @@
     border-radius: 8px;
     display: grid;
     grid-template-columns: 20px 60px auto 41px 20px;
-    grid-template-rows: 100px;
+    grid-template-rows: 120px;
     .seed-status-container,
     .seed-img-container,
     .seed-info-container,
@@ -64,8 +64,9 @@
     background-color: lightyellow;
 }
 
-@media only screen and (max-width: 325px) {
+@media only screen and (max-width: 325px) and (max-height: 600px) {
     .seed-element-container {
+        grid-template-rows: 100px;
         .seed-number-container {
             font-size: 16px;
             font-weight: 700;

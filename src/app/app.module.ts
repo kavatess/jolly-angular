@@ -11,6 +11,7 @@ import { PlantSettingModule } from './core/modules/plant-setting/plant-setting.m
 import { SettingModule } from './core/modules/setting/setting.module';
 import { StatisticsModule } from './core/modules/statistics/statistics.module';
 import { TrussSettingModule } from './core/modules/truss-setting/truss-setting.module';
+import { UserInfoSettingModule } from './core/modules/user-info-setting/user-info-setting.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,6 +25,7 @@ import { TrussSettingModule } from './core/modules/truss-setting/truss-setting.m
     SettingModule,
     PlantSettingModule,
     TrussSettingModule,
+    UserInfoSettingModule,
     NgxWebstorageModule.forRoot()
   ],
   bootstrap: [AppComponent]

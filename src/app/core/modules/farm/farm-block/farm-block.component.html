@@ -1,6 +1,6 @@
 <div [class]="'farm-block-'+ block">
     <div *ngFor=" let truss of trussArr">
-        <app-progress-bar *ngIf="truss" [verticalBar]="truss.block == 'BN' || truss.block == 'BS'" [hasContent]="false"
+        <app-progress-bar *ngIf="truss" [striped]="plantGrowth == 2" [verticalBar]="truss.block == 'BN' || truss.block == 'BS'" [hasContent]="false"
             [plantNumber]="truss.plantNumber" [maxHole]="truss.maxHole" (click)="farmComponent.changeClickedTruss(truss)"
             [color]="(!farmComponent.selectedPlantId || truss.plantId == farmComponent.selectedPlantId) && (!farmComponent.selectedPlantGrowth || truss.plantGrowth == farmComponent.selectedPlantGrowth) ? truss.plantColor : 'lightgray'"
             data-toggle="modal" data-target="#farm_modal">

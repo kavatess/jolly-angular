@@ -1,5 +1,18 @@
 <app-page-layout [hasFooter]="false" [onLoad]="false">
     <div class="page-content">
+        <h4>CÀI ĐẶT</h4>
+
+        <div class="card" [routerLink]="['/user-info']" routerLinkActive="active">
+            <a class="card-header">
+                <h5 class="mb-0 text">
+                    Quản lý thông tin tài khoản
+                </h5>
+                <span class="arrow-icon">
+                    <i class="fas fa-arrow-right"></i>
+                </span>
+            </a>
+        </div>
+
         <div class="card" [routerLink]="['/plant-setting']" routerLinkActive="active">
             <a class="card-header">
                 <h5 class="mb-0 text">
