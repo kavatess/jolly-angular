@@ -1,4 +1,5 @@
 // WEBAPP CONSTANTS
+// STORAGE COLLECTION
 export enum LOCAL_STORAGE_KEY {
     TOKEN = 'token',
     USER = 'user'

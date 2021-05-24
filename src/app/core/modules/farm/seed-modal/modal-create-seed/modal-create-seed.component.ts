@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { PLANT_SESSION_COLLECTION } from 'src/app/app-constants';
 import { Plant } from 'src/app/core/models/plant.model';
 import { BasicSeedInfo, SimpleSeed } from 'src/app/core/models/seed.model';
@@ -49,7 +49,7 @@ export class ModalCreateSeedComponent extends SeedModalComponent implements OnIn
 
   insertToDB(): void {
     if (this.seedCreatedArr.length) {
-      const newSeedArr: SimpleSeed[] = this.seedCreatedArr.map(({ plantId, startDate, plantNumber }) => {
+      const newSeedArr = this.seedCreatedArr.map(({ plantId, startDate, plantNumber }) => {
         return { plantId, startDate, plantNumber };
       });
       this.addSeedService.insertManySeed(newSeedArr).subscribe(async (_response) => {

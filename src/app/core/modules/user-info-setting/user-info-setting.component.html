@@ -1,5 +1,66 @@
 <app-page-layout [onLoad]="false">
     <div class="page-content">
-        
+        <form *ngIf="userInfoForm" [formGroup]="userInfoForm">
+            <h6 class="text-center">Thông tin cá nhân của bạn</h6>
+
+            <div class="form-item">
+                <label class="text">Tên:</label>
+                <input type="text" class="form-control" formControlName="name" [readOnly]="displayMode">
+            </div>
+
+            <div class="form-item">
+                <label class="text">Ngày sinh:</label>
+                <input type="text" class="form-control" formControlName="dateOfBirth" [readOnly]="displayMode">
+            </div>
+
+            <div class="form-item">
+                <label class="text">Địa chỉ:</label>
+                <input type="text" class="form-control" formControlName="address" [readOnly]="displayMode">
+            </div>
+
+            <div class="form-item">
+                <label class="text">Số CMND/CCCD:</label>
+                <input type="number" class="form-control" formControlName="idNumber" [readOnly]="displayMode">
+            </div>
+
+            <div class="form-item">
+                <label class="text">Số điện thoại liên hệ:</label>
+                <input type="number" class="form-control" formControlName="phoneNumber" [readOnly]="displayMode">
+            </div>
+        </form>
+    </div>
+
+    <div class="footer footer-btn-group">
+        <ng-template [ngIf]="displayMode">
+            <button class="btn btn-sm left-btn-container" [routerLink]="['/settings']" routerLinkActive="active">
+                <span class="fa-icon">
+                    <i class="fas fa-arrow-circle-left"></i>
+                </span>
+                <span class="text">Quay về</span>
+            </button>
+
+            <button class="btn btn-sm btn-outline-success right-btn-container" (click)="goToModifyMode()">
+                <span class="fa-icon">
+                    <i class="fas fa-wrench"></i>
+                </span>
+                <span class="text">Thay đổi</span>
+            </button>
+        </ng-template>
+
+        <ng-template [ngIf]="!displayMode">
+            <button class="btn btn-sm left-btn-container" (click)="resetForm()">
+                <span class="fa-icon">
+                    <i class="fas fa-history"></i>
+                </span>
+                <span class="text">Phục hồi mặc định</span>
+            </button>
+
+            <button class="btn btn-sm btn-success right-btn-container">
+                <span class="fa-icon">
+                    <i class="fas fa-check"></i>
+                </span>
+                <span class="text">Lưu thay đổi</span>
+            </button>
+        </ng-template>
     </div>
 </app-page-layout>
