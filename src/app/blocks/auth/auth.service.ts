@@ -13,7 +13,7 @@ import { LOCAL_STORAGE_KEY } from '../../app-constants';
   providedIn: 'root'
 })
 export class AuthService {
-  private readonly authRequestURL = '/api/auth/login';
+  private readonly AUTH_REQUEST_BEGIN = SERVER_URL + '/api/auth';
 
   constructor(private http: HttpClient, private localStorage: LocalStorageService, private router: Router) { }
 
@@ -30,7 +30,7 @@ export class AuthService {
   }
 
   login(loginInfo: LoginModel): Observable<boolean> {
-    return this.http.post(SERVER_URL + this.authRequestURL, loginInfo)
+    return this.http.post(this.AUTH_REQUEST_BEGIN + '/login', loginInfo)
       .pipe(
         tap(token => this.storeAuthInfo(token)),
         mapTo(true),
@@ -39,6 +39,10 @@ export class AuthService {
           return of(false);
         })
       );
+  }
+
+  updateUserInfo(user: User): Observable<any> {
+    return this.http.post(this.AUTH_REQUEST_BEGIN + '/user/update', user);
   }
 
   logout(): void {

@@ -55,6 +55,7 @@ export class ModalSeedManagementComponent extends SeedModalComponent implements 
     if (confirm) {
       this.deleteSeedService.deleteOneSeed(deletedSeed._id).subscribe(async (_response) => {
         await this.reloadData();
+        await this.ngOnInit();
       });
     }
   }

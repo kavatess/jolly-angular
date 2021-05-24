@@ -1,17 +1,11 @@
-import { AbstractControl, ValidationErrors, ValidatorFn } from "@angular/forms";
+import { AbstractControl, ValidationErrors, ValidatorFn, Validators } from "@angular/forms";
 
-export function getNumberInputValidator(min: number = null, max: number = null): ValidatorFn {
-    return (control: AbstractControl): ValidationErrors | null => {
-        const number = Number(control.value);
-        if (isNaN(number)) {
+export function getNumberInputValidator(minLength: number = 1, maxLength: number = 32): ValidatorFn[] {
+    const numberValidator = (control: AbstractControl): ValidationErrors | null => {
+        if (isNaN(control.value)) {
             return { invalidNumber: { value: control.value } };
-        }
-        if (min != null) {
-            return number < min ? { smallerThanMin: { value: control.value } } : null;
-        }
-        if (max != null) {
-            return number > max ? { greaterThanMax: { value: control.value } } : null;
         }
         return null;
     };
+    return [Validators.required, numberValidator, Validators.minLength(minLength), Validators.maxLength(maxLength)];
 }

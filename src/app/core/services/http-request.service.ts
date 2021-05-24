@@ -9,7 +9,7 @@ import { shareReplay } from 'rxjs/operators';
 export class HttpRequestService {
 
   constructor(private http: HttpClient) { }
-  createPostRequest(url: string, sentJSON: any = ""): Observable<any> {
+  createPostRequest(url: string, sentJSON: any = {}): Observable<any> {
     return this.http.post(url, sentJSON).pipe(shareReplay());
   }
 }

@@ -7,6 +7,13 @@ import { TrussRecentStatusCardModule } from './truss-recent-status-card/truss-re
 import { TrussHistoryListModule } from './truss-history-list/truss-history-list.module';
 import { ModalTrussSettingModule } from './modal-truss-setting/modal-truss-setting.module';
 
+const TRUSS_SETTING_ROUTE = [
+  {
+    path: '',
+    component: TrussSettingComponent,
+  },
+];
+
 @NgModule({
   declarations: [TrussSettingComponent],
   imports: [
@@ -15,7 +22,8 @@ import { ModalTrussSettingModule } from './modal-truss-setting/modal-truss-setti
     RouterModule,
     TrussRecentStatusCardModule,
     TrussHistoryListModule,
-    ModalTrussSettingModule
+    ModalTrussSettingModule,
+    RouterModule.forChild(TRUSS_SETTING_ROUTE)
   ]
 })
 export class TrussSettingModule { }
