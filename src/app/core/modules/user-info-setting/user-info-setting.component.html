@@ -12,8 +12,6 @@
             </li>
         </ul>
         <form *ngIf="userInfoForm" [formGroup]="userInfoForm">
-            <h6 class="text-center">Thông tin cá nhân của bạn</h6>
-
             <div class="form-item">
                 <label class="text">Tên:</label>
                 <input type="text" class="form-control" formControlName="name" [readOnly]="!situation">

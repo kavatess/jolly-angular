@@ -1,0 +1,17 @@
+<form [formGroup]="form">
+    <h6 *ngIf="formHeader" class="text-center">{{ formHeader }}</h6>
+
+    <div *ngFor="let control of controlArr" class="form-item">
+        <label [for]="control.name" class="text">{{ control.label }}</label>
+
+        <ng-template [ngIf]="control.type != 'select'">
+            <input [type]="control.type" class="form-control" [formControlName]="control.name">
+        </ng-template>
+
+        <ng-template [ngIf]="control.type == 'select'">
+            <select [name]="'select-' + control.name" [id]="control.name" class="form-select">
+                <option *ngFor="let option of control.options" [value]="option.value">{{ option.name }}</option>
+            </select>
+        </ng-template>
+    </div>
+</form>
