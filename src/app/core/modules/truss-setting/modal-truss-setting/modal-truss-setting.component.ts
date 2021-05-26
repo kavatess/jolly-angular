@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { RAW_TRUSS_SESSION_COLLECTION } from 'src/app/app-constants';
-import { RawTruss } from 'src/app/core/models/truss.model';
+import { SESSION_STORAGE_KEY } from 'src/app/app-constants';
+import { RawTruss } from 'src/app/models/truss.model';
 import { RevertStatusService } from 'src/app/core/services/truss/revert-status.service';
 import { UpdateMaxholeService } from 'src/app/core/services/truss/update-maxhole.service';
 import { SessionService } from 'src/app/shared/services/session.service';
@@ -54,7 +54,7 @@ export class ModalTrussSettingComponent implements OnChanges {
   }
 
   private updateDone(): void {
-    this.sessionStorage.restore(RAW_TRUSS_SESSION_COLLECTION + this.truss.block);
+    this.sessionStorage.restore(SESSION_STORAGE_KEY.RAW_TRUSS + this.truss.block);
     this.updateEv.emit();
     this.onLoad = false;
   }

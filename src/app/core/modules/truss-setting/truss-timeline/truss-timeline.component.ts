@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Plant } from 'src/app/core/models/plant.model';
-import { TrussHistoryInfo } from 'src/app/core/models/truss.model';
+import { Plant } from 'src/app/models/plant.model';
+import { TrussHistoryInfo } from 'src/app/models/truss.model';
 
 @Component({
   selector: 'app-truss-timeline',

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { SEED_SESSION_COLLECTION } from 'src/app/app-constants';
-import { Seed } from 'src/app/core/models/seed.model';
+import { SESSION_STORAGE_KEY } from 'src/app/app-constants';
+import { Seed } from 'src/app/models/seed.model';
 import { CreateTrussService } from 'src/app/core/services/truss/create-truss.service';
 import { SessionService } from 'src/app/shared/services/session.service';
 import { FarmModalComponent } from '../farm-modal.component';
@@ -22,7 +22,7 @@ export class ModalEmptyTrussComponent extends FarmModalComponent implements OnIn
   }
 
   ngOnInit(): void {
-    this.readySeed = this.sessionStorage.retrieve(SEED_SESSION_COLLECTION) || [];
+    this.readySeed = this.sessionStorage.retrieve(SESSION_STORAGE_KEY.SEED) || [];
     this.readySeed = this.readySeed.filter(({ isReadySeed }) => isReadySeed);
   }
 

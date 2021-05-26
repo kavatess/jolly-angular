@@ -26,7 +26,7 @@ const routes: Routes = [
   },
   {
     path: 'user-setting',
-    loadChildren: () => import('./core/modules/user-info-setting/user-info-setting.module').then(mod => mod.UserInfoSettingModule),
+    loadChildren: () => import('./core/modules/user-setting/user-setting.module').then(mod => mod.UserSettingModule),
     canActivate: [AuthGuard],
   },
   {

@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { Chart, Options } from 'highcharts';
-import { Statistics } from 'src/app/core/models/statistic.model';
+import { Statistics } from 'src/app/models/statistic.model';
 
 @Component({
   selector: 'app-truss-stat-bar-chart',

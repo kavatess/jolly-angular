@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { Plant } from 'src/app/core/models/plant.model';
+import { Plant } from 'src/app/models/plant.model';
 
 @Component({
   selector: 'app-form-plant-info',

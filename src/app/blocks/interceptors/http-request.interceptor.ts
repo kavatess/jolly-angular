@@ -10,7 +10,7 @@ export class HttpRequestInterceptor implements HttpInterceptor {
     constructor(private authService: AuthService) { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        if (this.authService.getAuthToken()) {
+        if (!request.url.includes('api/auth') && this.authService.getAuthToken()) {
             request = this.addAuthHeaderTo(request);
         }
         return next.handle(request).pipe(catchError((error: HttpErrorResponse) => {
@@ -18,7 +18,7 @@ export class HttpRequestInterceptor implements HttpInterceptor {
                 console.log('this is client side error');
             }
             if (error instanceof HttpErrorResponse) {
-                if (error.status == 401 ) {
+                if (error.status == 401) {
                     console.log('Unauthorized or login failed.');
                     this.authService.logout();
                 }

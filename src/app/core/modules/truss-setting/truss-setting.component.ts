@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { BLOCK_ARR, RAW_TRUSS_SESSION_COLLECTION } from 'src/app/app-constants';
+import { BLOCK_ARR, SESSION_STORAGE_KEY } from 'src/app/app-constants';
 import { SessionService } from 'src/app/shared/services/session.service';
-import { TrussHistoryInfo, RawTruss } from '../../models/truss.model';
+import { TrussHistoryInfo, RawTruss } from '../../../models/truss.model';
 import { GetHistoryDataService } from '../../services/truss/get-history-data.service';
 
 @Component({
@@ -22,8 +22,7 @@ export class TrussSettingComponent implements OnInit {
   }
 
   async changeBlock(block: string, trussId: string = null): Promise<void> {
-    this.trussArr = await this.sessionStorage.getAsync(RAW_TRUSS_SESSION_COLLECTION + block);
-    this.trussArr = this.trussArr.filter(truss => truss != null).sort((a, b) => a.index - b.index);
+    this.trussArr = await this.sessionStorage.getAsync(SESSION_STORAGE_KEY.RAW_TRUSS + block);
     this.selectTruss(trussId || this.trussArr[0]._id);
   }
 

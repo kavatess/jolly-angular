@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { FARM_LAST_BLOCK_COLLECTION, PLANT_SESSION_COLLECTION, STAT_LAST_BLOCK_COLLECTION } from 'src/app/app-constants';
-import { Plant } from 'src/app/core/models/plant.model';
+import { SESSION_STORAGE_KEY } from 'src/app/app-constants';
+import { Plant } from 'src/app/models/plant.model';
 import { SessionService } from '../../services/session.service';
 
 @Component({
@@ -24,7 +24,7 @@ export class SelectComponent implements OnInit, OnDestroy {
   constructor(private sessionService: SessionService) { }
 
   async ngOnInit() {
-    this.plantArr = await this.sessionService.getAsync(PLANT_SESSION_COLLECTION);
+    this.plantArr = await this.sessionService.getAsync(SESSION_STORAGE_KEY.PLANT);
     this.getLastBlockVal();
     this.emitSelectValOnChange();
   }
@@ -32,9 +32,9 @@ export class SelectComponent implements OnInit, OnDestroy {
   getLastBlockVal(): void {
     let lastBlock = '';
     if (this.isStatisticPage) {
-      lastBlock = this.sessionService.retrieve(STAT_LAST_BLOCK_COLLECTION) || '';
+      lastBlock = this.sessionService.retrieve(SESSION_STORAGE_KEY.STAT_LAST_BLOCK) || '';
     } else {
-      lastBlock = this.sessionService.retrieve(FARM_LAST_BLOCK_COLLECTION) || 'A';
+      lastBlock = this.sessionService.retrieve(SESSION_STORAGE_KEY.FARM_LAST_BLOCK) || 'A';
     }
     this.selectGroup.setControl('block', new FormControl(lastBlock));
   }
@@ -42,9 +42,9 @@ export class SelectComponent implements OnInit, OnDestroy {
   emitSelectValOnChange(): void {
     this.subscription = this.selectGroup.valueChanges.subscribe(changeVal => {
       if (this.isStatisticPage) {
-        this.sessionService.store(STAT_LAST_BLOCK_COLLECTION, changeVal.block);
+        this.sessionService.store(SESSION_STORAGE_KEY.STAT_LAST_BLOCK, changeVal.block);
       } else {
-        this.sessionService.store(FARM_LAST_BLOCK_COLLECTION, changeVal.block);
+        this.sessionService.store(SESSION_STORAGE_KEY.FARM_LAST_BLOCK, changeVal.block);
       }
       changeVal.plantGrowth *= 1;
       this.selectChange.emit(changeVal);

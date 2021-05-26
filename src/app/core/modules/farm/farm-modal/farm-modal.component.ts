@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
-import { TRUSS_SESSION_COLLECTION } from 'src/app/app-constants';
-import { Truss } from 'src/app/core/models/truss.model';
+import { SESSION_STORAGE_KEY } from 'src/app/app-constants';
+import { Truss } from 'src/app/models/truss.model';
 import { ModalComp } from 'src/app/shared/base-component/base-modal.component';
 import { SessionService } from 'src/app/shared/services/session.service';
 
@@ -23,7 +23,7 @@ export class FarmModalComponent extends ModalComp implements OnInit, OnChanges {
 
   public async reloadData(): Promise<void> {
     this.changeLoadStatus(true);
-    const newTrussArr: Truss[] = await this.sessionStorage.restore(TRUSS_SESSION_COLLECTION + this.clickedTruss.block);
+    const newTrussArr: Truss[] = await this.sessionStorage.restore(SESSION_STORAGE_KEY.TRUSS + this.clickedTruss.block);
     const newClickedTruss = newTrussArr.find(truss => truss._id == this.clickedTruss._id);
     this.onUpdate.emit(newClickedTruss);
   }

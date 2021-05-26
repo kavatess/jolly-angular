@@ -1,4 +1,4 @@
-<app-page-layout [hasFooter]="false" [onLoad]="false">
+<app-page-layout [onLoad]="false">
     <div class="page-content">
         <h4 class="text-center">CÀI ĐẶT</h4>
 
@@ -34,5 +34,14 @@
                 </span>
             </a>
         </div>
+    </div>
+
+    <div class="footer">
+        <button class="btn btn-danger" (click)="logout()">
+            <span class="fa-icon">
+                <i class="fas fa-sign-out-alt"></i>
+            </span>
+            <span class="text">Đăng xuất</span>
+        </button>
     </div>
 </app-page-layout>

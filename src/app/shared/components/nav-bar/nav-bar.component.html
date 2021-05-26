@@ -1,0 +1,5 @@
+<ul class="nav nav-tabs">
+    <li *ngFor="let nav of navArr; let i = index" class="nav-item">
+        <a class="nav-link" [ngClass]="{ 'active': i == 0 }" (click)="changeTab(nav.tabIndex, $event)">{{ nav.content }}</a>
+    </li>
+</ul>

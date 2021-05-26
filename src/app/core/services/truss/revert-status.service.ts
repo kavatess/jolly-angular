@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpRequestService } from '../http-request.service';
-import { TRUSS_REQUEST } from '../request-url-constants';
-import { RevertTrussBody } from '../../models/truss.request.model';
+import { TRUSS_REQUEST } from 'src/app/app-constants';
+import { RevertTrussBody } from '../../../models/truss.request.model';
 
 @Injectable({
   providedIn: 'root'

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DEFAULT_STATISTIC_QUERY } from 'src/app/app-constants';
-import { Statistics } from '../../models/statistic.model';
+import { Statistics } from '../../../models/statistic.model';
 import { HttpRequestService } from '../http-request.service';
-import { TRUSS_REQUEST } from '../request-url-constants';
+import { TRUSS_REQUEST } from 'src/app/app-constants';
 
 @Injectable({
   providedIn: 'root'

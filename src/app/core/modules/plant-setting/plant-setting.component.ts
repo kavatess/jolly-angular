@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { PLANT_SESSION_COLLECTION } from 'src/app/app-constants';
+import { SESSION_STORAGE_KEY } from 'src/app/app-constants';
 import { SessionService } from 'src/app/shared/services/session.service';
-import { Plant } from '../../models/plant.model';
+import { Plant } from '../../../models/plant.model';
 import { UploadImgbbService } from '../../services/others/upload-imgbb.service';
 import { InsertPlantService } from '../../services/plant/insert-plant.service';
 import { UpdatePlantService } from '../../services/plant/update-plant.service';
@@ -27,7 +27,7 @@ export class PlantSettingComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
-    this.plantArr = await this.sessionStorage.getAsync(PLANT_SESSION_COLLECTION);
+    this.plantArr = await this.sessionStorage.getAsync(SESSION_STORAGE_KEY.PLANT);
   }
 
   changeSituation(newSit: number): void {
@@ -64,7 +64,7 @@ export class PlantSettingComponent implements OnInit {
     this.plantArr = newPlantArr;
     this.changeSituation(0);
     this.onLoading = false;
-    this.sessionStorage.store(PLANT_SESSION_COLLECTION, newPlantArr);
+    this.sessionStorage.store(SESSION_STORAGE_KEY.PLANT, newPlantArr);
   }
 
   async updateDataByType(updateType: string): Promise<void> {

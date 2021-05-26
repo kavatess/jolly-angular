@@ -1,6 +1,6 @@
 import { Component, DoCheck, Input, OnInit } from '@angular/core';
-import { TRUSS_SESSION_COLLECTION } from 'src/app/app-constants';
-import { Truss } from 'src/app/core/models/truss.model';
+import { SESSION_STORAGE_KEY } from 'src/app/app-constants';
+import { Truss } from 'src/app/models/truss.model';
 import { GetPlantDataService } from 'src/app/core/services/plant/get-plant-data.service';
 import { GetTrussByBlockService } from 'src/app/core/services/truss/get-truss-by-block.service';
 import { SessionService } from 'src/app/shared/services/session.service';
@@ -19,7 +19,7 @@ export class FarmBlockComponent implements OnInit, DoCheck {
   constructor(protected sessionStorage: SessionService, protected getPlantService: GetPlantDataService, private getTrussService: GetTrussByBlockService) { }
 
   async ngOnInit(): Promise<void> {
-    this.trussArr = await this.sessionStorage.getAsync(TRUSS_SESSION_COLLECTION + this.block);
+    this.trussArr = await this.sessionStorage.getAsync(SESSION_STORAGE_KEY.TRUSS + this.block);
     this.farmComponent.changeDataReadyTo(true);
   }
 

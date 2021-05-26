@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { SessionStorageService } from 'ngx-webstorage';
 import { Observable } from 'rxjs';
-import { PLANT_SESSION_COLLECTION, RAW_TRUSS_SESSION_COLLECTION, SEED_SESSION_COLLECTION, TRUSS_SESSION_COLLECTION } from 'src/app/app-constants';
 import { HttpRequestService } from 'src/app/core/services/http-request.service';
-import { PLANT_REQUEST, SEED_REQUEST, TRUSS_REQUEST } from 'src/app/core/services/request-url-constants';
+import { PLANT_REQUEST, SEED_REQUEST, SESSION_STORAGE_KEY, TRUSS_REQUEST } from 'src/app/app-constants';
 
 @Injectable({
   providedIn: 'root'
@@ -39,16 +38,16 @@ export class SessionService {
   }
 
   private getRequestUrlByColName(colName: string): string {
-    if (colName == PLANT_SESSION_COLLECTION) {
+    if (colName == SESSION_STORAGE_KEY.PLANT) {
       return PLANT_REQUEST.getPlantData;
     }
-    if (colName == SEED_SESSION_COLLECTION) {
+    if (colName == SESSION_STORAGE_KEY.SEED) {
       return SEED_REQUEST.getSeedData;
     }
-    if (colName.includes(RAW_TRUSS_SESSION_COLLECTION)) {
+    if (colName.includes(SESSION_STORAGE_KEY.RAW_TRUSS)) {
       return TRUSS_REQUEST.getRawTrussData + `/${colName.split('-')[4]}`;
     }
-    if (colName.includes(TRUSS_SESSION_COLLECTION)) {
+    if (colName.includes(SESSION_STORAGE_KEY.TRUSS)) {
       return TRUSS_REQUEST.getTrussData + `/${colName.split('-')[3]}`;
     }
     return '';

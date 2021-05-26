@@ -2,18 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { LocalStorageService } from 'ngx-webstorage';
-import { Observable, of } from 'rxjs';
-import { catchError, mapTo, tap } from 'rxjs/operators';
-import { User } from 'src/app/core/models/user.model';
-import { SERVER_URL } from 'src/app/core/services/request-url-constants';
-import { LOCAL_STORAGE_KEY } from '../../app-constants';
-
+import { Observable, of, throwError } from 'rxjs';
+import { catchError, map, mapTo, tap } from 'rxjs/operators';
+import { User } from 'src/app/models/user.model';
+import { AUTH_REQUEST_BEGIN, LOCAL_STORAGE_KEY } from '../../app-constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private readonly AUTH_REQUEST_BEGIN = SERVER_URL + '/api/auth';
 
   constructor(private http: HttpClient, private localStorage: LocalStorageService, private router: Router) { }
 
@@ -30,19 +27,38 @@ export class AuthService {
   }
 
   login(loginInfo: LoginModel): Observable<boolean> {
-    return this.http.post(this.AUTH_REQUEST_BEGIN + '/login', loginInfo)
+    return this.http.post(AUTH_REQUEST_BEGIN + '/login', loginInfo)
       .pipe(
-        tap(token => this.storeAuthInfo(token)),
+        tap(authInfo => this.storeAuthInfo(authInfo)),
         mapTo(true),
-        catchError(err => {
-          console.log(err)
+        catchError(_err => {
           return of(false);
         })
       );
   }
 
-  updateUserInfo(user: User): Observable<any> {
-    return this.http.post(this.AUTH_REQUEST_BEGIN + '/user/update', user);
+  updateUserInfo(user: User): void {
+    this.http.post(AUTH_REQUEST_BEGIN + '/user/update', user)
+      .pipe(
+        catchError((err) => {
+          window.alert('Hiện không thể cập nhật thông tin cá thân vì có lỗi từ máy chủ. Xin vui lòng thử lại sau');
+          return throwError(err);
+        })
+      ).subscribe(_res => {
+        this.logout();
+      });;
+  }
+
+  changePassword(newPasswordInfo: { phoneNumber: string, oldPassword: string, newPassword: string }): void {
+    this.http.post(AUTH_REQUEST_BEGIN + '/password/update', newPasswordInfo)
+      .pipe(
+        catchError((err) => {
+          window.alert('Sai số điện thoại hoặc tên đăng nhập.');
+          return throwError(err);
+        })
+      ).subscribe(_res => {
+        this.logout();
+      });
   }
 
   logout(): void {

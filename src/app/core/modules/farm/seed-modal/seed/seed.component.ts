@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Seed, BasicSeedInfo } from 'src/app/core/models/seed.model';
+import { Seed, BasicSeedInfo } from 'src/app/models/seed.model';
 
 @Component({
   selector: 'app-seed',

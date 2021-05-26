@@ -1,6 +1,6 @@
 import { Component, OnChanges } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { UpdateStatusBody } from 'src/app/core/models/truss.request.model';
+import { UpdateStatusBody } from 'src/app/models/truss.request.model';
 import { ClearTrussService } from 'src/app/core/services/truss/clear-truss.service';
 import { UpdateStatusService } from 'src/app/core/services/truss/update-status.service';
 import { SessionService } from 'src/app/shared/services/session.service';

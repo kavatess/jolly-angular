@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/blocks/auth/auth.service';
 
 @Component({
   selector: 'app-setting',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SettingComponent implements OnInit {
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
   }
 
+  logout(): void {
+    const confirm = window.confirm('Bạn chắc chắn muốn đăng xuất khỏi jolly-farm ?');
+    if (confirm) {
+      this.authService.logout();
+    }
+  }
 }

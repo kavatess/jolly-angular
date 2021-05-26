@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DEFAULT_STATISTIC_QUERY } from 'src/app/app-constants';
-import { Statistics } from '../../models/statistic.model';
+import { Statistics } from '../../../models/statistic.model';
 import { GetStatisticService } from '../../services/truss/get-statistic.service';
 
 @Component({

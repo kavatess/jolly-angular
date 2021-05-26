@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { SEED_SESSION_COLLECTION } from 'src/app/app-constants';
-import { BasicSeedInfo, Seed } from 'src/app/core/models/seed.model';
+import { SESSION_STORAGE_KEY } from 'src/app/app-constants';
+import { BasicSeedInfo, Seed } from 'src/app/models/seed.model';
 import { DeleteOneSeedService } from 'src/app/core/services/seed/delete-one-seed.service';
 import { UpdateSeedNumberService } from 'src/app/core/services/seed/update-seed-number.service';
 import { SessionService } from 'src/app/shared/services/session.service';
@@ -27,7 +27,7 @@ export class ModalSeedManagementComponent extends SeedModalComponent implements 
 
   async ngOnInit(): Promise<void> {
     await super.ngOnInit();
-    this.seedArr = this.sessionStorage.retrieve(SEED_SESSION_COLLECTION);
+    this.seedArr = this.sessionStorage.retrieve(SESSION_STORAGE_KEY.SEED);
     if (this.isReadySeed) {
       this.seedArr = this.seedArr.filter(seed => seed.isReadySeed);
     }

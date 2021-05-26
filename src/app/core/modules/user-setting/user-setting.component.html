@@ -1,0 +1,51 @@
+<app-page-layout [onLoad]="false" [scroll]="true">
+    <div class="page-content">
+        <app-nav-bar [navArr]="navArr" (tabChange)="changeSituation($event)"></app-nav-bar>
+
+        <app-form [controlArr]="controlArr" [readOnlyMode]="situation == 0"></app-form>
+    </div>
+
+    <div class="footer footer-btn-group">
+        <ng-template [ngIf]="situation == 0 || situation == 2">
+            <button class="btn btn-sm left-btn-container" [routerLink]="['/settings']" routerLinkActive="active">
+                <span class="fa-icon">
+                    <i class="fas fa-arrow-circle-left"></i>
+                </span>
+                <span class="text">Quay về</span>
+            </button>
+
+            <button *ngIf="situation == 0" class="btn btn-sm btn-outline-success right-btn-container"
+                (click)="changeSituation(1)">
+                <span class="fa-icon">
+                    <i class="fas fa-wrench"></i>
+                </span>
+                <span class="text">Thay đổi</span>
+            </button>
+
+            <button *ngIf="situation == 2" class="btn btn-sm btn-danger right-btn-container"
+                [disabled]="!formComp.isValidForm()" (click)="changePassword()">
+                <span class="fa-icon">
+                    <i class="fas fa-wrench"></i>
+                </span>
+                <span class="text">Thay đổi mật khẩu</span>
+            </button>
+        </ng-template>
+
+        <ng-template [ngIf]="situation == 1">
+            <button class="btn btn-sm left-btn-container" (click)="resetUserInfo(0)">
+                <span class="fa-icon">
+                    <i class="fas fa-history"></i>
+                </span>
+                <span class="text">Phục hồi mặc định</span>
+            </button>
+
+            <button class="btn btn-sm btn-success right-btn-container" [disabled]="!formComp.isValidForm()"
+                (click)="updateUserInfo()">
+                <span class="fa-icon">
+                    <i class="fas fa-check"></i>
+                </span>
+                <span class="text">Lưu thay đổi</span>
+            </button>
+        </ng-template>
+    </div>
+</app-page-layout>

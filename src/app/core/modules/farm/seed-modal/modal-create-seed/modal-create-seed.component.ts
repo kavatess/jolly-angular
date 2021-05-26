@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { PLANT_SESSION_COLLECTION } from 'src/app/app-constants';
-import { Plant } from 'src/app/core/models/plant.model';
-import { BasicSeedInfo, SimpleSeed } from 'src/app/core/models/seed.model';
+import { SESSION_STORAGE_KEY } from 'src/app/app-constants';
+import { Plant } from 'src/app/models/plant.model';
+import { BasicSeedInfo, SimpleSeed } from 'src/app/models/seed.model';
 import { InsertSeedService } from 'src/app/core/services/seed/insert-seed.service';
 import { SessionService } from 'src/app/shared/services/session.service';
 import { SeedModalComponent } from '../seed-modal.component';
@@ -22,7 +22,7 @@ export class ModalCreateSeedComponent extends SeedModalComponent implements OnIn
   }
 
   async ngOnInit(): Promise<void> {
-    this.plantArr = await this.sessionStorage.getAsync(PLANT_SESSION_COLLECTION);
+    this.plantArr = await this.sessionStorage.getAsync(SESSION_STORAGE_KEY.PLANT);
     this.initializeForm();
   }
 

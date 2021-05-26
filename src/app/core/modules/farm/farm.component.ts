@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FARM_LAST_BLOCK_COLLECTION } from 'src/app/app-constants';
+import { SESSION_STORAGE_KEY } from 'src/app/app-constants';
 import { SessionService } from 'src/app/shared/services/session.service';
-import { Truss } from '../../models/truss.model';
+import { Truss } from '../../../models/truss.model';
 import { GetPlantDataService } from '../../services/plant/get-plant-data.service';
 
 @Component({
@@ -70,7 +70,7 @@ export class FarmComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const lastBlock = this.sessionStorage.retrieve(FARM_LAST_BLOCK_COLLECTION) || 'A';
+    const lastBlock = this.sessionStorage.retrieve(SESSION_STORAGE_KEY.FARM_LAST_BLOCK) || 'A';
     this.changeSelectedBlock(lastBlock);
   }
 }

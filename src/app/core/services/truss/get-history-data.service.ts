@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { TrussHistoryInfo } from '../../models/truss.model';
+import { TrussHistoryInfo } from '../../../models/truss.model';
 import { HttpRequestService } from '../http-request.service';
-import { TRUSS_REQUEST } from '../request-url-constants';
+import { TRUSS_REQUEST } from 'src/app/app-constants';
 
 @Injectable({
   providedIn: 'root'

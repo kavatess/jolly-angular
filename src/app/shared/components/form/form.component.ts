@@ -1,73 +1,88 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { FormControlInfo } from 'src/app/core/models/form-control.model';
+import { Component, Input, OnChanges } from '@angular/core';
+import { FormControl, FormGroup, ValidationErrors } from '@angular/forms';
+import { FormControlInfo } from 'src/app/models/form-control.model';
 
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
-  styleUrls: ['./form.component.css']
+  styleUrls: ['./form.component.scss']
 })
-export class FormComponent implements OnInit {
-  private _formHeader = '';
+export class FormComponent implements OnChanges {
+  @Input() formHeader = '';
+  @Input() controlArr: FormControlInfo[] = [];
+  @Input() readOnlyMode = false;
   private _form: FormGroup = new FormGroup({});
-  private _controlArr: FormControlInfo[] = [];
-  private _readOnlyMode = true;
+  private _fileRepo: any[] = [];
 
   get form(): FormGroup {
     return this._form;
   }
-  get formHeader(): string {
-    return this._formHeader;
-  }
-  get controlArr(): FormControlInfo[] {
-    return this._controlArr;
-  }
-  get readOnlyMode(): boolean {
-    return this._readOnlyMode;
-  }
-  private addFormControl({ name, value, validators }: FormControlInfo): void {
-    this._form.addControl(name, new FormControl(value, validators));
-  }
-  private setExistFormControl({ name, value, validators }: FormControlInfo): void {
-    this._form.setControl(name, new FormControl(value, validators));
-  }
-  setFormHeader(header: string): void {
-    this._formHeader = header;
-  }
-  switchMode(): void {
-    this._readOnlyMode = !this._readOnlyMode;
-  }
-  createFormControl(controlInfo: FormControlInfo): void {
-    const controlIndex = this._controlArr.findIndex(({ name }) => name == controlInfo.name);
-    if (controlIndex > -1) {
-      this.addFormControl(controlInfo);
-      this._controlArr.push(controlInfo);
-      return;
-    }
-    this.controlArr[controlIndex] = controlInfo;
-    this.setExistFormControl(controlInfo);
-  }
-  removeFormControl(controlName: string): void {
-    this._controlArr = this._controlArr.filter(control => control.name != controlName);
-    this._form.removeControl(controlName);
-  }
-  createFormByControlArr(controlArr: FormControlInfo[]): void {
-    this.resetForm();
-    controlArr.forEach(control => {
-      if (control.name) {
-        this.createFormControl(control);
-      }
-    });
-    this._controlArr = controlArr;
-  }
-  resetForm(): void {
-    this._controlArr = [];
-    this._form = new FormGroup({});
-  }
 
   constructor() { }
 
-  ngOnInit(): void {
+  isValidForm(): boolean {
+    return this._form.valid;
   }
 
+  getFormValue(): any {
+    return this._form.value;
+  }
+
+  getCtrlError(ctrlName: string): ValidationErrors | null {
+    return this._form.get(ctrlName).errors;
+  }
+
+  isCtrlTouched(ctrlName: string): boolean {
+    return this._form.get(ctrlName).touched;
+  }
+
+  resetForm(): void {
+    this.controlArr.forEach(control => {
+      this.form.controls[control.name].patchValue(control.defaultVal);
+    });
+    this.form.markAsUntouched();
+  }
+
+  ngOnChanges(): void {
+    if (this.controlArr.length) {
+      this._form = new FormGroup({});
+      this.createFormByControlArr();
+    }
+  }
+
+  private createFormByControlArr(): void {
+    this.controlArr.map(({ name, defaultVal, validators }) => {
+      if (name) {
+        this._form.addControl(name, new FormControl(defaultVal, validators));
+      }
+    });
+  }
+
+  getFileByCtrlName(ctrlName: string): void {
+    return this._fileRepo.find(fileEl => fileEl.controlName == ctrlName);
+  }
+
+  emitNewImg(ctrlName: string, imgFile: File): void {
+    this.showPreviewImg(ctrlName, imgFile);
+    this.addFileToRepo(ctrlName, imgFile);
+  }
+
+  private showPreviewImg(ctrlName: string, imgFile: File): void {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      $(`img-${ctrlName}`).attr('src', e.target.result.toString());
+      $(`img-${ctrlName}`).removeClass('d-none');
+    }
+    reader.readAsDataURL(imgFile);
+  }
+
+  private addFileToRepo(ctrlName: string, newFile: File): void {
+    const fileIndex = this._fileRepo.findIndex(({ controlName }) => controlName == ctrlName);
+    if (fileIndex > -1) {
+      this._fileRepo[fileIndex].file = newFile;
+      return;
+    }
+    const newFileEl = { controlName: ctrlName, file: newFile };
+    this._fileRepo.push(newFileEl);
+  }
 }

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { TrussHistoryInfo, RawTruss } from 'src/app/core/models/truss.model';
+import { TrussHistoryInfo, RawTruss } from 'src/app/models/truss.model';
 
 @Component({
   selector: 'app-truss-history-list',
