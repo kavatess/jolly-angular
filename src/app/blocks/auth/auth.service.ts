@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { LocalStorageService } from 'ngx-webstorage';
 import { Observable, of, throwError } from 'rxjs';
-import { catchError, map, mapTo, tap } from 'rxjs/operators';
+import { catchError, mapTo, tap } from 'rxjs/operators';
 import { User } from 'src/app/models/user.model';
 import { AUTH_REQUEST_BEGIN, LOCAL_STORAGE_KEY } from '../../app-constants';
 
@@ -38,27 +38,13 @@ export class AuthService {
   }
 
   updateUserInfo(user: User): void {
-    this.http.post(AUTH_REQUEST_BEGIN + '/user/update', user)
-      .pipe(
-        catchError((err) => {
-          window.alert('Hiện không thể cập nhật thông tin cá thân vì có lỗi từ máy chủ. Xin vui lòng thử lại sau');
-          return throwError(err);
-        })
-      ).subscribe(_res => {
-        this.logout();
-      });;
+    this.http.post(AUTH_REQUEST_BEGIN + '/user/update', user).subscribe(_res => {
+      this.logout();
+    });
   }
 
-  changePassword(newPasswordInfo: { phoneNumber: string, oldPassword: string, newPassword: string }): void {
-    this.http.post(AUTH_REQUEST_BEGIN + '/password/update', newPasswordInfo)
-      .pipe(
-        catchError((err) => {
-          window.alert('Sai số điện thoại hoặc tên đăng nhập.');
-          return throwError(err);
-        })
-      ).subscribe(_res => {
-        this.logout();
-      });
+  changePassword(newPasswordInfo: { phoneNumber: string, oldPassword: string, newPassword: string }): Observable<any> {
+    return this.http.post(AUTH_REQUEST_BEGIN + '/password/update', newPasswordInfo);
   }
 
   logout(): void {

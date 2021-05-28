@@ -6,7 +6,7 @@
 
         <ng-container [ngSwitch]="control.type">
             <select *ngSwitchCase="'select'" [name]="'select-' + control.name" [id]="control.name" class="form-select"
-                [readOnly]="readOnlyMode">
+                [disabled]="readOnlyMode">
                 <option *ngFor="let option of control.options" [value]="option.value">{{ option.name }}</option>
             </select>
 

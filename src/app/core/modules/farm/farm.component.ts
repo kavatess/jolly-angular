@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { SESSION_STORAGE_KEY } from 'src/app/app-constants';
 import { SessionService } from 'src/app/shared/services/session.service';
 import { Truss } from '../../../models/truss.model';

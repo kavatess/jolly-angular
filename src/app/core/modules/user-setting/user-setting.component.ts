@@ -94,15 +94,24 @@ export class UserSettingComponent implements OnInit {
     }
   }
 
-  changePassword(): void {
+  async changePassword() {
     if (this.formComp.isValidForm()) {
-      const { oldPassword, newPassword, checkNewPassword } = this.formComp.getFormValue();
-      if (newPassword != checkNewPassword) {
-        window.alert('2 mật khẩu thay đổi không trùng khớp. Xin vui lòng nhập lại.');
+      try {
+        const { oldPassword, newPassword, checkNewPassword } = this.formComp.getFormValue();
+        if (newPassword != checkNewPassword) {
+          throw new Error('2 mật khẩu thay đổi không trùng khớp. Xin vui lòng nhập lại.');
+        }
+        const submitJson = { phoneNumber: this.userInfo.phoneNumber, oldPassword, newPassword };
+        await this.authService.changePassword(submitJson).toPromise().then(response => {
+          if (!response.matchedCount) {
+            throw new Error('Mật khẩu cũ không đúng. Xin vui lòng nhập lại.');
+          }
+          this.authService.logout();
+        });
+      } catch (err) {
+        alert(err.message);
         return this.formComp.resetForm();
       }
-      const submitJson = { phoneNumber: this.userInfo.phoneNumber, oldPassword, newPassword };
-      this.authService.changePassword(submitJson);
     }
   }
 }

@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     if (this.loginForm.valid) {
       this.subscription = this.authService.login(this.loginForm.value).subscribe(isLoggedIn => {
         if (isLoggedIn) {
-          this.router.navigate(['']);
+          this.router.navigate(['farm']);
         } else {
           alert('Đăng nhập thất bại. Xin vui lòng thử lại.')
         }

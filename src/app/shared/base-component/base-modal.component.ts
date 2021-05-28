@@ -3,22 +3,21 @@ import { Component, OnInit } from '@angular/core';
 @Component({
     template: ''
 })
-export abstract class ModalComp implements OnInit {
-    private static onReloading = false;
+export abstract class BaseModalComponent implements OnInit {
+    private _isOnReload = false;
 
     constructor() { }
 
-    get onReloading(): boolean {
-        return ModalComp.onReloading;
+    get isOnReload(): boolean {
+        return this._isOnReload;
     }
-    changeLoadStatus(status: boolean) {
-        ModalComp.onReloading = status
+    changeReloadStatus(status: boolean): void {
+        this._isOnReload = status
     }
 
     ngOnInit(): void {
-        ModalComp.onReloading = false;
+        this._isOnReload = false;
     }
 
     protected abstract reloadData(): Promise<void>;
-
 }

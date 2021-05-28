@@ -1,6 +1,6 @@
 <!-- Modal for truss -->
 <app-modal [Id]="'farm_modal'" [title]=" 'Thông tin giàn rau ' + clickedTruss.block + clickedTruss.index "
-    [onLoad]="onReloading">
+    [onLoad]="isOnReload">
     <!-- If truss is being planted, display modal-planting-truss comp -->
     <app-modal-planting-truss *ngIf="clickedTruss.plantId" modal-content [clickedTruss]="clickedTruss"
         (onUpdate)="onUpdate.emit($event)">

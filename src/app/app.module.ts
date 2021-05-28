@@ -9,7 +9,6 @@ import { FarmModule } from './core/modules/farm/farm.module';
 import { LoginModule } from './core/modules/login/login.module';
 import { SettingModule } from './core/modules/setting/setting.module';
 import { StatisticsModule } from './core/modules/statistics/statistics.module';
-
 @NgModule({
   declarations: [AppComponent],
   imports: [

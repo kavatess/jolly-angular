@@ -22,22 +22,22 @@ const routes: Routes = [
   {
     path: 'settings',
     component: SettingComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard]
   },
   {
     path: 'user-setting',
     loadChildren: () => import('./core/modules/user-setting/user-setting.module').then(mod => mod.UserSettingModule),
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard]
   },
   {
     path: 'plant-setting',
     loadChildren: () => import('./core/modules/plant-setting/plant-setting.module').then(mod => mod.PlantSettingModule),
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard]
   },
   {
     path: 'truss-setting',
     loadChildren: () => import('./core/modules/truss-setting/truss-setting.module').then(mod => mod.TrussSettingModule),
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard]
   }
 ];
 

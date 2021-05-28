@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SESSION_STORAGE_KEY } from 'src/app/app-constants';
-import { ModalComp } from 'src/app/shared/base-component/base-modal.component';
+import { BaseModalComponent } from 'src/app/shared/base-component/base-modal.component';
 import { SessionService } from 'src/app/shared/services/session.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { SessionService } from 'src/app/shared/services/session.service';
   templateUrl: './seed-modal.component.html',
   styleUrls: ['./seed-modal.component.scss']
 })
-export class SeedModalComponent extends ModalComp implements OnInit {
+export class SeedModalComponent extends BaseModalComponent implements OnInit {
   private static isCreateSeedMode = false;
 
   constructor(protected sessionStorage: SessionService) {
@@ -23,13 +23,13 @@ export class SeedModalComponent extends ModalComp implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    this.changeLoadStatus(false);
+    this.changeReloadStatus(false);
     await this.sessionStorage.getAsync(SESSION_STORAGE_KEY.SEED);
   }
 
   protected async reloadData(): Promise<void> {
-    this.changeLoadStatus(true);
+    this.changeReloadStatus(true);
     await this.sessionStorage.restore(SESSION_STORAGE_KEY.SEED);
-    this.changeLoadStatus(false);
+    this.changeReloadStatus(false);
   }
 }
