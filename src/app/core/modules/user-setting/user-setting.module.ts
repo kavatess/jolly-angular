@@ -10,7 +10,7 @@ const USER_SETTING_ROUTE: Routes = [
   {
     path: '',
     component: UserSettingComponent,
-  },
+  }
 ];
 
 @NgModule({

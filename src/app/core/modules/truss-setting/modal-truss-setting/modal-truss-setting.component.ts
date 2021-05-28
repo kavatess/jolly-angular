@@ -55,6 +55,7 @@ export class ModalTrussSettingComponent implements OnChanges {
 
   private updateDone(): void {
     this.sessionStorage.restore(SESSION_STORAGE_KEY.RAW_TRUSS + this.truss.block);
+    this.sessionStorage.restore(SESSION_STORAGE_KEY.TRUSS + this.truss.block);
     this.updateEv.emit();
     this.onLoad = false;
   }

@@ -4,7 +4,6 @@ import { AuthGuard } from './blocks/guards/auth.guard';
 import { FarmComponent } from './core/modules/farm/farm.component';
 import { LoginComponent } from './core/modules/login/login.component';
 import { SettingComponent } from './core/modules/setting/setting.component';
-import { StatisticsComponent } from './core/modules/statistics/statistics.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -16,7 +15,7 @@ const routes: Routes = [
   },
   {
     path: 'statistics',
-    component: StatisticsComponent,
+    loadChildren: () => import('./core/modules/statistics/statistics.module').then(mod => mod.StatisticsModule),
     canActivate: [AuthGuard]
   },
   {

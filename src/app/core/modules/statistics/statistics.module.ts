@@ -6,8 +6,9 @@ import { PageLayoutModule } from 'src/app/shared/components/page-layout/page-lay
 import { HighchartsConfig, HighchartsModule } from '@howtimeflies/ngx-highcharts';
 import { PlantStatPieChartComponent } from './plant-stat-pie-chart/plant-stat-pie-chart.component';
 import { TrussStatBarChartComponent } from './truss-stat-bar-chart/truss-stat-bar-chart.component';
+import { RouterModule, Routes } from '@angular/router';
 
-const config: HighchartsConfig = {
+const HIGHCHARTS_CONFIG: HighchartsConfig = {
   cdnBaseUrl: 'https://code.highcharts.com',
   scriptName: 'highcharts.js',
   delayToExecuteModulesCode: 200,
@@ -15,16 +16,24 @@ const config: HighchartsConfig = {
   globalOptions: {}
 }
 
+const STATISTICS_ROUTE: Routes = [
+  {
+    path: '',
+    component: StatisticsComponent
+  }
+]
+
 @NgModule({
   declarations: [StatisticsComponent, PlantStatPieChartComponent, TrussStatBarChartComponent],
   imports: [
     CommonModule,
     HighchartsModule,
     PageLayoutModule,
-    SelectModule
+    SelectModule,
+    RouterModule.forChild(STATISTICS_ROUTE)
   ],
   providers: [
-    { provide: HighchartsConfig, useValue: config }
+    { provide: HighchartsConfig, useValue: HIGHCHARTS_CONFIG }
   ]
 })
 export class StatisticsModule { }
