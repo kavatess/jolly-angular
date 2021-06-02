@@ -9,7 +9,7 @@ export class ProgressBarComponent implements OnChanges {
   @Input() verticalBar = false;
   @Input() striped = false;
   @Input() hasContent = true;
-  @Input() height = '24px';
+  @Input() height = '';
   @Input() color = '';
   @Input() maxHole = 0;
   @Input() plantNumber = 0;

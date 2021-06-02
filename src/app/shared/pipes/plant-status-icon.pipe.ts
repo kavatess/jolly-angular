@@ -7,7 +7,7 @@ export class PlantStatusIconPipe implements PipeTransform {
 
   transform(growth: any): string | null {
     if (typeof growth === 'number') {
-      return growth === 3 ? 'fas fa-danger fa-tractor' : 'fas fa-success fa-seedling';
+      return growth == 3 ? 'fas fa-danger fa-tractor' : 'fas fa-success fa-seedling';
     }
     
     if (typeof growth === 'boolean') {

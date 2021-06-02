@@ -1,30 +1,25 @@
-import { Component, OnChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { UpdateStatusBody } from 'src/app/models/truss.request.model';
 import { ClearTrussService } from 'src/app/core/services/truss/clear-truss.service';
 import { UpdateStatusService } from 'src/app/core/services/truss/update-status.service';
-import { SessionService } from 'src/app/shared/services/session.service';
-import { FarmModalComponent } from '../farm-modal.component';
+import { Truss } from 'src/app/models/truss.model';
 
 @Component({
   selector: 'app-modal-planting-truss',
   templateUrl: './modal-planting-truss.component.html',
   styleUrls: ['./modal-planting-truss.component.scss']
 })
-export class ModalPlantingTrussComponent extends FarmModalComponent implements OnChanges {
+export class ModalPlantingTrussComponent implements OnChanges {
+  @Input() clickedTruss: Truss = new Truss();
+  @Output() updateEv = new EventEmitter();
   updateStatusForm: FormGroup = new FormGroup({
     newPlantGrowth: new FormControl(),
     newPlantNumber: new FormControl()
   });
   isModifyMode = false;
 
-  constructor(
-    protected sessionStorage: SessionService,
-    private updateStatusService: UpdateStatusService,
-    private clearTrussService: ClearTrussService
-  ) {
-    super(sessionStorage);
-  }
+  constructor(private updateStatusService: UpdateStatusService, private clearTrussService: ClearTrussService) { }
 
   ngOnChanges(): void {
     this.revertStatus();
@@ -43,8 +38,8 @@ export class ModalPlantingTrussComponent extends FarmModalComponent implements O
   clearTruss(): void {
     let confirm = window.confirm(`Bạn chắc chắn muốn xóa giàn ${this.clickedTruss.block + this.clickedTruss.index} này chứ!`);
     if (confirm) {
-      this.clearTrussService.clearTruss(this.clickedTruss._id).subscribe(async (_response) => {
-        await this.reloadData();
+      this.clearTrussService.clearTruss(this.clickedTruss._id).subscribe(_response => {
+        this.updateEv.emit();
       });
     }
   }
@@ -52,8 +47,8 @@ export class ModalPlantingTrussComponent extends FarmModalComponent implements O
   saveStatus(): void {
     if (this.isValidNewStatus) {
       const requestBody = new UpdateStatusBody(this.clickedTruss._id, this.newPlantNumber, this.newPlantGrowth);
-      this.updateStatusService.updateStatus(requestBody).subscribe(async (_response) => {
-        await this.reloadData();
+      this.updateStatusService.updateStatus(requestBody).subscribe(_response => {
+        this.updateEv.emit();
       });
     }
   }

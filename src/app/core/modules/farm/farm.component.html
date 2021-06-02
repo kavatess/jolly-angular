@@ -1,4 +1,4 @@
-<app-page-layout [onLoad]="!dataReady" [loadTimeOut]="2000">
+<app-page-layout [onLoad]="farmService.isReloading" [loadTimeOut]="2000">
     <div class="page-content">
         <!-- Map of farm -->
         <div class="farm-container">
@@ -6,7 +6,7 @@
                 <div class="farm-main-container">
                     <div class="farm-middle-container">
                         <!-- truss array A -->
-                        <app-farm-block [block]="'A'" [farmComponent]="this">
+                        <app-farm-block [block]="'A'">
                         </app-farm-block>
                     </div>
                     <div class="farm-right-container">
@@ -32,17 +32,17 @@
                 <div class="farm-main-container">
                     <div class="farm-left-container">
                         <!-- truss array BN -->
-                        <app-farm-block [block]="'BN'" [farmComponent]="this">
+                        <app-farm-block [block]="'BN'">
                         </app-farm-block>
                     </div>
                     <div class="farm-middle-container">
                         <!-- truss array B -->
-                        <app-farm-block [block]="'B'" [farmComponent]="this">
+                        <app-farm-block [block]="'B'">
                         </app-farm-block>
                     </div>
                     <div class="farm-right-container">
                         <!-- truss array BS -->
-                        <app-farm-block [block]="'BS'" [farmComponent]="this">
+                        <app-farm-block [block]="'BS'">
                         </app-farm-block>
                     </div>
                 </div>
@@ -58,7 +58,7 @@
                             </div>
                             <div class="card-body">
                                 <!-- truss array C -->
-                                <app-farm-block [block]="'C'" [farmComponent]="this">
+                                <app-farm-block [block]="'C'">
                                 </app-farm-block>
                             </div>
                         </div>
@@ -69,7 +69,7 @@
                             </div>
                             <div class="card-body">
                                 <!-- truss array CT -->
-                                <app-farm-block [block]="'CT'" [farmComponent]="this">
+                                <app-farm-block [block]="'CT'">
                                 </app-farm-block>
                             </div>
                         </div>
@@ -80,7 +80,7 @@
                             </div>
                             <div class="card-body">
                                 <!-- truss array D -->
-                                <app-farm-block [block]="'D'" [farmComponent]="this">
+                                <app-farm-block [block]="'D'">
                                 </app-farm-block>
                             </div>
                         </div>
@@ -90,8 +90,7 @@
         </div>
 
         <!-- Modal truss information -->
-        <app-farm-modal [clickedTruss]="clickedTruss" (onUpdate)="trussUpdatedEvHandler($event)">
-        </app-farm-modal>
+        <app-farm-modal></app-farm-modal>
 
         <!-- Modal for seed table -->
         <app-seed-modal></app-seed-modal>
@@ -99,6 +98,6 @@
 
     <!-- select group -->
     <div class="footer">
-        <app-select (selectChange)="selectChangeHandler($event)"></app-select>
+        <app-select (selectChange)="handleSelectOnChanges($event)"></app-select>
     </div>
 </app-page-layout>

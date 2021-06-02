@@ -15,6 +15,10 @@ export class SessionService {
     return this.sessionStorage.observe(colName);
   }
 
+  clear(colName?: string): void {
+    return this.sessionStorage.clear(colName);
+  }
+
   retrieve(colName: string): any {
     return this.sessionStorage.retrieve(colName);
   }

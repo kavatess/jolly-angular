@@ -12,10 +12,10 @@ import { SeedModalComponent } from '../seed-modal.component';
   styleUrls: ['./modal-seed-management.component.scss']
 })
 export class ModalSeedManagementComponent extends SeedModalComponent implements OnInit {
-  seedArr: Seed[] = [];
   @Input() isReadySeed = false;
   @Input() clickEventActivated = false;
   @Output() seedElClick = new EventEmitter<BasicSeedInfo>();
+  seedArr: Seed[] = [];
 
   constructor(
     protected sessionStorage: SessionService,

@@ -1,8 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SESSION_STORAGE_KEY } from 'src/app/app-constants';
 import { SessionService } from 'src/app/shared/services/session.service';
-import { Truss } from '../../../models/truss.model';
-import { GetPlantDataService } from '../../services/plant/get-plant-data.service';
+import { FarmService } from './farm.service';
 
 @Component({
   selector: 'app-farm',
@@ -10,67 +9,16 @@ import { GetPlantDataService } from '../../services/plant/get-plant-data.service
   styleUrls: ['./farm.component.scss']
 })
 export class FarmComponent implements OnInit {
-  private _dataReady = false;
-  private _selectedBlock = '';
-  private _selectedPlantId = '';
-  private _selectedPlantGrowth = 0;
-  private _clickedTruss: Truss = new Truss();
+  selectedBlock = '';
 
-  constructor(protected sessionStorage: SessionService, protected getPlantService: GetPlantDataService) { }
+  constructor(private sessionStorage: SessionService, public farmService: FarmService) { }
 
-  get dataReady(): boolean {
-    return this._dataReady;
-  }
-
-  get selectedBlock(): string {
-    return this._selectedBlock;
-  }
-
-  get selectedPlantId(): string {
-    return this._selectedPlantId;
-  }
-
-  get selectedPlantGrowth(): number {
-    return this._selectedPlantGrowth;
-  }
-
-  get clickedTruss(): Truss {
-    return this._clickedTruss;
-  }
-
-  changeDataReadyTo(status: boolean): void {
-    this._dataReady = status;
-  }
-
-  private changeSelectedBlock(newBlock: string): void {
-    this._selectedBlock = newBlock;
-  }
-
-  private changeSelectedPlantId(newPlantId: string): void {
-    this._selectedPlantId = newPlantId;
-  }
-
-  private changeSelectedPlantGrowth(newPlantGrowth: number): void {
-    this._selectedPlantGrowth = Number(newPlantGrowth);
-  }
-
-  changeClickedTruss(newClickedTruss: Truss): void {
-    this._clickedTruss = newClickedTruss;
-  }
-
-  selectChangeHandler({ block, plantId, plantGrowth }: any): void {
-    this.changeSelectedBlock(block);
-    this.changeSelectedPlantId(plantId);
-    this.changeSelectedPlantGrowth(plantGrowth);
-  }
-
-  trussUpdatedEvHandler(newClickedTruss: Truss): void {
-    this.changeClickedTruss(newClickedTruss);
-    this.changeDataReadyTo(false);
+  handleSelectOnChanges(selectVal: any): void {
+    this.selectedBlock = selectVal.block;
+    this.farmService.handleSelectOnChanges(selectVal);
   }
 
   ngOnInit(): void {
-    const lastBlock = this.sessionStorage.retrieve(SESSION_STORAGE_KEY.FARM_LAST_BLOCK) || 'A';
-    this.changeSelectedBlock(lastBlock);
+    this.selectedBlock = this.sessionStorage.retrieve(SESSION_STORAGE_KEY.FARM_LAST_BLOCK) || 'A';
   }
 }

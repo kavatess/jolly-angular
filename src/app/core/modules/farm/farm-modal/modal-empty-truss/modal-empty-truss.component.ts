@@ -1,35 +1,26 @@
-import { Component, OnInit } from '@angular/core';
-import { SESSION_STORAGE_KEY } from 'src/app/app-constants';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Seed } from 'src/app/models/seed.model';
 import { CreateTrussService } from 'src/app/core/services/truss/create-truss.service';
-import { SessionService } from 'src/app/shared/services/session.service';
-import { FarmModalComponent } from '../farm-modal.component';
+import { Truss } from 'src/app/models/truss.model';
 
 @Component({
   selector: 'app-modal-empty-truss',
   templateUrl: './modal-empty-truss.component.html',
   styleUrls: ['./modal-empty-truss.component.scss']
 })
-export class ModalEmptyTrussComponent extends FarmModalComponent implements OnInit {
-  readySeed: Seed[] = [];
+export class ModalEmptyTrussComponent implements OnInit {
+  @Input() clickedTruss = new Truss();
+  @Output() updateEv = new EventEmitter();
   selectedSeed: Seed = new Seed();
 
-  constructor(
-    protected sessionStorage: SessionService,
-    private createTrussService: CreateTrussService
-  ) {
-    super(sessionStorage);
-  }
+  constructor(private createTrussService: CreateTrussService) { }
 
-  ngOnInit(): void {
-    this.readySeed = this.sessionStorage.retrieve(SESSION_STORAGE_KEY.SEED) || [];
-    this.readySeed = this.readySeed.filter(({ isReadySeed }) => isReadySeed);
-  }
+  ngOnInit(): void { }
 
   createTruss(): void {
     if (this.clickedTruss._id && this.selectedSeed._id) {
-      this.createTrussService.createTruss(this.clickedTruss._id, this.selectedSeed._id).subscribe(async (_response) => {
-        await this.reloadData();
+      this.createTrussService.createTruss(this.clickedTruss._id, this.selectedSeed._id).subscribe(_response => {
+        this.updateEv.emit();
       });
     }
   }
