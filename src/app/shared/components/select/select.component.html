@@ -4,7 +4,8 @@
             <option *ngIf="isStatisticPage" value="" selected>--Tất cả vườn--</option>
             <option value="A">Vườn A</option>
             <option value="B">Vườn B</option>
-            <option value="C">Vườn C và D</option>
+            <option value="C">Vườn C <span *ngIf="!isStatisticPage">và D</span></option>
+            <option *ngIf="isStatisticPage" value="D">Vuờn D</option>
         </select>
     </span>
 

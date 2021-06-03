@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DEFAULT_STATISTIC_QUERY } from 'src/app/app-constants';
+import { DEFAULT_STATISTIC_REQ_BODY } from 'src/app/app-constants';
 import { Statistics } from '../../../models/statistic.model';
 import { GetStatisticService } from '../../services/truss/get-statistic.service';
 
@@ -17,9 +17,9 @@ export class StatisticsComponent implements OnInit {
     this.changeStatArr();
   }
 
-  changeStatArr(reqQuery: any = DEFAULT_STATISTIC_QUERY): void {
+  changeStatArr({ block, plantGrowth, plantId }: any = DEFAULT_STATISTIC_REQ_BODY): void {
     this.statArr = [];
-    this.getStatisticService.getFarmStatistics(reqQuery).subscribe(newStats => {
+    this.getStatisticService.getFarmStatistics(block, plantGrowth, plantId).subscribe(newStats => {
       this.statArr = newStats;
     });
   }

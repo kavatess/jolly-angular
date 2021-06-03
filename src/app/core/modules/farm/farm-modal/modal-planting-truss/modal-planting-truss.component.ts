@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { UpdateStatusBody } from 'src/app/models/truss.request.model';
 import { ClearTrussService } from 'src/app/core/services/truss/clear-truss.service';
 import { UpdateStatusService } from 'src/app/core/services/truss/update-status.service';
 import { Truss } from 'src/app/models/truss.model';
@@ -46,8 +45,7 @@ export class ModalPlantingTrussComponent implements OnChanges {
 
   saveStatus(): void {
     if (this.isValidNewStatus) {
-      const requestBody = new UpdateStatusBody(this.clickedTruss._id, this.newPlantNumber, this.newPlantGrowth);
-      this.updateStatusService.updateStatus(requestBody).subscribe(_response => {
+      this.updateStatusService.updateStatus(this.clickedTruss._id, this.newPlantGrowth, this.newPlantNumber).subscribe(_response => {
         this.updateEv.emit();
       });
     }

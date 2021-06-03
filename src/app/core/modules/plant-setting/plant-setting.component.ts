@@ -60,19 +60,18 @@ export class PlantSettingComponent implements OnInit {
     return null;
   }
 
-  private reloadPlantData(newPlantArr: Plant[]): void {
-    this.plantArr = newPlantArr;
+  private async reloadPlantData(): Promise<void> {
+    this.plantArr = await this.sessionStorage.restore(SESSION_STORAGE_KEY.PLANT);
     this.changeSituation(0);
     this.onLoading = false;
-    this.sessionStorage.store(SESSION_STORAGE_KEY.PLANT, newPlantArr);
   }
 
   async updateDataByType(updateType: string): Promise<void> {
     if (this.validPlantInfo) {
       this.onLoading = true;
       await this.uploadImgIfNeeded();
-      const response = await this.callApiByUpdateType(updateType);
-      this.reloadPlantData(response);
+      await this.callApiByUpdateType(updateType);
+      this.reloadPlantData();
     }
   }
 

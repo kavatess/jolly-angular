@@ -14,10 +14,10 @@ export enum SESSION_STORAGE_KEY {
 }
 // BASIC CONSTANTS
 export const BLOCK_ARR = ['A', 'B', 'BN', 'BS', 'C', 'CT', 'D'];
-export enum DEFAULT_STATISTIC_QUERY {
-    block = '',
-    plantId = '',
-    plantGrowth = 0
+export const DEFAULT_STATISTIC_REQ_BODY = {
+    block: '',
+    plantGrowth: 0,
+    plantId: ''
 }
 export enum TRUSS_NUMBER {
     block_A = 33,

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpRequestService } from '../http-request.service';
-import { UpdateStatusBody } from '../../../models/truss.request.model';
 import { TRUSS_REQUEST } from 'src/app/app-constants';
 
 @Injectable({
@@ -8,7 +7,12 @@ import { TRUSS_REQUEST } from 'src/app/app-constants';
 })
 export class UpdateStatusService {
   constructor(private httpReq: HttpRequestService) { }
-  updateStatus(reqBody: UpdateStatusBody) {
+  updateStatus(updatedTrussId: string, newPlantGrowth: number, newPlantNumber: number) {
+    const reqBody = {
+      _id: updatedTrussId,
+      plantGrowth: newPlantGrowth,
+      plantNumber: newPlantNumber
+    }
     return this.httpReq.createPostRequest(TRUSS_REQUEST.updateStatus, reqBody);
   }
 }
