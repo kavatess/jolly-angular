@@ -1,5 +1,5 @@
 <app-page-layout [scroll]="true" [onLoad]="!statArr.length" [loadTimeOut]="2000">
-    <div class="page-content">
+    <div *ngIf="statArr.length" class="page-content">
         <app-truss-stat-bar-chart [statArr]="statArr"></app-truss-stat-bar-chart>
         <app-plant-stat-pie-chart [statArr]="statArr"></app-plant-stat-pie-chart>
     </div>

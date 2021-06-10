@@ -17,8 +17,6 @@ export class TrussStatBarChartComponent implements OnChanges {
     this.options = {
       chart: {
         type: 'bar',
-        width: 550,
-        height: 1000
       },
       title: {
         text: 'Số lượng từng loại rau'
@@ -27,7 +25,7 @@ export class TrussStatBarChartComponent implements OnChanges {
         text: 'Đơn vị: cây (kg)'
       },
       xAxis: {
-        categories: this.categoriesOfxAxis,
+        categories: this.getCategoriesOfxAxis(),
         title: {
           text: null
         }
@@ -49,32 +47,32 @@ export class TrussStatBarChartComponent implements OnChanges {
         {
           name: 'Số lượng',
           type: "bar",
-          data: this.chartDataSeries,
+          data: this.getChartDataSeries(),
           dataLabels: {
             enabled: true,
             format: undefined,
-            formatter: this.labelOptionFormatter
+            formatter: this.getLabelOptionFormatter()
           }
         }
       ]
     };
   }
 
-  private get categoriesOfxAxis(): string[] {
+  private getCategoriesOfxAxis(): string[] {
     return this.statArr.map(({ plantName }) => plantName);
   }
 
-  private get chartDataSeries(): any[] {
+  private getChartDataSeries(): any[] {
     return this.statArr.map(({ plantColor, plantNumber }) => {
       return { y: plantNumber, color: plantColor };
     });
   }
 
-  private get labelOptionFormatter(): any {
+  private getLabelOptionFormatter(): any {
     const numberPerKgArr = this.statArr.map(({ numberPerKg }) => numberPerKg);
     return function () {
-      const kgValue = Number(this.y / numberPerKgArr[this.point.index]).toFixed(1);
-      return `${this.y} (${kgValue} kg)`;
+      const estimatedKgVal = Number(this.y / numberPerKgArr[this.point.index]).toFixed(1);
+      return `${this.y} (${estimatedKgVal} kg)`;
     }
   }
 

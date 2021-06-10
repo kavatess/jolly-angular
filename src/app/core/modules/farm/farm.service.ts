@@ -33,7 +33,7 @@ export class FarmService {
     this._isReloading = true;
   }
 
-  finishReloadin(): void {
+  finishReloading(): void {
     this._isReloading = false;
   }
 
