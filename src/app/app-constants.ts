@@ -14,11 +14,6 @@ export enum SESSION_STORAGE_KEY {
 }
 // BASIC CONSTANTS
 export const BLOCK_ARR = ['A', 'B', 'BN', 'BS', 'C', 'CT', 'D'];
-export const DEFAULT_STATISTIC_REQ_BODY = {
-    block: '',
-    plantGrowth: 0,
-    plantId: ''
-}
 export enum TRUSS_NUMBER {
     block_A = 33,
     block_B = 33,
@@ -32,34 +27,37 @@ export enum TRUSS_NUMBER {
 const SERVER_URL = 'http://localhost:1000';
 export const AUTH_REQUEST_BEGIN = SERVER_URL + '/api/auth';
 const API_REQUEST_BEGIN = SERVER_URL + '/api/v1';
-const TRUSS_REQUEST_BEGIN = API_REQUEST_BEGIN + '/truss';
-const PLANT_REQUEST_BEGIN = API_REQUEST_BEGIN + '/plant';
-const SEED_REQUEST_BEGIN = API_REQUEST_BEGIN + '/seed';
+const TRUSS_API_ROUTE_BEGIN = API_REQUEST_BEGIN + '/truss';
+const PLANT_API_ROUTE_BEGIN = API_REQUEST_BEGIN + '/plant';
+const SEED_API_ROUTE_BEGIN = API_REQUEST_BEGIN + '/seed';
 const UPDATE_ROUTE = '/update';
 const INSERT_ROUTE = '/insert';
 const DELETE_ROUTE = '/delete';
 export const TRUSS_REQUEST = {
-    getTrussData: TRUSS_REQUEST_BEGIN + '/block',
-    getRawTrussData: TRUSS_REQUEST_BEGIN + '/raw',
-    getStatistics: TRUSS_REQUEST_BEGIN + '/statistics',
-    updateStatus: TRUSS_REQUEST_BEGIN + '/status/update',
-    createTruss: TRUSS_REQUEST_BEGIN + '/create',
-    clearTruss: TRUSS_REQUEST_BEGIN + '/clear',
-    updateMaxHole: TRUSS_REQUEST_BEGIN + '/maxhole/update',
-    revertStatus: TRUSS_REQUEST_BEGIN + '/status/revert',
-    getTimelineById: TRUSS_REQUEST_BEGIN + '/history'
+    getTrussData: TRUSS_API_ROUTE_BEGIN + '/block',
+    getRawTrussData: TRUSS_API_ROUTE_BEGIN + '/raw',
+    getStatistics: TRUSS_API_ROUTE_BEGIN + '/statistics',
+    updateStatus: TRUSS_API_ROUTE_BEGIN + '/status/update',
+    createTruss: TRUSS_API_ROUTE_BEGIN + '/create',
+    clearTruss: TRUSS_API_ROUTE_BEGIN + '/clear',
+    updateMaxHole: TRUSS_API_ROUTE_BEGIN + '/maxhole/update',
+    revertStatus: TRUSS_API_ROUTE_BEGIN + '/status/revert',
+    getHistoryData: TRUSS_API_ROUTE_BEGIN + '/history',
+    getHarvestStatsByDate: TRUSS_API_ROUTE_BEGIN + '/records/date',
+    getHarvestStatsByMonth: TRUSS_API_ROUTE_BEGIN + '/records/month',
+    getHarvestStatsByYear: TRUSS_API_ROUTE_BEGIN + '/records/year',
 }
 export const PLANT_REQUEST = {
-    getPlantData: PLANT_REQUEST_BEGIN,
-    updateOnePlant: PLANT_REQUEST_BEGIN + UPDATE_ROUTE,
-    insertOnePlant: PLANT_REQUEST_BEGIN + INSERT_ROUTE,
-    deleteOnePlant: PLANT_REQUEST_BEGIN + DELETE_ROUTE
+    getPlantData: PLANT_API_ROUTE_BEGIN,
+    updateOnePlant: PLANT_API_ROUTE_BEGIN + UPDATE_ROUTE,
+    insertOnePlant: PLANT_API_ROUTE_BEGIN + INSERT_ROUTE,
+    deleteOnePlant: PLANT_API_ROUTE_BEGIN + DELETE_ROUTE
 }
 export const SEED_REQUEST = {
-    getSeedData: SEED_REQUEST_BEGIN,
-    updateOneSeed: SEED_REQUEST_BEGIN + UPDATE_ROUTE,
-    insertManySeed: SEED_REQUEST_BEGIN + INSERT_ROUTE,
-    deleteManySeed: SEED_REQUEST_BEGIN + DELETE_ROUTE,
-    deleteOneSeed: SEED_REQUEST_BEGIN + '/remove'
+    getSeedData: SEED_API_ROUTE_BEGIN,
+    updateOneSeed: SEED_API_ROUTE_BEGIN + UPDATE_ROUTE,
+    insertManySeed: SEED_API_ROUTE_BEGIN + INSERT_ROUTE,
+    deleteManySeed: SEED_API_ROUTE_BEGIN + DELETE_ROUTE,
+    deleteOneSeed: SEED_API_ROUTE_BEGIN + '/remove'
 }
 export const UPLOAD_IMGBB_REQUEST = 'https://api.imgbb.com/1/upload';

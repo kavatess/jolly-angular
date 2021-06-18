@@ -1,5 +1,6 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, Output } from '@angular/core';
 import { FormControl, FormGroup, ValidationErrors } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { FormControlInfo } from 'src/app/models/form-control.model';
 
 @Component({
@@ -7,35 +8,32 @@ import { FormControlInfo } from 'src/app/models/form-control.model';
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss']
 })
-export class FormComponent implements OnChanges {
-  @Input() formHeader = '';
+export class FormComponent implements OnChanges, OnDestroy {
   @Input() controlArr: FormControlInfo[] = [];
+  @Input() errorAlert = true;
   @Input() readOnlyMode = false;
-  private _form: FormGroup = new FormGroup({});
-  private _fileRepo: any[] = [];
-
-  get form(): FormGroup {
-    return this._form;
-  }
+  @Output() onchange = new EventEmitter();
+  form: FormGroup = new FormGroup({});
+  private fileRepo: any[] = [];
+  private subscription = new Subscription();
 
   constructor() { }
 
   isValidForm(): boolean {
-    return this._form.valid;
+    return this.form.valid;
   }
-
-  getFormValue(): any {
-    return this._form.value;
+  getFormVal(): any {
+    return this.form.value;
   }
-
+  getCtrlVal(ctrlName: string): any {
+    return this.form.value[ctrlName];
+  }
   getCtrlError(ctrlName: string): ValidationErrors | null {
-    return this._form.get(ctrlName).errors;
+    return this.form.get(ctrlName).errors;
   }
-
   isCtrlTouched(ctrlName: string): boolean {
-    return this._form.get(ctrlName).touched;
+    return this.form.get(ctrlName).touched;
   }
-
   resetForm(): void {
     this.controlArr.forEach(control => {
       this.form.controls[control.name].patchValue(control.defaultVal);
@@ -45,21 +43,28 @@ export class FormComponent implements OnChanges {
 
   ngOnChanges(): void {
     if (this.controlArr.length) {
-      this._form = new FormGroup({});
+      this.form = new FormGroup({});
       this.createFormByControlArr();
     }
+  }
+
+  private emitFormChanges(): void {
+    this.subscription = this.form.valueChanges.subscribe(formVal => {
+      this.onchange.emit(formVal);
+    })
   }
 
   private createFormByControlArr(): void {
     this.controlArr.map(({ name, defaultVal, validators }) => {
       if (name) {
-        this._form.addControl(name, new FormControl(defaultVal, validators));
+        this.form.addControl(name, new FormControl(defaultVal, validators));
       }
     });
+    this.emitFormChanges();
   }
 
   getFileByCtrlName(ctrlName: string): void {
-    return this._fileRepo.find(fileEl => fileEl.controlName == ctrlName);
+    return this.fileRepo.find(fileEl => fileEl.controlName == ctrlName);
   }
 
   emitNewImg(ctrlName: string, imgFile: File): void {
@@ -77,12 +82,16 @@ export class FormComponent implements OnChanges {
   }
 
   private addFileToRepo(ctrlName: string, newFile: File): void {
-    const fileIndex = this._fileRepo.findIndex(({ controlName }) => controlName == ctrlName);
+    const fileIndex = this.fileRepo.findIndex(({ controlName }) => controlName == ctrlName);
     if (fileIndex > -1) {
-      this._fileRepo[fileIndex].file = newFile;
+      this.fileRepo[fileIndex].file = newFile;
       return;
     }
     const newFileEl = { controlName: ctrlName, file: newFile };
-    this._fileRepo.push(newFileEl);
+    this.fileRepo.push(newFileEl);
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

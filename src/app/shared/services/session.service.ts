@@ -9,7 +9,11 @@ import { PLANT_REQUEST, SEED_REQUEST, SESSION_STORAGE_KEY, TRUSS_REQUEST } from 
 })
 export class SessionService {
 
-  constructor(private httpReq: HttpRequestService, private sessionStorage: SessionStorageService) { }
+  constructor(private httpReq: HttpRequestService, private sessionStorage: SessionStorageService) {
+    setInterval(() => {
+      this.clear();
+    }, 60000);
+  }
 
   observe(colName: string): Observable<any> {
     return this.sessionStorage.observe(colName);

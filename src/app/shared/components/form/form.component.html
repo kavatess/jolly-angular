@@ -1,33 +1,43 @@
 <form [formGroup]="form">
-    <h6 *ngIf="formHeader" class="text-center">{{ formHeader }}</h6>
-
     <div *ngFor="let control of controlArr" class="form-item">
         <label class="text">{{ control.label }}:</label>
 
         <ng-container [ngSwitch]="control.type">
             <select *ngSwitchCase="'select'" [name]="'select-' + control.name" [id]="control.name" class="form-select"
-                [disabled]="readOnlyMode">
+                [disabled]="readOnlyMode" [formControlName]="control.name">
                 <option *ngFor="let option of control.options" [value]="option.value">{{ option.name }}</option>
             </select>
 
-            <ng-container *ngSwitchCase="'img'">
+            <div class="form-control" *ngSwitchCase="'multiple-select'">
+                <mat-select [formControlName]="control.name" multiple>
+                    <mat-option *ngFor="let option of control.options" [value]="option.value">{{ option.name }}
+                    </mat-option>
+                </mat-select>
+            </div>
+
+            <ng-template *ngSwitchCase="'img'">
                 <input *ngIf="!readOnlyMode" [id]="control.name" type="file" accept="image/*" class="form-control"
                     (change)="emitNewImg($event.target.files[0], control.name)">
                 <img [id]="'img-' + control.name" class="img img-120" [ngClass]="{ 'd-none': !control.defaultVal }"
                     [src]="control.defaultVal" alt="">
-            </ng-container>
+            </ng-template>
 
             <input *ngSwitchDefault [id]="control.name" [type]="control.type" class="form-control"
                 [formControlName]="control.name" [readOnly]="readOnlyMode">
         </ng-container>
 
-        <ng-template [ngIf]="getCtrlError(control.name) && isCtrlTouched(control.name)">
-            <div class="alert alert-danger" role="alert">
-                <span *ngIf="getCtrlError(control.name).required">Xin vui lòng nhập {{ control.label | lowercase }}.</span>
-                <span *ngIf="getCtrlError(control.name).maxlength">{{ control.label }} của bạn vượt quá độ dài cho phép!</span>
+        <ng-template [ngIf]="errorAlert">
+            <div *ngIf="getCtrlError(control.name) && isCtrlTouched(control.name)" class="alert alert-danger"
+                role="alert">
+                <span *ngIf="getCtrlError(control.name).required">Xin vui lòng nhập {{ control.label | lowercase
+                    }}.</span>
+                <span *ngIf="getCtrlError(control.name).maxlength">{{ control.label }} của bạn vượt quá độ dài cho
+                    phép!</span>
                 <span *ngIf="getCtrlError(control.name).minlength">{{ control.label }} của bạn quá ngắn!</span>
-                <span *ngIf="getCtrlError(control.name).inValidNumber">{{ control.label }} của bạn không đúng định dạng số!</span>
-                <span *ngIf="getCtrlError(control.name).inValidDate">{{ control.label }} của bạn không đúng định dạng thời gian!</span>
+                <span *ngIf="getCtrlError(control.name).inValidNumber">{{ control.label }} của bạn không đúng định dạng
+                    số!</span>
+                <span *ngIf="getCtrlError(control.name).inValidDate">{{ control.label }} của bạn không đúng định dạng
+                    thời gian!</span>
             </div>
         </ng-template>
     </div>

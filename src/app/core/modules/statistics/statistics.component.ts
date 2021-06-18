@@ -1,7 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { DEFAULT_STATISTIC_REQ_BODY } from 'src/app/app-constants';
+import { SESSION_STORAGE_KEY } from 'src/app/app-constants';
+import { FormControlInfo, MultipleSelectControlInfo } from 'src/app/models/form-control.model';
+import { Plant } from 'src/app/models/plant.model';
+import { NavElement } from 'src/app/shared/components/nav-bar/nav-bar.component';
+import { SessionService } from 'src/app/shared/services/session.service';
 import { Statistics } from '../../../models/statistic.model';
 import { GetStatisticService } from '../../services/truss/get-statistic.service';
+import { HarvestStatColumnChartService } from './services/harvest-stat-column-chart.service';
+import { PlantPercentPieChartService } from './services/plant-percent-pie-chart.service';
+import { TotalStatBarChartService } from './services/total-stat-bar-chart.service';
 
 @Component({
   selector: 'app-statistics',
@@ -9,18 +16,61 @@ import { GetStatisticService } from '../../services/truss/get-statistic.service'
   styleUrls: ['./statistics.component.scss']
 })
 export class StatisticsComponent implements OnInit {
-  statArr: Statistics[] = [];
+  readonly navArr: NavElement[] = [
+    new NavElement(0, "Thống kê tổng hợp"),
+    new NavElement(1, "Thống kê theo mùa vụ")
+  ];
+  tabIndex = 0;
+  controlArr: FormControlInfo[] = [];
+  trussTotalStatArr: Statistics[] = [];
+  harvestStatArr = {};
 
-  constructor(private getStatisticService: GetStatisticService) { }
+  constructor(
+    private getStatisticService: GetStatisticService,
+    private sessionStorage: SessionService,
+    public trussTotalBarChart: TotalStatBarChartService,
+    public plantPercentPieChart: PlantPercentPieChartService,
+    public harvestStatColumnChart: HarvestStatColumnChartService
+  ) { }
 
   ngOnInit(): void {
-    this.changeStatArr();
+    this.initControlArr();
+    this.initStatArr();
   }
 
-  changeStatArr({ block, plantGrowth, plantId }: any = DEFAULT_STATISTIC_REQ_BODY): void {
-    this.statArr = [];
-    this.getStatisticService.getFarmStatistics(block, plantGrowth, plantId).subscribe(newStats => {
-      this.statArr = newStats;
+  private async initControlArr() {
+    const plantArr: Plant[] = await this.sessionStorage.getAsync(SESSION_STORAGE_KEY.PLANT);
+    this.controlArr = [
+      new FormControlInfo({
+        label: 'Chọn tháng thống kê',
+        name: 'month',
+        type: 'month',
+      }),
+      new MultipleSelectControlInfo({
+        label: 'Chọn cây trồng',
+        name: 'plantIdArr',
+        defaultVal: [],
+        options: plantArr.map(({ _id, plantName }) => {
+          return { name: plantName, value: _id };
+        })
+      })
+    ];
+  }
+
+  private initStatArr(): void {
+    const lastBlock = this.sessionStorage.retrieve(SESSION_STORAGE_KEY.STAT_LAST_BLOCK) || 'A';
+    this.changeTotalStatArr({ block: lastBlock });
+  }
+
+  changeTotalStatArr(filterOptions: any): void {
+    this.getStatisticService.getTrussTotalStatistics(filterOptions).subscribe(newStats => {
+      this.trussTotalStatArr = newStats;
     });
+  }
+
+  changeHarvestStatArr(filterOpitons: { month: string, plantIdArr: string[] }): void {
+    this.getStatisticService.getHarvestStatsByDate(filterOpitons).subscribe(harvestStats => {
+      this.harvestStatArr = harvestStats;
+    })
   }
 }

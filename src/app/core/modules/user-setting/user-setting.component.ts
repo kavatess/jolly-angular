@@ -89,7 +89,7 @@ export class UserSettingComponent implements OnInit {
 
   updateUserInfo(): void {
     if (this.formComp.isValidForm()) {
-      const submitJson = { _id: this.userInfo._id, ...this.formComp.getFormValue() };
+      const submitJson = { _id: this.userInfo._id, ...this.formComp.getFormVal() };
       this.authService.updateUserInfo(submitJson);
     }
   }
@@ -97,7 +97,7 @@ export class UserSettingComponent implements OnInit {
   async changePassword() {
     if (this.formComp.isValidForm()) {
       try {
-        const { oldPassword, newPassword, checkNewPassword } = this.formComp.getFormValue();
+        const { oldPassword, newPassword, checkNewPassword } = this.formComp.getFormVal();
         if (newPassword != checkNewPassword) {
           throw new Error('2 mật khẩu thay đổi không trùng khớp. Xin vui lòng nhập lại.');
         }

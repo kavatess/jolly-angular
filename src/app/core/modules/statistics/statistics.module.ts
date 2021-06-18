@@ -3,18 +3,10 @@ import { CommonModule } from '@angular/common';
 import { StatisticsComponent } from './statistics.component';
 import { SelectModule } from 'src/app/shared/components/select/select.module';
 import { PageLayoutModule } from 'src/app/shared/components/page-layout/page-layout.module';
-import { HighchartsConfig, HighchartsModule } from '@howtimeflies/ngx-highcharts';
-import { PlantStatPieChartComponent } from './plant-stat-pie-chart/plant-stat-pie-chart.component';
-import { TrussStatBarChartComponent } from './truss-stat-bar-chart/truss-stat-bar-chart.component';
 import { RouterModule, Routes } from '@angular/router';
-
-const HIGHCHARTS_CONFIG: HighchartsConfig = {
-  cdnBaseUrl: 'https://code.highcharts.com',
-  scriptName: 'highcharts.js',
-  delayToExecuteModulesCode: 200,
-  maxDelayToResizeContainer: 10000,
-  globalOptions: {}
-}
+import { NavBarModule } from 'src/app/shared/components/nav-bar/nav-bar.module';
+import { FormModule } from 'src/app/shared/components/form/form.module';
+import { ChartModule } from 'src/app/shared/components/chart/chart.module';
 
 const STATISTICS_ROUTE: Routes = [
   {
@@ -24,16 +16,17 @@ const STATISTICS_ROUTE: Routes = [
 ]
 
 @NgModule({
-  declarations: [StatisticsComponent, PlantStatPieChartComponent, TrussStatBarChartComponent],
+  declarations: [
+    StatisticsComponent,
+  ],
   imports: [
     CommonModule,
-    HighchartsModule,
+    ChartModule,
     PageLayoutModule,
+    NavBarModule,
+    FormModule,
     SelectModule,
     RouterModule.forChild(STATISTICS_ROUTE)
-  ],
-  providers: [
-    { provide: HighchartsConfig, useValue: HIGHCHARTS_CONFIG }
   ]
 })
 export class StatisticsModule { }

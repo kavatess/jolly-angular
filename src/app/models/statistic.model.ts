@@ -4,3 +4,8 @@ export interface Statistics {
     plantNumber: number;
     numberPerKg: number;
 }
+
+export interface HarvestStatByDate {
+    date: string;
+    harvestNumber: any[];
+}

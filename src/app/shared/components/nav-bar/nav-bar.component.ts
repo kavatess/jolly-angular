@@ -23,7 +23,11 @@ export class NavBarComponent implements OnInit {
   }
 }
 
-export interface NavElement {
+export class NavElement {
   tabIndex: number;
   content: string;
+  constructor(tabIndex: number, content: string) {
+    this.tabIndex = Number(tabIndex);
+    this.content = content;
+  }
 }

@@ -10,6 +10,6 @@ import { TRUSS_REQUEST } from 'src/app/app-constants';
 export class GetHistoryDataService {
   constructor(private httpReq: HttpRequestService) { }
   getHistoryDataById(trussId: string): Observable<TrussHistoryInfo[]> {
-    return this.httpReq.createPostRequest(TRUSS_REQUEST.getTimelineById + `/${trussId}`);
+    return this.httpReq.createPostRequest(TRUSS_REQUEST.getHistoryData + `/${trussId}`);
   }
 }

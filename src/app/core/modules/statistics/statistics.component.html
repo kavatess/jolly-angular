@@ -1,10 +1,21 @@
-<app-page-layout [scroll]="true" [onLoad]="!statArr.length" [loadTimeOut]="2000">
-    <div *ngIf="statArr.length" class="page-content">
-        <app-truss-stat-bar-chart [statArr]="statArr"></app-truss-stat-bar-chart>
-        <app-plant-stat-pie-chart [statArr]="statArr"></app-plant-stat-pie-chart>
+<app-page-layout [hasFooter]="tabIndex == 0" [scroll]="true" [onLoad]="!trussTotalStatArr.length" [loadTimeOut]="2000">
+    <div class="page-content">
+        <app-nav-bar [navArr]="navArr" (tabChange)="tabIndex = $event"></app-nav-bar>
+
+        <div *ngIf="tabIndex == 0 && trussTotalStatArr.length" class="total-stats-container">
+            <app-chart [options]="trussTotalBarChart.getChartOptions(trussTotalStatArr)"></app-chart>
+            <app-chart [options]="plantPercentPieChart.getChartOptions(trussTotalStatArr)"></app-chart>
+        </div>
+
+        <div *ngIf="tabIndex == 1" class="harvest-stats-container">
+            <app-form [controlArr]="controlArr" (onchange)="changeHarvestStatArr($event)"></app-form>
+            <app-chart [options]="harvestStatColumnChart.getChartOptions(harvestStatArr)"></app-chart>
+        </div>
+
+        <div *ngIf="!trussTotalStatArr.length" class="text">Dữ liệu thống kê khôn tồn tại</div>
     </div>
 
-    <div class="footer">
-        <app-select [isStatisticPage]="true" (selectChange)="changeStatArr($event)"></app-select>
+    <div *ngIf="tabIndex == 0" class="footer">
+        <app-select [isStatisticPage]="true" (selectChange)="changeTotalStatArr($event)"></app-select>
     </div>
 </app-page-layout>

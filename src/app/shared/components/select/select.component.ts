@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { SESSION_STORAGE_KEY } from 'src/app/app-constants';
@@ -25,8 +25,8 @@ export class SelectComponent implements OnInit, OnDestroy {
 
   async ngOnInit() {
     this.plantArr = await this.sessionService.getAsync(SESSION_STORAGE_KEY.PLANT);
-    this.getLastBlockVal();
     this.emitSelectValOnChange();
+    this.getLastBlockVal();
   }
 
   getLastBlockVal(): void {
@@ -36,7 +36,7 @@ export class SelectComponent implements OnInit, OnDestroy {
     } else {
       lastBlock = this.sessionService.retrieve(SESSION_STORAGE_KEY.FARM_LAST_BLOCK) || 'A';
     }
-    this.selectGroup.setControl('block', new FormControl(lastBlock));
+    this.selectGroup.controls.block.setValue(lastBlock);
   }
 
   emitSelectValOnChange(): void {
