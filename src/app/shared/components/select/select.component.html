@@ -1,0 +1,29 @@
+<form class="select-group" [formGroup]="selectGroup">
+    <span class="select-block">
+        <select class="form-select form-select-sm" formControlName="block">
+            <option *ngIf="isStatisticPage" value="" selected>--Tất cả vườn--</option>
+            <option value="A">Vườn A</option>
+            <option value="B">Vườn B</option>
+            <option value="C">Vườn C <span *ngIf="!isStatisticPage">và D</span></option>
+            <option *ngIf="isStatisticPage" value="D">Vuờn D</option>
+        </select>
+    </span>
+
+    <span class="select-growth">
+        <select class="form-select form-select-sm" formControlName="plantGrowth">
+            <option value="0">--Tình trạng--</option>
+            <option value="1">Cây con</option>
+            <option value="2">Cây trung</option>
+            <option value="3">Đang thu hoạch</option>
+        </select>
+    </span>
+
+    <span class="select-plant">
+        <select class="form-select form-select-sm" formControlName="plantId">
+            <option value="">--Tất cả rau--</option>
+            <option *ngFor="let plant of plantArr" [value]="plant._id">
+                {{ plant.plantName }}
+            </option>
+        </select>
+    </span>
+</form>

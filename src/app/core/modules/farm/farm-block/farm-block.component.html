@@ -1,0 +1,12 @@
+<div [class]="'farm-block-' + block">
+    <div *ngFor=" let truss of trussArr">
+        <app-progress-bar *ngIf="truss" [striped]="truss.plantGrowth == 3"
+            [verticalBar]="truss.block == 'BN' || truss.block == 'BS'" [hasContent]="false"
+            [plantNumber]="truss.plantNumber" [maxHole]="truss.maxHole" (click)="farmService.emitClickedTruss(truss)"
+            [color]="(!farmService.selectedPlantId || truss.plantId == farmService.selectedPlantId) && (!farmService.selectedPlantGrowth || truss.plantGrowth == farmService.selectedPlantGrowth) ? truss.plantColor : 'lightgray'"
+            data-toggle="modal" data-target="#farm_modal">
+        </app-progress-bar>
+
+        <div *ngIf="!truss"></div>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+.progress {
+    width: 100%;
+    height: 100%;
+}
+
+.truss-normal {
+    max-height: 33px;
+}
+
+.text-container {
+    height: 100%;
+    display: inline-flex;
+    align-items: center;
+    padding-left: 5px;
+}
+
+@media only screen and (max-height: 675px) {
+    .truss-normal {
+        min-height: 22px !important;
+        max-height: 24px !important;
+    }
+}

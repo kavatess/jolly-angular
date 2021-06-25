@@ -1,0 +1,99 @@
+<ng-template [ngIf]="!isModifyMode">
+    <!-- Thân modal hiển thị thông tin giàn -->
+    <div class="modal-body modal-body-no-scroll">
+        <div class="plant-info-container">
+            <span class="plant-img">
+                <img class="img-120" [src]="clickedTruss.imgSrc" alt="">
+            </span>
+
+            <span class="plant-info">
+                <div class="info-element">
+                    <span class="info-icon">
+                        <i [class]=" clickedTruss.plantGrowth | plant_status_icon "></i>
+                    </span>
+                    <span class="info-body status-info">
+                        <div class="text">{{ clickedTruss.plantGrowth | plant_growth_str }}</div>
+                    </span>
+                </div>
+
+                <div class="info-element">
+                    <span class="info-title">
+                        <div class="text">Tên rau:</div>
+                    </span>
+                    <span class="info-body" >
+                        <div class="text" [style.color]=" clickedTruss.plantColor ">
+                            {{ clickedTruss.plantName }}
+                        </div>
+                    </span>
+                </div>
+
+                <div class="info-element">
+                    <span class="info-title">
+                        <div class="text">Ngày trồng:</div>
+                    </span>
+                    <span class="info-body">
+                        <div class="text" [style.color]=" clickedTruss.plantColor ">{{ clickedTruss.startDate | date: 'dd/MM/yyyy' }}</div>
+                    </span>
+                </div>
+
+                <div class="info-element" *ngIf=" clickedTruss.plantGrowth < 3 ">
+                    <span class="info-title">
+                        <div class="text">Dự kiến TH:</div>
+                    </span>
+                    <span class="info-body">
+                        <div class="text" [style.color]=" clickedTruss.plantColor ">{{ clickedTruss.harvestDate | harvest_days }} ngày nữa</div>
+                    </span>
+                </div>
+
+                <div class="info-element" *ngIf=" clickedTruss.plantGrowth == 3 ">
+                    <span class="info-title">
+                        <div class="text">Đã TH được:</div>
+                    </span>
+                    <span class="info-body">
+                        <div class="text" [style.color]=" clickedTruss.plantColor ">{{ clickedTruss.harvestDate | harvest_days }} ngày</div>
+                    </span>
+                </div>
+            </span>
+
+        </div>
+        <app-progress-bar [striped]="true" [height]="'28px'" [color]="clickedTruss.plantColor"
+            [plantNumber]="clickedTruss.plantNumber" [maxHole]="clickedTruss.maxHole">
+        </app-progress-bar>
+    </div>
+
+    <div class="modal-footer">
+        <button class="btn btn-outline-primary" (click)="changeMode()">Thay đổi</button>
+        <button class="btn btn-outline-danger" (click)="clearTruss()">Xoá giàn</button>
+    </div>
+</ng-template>
+
+<!-- Khi bấm vào nút thay đổi thân modal sẽ là một form để nhận input từ user -->
+<ng-template [ngIf]="isModifyMode">
+
+    <div class="modal-body modal-body-no-scroll">
+        <form class="form-update-status" [formGroup]="updateStatusForm">
+
+            <div class="select-container">
+                <label for="plant-growth-select" class="text">Tình trạng:</label>
+                <select name="plant-growth-select" class="form-select form-select-sm" formControlName="newPlantGrowth">
+                    <option [value]="1">Cây con</option>
+                    <option [value]="2">Cây trung</option>
+                    <option [value]="3">Cây đã có thể thu hoạch
+                    </option>
+                </select>
+            </div>
+
+            <div class="input-container">
+                <label for="plant-number-input" class="text">Số lượng:</label>
+                <input name="plant-number-input" class="form-control form-control-sm" type="number"
+                    formControlName="newPlantNumber">
+            </div>
+        </form>
+    </div>
+
+    <div class="modal-footer">
+        <button class="btn btn-success" (click)="saveStatus()" [disabled]="!isValidNewStatus">Lưu</button>
+        <button type="button" class="btn btn-primary" (click)="revertStatus()">Phục hồi</button>
+        <button class="btn btn-secondary" (click)="changeMode()">Quay về</button>
+    </div>
+</ng-template>

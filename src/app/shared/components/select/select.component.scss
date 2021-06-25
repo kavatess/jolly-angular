@@ -1,0 +1,12 @@
+.select-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5px;
+}
+
+.select-block,
+.select-growth {
+    margin-right: 3px;
+}

@@ -1,0 +1,25 @@
+<app-page-layout [hasFooter]="tabIndex == 0" [scroll]="true" [onLoad]="!trussTotalStatArr.length" [loadTimeOut]="2000">
+    <div class="page-content">
+        <app-nav-bar [navArr]="navArr" (tabChange)="changeTab($event)"></app-nav-bar>
+
+        <div *ngIf="tabIndex == 0 && trussTotalStatArr.length" class="total-stats-container">
+            <app-chart [options]="trussTotalBarChart.getChartOptions(trussTotalStatArr)"></app-chart>
+            <app-chart [options]="plantPercentPieChart.getChartOptions(trussTotalStatArr)"></app-chart>
+        </div>
+
+        <div *ngIf="tabIndex == 1" class="harvest-stats-container">
+            <app-form #stat_setting [controlArr]="controlArr" (onchange)="changeHarvestStatArr($event)"></app-form>
+            <div *ngFor="let stat of harvestStatObj | keyvalue" class="chart-container">
+                <app-chart
+                    [options]="harvestStatColumnChart.getChartOptions(stat_setting.getCtrlVal('month') || '', stat.value, stat.key)">
+                </app-chart>
+            </div>
+        </div>
+
+        <div *ngIf="!trussTotalStatArr.length" class="text">Dữ liệu thống kê khôn tồn tại</div>
+    </div>
+
+    <div *ngIf="tabIndex == 0" class="footer">
+        <app-select [isStatisticPage]="true" (selectChange)="changeTotalStatArr($event)"></app-select>
+    </div>
+</app-page-layout>

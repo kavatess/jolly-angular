@@ -1,0 +1,66 @@
+<form *ngIf="plantArr" [formGroup]="plantForm">
+    <div class="form-item">
+        <label class="text">Tên rau:</label>
+        <select *ngIf="situation == 0" class="form-select" (change)="changeFormValByPlantId($event.target.value)"
+            (onload)="changeFormVal(plantArr[0])">
+            <option *ngFor="let plant of plantArr; let i = index" [value]="plant._id"
+                [selected]="plantForm.value._id == plant._id">
+                {{ plant.plantName }}
+            </option>
+        </select>
+        <input *ngIf="situation > 0" type="text" class="form-control" formControlName="plantName"
+            [readOnly]="situation == 1">
+    </div>
+
+    <div *ngIf="(situation == 0 && plantForm.value.imgSrc) || situation > 0" class="form-item">
+        <label class="text">Hình ảnh cây trồng:</label>
+
+        <input *ngIf="situation > 0" type="file" class="form-control" accept="image/*"
+            (change)="onFileChanged($event.target.files[0])">
+        <img id="chosen-img" class="img img-120" [ngClass]="{ 'd-none': !plantForm.value.imgSrc || situation == 2 }" [src]="plantForm.value.imgSrc" alt="">
+    </div>
+
+    <div class="form-item">
+        <label class="text">Màu nhận biết:</label>
+        <input type="text" class="form-control"
+            [style]="!situation ? 'color: white; background-color: ' + plantForm.value.plantColor + ';' : ''"
+            formControlName="plantColor" [readOnly]="situation == 0">
+    </div>
+
+    <div class="form-item">
+        <label class="text">Thời gian TB cây trưởng thành (ngày):</label>
+        <input type="number" class="form-control" formControlName="growUpTime" [readOnly]="situation == 0">
+    </div>
+
+    <div class="form-item">
+        <label class="text">Thời gian TB cây lớn vừa (ngày):</label>
+        <input type="number" class="form-control" formControlName="mediumGrowthTime" [readOnly]="situation == 0">
+    </div>
+
+    <div class="form-item">
+        <label class="text">Thời gian TB ươm hạt (ngày):</label>
+        <input type="number" class="form-control" formControlName="seedUpTime" [readOnly]="situation == 0">
+    </div>
+
+    <div class="form-item">
+        <label class="text">Số lượng TB trên 1 Kg:</label>
+        <input type="number" class="form-control" formControlName="numberPerKg" [readOnly]="situation == 0">
+    </div>
+
+    <div class="form-item">
+        <label class="text">Tỷ lệ cây còn sống sau khi lên hạt (%):</label>
+        <input type="number" class="form-control" formControlName="alivePercent" [readOnly]="situation == 0">
+    </div>
+
+    <div class="form-item">
+        <label class="text">Cây thường mắc các loại sâu bọ:</label>
+        <input type="text" class="form-control" formControlName="worm" [readOnly]="situation == 0">
+    </div>
+
+    <div class="form-item">
+        <label class="text">Tháng sâu bệnh của cây:</label>
+        <input type="text" class="form-control" formControlName="wormMonth" [readOnly]="situation == 0">
+    </div>
+</form>
+
+<div *ngIf="!plantArr" class="text">Không thể lấy được dữ liệu cây trồng. Xin vui lòng quay lại sau</div>
