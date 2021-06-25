@@ -6,6 +6,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   styleUrls: ['./nav-bar.component.scss']
 })
 export class NavBarComponent implements OnInit {
+  tabIndex = 0;
   @Input() navArr: NavElement[] = [];
   @Output() tabChange = new EventEmitter<number>();
 
@@ -15,11 +16,14 @@ export class NavBarComponent implements OnInit {
   }
 
   changeTab(tabIndex: number, navbarEl: any): void {
-    this.tabChange.emit(tabIndex);
-    document.querySelectorAll('.nav-link').forEach(element => {
-      element.classList.remove('active');
-    });
-    navbarEl.target.classList.add('active');
+    if (this.tabIndex != tabIndex) {
+      this.tabIndex = tabIndex;
+      this.tabChange.emit(tabIndex);
+      document.querySelectorAll('.nav-link').forEach(element => {
+        element.classList.remove('active');
+      });
+      navbarEl.target.classList.add('active');
+    }
   }
 }
 

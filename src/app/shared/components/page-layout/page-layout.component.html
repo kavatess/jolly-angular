@@ -3,7 +3,7 @@
         <app-header></app-header>
     </header>
 
-    <article [style.overflow]="scroll ? 'scroll' : ''">
+    <article [ngClass]="hasFooter ? 'smaller-container' : ''" [style.overflow]="scroll ? 'scroll' : ''">
         <ng-template [ngIf]="onLoad">
             <app-circle-loading></app-circle-loading>
         </ng-template>

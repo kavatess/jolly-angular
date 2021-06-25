@@ -19,11 +19,7 @@ export class GetStatisticService {
     return this.httpReq.createPostRequest(TRUSS_REQUEST.getStatistics, reqJson);
   }
 
-  getHarvestStatsByMonth(plantId: string) {
-    return this.httpReq.createPostRequest(TRUSS_REQUEST.getHarvestStatsByMonth + `/${plantId}`);
-  }
-
-  getHarvestStatsByDate(filterOptions: { month: string, plantIdArr: string[] }): Observable<HarvestStatByDate[]> {
-    return this.httpReq.createPostRequest(TRUSS_REQUEST.getHarvestStatsByDate, filterOptions);
+  getHarvestStats(filterOptions: { month: string, plantIdArr: string[] }): Observable<HarvestStatByDate[]> {
+    return this.httpReq.createPostRequest(TRUSS_REQUEST.getHarvestStats, filterOptions);
   }
 }

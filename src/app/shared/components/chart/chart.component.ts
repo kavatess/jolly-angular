@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Chart, Options } from 'highcharts';
 
 @Component({
@@ -7,13 +7,13 @@ import { Chart, Options } from 'highcharts';
 })
 export class ChartComponent implements OnInit {
   @Input() options: Options = null;
-  chart: Chart;
+  @Output() onLoad = new EventEmitter();
   constructor() { }
 
   ngOnInit(): void {
   }
 
   onChartLoad(chart: Chart): void {
-    this.chart = chart;
+    this.onLoad.emit(chart);
   }
 }

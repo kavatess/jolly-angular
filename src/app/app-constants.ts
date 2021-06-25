@@ -43,9 +43,7 @@ export const TRUSS_REQUEST = {
     updateMaxHole: TRUSS_API_ROUTE_BEGIN + '/maxhole/update',
     revertStatus: TRUSS_API_ROUTE_BEGIN + '/status/revert',
     getHistoryData: TRUSS_API_ROUTE_BEGIN + '/history',
-    getHarvestStatsByDate: TRUSS_API_ROUTE_BEGIN + '/records/date',
-    getHarvestStatsByMonth: TRUSS_API_ROUTE_BEGIN + '/records/month',
-    getHarvestStatsByYear: TRUSS_API_ROUTE_BEGIN + '/records/year',
+    getHarvestStats: TRUSS_API_ROUTE_BEGIN + '/records'
 }
 export const PLANT_REQUEST = {
     getPlantData: PLANT_API_ROUTE_BEGIN,

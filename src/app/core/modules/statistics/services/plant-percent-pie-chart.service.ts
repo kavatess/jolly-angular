@@ -10,6 +10,7 @@ export class PlantPercentPieChartService {
   constructor() { }
 
   getChartOptions(statArr: Statistics[]): Options {
+    if (!statArr.length) return null;
     return {
       chart: {
         plotBackgroundColor: null,
@@ -42,12 +43,12 @@ export class PlantPercentPieChartService {
         name: 'Loại cây',
         colorByPoint: true,
         type: 'pie',
-        data: this.getPercentDataArr(statArr)
+        data: this.getChartSeries(statArr)
       }]
     };
   }
 
-  private getPercentDataArr(statArr: Statistics[]): any[] {
+  getChartSeries(statArr: Statistics[]): any[] {
     const sumOfPlantNumber = statArr.length ? statArr.map(({ plantNumber }) => plantNumber).reduce((a, b) => a + b) : 1;
     return statArr.map(({ plantName, plantNumber }) => {
       return { name: plantName, y: plantNumber / sumOfPlantNumber * 100 }

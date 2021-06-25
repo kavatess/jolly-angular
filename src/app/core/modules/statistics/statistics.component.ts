@@ -23,7 +23,7 @@ export class StatisticsComponent implements OnInit {
   tabIndex = 0;
   controlArr: FormControlInfo[] = [];
   trussTotalStatArr: Statistics[] = [];
-  harvestStatArr = {};
+  harvestStatObj = null;
 
   constructor(
     private getStatisticService: GetStatisticService,
@@ -32,6 +32,11 @@ export class StatisticsComponent implements OnInit {
     public plantPercentPieChart: PlantPercentPieChartService,
     public harvestStatColumnChart: HarvestStatColumnChartService
   ) { }
+
+  changeTab(tabIndex: number): void {
+    this.tabIndex = tabIndex;
+    if (tabIndex == 1) this.harvestStatObj = null;
+  }
 
   ngOnInit(): void {
     this.initControlArr();
@@ -63,14 +68,16 @@ export class StatisticsComponent implements OnInit {
   }
 
   changeTotalStatArr(filterOptions: any): void {
+    this.trussTotalStatArr = [];
     this.getStatisticService.getTrussTotalStatistics(filterOptions).subscribe(newStats => {
       this.trussTotalStatArr = newStats;
     });
   }
 
   changeHarvestStatArr(filterOpitons: { month: string, plantIdArr: string[] }): void {
-    this.getStatisticService.getHarvestStatsByDate(filterOpitons).subscribe(harvestStats => {
-      this.harvestStatArr = harvestStats;
-    })
+    this.harvestStatObj = null;
+    this.getStatisticService.getHarvestStats(filterOpitons).subscribe(harvestStats => {
+      this.harvestStatObj = harvestStats;
+    });
   }
 }
