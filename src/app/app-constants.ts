@@ -24,7 +24,7 @@ export enum TRUSS_NUMBER {
     block_D = 7
 }
 // API REQUEST URLs CONSTANTS
-const SERVER_URL = 'http://localhost:1000';
+const SERVER_URL = 'https://jollyfarm-server.herokuapp.com';
 export const AUTH_REQUEST_BEGIN = SERVER_URL + '/api/auth';
 const API_REQUEST_BEGIN = SERVER_URL + '/api/v1';
 const TRUSS_API_ROUTE_BEGIN = API_REQUEST_BEGIN + '/truss';
