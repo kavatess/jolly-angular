@@ -17,7 +17,7 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "allowedCommonJsDependencies": [
-              "lodash"
+              "highcharts"
             ],
             "outputPath": "dist/jolly-angular/browser",
             "index": "src/index.html",

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { LocalStorageService } from 'ngx-webstorage';
-import { Observable, of, throwError } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { catchError, mapTo, tap } from 'rxjs/operators';
 import { User } from 'src/app/models/user.model';
 import { AUTH_REQUEST_BEGIN, LOCAL_STORAGE_KEY } from '../../app-constants';
