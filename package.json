@@ -6,7 +6,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "dev": "ng run jolly-angular:serve-ssr",
+    "dev": "ng serve",
+    "dev:ssr": "ng run jolly-angular:serve-ssr",
     "start": "node dist/jolly-angular/server/main.js",
     "build": "ng build --prod && ng run jolly-angular:server:production",
     "prerender": "ng run jolly-angular:prerender"
