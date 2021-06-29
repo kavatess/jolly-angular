@@ -12,14 +12,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
     BlocksModule,
     LoginModule,
     FarmModule,
     SettingModule,
-    NgxWebstorageModule.forRoot()
+    NgxWebstorageModule.forRoot(),
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
   ],
   bootstrap: [AppComponent]
 })
