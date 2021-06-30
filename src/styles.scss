@@ -19,6 +19,9 @@ hr {
 .card-footer,
 .modal-footer {
     padding: 1rem;
+    @media screen and (max-width: 360px) {
+        padding: 0.5rem;
+    }
 }
 .p-16 {
     padding: 16px;
@@ -160,17 +163,12 @@ hr {
 }
 
 .modal-body {
-    max-height: 450px;
+    max-height: calc(100vh - 150px);
     overflow: scroll;
 }
 
 .modal-body-no-scroll {
     overflow: unset;
-}
-
-.modal-body,
-.modal-footer {
-    padding: 14px;
 }
 
 .footer-btn-group {
@@ -185,17 +183,6 @@ hr {
     }
 }
 
-@media screen and (min-height: 700px) {
-    .modal-body {
-        max-height: 525px;
-    }
-    @media screen and (min-height: 800px) {
-        .modal-body {
-            max-height: 600px;
-        }
-    }
-}
-
 @media only screen and (max-width: 325px) and (max-height: 600px) {
     .text {
         font-size: 14px;
@@ -203,11 +190,13 @@ hr {
     img {
         max-height: 100px;
     }
-    .modal-body {
-        max-height: 400px;
-        padding: 7px;
-    }
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+    height: 100%;
+}
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}

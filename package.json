@@ -6,7 +6,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "dev": "ng serve",
+    "dev": "ng serve --port=4000",
     "dev:ssr": "ng run jolly-angular:serve-ssr",
     "start": "node dist/jolly-angular/server/main.js",
     "build": "ng build --prod && ng run jolly-angular:server:production",
