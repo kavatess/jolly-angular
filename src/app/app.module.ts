@@ -4,17 +4,18 @@ import { NgxWebstorageModule } from 'ngx-webstorage';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
-import { BlocksModule } from './blocks/blocks.module';
-import { FarmModule } from './core/modules/farm/farm.module';
-import { LoginModule } from './core/modules/login/login.module';
-import { SettingModule } from './core/modules/setting/setting.module';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { InterceptorsModule } from './interceptors/interceptors.module';
+import { LoginModule } from './modules/login/login.module';
+import { FarmModule } from './modules/farm/farm.module';
+import { SettingModule } from './modules/setting/setting.module';
 @NgModule({
   declarations: [AppComponent],
   imports: [
     AppRoutingModule,
     BrowserAnimationsModule,
-    BlocksModule,
+    InterceptorsModule,
     LoginModule,
     FarmModule,
     SettingModule,

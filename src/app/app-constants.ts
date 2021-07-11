@@ -14,15 +14,6 @@ export enum SESSION_STORAGE_KEY {
 }
 // BASIC CONSTANTS
 export const BLOCK_ARR = ['A', 'B', 'BN', 'BS', 'C', 'CT', 'D'];
-export enum TRUSS_NUMBER {
-    block_A = 33,
-    block_B = 33,
-    block_BS = 15,
-    block_BN = 8,
-    block_C = 16,
-    block_CT = 12,
-    block_D = 7
-}
 // API REQUEST URLs CONSTANTS
 const SERVER_URL = 'https://jollyfarm-server.herokuapp.com';
 export const AUTH_REQUEST_BEGIN = SERVER_URL + '/api/auth';

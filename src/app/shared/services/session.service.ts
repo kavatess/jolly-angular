@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { SessionStorageService } from 'ngx-webstorage';
 import { Observable } from 'rxjs';
-import { HttpRequestService } from 'src/app/core/services/http-request.service';
+import { HttpRequestService } from 'src/app/services/http-request.service';
 import { PLANT_REQUEST, SEED_REQUEST, SESSION_STORAGE_KEY, TRUSS_REQUEST } from 'src/app/app-constants';
 
 @Injectable({
