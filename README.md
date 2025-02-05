@@ -10,6 +10,8 @@ Username: `0919123029`
 
 Password: `987612345`
 
+This demo uses a free deployment tool, please wait 3-5 minutes for it to fully initiate.
+
 ## Development server
 
 Run `npm run dev` for a dev server. Navigate to `http://localhost:4000/`. The app will automatically reload if you change any of the source files.
