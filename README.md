@@ -2,6 +2,12 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.5.
 
+## Live webapp
+URL: https://jolly-angular.vercel.app/farm
+
+Username: 0919123029
+Password: 987612345
+
 ## Development server
 
 Run `npm run dev` for a dev server. Navigate to `http://localhost:4000/`. The app will automatically reload if you change any of the source files.
