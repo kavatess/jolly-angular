@@ -8,8 +8,9 @@
     "e2e": "ng e2e",
     "dev": "ng serve --port=4000",
     "dev:ssr": "ng run jolly-angular:serve-ssr",
-    "start": "node dist/jolly-angular/server/main.js",
-    "build": "ng build --prod && ng run jolly-angular:server:production",
+    "start:ssr": "node dist/jolly-angular/server/main.js",
+    "build": "ng build --prod",
+    "build:ssr": "ng build --prod && ng run jolly-angular:server:production",
     "prerender": "ng run jolly-angular:prerender"
   },
   "private": true,
