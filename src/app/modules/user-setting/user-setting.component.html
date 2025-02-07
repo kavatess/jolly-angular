@@ -5,7 +5,7 @@
         <app-form [controlArr]="controlArr" [readOnlyMode]="situation == 0"></app-form>
     </div>
 
-    <div class="footer footer-btn-group">
+    <div class="header footer-btn-group">
         <ng-template [ngIf]="situation == 0 || situation == 2">
             <button class="btn btn-sm left-btn-container" [routerLink]="['/settings']" routerLinkActive="active">
                 <span class="fa-icon">
