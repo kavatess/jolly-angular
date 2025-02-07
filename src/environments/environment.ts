@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   apiUrl: 'http://localhost:1000',
-  imgBBApiUrl: 'http://localhost:2000',
+  imgBBApiUrl: 'https://api.imgbb.com/1/upload',
 };
 
 /*

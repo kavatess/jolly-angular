@@ -1,16 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PageLayoutComponent } from './page-layout.component';
-import { HeaderModule } from '../header/header.module';
 import { CircleLoadingModule } from '../circle-loading/circle-loading.module';
+import { NavigationModule } from '../navigation/navigation.module';
 
 @NgModule({
   declarations: [PageLayoutComponent],
-  imports: [
-    CommonModule,
-    HeaderModule,
-    CircleLoadingModule
-  ],
-  exports: [PageLayoutComponent]
+  imports: [CommonModule, CircleLoadingModule, NavigationModule],
+  exports: [PageLayoutComponent],
 })
-export class PageLayoutModule { }
+export class PageLayoutModule {}

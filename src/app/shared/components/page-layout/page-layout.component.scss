@@ -1,28 +1,28 @@
 .page-container {
+  width: 100%;
+  height: 100%;
+  padding: 5px;
+  box-sizing: border-box;
+  header {
+    padding-bottom: 10px;
     width: 100%;
-    height: 100%;
-    padding: 5px;
+    height: 8%;
     box-sizing: border-box;
-    header {
-        width: 100%;
-        height: 8%;
-        padding-bottom: 10px;
-    }
-    article {
-        width: 100%;
-        height: 92%;
-        display: block;
-        box-sizing: border-box;
-    }
-    .smaller-container {
-        height: 84%;
-    }
-    footer {
-        padding-top: 10px;
-        width: 100%;
-        height: 8%;
-        box-sizing: border-box;
-        display: flex;
-        align-items: center;
-    }
+    display: flex;
+    align-items: center;
+  }
+  article {
+    width: 100%;
+    height: 92%;
+    display: block;
+    box-sizing: border-box;
+  }
+  .smaller-container {
+    height: 84%;
+  }
+  footer {
+    width: 100%;
+    height: 8%;
+    padding-top: 10px;
+  }
 }

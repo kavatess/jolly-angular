@@ -19,7 +19,7 @@
         <div *ngIf="!trussTotalStatArr.length" class="text">Dữ liệu thống kê khôn tồn tại</div>
     </div>
 
-    <div *ngIf="tabIndex == 0" class="footer d-flex flex-row justify-content-center">
+    <div *ngIf="tabIndex == 0" class="header d-flex flex-row justify-content-center">
         <app-select [isStatisticPage]="true" (selectChange)="changeTotalStatArr($event)"></app-select>
     </div>
 </app-page-layout>

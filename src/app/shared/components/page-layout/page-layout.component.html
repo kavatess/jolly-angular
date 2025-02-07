@@ -1,19 +1,22 @@
 <div class="page-container">
-    <header *ngIf="hasHeader">
-        <app-header></app-header>
-    </header>
+  <header *ngIf="hasHeader">
+    <ng-content select=".header"></ng-content>
+  </header>
 
-    <article [ngClass]="hasFooter ? 'smaller-container' : ''" [style.overflow]="scroll ? 'scroll' : ''">
-        <ng-template [ngIf]="onLoad">
-            <app-circle-loading></app-circle-loading>
-        </ng-template>
+  <article
+    [ngClass]="hasFooter ? 'smaller-container' : ''"
+    [style.overflow]="scroll ? 'scroll' : ''"
+  >
+    <ng-template [ngIf]="onLoad">
+      <app-circle-loading></app-circle-loading>
+    </ng-template>
 
-        <ng-template [ngIf]="!onLoad">
-            <ng-content select=".page-content"></ng-content>
-        </ng-template>
-    </article>
+    <ng-template [ngIf]="!onLoad">
+      <ng-content select=".page-content"></ng-content>
+    </ng-template>
+  </article>
 
-    <footer *ngIf="hasFooter">
-        <ng-content select=".footer"></ng-content>
-    </footer>
+  <footer *ngIf="hasFooter">
+    <app-navigation></app-navigation>
+  </footer>
 </div>

@@ -1,47 +1,55 @@
 <app-page-layout [onLoad]="false">
-    <div class="page-content">
-        <h4 class="text-center">CÀI ĐẶT</h4>
+  <div class="header w-100">
+    <div class="d-flex flex-row justify-content-end">
+      <button class="btn btn-danger" (click)="logout()">
+        <span class="fa-icon">
+          <i class="fas fa-sign-out-alt"></i>
+        </span>
+        <span class="text">Đăng xuất</span>
+      </button>
+    </div>
+  </div>
 
-        <div class="card" [routerLink]="['/user-setting']" routerLinkActive="active">
-            <a class="card-header">
-                <h5 class="mb-0 text">
-                    Quản lý thông tin tài khoản
-                </h5>
-                <span class="arrow-icon">
-                    <i class="fas fa-arrow-right"></i>
-                </span>
-            </a>
-        </div>
+  <div class="page-content">
+    <h4 class="text-center">CÀI ĐẶT</h4>
 
-        <div class="card" [routerLink]="['/plant-setting']" routerLinkActive="active">
-            <a class="card-header">
-                <h5 class="mb-0 text">
-                    Quản lý dữ liệu cây trồng
-                </h5>
-                <span class="arrow-icon">
-                    <i class="fas fa-arrow-right"></i>
-                </span>
-            </a>
-        </div>
-
-        <div class="card" [routerLink]="['/truss-setting']" routerLinkActive="active">
-            <a class="card-header">
-                <h5 class="mb-0 text">
-                    Quản lý dữ liệu giàn
-                </h5>
-                <span class="arrow-icon">
-                    <i class="fas fa-arrow-right"></i>
-                </span>
-            </a>
-        </div>
+    <div
+      class="card"
+      [routerLink]="['/user-setting']"
+      routerLinkActive="active"
+    >
+      <a class="card-header">
+        <h5 class="mb-0 text">Quản lý thông tin tài khoản</h5>
+        <span class="arrow-icon">
+          <i class="fas fa-arrow-right"></i>
+        </span>
+      </a>
     </div>
 
-    <div class="footer">
-        <button class="btn btn-danger" (click)="logout()">
-            <span class="fa-icon">
-                <i class="fas fa-sign-out-alt"></i>
-            </span>
-            <span class="text">Đăng xuất</span>
-        </button>
+    <div
+      class="card"
+      [routerLink]="['/plant-setting']"
+      routerLinkActive="active"
+    >
+      <a class="card-header">
+        <h5 class="mb-0 text">Quản lý dữ liệu cây trồng</h5>
+        <span class="arrow-icon">
+          <i class="fas fa-arrow-right"></i>
+        </span>
+      </a>
     </div>
+
+    <div
+      class="card"
+      [routerLink]="['/truss-setting']"
+      routerLinkActive="active"
+    >
+      <a class="card-header">
+        <h5 class="mb-0 text">Quản lý dữ liệu giàn</h5>
+        <span class="arrow-icon">
+          <i class="fas fa-arrow-right"></i>
+        </span>
+      </a>
+    </div>
+  </div>
 </app-page-layout>
